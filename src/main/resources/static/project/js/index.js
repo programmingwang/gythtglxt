@@ -36,7 +36,7 @@
                     },
                     {
                         menu_name: "中药常识",
-                        menu_url: "/bjkh",
+                        menu_url: "/ChineseMedicine/chineseMedicine",
                         id: "1-4",
                         level: "2",
                         pid: "1"
