@@ -203,4 +203,8 @@ hr {
 
 thead.self-thead {
     text-align: center;
+    background-color: #775637;
+}
+.th-inner {
+    color: #fff;
 }
