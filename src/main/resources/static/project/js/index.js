@@ -64,7 +64,7 @@
                     },
                     {
                         menu_name: "号源管理",
-                        menu_url: "/hhguygi",
+                        menu_url: "/demo/informationDemo",
                         id: "2-1",
                         level: "2",
                         pid: "2"
