@@ -1,0 +1,55 @@
+spring:
+  thymeleaf:
+#    听说关掉就可以不用重启，上线要开启
+    cache: false
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    prefix: classpath:/templates
+  application:
+    name: zyyglxt
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.115.177.141:3306/natmeha?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root1234
+    type: com.alibaba.druid.pool.DruidDataSource
+
+#     使项目能访问图片
+  resources:
+    static-locations: classpath:/static/
+  devtools:
+    restart:
+      enabled: false
+  cache:
+    ehcache:
+      config: ehcache.xml
+
+
+
+
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.gythtglxt.dataobject
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+server:
+  port: 14213
+
+upload:
+  addr: 47.113.104.120
+  port: 8085
+
+#  servlet:
+#    context-path: /zyyglxt
+    
+#logging:
+#  file:
+#    path: E:/Desktop
+
+
+
