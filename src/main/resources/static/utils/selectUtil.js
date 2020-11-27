@@ -166,20 +166,7 @@
         function getStatus(role,webStatus) {
             if(role === "文化宣传科员"){
                 return webStatus[1].id
-            }else if(role === "文化宣传处长"){
-                return webStatus[2].id
-            }else if(role === "文化宣传综合处处长"){
-                return webStatus[5].id
-            }else if(role === "政务资源科员"){
-                return webStatus[1].id
-            }else if(role === "政务资源处长"){
-                return webStatus[2].id
-            }else if(role === "政务资源综合处处长"){
-                return webStatus[5].id
             }
-            // else if(role === "管理员") {
-            //     return
-            // }
         }
 
 

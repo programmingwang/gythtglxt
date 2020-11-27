@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Data
@@ -12,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 public class HotspotDO extends HotspotDOKey {
+    @NotBlank(message = "标题不能为空")
     private String hotspotTitle;
     private String dataStatus;
     private String dataType;
@@ -20,7 +22,10 @@ public class HotspotDO extends HotspotDOKey {
     private Date itemcreateat;
     private String updater;
     private Date itemupdateat;
+    @NotBlank(message = "正文介绍不能为空")
     private String hotspotContent;
+    @NotBlank(message = "来源不能为空")
     private String hotspotSource;
+    @NotBlank(message = "作者不能为空")
     private String hotspotAuthor;
 }

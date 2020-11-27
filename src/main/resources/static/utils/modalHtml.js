@@ -129,6 +129,13 @@
 
         modalHtml.myCencelDistribution = "是否取消分配专家？";
 
+        modalHtml.mySubmitProtection = "确认提交？";
+        modalHtml.myPassProtection = "确认通过？";
+        modalHtml.myNoPassProtection = "确认不通过？";
+        modalHtml.myUnderShelfProtection = "确认下架？";
+        modalHtml.myDeleteProtection = "确认删除？";
+        modalHtml.myPublishProtection = "此信息发布后将展示给用户查看，需要文责自负，是否确认发布？";
+
 
         return modalHtml;
 
