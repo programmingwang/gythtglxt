@@ -40,7 +40,7 @@ public class HotpotController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @RequestMapping(value = "/hotSpot" , method = RequestMethod.DELETE)
+    @RequestMapping(value = "/hotspot" , method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseData deleteTraditionalCultural(@RequestBody HotspotDOKey hotspotDOKey){
         hotspotService.removeHotspot(hotspotDOKey);
@@ -49,7 +49,7 @@ public class HotpotController {
 
 
 
-    @RequestMapping(value = "/hotSpot" , method = RequestMethod.PUT)
+    @RequestMapping(value = "/hotspot" , method = RequestMethod.PUT)
     @ResponseBody
     public ResponseData updateTraditionalCultural(@RequestBody HotspotDO hotspotDO) {
         hotspotService.updateHotspot(hotspotDO);
