@@ -1,23 +1,22 @@
-package com.gythtglxt.dao;
+package com.gythtglxt.service;
 
 import com.gythtglxt.dataobject.UserRoleRefDO;
 import com.gythtglxt.dataobject.UserRoleRefDOKey;
-import org.springframework.stereotype.Component;
 
-@Component
-public interface UserRoleRefDOMapper {
+/**
+ * @Author wanglx
+ * @Date 2020/10/29 0029 14:51
+ * @Version 1.0
+ */
+public interface UserRoleRefService {
 
     int deleteByPrimaryKey(UserRoleRefDOKey key);
-
-    int insert(UserRoleRefDO record);
 
     int insertSelective(UserRoleRefDO record);
 
     UserRoleRefDO selectByPrimaryKey(UserRoleRefDOKey key);
 
     int updateByPrimaryKeySelective(UserRoleRefDO record);
-
-    int updateByPrimaryKey(UserRoleRefDO record);
 
     int updateByKeySelective(UserRoleRefDO record);
 

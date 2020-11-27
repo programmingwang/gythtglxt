@@ -1,19 +1,24 @@
-package com.gythtglxt.dao;
+package com.gythtglxt.service;
 
 import com.gythtglxt.dataobject.RoleDO;
 import com.gythtglxt.dataobject.RoleDOKey;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
-public interface RoleDOMapper {
+/**
+ * @Author wanglx
+ * @Date 2020/10/29 0029 11:24
+ * @Version 1.0
+ */
+@Service
+public interface RoleService {
 
     int deleteByPrimaryKey(RoleDOKey key);
 
     int insert(RoleDO record);
 
-    int insertSelective(RoleDO record);
+    void insertSelective(RoleDO roleDO);
 
     RoleDO selectByPrimaryKey(RoleDOKey key);
 
@@ -21,9 +26,7 @@ public interface RoleDOMapper {
 
     int updateByPrimaryKey(RoleDO record);
 
-    RoleDO selectByUserid(String itemcode);
-
     RoleDO selectByRoleType(Integer type);
 
-    RoleDO selectByRoleName(String roleName);
+    RoleDO selectRoleByUserid(String itemcode);
 }
