@@ -68,10 +68,6 @@ public class HotSpotServiceImpl implements IHotspotService {
 
     @Override
     public int updateHotspot(HotspotDO record) {
-        ValidatorResult validate = validator.validate(record);
-        if(validate.isHasErrors()){
-            throw new BusinessException(validate.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
-        }
         record.setUpdater("");
         return hotspotDOMapper.updateByPrimaryKeySelective(record);
     }

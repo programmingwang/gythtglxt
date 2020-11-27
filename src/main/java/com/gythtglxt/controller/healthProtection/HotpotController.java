@@ -18,9 +18,9 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/healthProtection")
-@Api("今日热点-除中药常识")
+@Api(tags = "今日热点-除中药常识")
 @SuppressWarnings("unchecked")
-public class HotSpotController {
+public class HotpotController {
 
     @Autowired
     private IHotspotService hotspotService;

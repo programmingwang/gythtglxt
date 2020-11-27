@@ -6,6 +6,8 @@
     <id column="itemID" jdbcType="INTEGER" property="itemid" />
     <id column="itemCode" jdbcType="CHAR" property="itemcode" />
     <result column="HOTSPOT_TITLE" jdbcType="VARCHAR" property="hotspotTitle" />
+    <result column="HOTSPOT_SOURCE" jdbcType="VARCHAR" property="hotspotSource" />
+    <result column="HOTSPOT_AUTHOR" jdbcType="VARCHAR" property="hotspotAuthor" />
     <result column="DATA_STATUS" jdbcType="VARCHAR" property="dataStatus" />
     <result column="DATA_TYPE" jdbcType="VARCHAR" property="dataType" />
     <result column="USER_CODE" jdbcType="CHAR" property="userCode" />
@@ -20,7 +22,7 @@
   </resultMap>
   <sql id="Base_Column_List">
      
-    itemID, itemCode, HOTSPOT_TITLE, DATA_STATUS, DATA_TYPE, USER_CODE, CREATER, itemCreateAt, 
+    itemID, itemCode, HOTSPOT_TITLE, HOTSPOT_SOURCE, HOTSPOT_AUTHOR, DATA_STATUS, DATA_TYPE, USER_CODE, CREATER, itemCreateAt,
     UPDATER, itemUpdateAt
   </sql>
   <sql id="Blob_Column_List">
@@ -55,11 +57,13 @@
   </delete>
   <insert id="insert" parameterType="com.gythtglxt.dataobject.HotspotDO">
      
-    insert into tb_natmeha_hotspot (itemID, itemCode, HOTSPOT_TITLE, 
+    insert into tb_natmeha_hotspot (itemID, itemCode, HOTSPOT_TITLE,
+      HOTSPOT_AUTHOR, HOTSPOT_AUTHOR
       DATA_STATUS, DATA_TYPE, USER_CODE, 
       CREATER, itemCreateAt, UPDATER, 
       itemUpdateAt, HOTSPOT_CONTENT)
-    values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{hotspotTitle,jdbcType=VARCHAR}, 
+    values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{hotspotTitle,jdbcType=VARCHAR},
+      #{hotspotSource,jdbcType=VARCHAR}, #{hotspotAuthor,jdbcType=VARCHAR},
       #{dataStatus,jdbcType=VARCHAR}, #{dataType,jdbcType=VARCHAR}, #{userCode,jdbcType=CHAR}, 
       #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
       #{itemupdateat,jdbcType=TIMESTAMP}, #{hotspotContent,jdbcType=LONGVARCHAR})
@@ -76,6 +80,12 @@
       </if>
       <if test="hotspotTitle != null">
         HOTSPOT_TITLE,
+      </if>
+      <if test="hotspotSource != null">
+        HOTSPOT_SOURCE,
+      </if>
+      <if test="hotspotAuthor != null">
+        HOTSPOT_AUTHOR,
       </if>
       <if test="dataStatus != null">
         DATA_STATUS,
@@ -112,6 +122,12 @@
       <if test="hotspotTitle != null">
         #{hotspotTitle,jdbcType=VARCHAR},
       </if>
+      <if test="hotspotSource != null">
+        #{hotspotSource,jdbcType=VARCHAR},
+      </if>
+      <if test="hotspotAuthor != null">
+        #{hotspotAuthor,jdbcType=VARCHAR},
+      </if>
       <if test="dataStatus != null">
         #{dataStatus,jdbcType=VARCHAR},
       </if>
@@ -145,6 +161,12 @@
       <if test="hotspotTitle != null">
         HOTSPOT_TITLE = #{hotspotTitle,jdbcType=VARCHAR},
       </if>
+      <if test="hotspotSource != null">
+        HOTSPOT_SOURCE = #{hotspotSource,jdbcType=VARCHAR},
+      </if>
+      <if test="hotspotAuthor != null">
+        HOTSPOT_AUTHOR = #{hotspotAuthor,jdbcType=VARCHAR},
+      </if>
       <if test="dataStatus != null">
         DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
       </if>
@@ -177,6 +199,8 @@
      
     update tb_natmeha_hotspot
     set HOTSPOT_TITLE = #{hotspotTitle,jdbcType=VARCHAR},
+      HOTSPOT_SOURCE = #{hotspotSource,jdbcType=VARCHAR},
+      HOTSPOT_AUTHOR = #{hotspotAuthor,jdbcType=VARCHAR},
       DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
       DATA_TYPE = #{dataType,jdbcType=VARCHAR},
       USER_CODE = #{userCode,jdbcType=CHAR},
@@ -192,6 +216,8 @@
      
     update tb_natmeha_hotspot
     set HOTSPOT_TITLE = #{hotspotTitle,jdbcType=VARCHAR},
+      HOTSPOT_SOURCE = #{hotspotSource,jdbcType=VARCHAR},
+      HOTSPOT_AUTHOR = #{hotspotAuthor,jdbcType=VARCHAR},
       DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
       DATA_TYPE = #{dataType,jdbcType=VARCHAR},
       USER_CODE = #{userCode,jdbcType=CHAR},
