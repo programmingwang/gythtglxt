@@ -31,24 +31,36 @@
                     <select class="custom-select" id="chargePersonSearch"></select>
                 </div>
             </div>
-            <div class="col-lg-3 "></div>
+            <!---- 时间框---->
 
-            <div class="col-lg-5 col-md-8 row">
-                创建时间: &nbsp &nbsp
-                <div id="stratTime">
-                    <input type="number" value="00" oninput="if(value>23)value=0;if(value<0)value=23;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">
-                    &nbsp : &nbsp
-                    <input type="number" value="00" oninput="if(value>59)value=0;if(value<0)value=59;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">
-                    <input type="number" value="00" oninput="if(value>59)value=0;if(value<0)value=59;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="display:none; outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">
-                </div>
-                &nbsp 至 &nbsp
-                <div id="endTime">
-                    <input type="number" value="00" oninput="if(value>23)value=0;if(value<0)value=23;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'')" style="outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">
-                    &nbsp : &nbsp
-                    <input type="number" value="00" oninput="if(value>59)value=0;if(value<0)value=59;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">
-                    <input type="number" value="00" oninput="if(value>59)value=0;if(value<0)value=59;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="display:none; outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">
+            <!--<div class="col-lg-3 "></div>-->
+            <!--<div class="col-lg-5 col-md-8 row">-->
+                <!--创建时间: &nbsp &nbsp-->
+                <!--<div id="stratTime">-->
+                    <!--<input type="number" value="00" oninput="if(value>23)value=0;if(value<0)value=23;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">-->
+                    <!--&nbsp : &nbsp-->
+                    <!--<input type="number" value="00" oninput="if(value>59)value=0;if(value<0)value=59;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">-->
+                    <!--<input type="number" value="00" oninput="if(value>59)value=0;if(value<0)value=59;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="display:none; outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">-->
+                <!--</div>-->
+                <!--&nbsp 至 &nbsp-->
+                <!--<div id="endTime">-->
+                    <!--<input type="number" value="00" oninput="if(value>23)value=0;if(value<0)value=23;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'')" style="outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">-->
+                    <!--&nbsp : &nbsp-->
+                    <!--<input type="number" value="00" oninput="if(value>59)value=0;if(value<0)value=59;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">-->
+                    <!--<input type="number" value="00" oninput="if(value>59)value=0;if(value<0)value=59;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="display:none; outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">-->
+                <!--</div>-->
+            <!--</div>-->
+            <!---- 药效选择框 ----->
+            <div class="col-lg-4 col-md-4" style="padding-left: 5rem;">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-text" >功效分类：</span>
+                    </div>
+                    <select class="custom-select" id="efficacy"></select>
                 </div>
             </div>
+
+
         </div>
     </div>
 
@@ -71,5 +83,5 @@
 
 </body>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/chineseCultural/demo/modl.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/demo/modl.js}"></script>
 </html>
