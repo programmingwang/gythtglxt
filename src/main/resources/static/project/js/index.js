@@ -15,21 +15,21 @@
                     },
                     {
                         menu_name: "节气养生",
-                        menu_url: "/demo/modl",
+                        menu_url: "/healthProtection/healthPreservation.html",
                         id: "1-1",
                         level: "2",
                         pid: "1"
                     },
                     {
                         menu_name: "自我保健",
-                        menu_url: "/ssss",
+                        menu_url: "/healthProtection/healthCare",
                         id: "1-2",
                         level: "2",
                         pid: "1"
                     },
                     {
                         menu_name: "药膳治疗",
-                        menu_url: "/fdcddc",
+                        menu_url: "/healthProtection/foodTreat",
                         id: "1-3",
                         level: "2",
                         pid: "1"
@@ -43,14 +43,14 @@
                     },
                     {
                         menu_name: "中医文化",
-                        menu_url: "/ggii",
+                        menu_url: "/healthProtection/chineseCultural",
                         id: "1-5",
                         level: "2",
                         pid: "1"
                     },
                     {
                         menu_name: "儿童健康",
-                        menu_url: "/uyfy",
+                        menu_url: "/healthProtection/kidsHealth",
                         id: "1-6",
                         level: "2",
                         pid: "1"
