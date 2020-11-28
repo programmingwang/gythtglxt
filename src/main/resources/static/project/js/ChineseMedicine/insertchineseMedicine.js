@@ -23,7 +23,7 @@
                 var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "insertchinesemedicine";
-                    operateMessage = "新增中医药成功";
+                    operateMessage = "新增中药成功";
                     chinesemedicineEntity = {
                         itemcode: stringUtil.getUUID(),
                         name : $("#name").val(),//中药名称
@@ -52,7 +52,7 @@
                         usage :$("#usage").val(),//用法用量
                        /* chineseMedicineUsage : editor.txt.html()*/
                     }
-                    operateMessage = "更新中医药成功";
+                    operateMessage = "更新中药成功";
                 }
                 fileUtil.handleFile(isUpdate(), chinesemedicineEntity.itemcode, uploadImg.getFiles()[0]);
                 ajaxUtil.myAjax(null,addUpdateUrl,chinesemedicineEntity,function (data) {

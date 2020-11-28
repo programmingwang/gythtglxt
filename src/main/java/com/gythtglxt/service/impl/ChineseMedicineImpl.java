@@ -43,6 +43,7 @@ public class ChineseMedicineImpl implements IChineseMedicineService {
         }
         record.setStatus("0");
         record.setItemcreateat(new Date());
+        record.setUserCode("未定义");
         return chineseMedicineDOMapper.insertSelective(record);
     }
 
@@ -65,8 +66,8 @@ public class ChineseMedicineImpl implements IChineseMedicineService {
     @Override
     public List<ChineseMedicineDO> selectAllChineseMedicine(List<String> status) {
         List<ChineseMedicineDO> chineseMedicineDOList=new ArrayList<>();
-        for(String chinesemedicine:status){
-            chineseMedicineDOList.addAll(chineseMedicineDOMapper.selectAllChineseMedicine(chinesemedicine));
+        for(String chinesemedicineStatus:status){
+            chineseMedicineDOList.addAll(chineseMedicineDOMapper.selectAllChineseMedicine(chinesemedicineStatus));
         }
         return chineseMedicineDOList;
     }
