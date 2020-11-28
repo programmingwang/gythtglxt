@@ -2266,6 +2266,16 @@
 
         modalHtml.myViewHotSpotModal =
             '<div class="row">'+
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">热点图片</button>\n' +
+            '                    </div>\n' +
+            '                    <img id="hotspotImg" src="#"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
             '            <div class="col-lg-12 col-md-12">\n' +
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +

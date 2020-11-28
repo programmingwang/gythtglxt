@@ -2,7 +2,7 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-            var url = "/healthProtection/hotspot?type=儿童健康&status=0";
+            var url = "/healthProtection/hotspot?type=4&status=0";
 
             var pathUrl = "/healthProtection/add/kidsHealth_add";
             var operateUrl = "/healthProtection/hotspot";
@@ -30,6 +30,7 @@
                     '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
                     '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
                     '<a class="publish"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >发布</a>',
+                    '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                 ].join('');
             }
 
@@ -57,6 +58,11 @@
                             ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
+                                        ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
+                                            if(!ajaxUtil.success(data)){
+                                                return alertUtil.error("文件删除失败，可能已经损坏了");
+                                            }
+                                        },false,"","get");
                                         alertUtil.info("删除儿童健康信息成功");
                                         isSuccess = true;
                                         refreshTable();
@@ -184,6 +190,7 @@
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#dataStatus").val(webStatus[row.dataStatus].text);
+                    $("#hotspotImg").attr("src",row.filePath)
 
                     myViewModal.show();
                 },
@@ -297,6 +304,13 @@
 
             var aCol = [
                 {field: 'hotspotTitle', title: '文章标题'},
+                {field: 'filePath', title: '热点图片', formatter:function (value, row, index) {
+                        if(value == "已经损坏了"){
+                            return '<p>'+value+'</p>';
+                        }else{
+                            return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
+                        }
+                    }},
                 {field: 'hotspotSource', title: '来源'},
                 {field: 'hotspotAuthor', title: '作者'},
                 {field: 'itemcreateat', title: '发布时间'},
