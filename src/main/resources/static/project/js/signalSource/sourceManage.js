@@ -3,13 +3,15 @@
         function (jquery, ajaxUtil, bootstrapTableUtil, objectUtil, alertUtil, modalUtil, selectUtil, stringUtil, dictUtil, datetimepicker) {
 
 
-            var baseUrl = "/accountSource/signal-source?userCode=345345"
+            var userCode = "345345";
+
+            var baseUrl = "/accountSource/signal-source?userCode="+userCode;
 
             var getUrl = baseUrl + "&status&year";
 
             var opUrl = "/accountSource/signal-source";
 
-            var userCode = "345345";
+
 
             var aParam = {};
 
