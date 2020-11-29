@@ -2,6 +2,7 @@ package com.gythtglxt.service;
 
 import com.gythtglxt.dataobject.HotspotDO;
 import com.gythtglxt.dataobject.HotspotDOKey;
+import com.gythtglxt.dto.HotspotDto;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public interface IHotspotService {
     HotspotDO getHotspot(HotspotDOKey key, String dataType);
-    List<HotspotDO> getAll(String dataType, List<String> dataStatus);
+    List<HotspotDto> getAll(String dataType, List<String> dataStatus);
     int addHotspot(HotspotDO record);
     int removeHotspot(HotspotDOKey key);
     int updateHotspot(HotspotDO record);

@@ -9,6 +9,8 @@
 
             var type = isUpdate() ? "put" : "post" ;
 
+            uploadImg.init();
+
             $("#cancel").unbind().on('click',function () {
                 orange.redirect(pathUrl);
             });
@@ -25,7 +27,7 @@
                         hotspotAuthor : $("#hotspotAuthor").val(),
                         hotspotContent : editor.txt.html(),
                         dataStatus : "0" ,
-                        dataType : "节气养生",
+                        dataType : "0",
                         userCode : ""
                     };
                 }else{
@@ -41,7 +43,7 @@
                     operateMessage = "更新节气养生成功";
                 }
 
-                // fileUtil.handleFile(isUpdate(), movTVEntity.itemcode, uploadImg.getFiles()[0]);
+                fileUtil.handleFile(isUpdate(), hotspotEntity.itemcode, uploadImg.getFiles()[0]);
 
                 ajaxUtil.myAjax(null,opreateUrl,hotspotEntity,function (data) {
                     if(ajaxUtil.success(data)){
@@ -70,7 +72,7 @@
                         hotspotAuthor : $("#hotspotAuthor").val(),
                         hotspotContent : editor.txt.html(),
                         dataStatus : "1" ,
-                        dataType : "节气养生",
+                        dataType : "0",
                         userCode : ""
                     };
                 }else{
@@ -86,7 +88,7 @@
                     operateMessage = "更新节气养生成功";
                 }
 
-                // fileUtil.handleFile(isUpdate(), movTVEntity.itemcode, uploadImg.getFiles()[0]);
+                fileUtil.handleFile(isUpdate(), hotspotEntity.itemcode, uploadImg.getFiles()[0]);
 
                 ajaxUtil.myAjax(null,opreateUrl,hotspotEntity,function (data) {
                     if(ajaxUtil.success(data)){
@@ -110,8 +112,8 @@
                     $("#hotspotSource").val(tempdata.hotspotSource);
                     $("#hotspotAuthor").val(tempdata.hotspotAuthor);
                     editor.txt.html(tempdata.hotspotContent);
-                    // var img = tempdata.filePath;
-                    // uploadImg.setImgSrc(img);
+                    var img = tempdata.filePath;
+                    uploadImg.setImgSrc(img);
                 }
             }());
 
