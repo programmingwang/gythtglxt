@@ -15,7 +15,7 @@
                     },
                     {
                         menu_name: "节气养生",
-                        menu_url: "/healthProtection/healthPreservation.html",
+                        menu_url: "/healthProtection/healthPreservation",
                         id: "1-1",
                         level: "2",
                         pid: "1"
@@ -64,7 +64,7 @@
                     },
                     {
                         menu_name: "号源管理",
-                        menu_url: "/hhguygi",
+                        menu_url: "/demo/informationDemo",
                         id: "2-1",
                         level: "2",
                         pid: "2"
