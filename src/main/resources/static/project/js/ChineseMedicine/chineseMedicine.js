@@ -155,7 +155,7 @@
                                         }else if(sessionStorage.getItem("rolename") == "市局中医药管理部门"){
                                             alertUtil.info("市局审核已通过，已发送给省局中医药管理部门！");
                                         }else if(sessionStorage.getItem("rolename") == "省局中医药管理部门"){
-                                            alertUtil.info("省局审核已通过，已发送给管理员确认发布！");
+                                            alertUtil.info("省局审核已通过，已通知管理员确认发布！");
                                         }
                                         isSuccess = true;
                                         refreshTable();
@@ -314,6 +314,34 @@
                     var mySubmitModal = modalUtil.init(myNoSubmitChineseMedicineModalData);
                     mySubmitModal.show();
                 },
+
+                'click .publish' : function (e, value, row, index) {
+                    var mypublishChineseMedicineModalData ={
+                        modalBodyID :"myPublishProtection",
+                        modalTitle : "发布",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": webStatus[8].id
+                            };
+                            ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("管理员已发布到小程序");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+                    };
+                    var mypublishModal = modalUtil.init(mypublishChineseMedicineModalData);
+                    mypublishModal.show();
+                },
             };
 
 
@@ -339,7 +367,9 @@
                                     return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                                 }
                             }},
-                        {field:'classification',title:'功效分类'},
+                        {field:'classification',title:'功效分类',formatter:function (row) {
+                                return '<p>'+webStatus[row].text+'</p>';
+                            }},
                         {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
                     ];
 
