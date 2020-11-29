@@ -87,7 +87,8 @@ public class FileController {
         fileDO.setFileSize((double) multipartFile.getSize());
         String path = "http://" + nginx.substring(0,nginx.indexOf(":")+1) + port + "/" + storePath.getFullPath() + "?filename=" + fileName;//字符串拼接路径
         fileDO.setFilePath(path);
-        fileDO.setUploader("");
+        fileDO.setUploader(fileDto.getUploader());
+        fileDO.setUploaderCode(fileDto.getUploaderCode());
         return fileDO;
     }
 }
