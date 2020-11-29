@@ -15,7 +15,7 @@
                     },
                     {
                         menu_name: "节气养生",
-                        menu_url: "/healthProtection/healthPreservation.html",
+                        menu_url: "/healthProtection/healthPreservation",
                         id: "1-1",
                         level: "2",
                         pid: "1"

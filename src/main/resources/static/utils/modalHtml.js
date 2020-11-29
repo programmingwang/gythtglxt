@@ -2264,6 +2264,93 @@
             "        <textarea name=\"\" id=\"reason\" cols=\"96\" rows=\"10\"></textarea>\n" +
             "    </div>";
 
+        modalHtml.myViewHotSpotModal =
+            '<div class="row">'+
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">热点图片</button>\n' +
+            '                    </div>\n' +
+            '                    <img id="hotspotImg" src="#"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">热点标题</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="hotspotTitle" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >来&emsp;&emsp;源</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="hotspotSource" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >作&emsp;&emsp;者</button>\n' +
+            '                    </div>\n' +
+            '                   <input type="text" id="hotspotAuthor" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >正&emsp;&emsp;文</button>\n' +
+            '                    </div>\n' +
+            '                  <div>\n' +
+            '                       <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" id="hotspotContent" class="form-control">\n' +
+            '                       </div>\n' +
+            '                  </div>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >数据状态</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="dataStatus" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="creater" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
+            '\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">创建时间</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="itemCreateAt" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
+            '</div>';
 
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
         modalHtml.myDeleteModalTraditionalCul = '是否删除中医医史信息?';
@@ -2319,6 +2406,7 @@
         modalHtml.myCencelDistribution = "是否取消分配专家？"
 
         modalHtml.mySubmitProtection = "确认提交？";
+        modalHtml.myNoSubmitProtection = "确认取消提交？";
         modalHtml.myPassProtection = "确认通过？";
         modalHtml.myNoSubmitProtection='确认取消提交';
         modalHtml.myNoPassProtection = "确认不通过？";

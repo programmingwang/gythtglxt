@@ -2,6 +2,7 @@ package com.gythtglxt.controller.healthProtection;
 
 import com.gythtglxt.dataobject.HotspotDO;
 import com.gythtglxt.dataobject.HotspotDOKey;
+import com.gythtglxt.dto.HotspotDto;
 import com.gythtglxt.error.EmBusinessError;
 import com.gythtglxt.response.ResponseData;
 import com.gythtglxt.service.IHotspotService;
@@ -28,8 +29,8 @@ public class HotpotController {
     @RequestMapping(value = "/hotspot" , method = RequestMethod.GET)
     @ResponseBody
     public ResponseData getAllTraditionalCultural(@RequestParam(value = "type")String dataType, @RequestParam(value = "status") List dataStatus){
-        List<HotspotDO> hotspotList = hotspotService.getAll(dataType, dataStatus);
-        return new ResponseData(EmBusinessError.success,hotspotList);
+        List<HotspotDto> hotspotDtoList =  hotspotService.getAll(dataType, dataStatus);
+        return new ResponseData(EmBusinessError.success,hotspotDtoList);
     }
 
 
@@ -40,7 +41,7 @@ public class HotpotController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @RequestMapping(value = "/hotSpot" , method = RequestMethod.DELETE)
+    @RequestMapping(value = "/hotspot" , method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseData deleteTraditionalCultural(@RequestBody HotspotDOKey hotspotDOKey){
         hotspotService.removeHotspot(hotspotDOKey);
@@ -49,7 +50,7 @@ public class HotpotController {
 
 
 
-    @RequestMapping(value = "/hotSpot" , method = RequestMethod.PUT)
+    @RequestMapping(value = "/hotspot" , method = RequestMethod.PUT)
     @ResponseBody
     public ResponseData updateTraditionalCultural(@RequestBody HotspotDO hotspotDO) {
         hotspotService.updateHotspot(hotspotDO);
