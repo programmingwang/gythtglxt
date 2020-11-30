@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if (username == null || "".equals(username)) {
-            throw new RuntimeException("用户不能为空");
+            throw new RuntimeException("用户名不能为空");
         }
         //根据用户名查询用户
         UserDO sysUser = userService.selectByName(username);
@@ -45,7 +45,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+role.getRoleName()));
 
             //获取该用户所拥有的权限
-            List<ResourceDO> sysPermissions = resService.SelectPermissionByRoleCode(sysUser);
+            List<ResourceDO> sysPermissions = resService.SelectPermissionByRoleCode(role.getItemcode());
             // 声明用户授权
             sysPermissions.forEach(sysPermission -> {
                 grantedAuthorities.add(new SimpleGrantedAuthority(sysPermission.getItemcode()));

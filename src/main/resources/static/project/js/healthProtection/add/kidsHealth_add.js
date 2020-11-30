@@ -28,7 +28,7 @@
                         hotspotContent : editor.txt.html(),
                         dataStatus : "0" ,
                         dataType : "4",
-                        userCode : ""
+                        userCode : sessionStorage.getItem("itemcode")
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
@@ -73,7 +73,7 @@
                         hotspotContent : editor.txt.html(),
                         dataStatus : "1" ,
                         dataType : "4",
-                        userCode : ""
+                        userCode : sessionStorage.getItem("itemcode")
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));

@@ -69,27 +69,4 @@ public class ResourcesController {
         return new ResponseData(EmBusinessError.success);
 
     }
-
-    /**
-     * 查询角色权限
-     */
-//    @LogAnnotation(logTitle = "查询角色权限", logLevel = "1")
-    @RequestMapping(value = "/selectroleres", method = RequestMethod.GET)
-    public ResponseData selectRoleResources(@RequestBody UserDO userDO) {
-        List<ResourceDO> resourcesDOS = resourcesService.SelectPermissionByRoleCode(userDO);
-        return new ResponseData(EmBusinessError.success, resourcesDOS);
-
-    }
-
-    /*@RequestMapping(value = "/selectPres", method = RequestMethod.GET)
-    public ResponseData selectPres() {
-        List<ResourcesDO> resourcesDOS = resourcesService.selectPres();
-        ResourcesRoleRefDO roleRefDO = new ResourcesRoleRefDO();
-        roleRefDO.setRoleCode("d767418f-ca2f-4afb-ba0c-e9dd61b414bb");
-        for (ResourcesDO aDo : resourcesDOS) {
-            roleRefDO.setResourceCode(aDo.getItemcode());
-            resRoleRefService.insertSelective(roleRefDO);
-        }
-        return new ResponseData(EmBusinessError.success);
-    }*/
 }

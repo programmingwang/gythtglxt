@@ -66,7 +66,7 @@ public class ChineseMedicineController {
     }
     /*中医药常识数据所有查询*/
     @RequestMapping(value ="selectallchinesemedicine",method = RequestMethod.GET )
-    public ResponseData selectAllChineseMedicine(@RequestParam(value="status") List status){
+    public ResponseData selectAllChineseMedicine(@RequestParam(value="status") List status,@RequestParam(value = "userCode", required = false)String userCode){
         List<ChineseMedicineDO> chineseMedicineDOList = iChineseMedicineService.selectAllChineseMedicine(status);
         List<ChineseMedicineDto> chineseMedicineDtoList = new ArrayList<>();
         for (ChineseMedicineDO chineseMedicineDO : chineseMedicineDOList) {
@@ -75,7 +75,19 @@ public class ChineseMedicineController {
                             chineseMedicineDO,iFileService.selectFileByDataCode(
                                     chineseMedicineDO.getItemcode()).getFilePath()));
         }
-        return new ResponseData(EmBusinessError.success,chineseMedicineDtoList);
+        if(userCode == null){
+            return new ResponseData(EmBusinessError.success,chineseMedicineDtoList);
+        }else{
+            List<ChineseMedicineDto> removeList = new ArrayList<>();
+            for (ChineseMedicineDto chineseMedicineDto : chineseMedicineDtoList) {
+                if(!userCode.equals(chineseMedicineDto.getUserCode()) || chineseMedicineDto.getUserCode().isEmpty()){
+                    removeList.add(chineseMedicineDto);
+                }
+            }
+            chineseMedicineDtoList.removeAll(removeList);
+            return new ResponseData(EmBusinessError.success,chineseMedicineDtoList);
+        }
+
     }
     private ChineseMedicineDto convertDtoFromDo(ChineseMedicineDO chineseMedicineDO, String filePath){
         if(StringUtils.isEmpty(filePath)){

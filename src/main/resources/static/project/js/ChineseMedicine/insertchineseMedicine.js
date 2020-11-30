@@ -23,7 +23,7 @@
                 var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "insertchinesemedicine";
-                    operateMessage = "新增中医药成功";
+                    operateMessage = "新增中药信息成功";
                     chinesemedicineEntity = {
                         itemcode: stringUtil.getUUID(),
                         name : $("#name").val(),//中药名称
@@ -34,6 +34,7 @@
                         merTropism : $("#merTropism").val(),//归经
                         governance : $("#governance").val(),//功能主治
                         usage :$("#usage").val(),//用法用量
+                        userCode : sessionStorage.getItem("itemcode")
                         /*chineseMedicineUsage : editor.txt.html()*/
                     };
                 }else{
@@ -52,7 +53,7 @@
                         usage :$("#usage").val(),//用法用量
                        /* chineseMedicineUsage : editor.txt.html()*/
                     }
-                    operateMessage = "更新中医药成功";
+                    operateMessage = "更新中药信息成功";
                 }
                 fileUtil.handleFile(isUpdate(), chinesemedicineEntity.itemcode, uploadImg.getFiles()[0]);
                 ajaxUtil.myAjax(null,addUpdateUrl,chinesemedicineEntity,function (data) {
@@ -71,7 +72,7 @@
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
                     $("#alias").val(tempdata.alias);
-                    $("#classification").find("option[value='请选择']").attr("selected", false);
+                   /* $("#classification").find("option[value='请选择']").attr("selected", false);
                     var selectedVal;
                     for(var i = 0;i<pl.length;i++){
                         if(pl[i].text == tempdata.classification){
@@ -79,7 +80,8 @@
                             break;
                         }
                     }
-                    $("#classification").val(selectedVal);
+                    $("#classification").val(selectedVal);*/
+                    $("#classification").val(tempdata.classification);
                     $("#harvesting").val(tempdata.harvesting);
                     $("#taste").val(tempdata.taste);
                     $("#governance").val(tempdata.governance);

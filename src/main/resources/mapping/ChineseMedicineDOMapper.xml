@@ -89,7 +89,7 @@
         itemCode,
       </if>
       <if test="name != null">
-        NAME,
+        `NAME`,
       </if>
       <if test="alias != null">
         ALIAS,
@@ -110,10 +110,10 @@
         GOVERNANCE,
       </if>
       <if test="usage != null">
-        USAGE,
+        `USAGE`,
       </if>
       <if test="status != null">
-        STATUS,
+        `STATUS`,
       </if>
       <if test="userCode != null">
         USER_CODE,
@@ -212,10 +212,10 @@
         GOVERNANCE = #{governance,jdbcType=VARCHAR},
       </if>
       <if test="usage != null">
-        USAGE = #{usage,jdbcType=VARCHAR},
+        `USAGE` = #{usage,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        STATUS = #{status,jdbcType=VARCHAR},
+        `STATUS` = #{status,jdbcType=VARCHAR},
       </if>
       <if test="userCode != null">
         USER_CODE = #{userCode,jdbcType=CHAR},
@@ -250,8 +250,8 @@
       TASTE = #{taste,jdbcType=VARCHAR},
       MER_TROPISM = #{merTropism,jdbcType=VARCHAR},
       GOVERNANCE = #{governance,jdbcType=VARCHAR},
-      USAGE = #{usage,jdbcType=VARCHAR},
-      STATUS = #{status,jdbcType=VARCHAR},
+      `USAGE` = #{usage,jdbcType=VARCHAR},
+      `STATUS` = #{status,jdbcType=VARCHAR},
       USER_CODE = #{userCode,jdbcType=CHAR},
       CREATER = #{creater,jdbcType=VARCHAR},
       itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},

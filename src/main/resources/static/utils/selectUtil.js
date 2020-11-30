@@ -17,13 +17,13 @@
         function getRoleTable(role,preUrl,status,webStatus) {
             if(role === "管理员"){
                 $('#btn_addTask').attr('style',"display:block");
-                return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id;
-            }else if(role === "县局中医药管理部门"){
-                return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[8].id;
-            }else if(role === "市局中医药管理部门"){
-                return preUrl + "?"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[8].id;
-            }else if(role === "省局中医药管理部门"){
-                return preUrl + "?"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[8].id;
+                return preUrl +status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
+            }else if(role === "县级"){
+                return preUrl +status+"="+webStatus[1].id+"&"+status+"="+webStatus[8].id;
+            }else if(role === "市级"){
+                return preUrl +status+"="+webStatus[3].id+"&"+status+"="+webStatus[8].id;
+            }else if(role === "省级"){
+                return preUrl +status+"="+webStatus[5].id+"&"+status+"="+webStatus[8].id;
             }
         }
         
@@ -57,7 +57,7 @@
                     ].join('');
                 }
 
-            }else if(role === "县局中医药管理部门"){
+            }else if(role === "县级"){
                 if(status == webStatus[1].id){
                     return [
                         '<a  class="pass"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >通过</a>',
@@ -71,7 +71,7 @@
                     ].join('');
                 }
 
-            }else if(role === "市局中医药管理部门"){
+            }else if(role === "市级"){
                 if(status == webStatus[3].id){
                     return [
                         '<a class="pass "  data-toggle="modal" data-target="#staticBackdrop" style="margin:0 1em;text-decoration: none;color:#775637;">通过</a>',
@@ -85,7 +85,7 @@
                     ].join('');
                 }
 
-            }else if(role === "省局中医药管理部门"){
+            }else if(role === "省级"){
                 if(status == webStatus[5].id){
                     return [
                         '<a class="pass "  data-toggle="modal" data-target="#staticBackdrop" style="margin:0 1em;text-decoration: none;color:#775637;">通过</a>',
@@ -102,21 +102,21 @@
         }
 
         function getPassStatus(role,webStatus) {
-            if(role == "县局中医药管理部门"){
+            if(role == "县级"){
                 return webStatus[3].id
-            }else if(role == "市局中医药管理部门"){
+            }else if(role == "市级"){
                 return webStatus[5].id
-            }else if(role == "省局中医药管理部门"){
+            }else if(role == "省级"){
                 return webStatus[7].id
             }
         }
 
         function getFailStatus(role,webStatus) {
-            if(role == "县局中医药管理部门"){
+            if(role == "县级"){
                 return webStatus[2].id
-            }else if(role == "市局中医药管理部门"){
+            }else if(role == "市级"){
                 return webStatus[4].id
-            }else if(role == "省局中医药管理部门"){
+            }else if(role == "省级"){
                 return webStatus[6].id
             }
         }
