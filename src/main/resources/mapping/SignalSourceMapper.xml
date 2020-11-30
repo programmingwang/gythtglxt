@@ -168,19 +168,22 @@
         from tb_natmeha_signal_source,
              tb_natmeha_doctor as doctor
                 where tb_natmeha_signal_source.USER_CODE = #{userCode,jdbcType=CHAR}
-                  and doctor.USER_CODE = tb_natmeha_signal_source.DOCTOR_CODE
+                  and doctor.itemCode = tb_natmeha_signal_source.DOCTOR_CODE
         <if test="status != null">
             and `STATUS` = #{status,jdbcType=VARCHAR}
         </if>
         <if test="year != null">
-        and year(REGISTER_DATE) = #{year}
-</if>
+            and year(REGISTER_DATE) = #{year}
+        </if>
+        order by REGISTER_DATE desc
     </select>
     <select id="getDoctor" resultType="com.gythtglxt.dto.SignalSourceDoctorDto">
-        select USER_CODE as id, DOCTOR_NAME as text
+        select itemCode as id, DOCTOR_NAME as text
         from tb_natmeha_doctor
-        where USER_CODE in (select DOCTOR_CODE
-                            from tb_natmeha_signal_source
-                            where tb_natmeha_signal_source.USER_CODE = #{usercode,jdbcType=VARCHAR})
+        where USER_CODE = #{usercode,jdbcType=VARCHAR}
     </select>
+    <update id="dayUpdate">
+    UPDATE tb_natmeha_signal_source SET `STATUS` = 0 WHERE
+    DATE(REGISTER_DATE) &lt; CURRENT_DATE
+    </update>
 </mapper>

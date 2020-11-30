@@ -3,7 +3,7 @@
         function (jquery, ajaxUtil, bootstrapTableUtil, objectUtil, alertUtil, modalUtil, selectUtil, stringUtil, dictUtil, datetimepicker) {
 
 
-            var userCode = "345345";
+            var userCode = sessionStorage.getItem("itemcode");
 
             var baseUrl = "/accountSource/signal-source?userCode="+userCode;
 
