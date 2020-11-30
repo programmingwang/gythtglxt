@@ -21,6 +21,11 @@ public interface HospitalService {
     HospitalDto selectOneByItemcode(String itemcode);
 
 
+	List<HospitalDto> selectAll();
+
+
+
+
 }
 
 

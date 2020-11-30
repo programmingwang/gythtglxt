@@ -1,210 +1,224 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gythtglxt.dao.HospitalMapper">
-  <resultMap id="BaseResultMap" type="com.gythtglxt.dataobject.Hospital">
-    <!--@mbg.generated-->
-    <!--@Table tb_natmeha_hospital-->
-    <id column="itemID" jdbcType="INTEGER" property="itemid" />
-    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
-    <result column="HOSPITAL_NAME" jdbcType="VARCHAR" property="hospitalName" />
-    <result column="HOSPITAL_LEVEL" jdbcType="VARCHAR" property="hospitalLevel" />
-    <result column="HOSPITAL_BOOKING" jdbcType="INTEGER" property="hospitalBooking" />
-    <result column="HOSPITAL_SOURCE" jdbcType="DOUBLE" property="hospitalSource" />
-    <result column="HOSPITAL_DISTANCE" jdbcType="INTEGER" property="hospitalDistance" />
-    <result column="HOSPITAL_PHONE" jdbcType="VARCHAR" property="hospitalPhone" />
-    <result column="HOSPITAL_PRO" jdbcType="VARCHAR" property="hospitalPro" />
-    <result column="HOSPITAL_CITY" jdbcType="VARCHAR" property="hospitalCity" />
-    <result column="HOSPITAL_COUNTRY" jdbcType="VARCHAR" property="hospitalCountry" />
-    <result column="HOSPITAL_ADRESS" jdbcType="VARCHAR" property="hospitalAdress" />
-    <result column="INTRODUCE" jdbcType="BLOB" property="introduce" />
-    <result column="STATUS" jdbcType="VARCHAR" property="status" />
-    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
-    <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
-    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
-    <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    itemID, itemCode, HOSPITAL_NAME, HOSPITAL_LEVEL, HOSPITAL_BOOKING, HOSPITAL_SOURCE, 
-    HOSPITAL_DISTANCE, HOSPITAL_PHONE, HOSPITAL_PRO, HOSPITAL_CITY, HOSPITAL_COUNTRY, 
-    HOSPITAL_ADRESS, INTRODUCE, `STATUS`, CREATER, itemCreateAt, UPDATER, itemUpdateAt
-  </sql>
-  <delete id="deleteByPrimaryKey" parameterType="map">
-    <!--@mbg.generated-->
-    delete from tb_natmeha_hospital
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
-  </delete>
-  <insert id="insertSelective" keyColumn="itemID" keyProperty="itemid" parameterType="com.gythtglxt.dataobject.Hospital" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into tb_natmeha_hospital
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="itemcode != null">
-        itemCode,
-      </if>
-      <if test="hospitalName != null">
-        HOSPITAL_NAME,
-      </if>
-      <if test="hospitalLevel != null">
-        HOSPITAL_LEVEL,
-      </if>
-      <if test="hospitalBooking != null">
-        HOSPITAL_BOOKING,
-      </if>
-      <if test="hospitalSource != null">
-        HOSPITAL_SOURCE,
-      </if>
-      <if test="hospitalDistance != null">
-        HOSPITAL_DISTANCE,
-      </if>
-      <if test="hospitalPhone != null">
-        HOSPITAL_PHONE,
-      </if>
-      <if test="hospitalPro != null">
-        HOSPITAL_PRO,
-      </if>
-      <if test="hospitalCity != null">
-        HOSPITAL_CITY,
-      </if>
-      <if test="hospitalCountry != null">
-        HOSPITAL_COUNTRY,
-      </if>
-      <if test="hospitalAdress != null">
-        HOSPITAL_ADRESS,
-      </if>
-      <if test="introduce != null">
-        INTRODUCE,
-      </if>
-      <if test="status != null">
-        `STATUS`,
-      </if>
-      <if test="creater != null">
-        CREATER,
-      </if>
-      <if test="itemcreateat != null">
-        itemCreateAt,
-      </if>
-      <if test="updater != null">
-        UPDATER,
-      </if>
-      <if test="itemupdateat != null">
-        itemUpdateAt,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="itemcode != null">
-        #{itemcode,jdbcType=CHAR},
-      </if>
-      <if test="hospitalName != null">
-        #{hospitalName,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalLevel != null">
-        #{hospitalLevel,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalBooking != null">
-        #{hospitalBooking,jdbcType=INTEGER},
-      </if>
-      <if test="hospitalSource != null">
-        #{hospitalSource,jdbcType=DOUBLE},
-      </if>
-      <if test="hospitalDistance != null">
-        #{hospitalDistance,jdbcType=INTEGER},
-      </if>
-      <if test="hospitalPhone != null">
-        #{hospitalPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalPro != null">
-        #{hospitalPro,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalCity != null">
-        #{hospitalCity,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalCountry != null">
-        #{hospitalCountry,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalAdress != null">
-        #{hospitalAdress,jdbcType=VARCHAR},
-      </if>
-      <if test="introduce != null">
-        #{introduce,jdbcType=BLOB},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="creater != null">
-        #{creater,jdbcType=VARCHAR},
-      </if>
-      <if test="itemcreateat != null">
-        #{itemcreateat,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updater != null">
-        #{updater,jdbcType=VARCHAR},
-      </if>
-      <if test="itemupdateat != null">
-        #{itemupdateat,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.gythtglxt.dataobject.Hospital">
-    <!--@mbg.generated-->
-    update tb_natmeha_hospital
-    <set>
-      <if test="hospitalName != null">
-        HOSPITAL_NAME = #{hospitalName,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalLevel != null">
-        HOSPITAL_LEVEL = #{hospitalLevel,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalBooking != null">
-        HOSPITAL_BOOKING = #{hospitalBooking,jdbcType=INTEGER},
-      </if>
-      <if test="hospitalSource != null">
-        HOSPITAL_SOURCE = #{hospitalSource,jdbcType=DOUBLE},
-      </if>
-      <if test="hospitalDistance != null">
-        HOSPITAL_DISTANCE = #{hospitalDistance,jdbcType=INTEGER},
-      </if>
-      <if test="hospitalPhone != null">
-        HOSPITAL_PHONE = #{hospitalPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalPro != null">
-        HOSPITAL_PRO = #{hospitalPro,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalCity != null">
-        HOSPITAL_CITY = #{hospitalCity,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalCountry != null">
-        HOSPITAL_COUNTRY = #{hospitalCountry,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalAdress != null">
-        HOSPITAL_ADRESS = #{hospitalAdress,jdbcType=VARCHAR},
-      </if>
-      <if test="introduce != null">
-        INTRODUCE = #{introduce,jdbcType=BLOB},
-      </if>
-      <if test="status != null">
-        `STATUS` = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="creater != null">
-        CREATER = #{creater,jdbcType=VARCHAR},
-      </if>
-      <if test="itemcreateat != null">
-        itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updater != null">
-        UPDATER = #{updater,jdbcType=VARCHAR},
-      </if>
-      <if test="itemupdateat != null">
-        itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
-  </update>
-<!--auto generated by MybatisCodeHelper on 2020-11-29-->
-  <select id="selectOneByItemcode" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List" />
-    from tb_natmeha_hospital
-    where itemCode=#{itemcode,jdbcType=CHAR}
-  </select>
+    <resultMap id="BaseResultMap" type="com.gythtglxt.dataobject.Hospital">
+        <!--@mbg.generated-->
+        <!--@Table tb_natmeha_hospital-->
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="HOSPITAL_NAME" jdbcType="VARCHAR" property="hospitalName"/>
+        <result column="HOSPITAL_LEVEL" jdbcType="VARCHAR" property="hospitalLevel"/>
+        <result column="HOSPITAL_BOOKING" jdbcType="INTEGER" property="hospitalBooking"/>
+        <result column="HOSPITAL_SOURCE" jdbcType="DOUBLE" property="hospitalSource"/>
+        <result column="HOSPITAL_DISTANCE" jdbcType="INTEGER" property="hospitalDistance"/>
+        <result column="HOSPITAL_PHONE" jdbcType="VARCHAR" property="hospitalPhone"/>
+        <result column="HOSPITAL_PRO" jdbcType="VARCHAR" property="hospitalPro"/>
+        <result column="HOSPITAL_CITY" jdbcType="VARCHAR" property="hospitalCity"/>
+        <result column="HOSPITAL_COUNTRY" jdbcType="VARCHAR" property="hospitalCountry"/>
+        <result column="HOSPITAL_ADRESS" jdbcType="VARCHAR" property="hospitalAdress"/>
+        <result column="INTRODUCE" jdbcType="BLOB" property="introduce"/>
+        <result column="REASON" jdbcType="VARCHAR" property="reason"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="CREATER" jdbcType="VARCHAR" property="creater"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+        <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        itemID,itemCode,HOSPITAL_NAME,HOSPITAL_LEVEL,HOSPITAL_BOOKING,HOSPITAL_SOURCE,HOSPITAL_DISTANCE,HOSPITAL_PHONE,
+        HOSPITAL_PRO,HOSPITAL_CITY,HOSPITAL_COUNTRY,HOSPITAL_ADRESS,INTRODUCE,STATUS,REASON,CREATER,itemCreateAt,UPDATER,
+        itemUpdateAt
+    </sql>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        <!--@mbg.generated-->
+        delete
+        from tb_natmeha_hospital
+        where itemID = #{itemid,jdbcType=INTEGER}
+          and itemCode = #{itemcode,jdbcType=CHAR}
+    </delete>
+    <insert id="insertSelective" keyColumn="itemID" keyProperty="itemid"
+            parameterType="com.gythtglxt.dataobject.Hospital" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into tb_natmeha_hospital
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="itemcode != null">
+                itemCode,
+            </if>
+            <if test="hospitalName != null">
+                HOSPITAL_NAME,
+            </if>
+            <if test="hospitalLevel != null">
+                HOSPITAL_LEVEL,
+            </if>
+            <if test="hospitalBooking != null">
+                HOSPITAL_BOOKING,
+            </if>
+            <if test="hospitalSource != null">
+                HOSPITAL_SOURCE,
+            </if>
+            <if test="hospitalDistance != null">
+                HOSPITAL_DISTANCE,
+            </if>
+            <if test="hospitalPhone != null">
+                HOSPITAL_PHONE,
+            </if>
+            <if test="hospitalPro != null">
+                HOSPITAL_PRO,
+            </if>
+            <if test="hospitalCity != null">
+                HOSPITAL_CITY,
+            </if>
+            <if test="hospitalCountry != null">
+                HOSPITAL_COUNTRY,
+            </if>
+            <if test="hospitalAdress != null">
+                HOSPITAL_ADRESS,
+            </if>
+            <if test="introduce != null">
+                INTRODUCE,
+            </if>
+            <if test="status != null">
+                `STATUS`,
+            </if>
+            <if test="creater != null">
+                CREATER,
+            </if>
+            <if test="itemcreateat != null">
+                itemCreateAt,
+            </if>
+            <if test="updater != null">
+                UPDATER,
+            </if>
+            <if test="itemupdateat != null">
+                itemUpdateAt,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="itemcode != null">
+                #{itemcode,jdbcType=CHAR},
+            </if>
+            <if test="hospitalName != null">
+                #{hospitalName,jdbcType=VARCHAR},
+            </if>
+            <if test="hospitalLevel != null">
+                #{hospitalLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="hospitalBooking != null">
+                #{hospitalBooking,jdbcType=INTEGER},
+            </if>
+            <if test="hospitalSource != null">
+                #{hospitalSource,jdbcType=DOUBLE},
+            </if>
+            <if test="hospitalDistance != null">
+                #{hospitalDistance,jdbcType=INTEGER},
+            </if>
+            <if test="hospitalPhone != null">
+                #{hospitalPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="hospitalPro != null">
+                #{hospitalPro,jdbcType=VARCHAR},
+            </if>
+            <if test="hospitalCity != null">
+                #{hospitalCity,jdbcType=VARCHAR},
+            </if>
+            <if test="hospitalCountry != null">
+                #{hospitalCountry,jdbcType=VARCHAR},
+            </if>
+            <if test="hospitalAdress != null">
+                #{hospitalAdress,jdbcType=VARCHAR},
+            </if>
+            <if test="introduce != null">
+                #{introduce,jdbcType=BLOB},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="itemcreateat != null">
+                #{itemcreateat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updater != null">
+                #{updater,jdbcType=VARCHAR},
+            </if>
+            <if test="itemupdateat != null">
+                #{itemupdateat,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gythtglxt.dataobject.Hospital">
+        <!--@mbg.generated-->
+        update tb_natmeha_hospital
+        <set>
+            <if test="hospitalName != null">
+                HOSPITAL_NAME = #{hospitalName,jdbcType=VARCHAR},
+            </if>
+            <if test="hospitalLevel != null">
+                HOSPITAL_LEVEL = #{hospitalLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="hospitalBooking != null">
+                HOSPITAL_BOOKING = #{hospitalBooking,jdbcType=INTEGER},
+            </if>
+            <if test="hospitalSource != null">
+                HOSPITAL_SOURCE = #{hospitalSource,jdbcType=DOUBLE},
+            </if>
+            <if test="hospitalDistance != null">
+                HOSPITAL_DISTANCE = #{hospitalDistance,jdbcType=INTEGER},
+            </if>
+            <if test="hospitalPhone != null">
+                HOSPITAL_PHONE = #{hospitalPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="hospitalPro != null">
+                HOSPITAL_PRO = #{hospitalPro,jdbcType=VARCHAR},
+            </if>
+            <if test="hospitalCity != null">
+                HOSPITAL_CITY = #{hospitalCity,jdbcType=VARCHAR},
+            </if>
+            <if test="hospitalCountry != null">
+                HOSPITAL_COUNTRY = #{hospitalCountry,jdbcType=VARCHAR},
+            </if>
+            <if test="hospitalAdress != null">
+                HOSPITAL_ADRESS = #{hospitalAdress,jdbcType=VARCHAR},
+            </if>
+            <if test="introduce != null">
+                INTRODUCE = #{introduce,jdbcType=BLOB},
+            </if>
+            <if test="status != null">
+                `STATUS` = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                CREATER = #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="itemcreateat != null">
+                itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updater != null">
+                UPDATER = #{updater,jdbcType=VARCHAR},
+            </if>
+            <if test="itemupdateat != null">
+                itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reason != null">
+                REASON = #{reason,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where itemID = #{itemid,jdbcType=INTEGER}
+          and itemCode = #{itemcode,jdbcType=CHAR}
+    </update>
+    <!--auto generated by MybatisCodeHelper on 2020-11-29-->
+    <select id="selectOneByItemcode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_natmeha_hospital
+        where itemCode = #{itemcode,jdbcType=CHAR}
+    </select>
+    <!--auto generated by MybatisCodeHelper on 2020-11-30-->
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_natmeha_hospital
+        where STATUS != '0'
+    </select>
 </mapper>

@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'objectUtil', 'distpicker', 'alertUtil'],
-        function ($, ajaxUtil, stringUtil, uploadImg, objectUtil, distpicker, alertUtil) {
+    require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil','uploadImg','distpicker'],
+        function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil,uploadImg,distpicker) {
 
             var url = "/information?itemCode=" + sessionStorage.getItem("orgCode");
 
@@ -21,7 +21,6 @@
             $("#cancelBtn").click(function () {
                 orange.redirect(pathUrl)
             });
-            console.log("11111111111")
 
             function generateParam() {
                 var param = {};
@@ -38,6 +37,7 @@
             }
 
             $("#saveBtn").unbind('click').on('click', function () {
+
                 var param = generateParam();
                 param.status = "0";
                 if (uploadImg.isUpdate()) {
@@ -51,12 +51,14 @@
                         alert(data.msg);
                     }
                 }, true, "123", type);
+
                 return false;
             });
 
             $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.status = "1";
+                param.reason = "";
                 ajaxUtil.myAjax(null, opUrl, param, function (data) {
                     if (ajaxUtil.success(data)) {
                         orange.redirect(pathUrl)
@@ -64,6 +66,7 @@
                         alert(data.msg)
                     }
                 }, true, "123", type);
+
                 return false;
             });
 
@@ -90,6 +93,14 @@
                 uploadImg.setImgSrc(tempdata.filePath);
                 itemcode = tempdata.itemcode;
                 itemid = tempdata.itemid;
+                if ( tempdata.status !== "6"){
+                    $("#statusSpan").html(dictUtil.getName(dictUtil.DICT_LIST.auditStatus, tempdata.status));
+                    $("#reasonSpan").html(tempdata.reason);
+                    $("#statusDiv").show();
+                }
+                else {
+                    $("#statusDiv").hide();
+                }
                 init = function () {
 
                 }

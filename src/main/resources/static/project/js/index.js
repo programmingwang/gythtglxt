@@ -97,6 +97,13 @@
                         level: "2",
                         pid: "2"
                     },
+                    {
+                        menu_name: "机构审核",
+                        menu_url: "/audit/audit",
+                        id: "2-6",
+                        level: "2",
+                        pid: "2"
+                    }
                 ];
 
 

@@ -7,7 +7,6 @@ import com.gythtglxt.response.ResponseData;
 import com.gythtglxt.service.HospitalService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
