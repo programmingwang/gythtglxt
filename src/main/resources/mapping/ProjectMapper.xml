@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gythtglxt.dao.ProjectMapper">
+  <resultMap id="BaseResultMap" type="com.gythtglxt.dataobject.Project">
+    <!--@mbg.generated-->
+    <!--@Table tb_natmeha_project-->
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="CONTENT" jdbcType="LONGVARCHAR" property="content" />
+    <result column="DATA_TYPE" jdbcType="VARCHAR" property="dataType" />
+    <result column="PRICE" jdbcType="INTEGER" property="price" />
+    <result column="DATA_STATUS" jdbcType="VARCHAR" property="dataStatus" />
+    <result column="USER_CODE" jdbcType="CHAR" property="userCode" />
+    <result column="VISIT_NUM" jdbcType="INTEGER" property="visitNum" />
+    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
+    <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    itemID, itemCode, `NAME`, CONTENT, DATA_TYPE, PRICE, DATA_STATUS, USER_CODE, VISIT_NUM, 
+    CREATER, itemCreateAt, UPDATER, itemUpdateAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from tb_natmeha_project
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    <!--@mbg.generated-->
+    delete from tb_natmeha_project
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </delete>
+  <insert id="insertSelective" keyColumn="itemID" keyProperty="itemid" parameterType="com.gythtglxt.dataobject.Project" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_natmeha_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemcode != null">
+        itemCode,
+      </if>
+      <if test="name != null">
+        `NAME`,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+      <if test="dataType != null">
+        DATA_TYPE,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="dataStatus != null">
+        DATA_STATUS,
+      </if>
+      <if test="userCode != null">
+        USER_CODE,
+      </if>
+      <if test="visitNum != null">
+        VISIT_NUM,
+      </if>
+      <if test="creater != null">
+        CREATER,
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemcode != null">
+        #{itemcode,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dataType != null">
+        #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="dataStatus != null">
+        #{dataStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=CHAR},
+      </if>
+      <if test="visitNum != null">
+        #{visitNum,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gythtglxt.dataobject.Project">
+    <!--@mbg.generated-->
+    update tb_natmeha_project
+    <set>
+      <if test="name != null">
+        `NAME` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dataType != null">
+        DATA_TYPE = #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="dataStatus != null">
+        DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        USER_CODE = #{userCode,jdbcType=CHAR},
+      </if>
+      <if test="visitNum != null">
+        VISIT_NUM = #{visitNum,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null">
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </update>
+<!--auto generated by MybatisCodeHelper on 2020-11-28-->
+  <select id="selectproAll" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from tb_natmeha_project
+  where DATA_TYPE=0 and DATA_STATUS = #{status,jdbcType=VARCHAR}
+</select>
+
+<select id="selectchaAll" resultMap="BaseResultMap">
+select
+<include refid="Base_Column_List" />
+  from tb_natmeha_project
+  where DATA_TYPE=1 and DATA_STATUS = #{status,jdbcType=VARCHAR}
+</select>
+<!--auto generated by MybatisCodeHelper on 2020-11-26-->
+  <!--auto generated by MybatisCodeHelper on 2020-11-26-->
+
+</mapper>
