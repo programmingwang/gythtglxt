@@ -2,8 +2,11 @@ package com.gythtglxt.service;
 
 import com.gythtglxt.dataobject.UserDO;
 import com.gythtglxt.dataobject.UserDOKey;
+import com.gythtglxt.dto.UpdatePwdDto;
+import com.gythtglxt.dto.UserDto;
+import com.gythtglxt.error.BusinessException;
+import com.gythtglxt.response.ResponseData;
 
-import java.util.List;
 
 /**
  * @Author wanglx
@@ -13,7 +16,7 @@ import java.util.List;
 
 public interface UserService {
 
-    void deleteUserByUsername(UserDO userDO);
+    void deleteUserByUsername(UserDto userDtO);
 
     int insert(UserDO record);
 
@@ -26,5 +29,13 @@ public interface UserService {
     int updateByPrimaryKey(UserDO record);
 
     UserDO selectByName(String username);
+
+    ResponseData UpdatePassword(UpdatePwdDto updatePwdDto);
+
+    void UpdateUserMsg(UserDO userDO);
+
+    void UpdateUserPortrait(UserDO userDO);
+
+    ResponseData Register(UserDto userDto) throws BusinessException;
 
 }

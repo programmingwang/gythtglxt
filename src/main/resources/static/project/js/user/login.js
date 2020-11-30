@@ -21,6 +21,7 @@
             ajaxUtil.myAjax(null, "/userLogin", userEntity, function (data) {
                 console.log(data)
                 if (data && data.code === 88888) {
+                    alertUtil.success('登录成功');
                     var userName = data.data.username;
                     var rolename = data.data.rolename;
                     var orgCode = data.data.orgCode;

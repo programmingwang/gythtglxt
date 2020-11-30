@@ -43,7 +43,7 @@ public class UserDO extends UserDOKey {
 
     private Integer type;
 
-    private byte[] portrait;
+    private String portrait;
 
     private String roleName;
 }
