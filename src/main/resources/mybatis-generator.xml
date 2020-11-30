@@ -86,9 +86,9 @@
 
 
 
-        <table tableName="tb_natmeha_patient" domainObjectName="PatientDO" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"></table>
+        <!--<table tableName="tb_natmeha_patient" domainObjectName="PatientDO" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"></table>-->
 
 
 
