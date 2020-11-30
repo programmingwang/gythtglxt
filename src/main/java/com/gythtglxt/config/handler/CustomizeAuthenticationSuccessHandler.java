@@ -44,9 +44,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         userSessionDto.setRolename(roleDO.getRoleName());
         userSessionDto.setItemid(userDo.getItemid());
         userSessionDto.setItemcode(userDo.getItemcode());
-        System.out.println(userSessionDto);
         httpServletRequest.getSession().setAttribute("user", userSessionDto);
-//        super.onAuthenticationSuccess(httpServletRequest, httpServletResponse, authentication);
         //返回json数据
         JsonResult result = ResultTool.success(userSessionDto);
         httpServletResponse.setContentType("text/json;charset=utf-8");

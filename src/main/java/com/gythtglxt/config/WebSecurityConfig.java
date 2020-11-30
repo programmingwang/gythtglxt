@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 /**
- * @Description:
+ * @Description: security配置类
  */
 @Configuration
 @EnableWebSecurity
@@ -72,17 +73,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(
+                "/component/**","/css/**", "/fonts/**",
+                "/images/**","/main/main.js", "/project/**", "/utils/**", "/"
+        );
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().
-                authorizeRequests().antMatchers("/v2/api-docs",//swagger api json
-                "/swagger-resources/configuration/ui",//用来获取支持的动作
-                "/swagger-resources",//用来获取api-docs的URI
-                "/swagger-resources/configuration/security",//安全选项
-                "/swagger-ui.html",
-                "/webjars/**","/component/**","/css/**", "/fonts/**",
+                authorizeRequests().antMatchers("/component/**","/css/**", "/fonts/**",
                 "/images/**","/main/main.js", "/project/**", "/utils/**", "/"
                 ).permitAll().
-//                   anyRequest().authenticated().
+                   anyRequest().authenticated().
                     and().logout().
                     permitAll().//允许所有用户
                     logoutSuccessHandler(logoutSuccessHandler).//登出成功处理逻辑
