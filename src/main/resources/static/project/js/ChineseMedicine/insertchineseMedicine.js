@@ -34,6 +34,7 @@
                         merTropism : $("#merTropism").val(),//归经
                         governance : $("#governance").val(),//功能主治
                         usage :$("#usage").val(),//用法用量
+                        userCode : sessionStorage.getItem("itemcode")
                         /*chineseMedicineUsage : editor.txt.html()*/
                     };
                 }else{

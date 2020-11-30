@@ -26,7 +26,7 @@
                         content : editor.txt.html(),
                         dataStatus : "0" ,
                         dataType : "0",
-                        userCode : ""
+                        userCode : sessionStorage.getItem("itemcode")
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
@@ -67,7 +67,7 @@
                         content : editor.txt.html(),
                         dataStatus : "0" ,
                         dataType : "0",
-                        userCode : ""
+                        userCode : sessionStorage.getItem("itemcode")
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
