@@ -93,6 +93,7 @@
             index: '../project/js/index',
             userMsg: '../project/js/user/usermsg',
             register: '../project/js/user/register',
+            addGytInfo: '../project/js/user/addGytInfo',
 
         },
         waitSeconds: 0,
@@ -110,6 +111,7 @@
         {path:"/userLogin",jspath:"userLogin"},
         {path:"/toUserMsg",jspath:"userMsg"},
         {path:"/register",jspath:"register"},
+        {path:"/addGytInfo",jspath:"addGytInfo"},
 
     ];
 

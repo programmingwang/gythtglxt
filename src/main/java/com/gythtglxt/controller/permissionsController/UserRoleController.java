@@ -27,11 +27,11 @@ public class UserRoleController {
      * @return 操作结果信息
      */
 //    @LogAnnotation(logTitle = "删除用户", logLevel = "4")
-    @RequestMapping(value = "/deletebykey",method = RequestMethod.DELETE)
-    public ResponseData deleteUserByUsername(@RequestBody UserDO userDO){
-        userService.deleteUserByUsername(userDO);
-        return new ResponseData(EmBusinessError.success);
-    }
+//    @RequestMapping(value = "/deletebykey",method = RequestMethod.DELETE)
+//    public ResponseData deleteUserByUsername(@RequestBody UserDO userDO){
+//        userService.deleteUserByUsername(userDO);
+//        return new ResponseData(EmBusinessError.success);
+//    }
 
     /**
      * 添加用户

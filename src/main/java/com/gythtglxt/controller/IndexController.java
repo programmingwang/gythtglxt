@@ -41,4 +41,8 @@ public class IndexController {
         return "/user/usermsg";
     }
 
+    @RequestMapping(value = "/addGytInfo")
+    public String addgytinfo() {
+        return "/user/addGytInfo";
+    }
 }

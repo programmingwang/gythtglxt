@@ -3,6 +3,8 @@ package com.gythtglxt.service;
 import com.gythtglxt.dataobject.UserDO;
 import com.gythtglxt.dataobject.UserDOKey;
 import com.gythtglxt.dto.UpdatePwdDto;
+import com.gythtglxt.dto.UserDto;
+import com.gythtglxt.error.BusinessException;
 import com.gythtglxt.response.ResponseData;
 
 
@@ -14,7 +16,7 @@ import com.gythtglxt.response.ResponseData;
 
 public interface UserService {
 
-    void deleteUserByUsername(UserDO userDO);
+    void deleteUserByUsername(UserDto userDtO);
 
     int insert(UserDO record);
 
@@ -33,5 +35,7 @@ public interface UserService {
     void UpdateUserMsg(UserDO userDO);
 
     void UpdateUserPortrait(UserDO userDO);
+
+    ResponseData Register(UserDto userDto) throws BusinessException;
 
 }

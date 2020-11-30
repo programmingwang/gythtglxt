@@ -2,6 +2,8 @@ package com.gythtglxt.controller.user;
 
 import com.gythtglxt.dataobject.UserDO;
 import com.gythtglxt.dto.UpdatePwdDto;
+import com.gythtglxt.dto.UserDto;
+import com.gythtglxt.error.BusinessException;
 import com.gythtglxt.error.EmBusinessError;
 import com.gythtglxt.response.ResponseData;
 import com.gythtglxt.service.UserService;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * @Author nongcn
@@ -33,11 +34,23 @@ public class UserController {
     UsernameUtil usernameUtil;
 
     /**
+     * 用户注册，接收前段传递的数据，到service层
+     */
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ResponseData Register(UserDto userDto) throws BusinessException {
+        ResponseData rd = userService.Register(userDto);
+        if (rd.getCode().equals(EmBusinessError.success.getErrCode())) {
+            return new ResponseData(EmBusinessError.success, rd.getData());
+        } else {
+            return new ResponseData(EmBusinessError.USER_REGISTER_FAILED);
+        }
+    }
+
+    /**
      * 根据电话号码来修改密码
      *
      * @param updatePwdDto
      */
-//    @LogAnnotation(logTitle = "修改密码", logLevel = "2")
     @RequestMapping(value = "/updatepwd", method = RequestMethod.PUT)
     public ResponseData UpdatePassword(UpdatePwdDto updatePwdDto) {
         if (StringUtils.isEmpty(updatePwdDto.getNewPassword()) || StringUtils.isEmpty(updatePwdDto.getCheckNewPassword())) {
@@ -56,25 +69,27 @@ public class UserController {
         }
     }
 
-//    @LogAnnotation(logTitle = "查看个人信息", logLevel = "1")
     @RequestMapping(value = "/usermsg", method = RequestMethod.GET)
     public ResponseData selectOne() {
         UserDO userDO = userService.selectByName(usernameUtil.getOperateUser());
         return new ResponseData(EmBusinessError.success, userDO);
     }
 
-//    @LogAnnotation(logTitle = "修改个人信息", logLevel = "2")
     @RequestMapping(value = "/updateusermsg", method = RequestMethod.POST)
     public ResponseData updateUserMsg(@RequestBody UserDO userDO) {
         userService.UpdateUserMsg(userDO);
         return new ResponseData(EmBusinessError.success);
     }
 
-//    @LogAnnotation(logTitle = "修改用户头像", logLevel = "2")
     @RequestMapping(value = "/updateuserimg", method = RequestMethod.POST)
     public ResponseData updateUserPortrait(@RequestBody UserDO userDO) {
         userService.UpdateUserPortrait(userDO);
         return new ResponseData(EmBusinessError.success);
     }
 
+    @RequestMapping(value = "/deletuser", method = RequestMethod.POST)
+    public ResponseData deleteUserByUsername(@RequestBody UserDto userDtO){
+        userService.deleteUserByUsername(userDtO);
+        return new ResponseData(EmBusinessError.success);
+    }
 }

@@ -1,10 +1,12 @@
 package com.gythtglxt.service.impl;
 
+import com.gythtglxt.dao.HospitalDOMapper;
 import com.gythtglxt.dao.RoleDOMapper;
 import com.gythtglxt.dao.UserDOMapper;
 import com.gythtglxt.dao.UserRoleRefDOMapper;
 import com.gythtglxt.dataobject.*;
 import com.gythtglxt.dto.UpdatePwdDto;
+import com.gythtglxt.dto.UserDto;
 import com.gythtglxt.dto.UserSessionDto;
 import com.gythtglxt.error.BusinessException;
 import com.gythtglxt.error.EmBusinessError;
@@ -24,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 /**
  * @Author wanglx
@@ -45,10 +48,126 @@ public class UserServiceImpl implements UserService {
     UsernameUtil usernameUtil;
     @Autowired
     HttpServletRequest request;
+    @Resource
+    HospitalDOMapper hospitalDOMapper;
+
+    /**
+     * 用户注册
+     */
+    @Override
+    @Transactional
+    public ResponseData Register(UserDto userDto) throws BusinessException {
+        // 验证参数不能为空
+        ValidatorResult result = validator.validate(userDto);
+        if (result.isHasErrors()) {
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        // 验证手机号码
+        if (!MobileUtil.checkPhone(userDto.getMobilePhone())) {
+            throw new BusinessException("手机号码不正确", EmBusinessError.MOBILEPHONE_ERROR);
+        }
+        // 用户名的唯一性
+        UserDO userDO = userDOMapper.selectByUsername(userDto.getUsername());
+        if (userDO != null) {
+            throw new BusinessException("用户名已存在", EmBusinessError.USER_ACCOUNT_ALREADY_EXIST);
+        } else {
+            HospitalDO hospitalDO = hospitalDOMapper.selectByHospitalName(userDto.getOrgName());
+            if (hospitalDO != null) {   // 申请用户所在的机构已经申请过则直接到登录页面
+                register1(userDto);
+                return new ResponseData(EmBusinessError.success, "/userLogin");
+            } else {    // 申请用户所在的机构没有申请过则跳转到信息录入页面
+                register2(userDto);
+                return new ResponseData(EmBusinessError.success, "/addGytInfo");
+            }
+        }
+    }
+
+    /**
+     * 注册用户（机构已存在）
+     *
+     * @param userDto
+     */
+    private void register1(UserDto userDto) {
+
+        String orgName = userDto.getOrgName();
+        HospitalDO hospitalDO = hospitalDOMapper.selectByHospitalName(orgName);
+
+        String userItemCode = UUID.randomUUID().toString();// user 表唯一标识UUID
+        UserDO userDO = new UserDO();
+        userDO.setItemcode(userItemCode);
+        userDO.setOrgCode(hospitalDO.getItemcode());
+        userDO.setUsername(userDto.getUsername());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String password = passwordEncoder.encode(userDto.getPassword());
+        userDO.setSalt(userDto.getUsername());// 将 登陆账号 设置为 盐，存放到数据库中
+        userDO.setPassword(password);
+        userDO.setMobilephone(userDto.getMobilePhone());
+        userDO.setCreater(userDto.getUsername());// 注册时，注册用户为 创建人
+        userDO.setUpdater(userDto.getUsername());// 注册时，注册用户为 修改人
+        userDO.setType(99);
+
+        UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
+        RoleDO roleDO = roleDOMapper.selectByRoleType(99);//根据角色类型查到itemcode
+
+        userRoleRefDO.setItemcode(UUID.randomUUID().toString());// 唯一标识UUID
+        userRoleRefDO.setUserCode(userItemCode);// 关联user表itemCode字段
+        userRoleRefDO.setRoleCode(roleDO.getItemcode());// 关联role表itemCode字段
+        userRoleRefDO.setPlatRole("管理员");
+        userRoleRefDO.setCreater(userDto.getUsername());// 设置创建人
+        userRoleRefDO.setUpdater(userDto.getUsername());// 设置修改人
+
+        userDOMapper.insertSelective(userDO);// 添加数据到user表
+        userRoleRefDOMapper.insertSelective(userRoleRefDO);// 添加数据到user_role_ref表
+    }
+
+    /**
+     * 注册用户（机构不存在）
+     *
+     * @param userDto
+     */
+    private void register2(UserDto userDto) {
+
+        HospitalDO hospitalDO = new HospitalDO();
+        hospitalDO.setItemcode(userDto.getOrgCode());
+        hospitalDO.setHospitalName(userDto.getOrgName());
+        hospitalDO.setStatus("1");
+        hospitalDO.setCreater(userDto.getUsername());
+        hospitalDO.setUpdater(userDto.getUsername());
+
+        String userItemCode = UUID.randomUUID().toString();// user 表唯一标识UUID
+        UserDO userDO = new UserDO();
+        userDO.setItemcode(userItemCode);
+        userDO.setOrgCode(userDto.getOrgCode());
+        userDO.setUsername(userDto.getUsername());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String password = passwordEncoder.encode(userDto.getPassword());
+        userDO.setSalt(userDto.getUsername());// 将 登陆账号 设置为 盐，存放到数据库中
+        userDO.setPassword(password);
+        userDO.setMobilephone(userDto.getMobilePhone());
+        userDO.setCreater(userDto.getUsername());// 注册时，注册用户为 创建人
+        userDO.setUpdater(userDto.getUsername());// 注册时，注册用户为 修改人
+        userDO.setType(99);
+
+        RoleDO roleDO = roleDOMapper.selectByRoleType(99);//根据角色类型查到itemcode
+
+        UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
+        userRoleRefDO.setItemcode(UUID.randomUUID().toString());// 唯一标识UUID
+        userRoleRefDO.setUserCode(userItemCode);// 关联user表itemCode字段
+        userRoleRefDO.setRoleCode(roleDO.getItemcode());// 关联role表itemCode字段
+        userRoleRefDO.setPlatRole("管理员");
+        userRoleRefDO.setCreater(userDto.getUsername());// 设置创建人
+        userRoleRefDO.setUpdater(userDto.getUsername());// 设置修改人
+
+        hospitalDOMapper.insertSelective(hospitalDO);// 添加数据到hospital表
+        userDOMapper.insertSelective(userDO);// 添加数据到user表
+        userRoleRefDOMapper.insertSelective(userRoleRefDO);// 添加数据到user_role_ref表
+    }
 
     @Override
-    public void deleteUserByUsername(UserDO userDO) {
+    public void deleteUserByUsername(UserDto userDtO) {
         //删除用户角色关系
+        UserDO userDO = userDOMapper.selectByUsername(userDtO.getUsername());
+
         UserRoleRefDOKey userRoleRefDOKey = new UserRoleRefDOKey();
         UserRoleRefDO userRoleRefDO = userRoleRefDOMapper.selectByUserCode(userDO.getItemcode());
         userRoleRefDOKey.setItemid(userRoleRefDO.getItemid());
@@ -59,6 +178,14 @@ public class UserServiceImpl implements UserService {
         userDOKey.setItemid(userDO.getItemid());
         userDOKey.setItemcode(userDO.getItemcode());
         userDOMapper.deleteByPrimaryKey(userDOKey);
+        //删除hospital
+        HospitalDO hospitalDO = hospitalDOMapper.selectByHospitalName(userDtO.getOrgName());
+        if (hospitalDO != null){
+            HospitalDOKey hospitalDOKey = new HospitalDOKey();
+            hospitalDOKey.setItemid(hospitalDO.getItemid());
+            hospitalDOKey.setItemcode(hospitalDO.getItemcode());
+            hospitalDOMapper.deleteByPrimaryKey(hospitalDOKey);
+        }
     }
 
     @Override
@@ -82,8 +209,6 @@ public class UserServiceImpl implements UserService {
         //查询角色role_code
         RoleDO roleDO = roleDOMapper.selectByRoleName(record.getRoleName());
         UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
-//        userRoleRefDO.setUpdater(usernameUtil.getOperateUser());
-//        userRoleRefDO.setCreater(usernameUtil.getOperateUser());
         userRoleRefDO.setItemcode(UUIDUtils.getUUID());
         userRoleRefDO.setRoleCode(roleDO.getItemcode());
         userRoleRefDO.setUserCode(record.getItemcode());
