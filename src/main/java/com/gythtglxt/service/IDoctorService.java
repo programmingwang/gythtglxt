@@ -22,4 +22,6 @@ public interface IDoctorService {
     DoctorDO selectByPrimaryKey(DoctorDOKey key);
 
     List<DoctorDto> selectAll();
+
+    List<DoctorDto> selectByUserCode();
 }

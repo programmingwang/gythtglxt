@@ -21,4 +21,6 @@ public interface DoctorDOMapper {
     int updateByPrimaryKey(DoctorDO record);
 
     List<DoctorDO> selectAll();
+
+    List<DoctorDO> selectByUserCode(String userCode);
 }

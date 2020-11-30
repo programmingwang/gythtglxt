@@ -9,6 +9,7 @@ import com.gythtglxt.error.BusinessException;
 import com.gythtglxt.error.EmBusinessError;
 import com.gythtglxt.service.IDoctorService;
 import com.gythtglxt.service.IFileService;
+import com.gythtglxt.util.UsernameUtil;
 import com.gythtglxt.validator.ValidatorImpl;
 import com.gythtglxt.validator.ValidatorResult;
 import org.springframework.beans.BeanUtils;
@@ -32,6 +33,8 @@ public class DoctorServiceImpl implements IDoctorService {
     private ValidatorImpl validator;
     @Resource
     private IFileService fileService;
+    @Resource
+    private UsernameUtil usernameUtil;
 
     @Override
     public int insertSelective(DoctorDO record) {
@@ -73,6 +76,12 @@ public class DoctorServiceImpl implements IDoctorService {
     @Override
     public List<DoctorDto> selectAll() {
         List<DoctorDO> doctorDOList = doctorDOMapper.selectAll();
+        return DoToDto(doctorDOList);
+    }
+
+    @Override
+    public List<DoctorDto> selectByUserCode() {
+        List<DoctorDO> doctorDOList = doctorDOMapper.selectByUserCode(usernameUtil.getOrgCode());
         return DoToDto(doctorDOList);
     }
 

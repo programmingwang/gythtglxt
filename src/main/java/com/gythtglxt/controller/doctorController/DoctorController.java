@@ -46,7 +46,7 @@ public class DoctorController {
     /*查询所有医生*/
     @GetMapping(value = "/doctor")
     public ResponseData selectAll(){
-        List<DoctorDto> doctorDtoList =  doctorService.selectAll();
+        List<DoctorDto> doctorDtoList =  doctorService.selectByUserCode();
         return new ResponseData(EmBusinessError.success,doctorDtoList);
     }
 

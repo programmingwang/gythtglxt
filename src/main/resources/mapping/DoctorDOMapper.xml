@@ -191,6 +191,12 @@
         select
         <include refid="Base_Column_List"/>
         from tb_natmeha_doctor
-        ORDER BY itemUpdateAt DESC
+    </select>
+
+    <select id="selectByUserCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_natmeha_doctor
+        WHERE USER_CODE = #{userCode}
     </select>
 </mapper>
