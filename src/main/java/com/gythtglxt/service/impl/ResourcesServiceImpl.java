@@ -62,8 +62,8 @@ public class ResourcesServiceImpl implements ResourcesService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setUpdater(usernameUtil.getOperateUser());
-        record.setCreater(usernameUtil.getOperateUser());
+//        record.setUpdater(usernameUtil.getOperateUser());
+//        record.setCreater(usernameUtil.getOperateUser());
         record.setItemcode(UUIDUtils.getUUID());
         resourcesDOMapper.insertSelective(record);
     }

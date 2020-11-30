@@ -50,7 +50,10 @@ public class CustomizeFilterInvocationSecurityMetadataSource implements FilterIn
         if (index != -1) {
             requestUrl = requestUrl.substring(0, index);
         }
-        if (requestUrl.contains("/industrialdevelop")){
+        if (requestUrl.contains("/healthProtection")
+                ||requestUrl.contains("/doctor")
+                ||requestUrl.contains("/information")
+        ){
             String method = ((FilterInvocation) o).getHttpRequest().getMethod();
             requestUrl = UrlUtil.getUrl(requestUrl, method);
         }else {
