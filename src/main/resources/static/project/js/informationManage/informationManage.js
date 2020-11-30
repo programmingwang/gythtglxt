@@ -2,7 +2,7 @@
     require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'objectUtil', 'distpicker', 'alertUtil'],
         function ($, ajaxUtil, stringUtil, uploadImg, objectUtil, distpicker, alertUtil) {
 
-            var url = "/information?itemCode=" + "f324ccba-2e2c-4df2-aeb8-f9f0cd58f5dc";
+            var url = "/information?itemCode=" + sessionStorage.getItem("orgCode");
 
             var pathUrl = "/informationManage/informationManage";
 
@@ -21,6 +21,7 @@
             $("#cancelBtn").click(function () {
                 orange.redirect(pathUrl)
             });
+            console.log("11111111111")
 
             function generateParam() {
                 var param = {};

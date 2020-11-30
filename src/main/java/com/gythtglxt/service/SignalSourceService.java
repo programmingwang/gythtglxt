@@ -22,5 +22,7 @@ public interface SignalSourceService {
     List<SignalSourceDto> selectAllByUserCodeOrStatusOrRegisterDate(String userCode, String status,String year);
 
     List<SignalSourceDoctorDto> getDoctor(String usercode);
+
+    int dayUpdate();
 }
 

@@ -3,8 +3,10 @@ package com.gythtglxt.service.impl;
 import com.gythtglxt.dto.SignalSourceDoctorDto;
 import com.gythtglxt.dto.SignalSourceDto;
 import com.gythtglxt.service.IDictService;
+import com.gythtglxt.util.UsernameUtil;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +26,9 @@ public class SignalSourceServiceImpl implements SignalSourceService {
     private SignalSourceMapper signalSourceMapper;
 
     @Resource
+    private UsernameUtil usernameUtil;
+
+    @Resource
     private IDictService dictService;
 
     @Override
@@ -34,11 +39,15 @@ public class SignalSourceServiceImpl implements SignalSourceService {
     @Override
     public int insertSelective(SignalSource record) {
         record.setItemcode(UUID.randomUUID().toString());
+        record.setCreater(usernameUtil.getOperateUser());
+        record.setUpdater(usernameUtil.getOperateUser());
         return signalSourceMapper.insertSelective(record);
     }
 
     @Override
     public int updateByPrimaryKeySelective(SignalSource record) {
+        record.setUpdater(usernameUtil.getOperateUser());
+        record.setItemupdateat(new Date());
         return signalSourceMapper.updateByPrimaryKeySelective(record);
     }
 
@@ -55,6 +64,11 @@ public class SignalSourceServiceImpl implements SignalSourceService {
     @Override
     public List<SignalSourceDoctorDto> getDoctor(String usercode) {
         return signalSourceMapper.getDoctor(usercode);
+    }
+
+    @Override
+    public int dayUpdate() {
+        return signalSourceMapper.dayUpdate();
     }
 }
 

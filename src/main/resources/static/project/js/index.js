@@ -64,7 +64,7 @@
                     },
                     {
                         menu_name: "号源管理",
-                        menu_url: "/demo/informationDemo",
+                        menu_url: "/signalSource/sourceManage",
                         id: "2-1",
                         level: "2",
                         pid: "2"
@@ -92,7 +92,7 @@
                     },
                     {
                         menu_name: "信息维护",
-                        menu_url: "/iubyyu",
+                        menu_url: "/informationManage/informationManage",
                         id: "2-5",
                         level: "2",
                         pid: "2"
