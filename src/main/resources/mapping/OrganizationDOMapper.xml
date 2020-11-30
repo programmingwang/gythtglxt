@@ -19,8 +19,7 @@
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
   </resultMap>
   <sql id="Base_Column_List">
-    itemID, itemCode, ORG_NAME, ORG_CODE, ORG_DESCRIPTION, ORG_IDENTIFY, backup1, backup2,
-    LEFT, RIGHT, LEVEL, CREATER, itemCreateAt, UPDATER, itemUpdateAt
+    itemID, itemCode, ORG_NAME, ORG_CODE, ORG_DESCRIPTION, ORG_IDENTIFY
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
