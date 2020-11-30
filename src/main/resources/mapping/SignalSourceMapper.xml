@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gythtglxt.dao.SignalSourceMapper">
+    <resultMap id="BaseResultMap" type="com.gythtglxt.dataobject.SignalSource">
+        <!--@mbg.generated-->
+        <!--@Table tb_natmeha_signal_source-->
+        <!--@Table tb_natmeha_doctor-->
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="DOCTOR_CODE" jdbcType="CHAR" property="doctorCode"/>
+        <result column="REGISTER_TYPE" jdbcType="VARCHAR" property="registerType"/>
+        <result column="REGISTER_DATE" jdbcType="TIMESTAMP" property="registerDate"/>
+        <result column="REGISTER_COUNT" jdbcType="INTEGER" property="registerCount"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="USER_CODE" jdbcType="CHAR" property="userCode"/>
+        <result column="CREATER" jdbcType="VARCHAR" property="creater"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+        <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="DtoResultMap" type="com.gythtglxt.dto.SignalSourceDto">
+        <result column="DOCTOR_NAME" property="doctorName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        itemID, itemCode, DOCTOR_CODE, REGISTER_TYPE, REGISTER_DATE, REGISTER_COUNT, `STATUS`,
+        USER_CODE, CREATER, itemCreateAt, UPDATER, itemUpdateAt
+    </sql>
+    <sql id="Dto_Column_List">
+        tb_natmeha_signal_source.itemID         as itemID,
+        tb_natmeha_signal_source.itemCode       as itemCode,
+        tb_natmeha_signal_source.DOCTOR_CODE    as DOCTOR_CODE,
+        tb_natmeha_signal_source.REGISTER_TYPE  as REGISTER_TYPE,
+        tb_natmeha_signal_source.REGISTER_DATE  as REGISTER_DATE,
+        tb_natmeha_signal_source.REGISTER_COUNT as REGISTER_COUNT,
+        tb_natmeha_signal_source.STATUS         as STATUS,
+        tb_natmeha_signal_source.USER_CODE      as USER_CODE,
+        tb_natmeha_signal_source.CREATER        as CREATER,
+        tb_natmeha_signal_source.itemCreateAt   as itemCreateAt,
+        tb_natmeha_signal_source.UPDATER        as UPDATER,
+        tb_natmeha_signal_source.itemUpdateAt   as itemUpdateAt,
+        DOCTOR_NAME
+    </sql>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        <!--@mbg.generated-->
+        delete
+        from tb_natmeha_signal_source
+        where itemID = #{itemid,jdbcType=INTEGER}
+          and itemCode = #{itemcode,jdbcType=CHAR}
+    </delete>
+    <insert id="insertSelective" keyColumn="itemID" keyProperty="itemid"
+            parameterType="com.gythtglxt.dataobject.SignalSource" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into tb_natmeha_signal_source
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="itemcode != null">
+                itemCode,
+            </if>
+            <if test="doctorCode != null">
+                DOCTOR_CODE,
+            </if>
+            <if test="registerType != null">
+                REGISTER_TYPE,
+            </if>
+            <if test="registerDate != null">
+                REGISTER_DATE,
+            </if>
+            <if test="registerCount != null">
+                REGISTER_COUNT,
+            </if>
+            <if test="status != null">
+                `STATUS`,
+            </if>
+            <if test="userCode != null">
+                USER_CODE,
+            </if>
+            <if test="creater != null">
+                CREATER,
+            </if>
+            <if test="itemcreateat != null">
+                itemCreateAt,
+            </if>
+            <if test="updater != null">
+                UPDATER,
+            </if>
+            <if test="itemupdateat != null">
+                itemUpdateAt,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="itemcode != null">
+                #{itemcode,jdbcType=CHAR},
+            </if>
+            <if test="doctorCode != null">
+                #{doctorCode,jdbcType=CHAR},
+            </if>
+            <if test="registerType != null">
+                #{registerType,jdbcType=VARCHAR},
+            </if>
+            <if test="registerDate != null">
+                #{registerDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerCount != null">
+                #{registerCount,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="userCode != null">
+                #{userCode,jdbcType=CHAR},
+            </if>
+            <if test="creater != null">
+                #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="itemcreateat != null">
+                #{itemcreateat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updater != null">
+                #{updater,jdbcType=VARCHAR},
+            </if>
+            <if test="itemupdateat != null">
+                #{itemupdateat,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gythtglxt.dataobject.SignalSource">
+        <!--@mbg.generated-->
+        update tb_natmeha_signal_source
+        <set>
+            <if test="doctorCode != null">
+                DOCTOR_CODE = #{doctorCode,jdbcType=CHAR},
+            </if>
+            <if test="registerType != null">
+                REGISTER_TYPE = #{registerType,jdbcType=VARCHAR},
+            </if>
+            <if test="registerDate != null">
+                REGISTER_DATE = #{registerDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerCount != null">
+                REGISTER_COUNT = #{registerCount,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                `STATUS` = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="userCode != null">
+                USER_CODE = #{userCode,jdbcType=CHAR},
+            </if>
+            <if test="creater != null">
+                CREATER = #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="itemcreateat != null">
+                itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updater != null">
+                UPDATER = #{updater,jdbcType=VARCHAR},
+            </if>
+            <if test="itemupdateat != null">
+                itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where itemID = #{itemid,jdbcType=INTEGER}
+          and itemCode = #{itemcode,jdbcType=CHAR}
+    </update>
+    <select id="selectAllByUserCodeOrStatusOrRegisterDate" resultMap="DtoResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Dto_Column_List"/>
+        from tb_natmeha_signal_source,
+             tb_natmeha_doctor as doctor
+                where tb_natmeha_signal_source.USER_CODE = #{userCode,jdbcType=CHAR}
+                  and doctor.USER_CODE = tb_natmeha_signal_source.DOCTOR_CODE
+        <if test="status != null">
+            and `STATUS` = #{status,jdbcType=VARCHAR}
+        </if>
+        <if test="year != null">
+        and year(REGISTER_DATE) = #{year}
+</if>
+    </select>
+    <select id="getDoctor" resultType="com.gythtglxt.dto.SignalSourceDoctorDto">
+        select USER_CODE as id, DOCTOR_NAME as text
+        from tb_natmeha_doctor
+        where USER_CODE in (select DOCTOR_CODE
+                            from tb_natmeha_signal_source
+                            where tb_natmeha_signal_source.USER_CODE = #{usercode,jdbcType=VARCHAR})
+    </select>
+</mapper>
