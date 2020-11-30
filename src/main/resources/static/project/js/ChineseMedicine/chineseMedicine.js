@@ -50,7 +50,7 @@
                             '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
                             '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                         ].join('');
-                    }else if(status == webStatus[2].id || status == webStatus[4].id || status == webStatus[6].id || status == webStatus[7].id || status == webStatus[9].id){
+                    }else if(status == webStatus[2].id || status == webStatus[4].id || status == webStatus[6].id || status == webStatus[9].id){
                         return [
                             '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                             '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
