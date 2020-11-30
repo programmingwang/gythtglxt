@@ -97,4 +97,7 @@ public class HospitalDto {
 
     @ApiModelProperty(value = "数据状态")
     private String status;
+
+    @ApiModelProperty(value = "理由")
+    private String reason;
 }

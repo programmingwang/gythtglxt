@@ -1,4 +1,5 @@
 package com.gythtglxt.dao;
+import java.util.List;
 
 import com.gythtglxt.dataobject.Hospital;
 import org.apache.ibatis.annotations.Mapper;
@@ -33,4 +34,7 @@ public interface HospitalMapper {
     int updateByPrimaryKeySelective(Hospital record);
 
     Hospital selectOneByItemcode(@Param("itemcode") String itemcode);
+
+    List<Hospital> selectAll();
+
 }
