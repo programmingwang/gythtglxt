@@ -71,7 +71,7 @@
                     },
                     {
                         menu_name: "服务团队",
-                        menu_url: "/iuhubiu",
+                        menu_url: "/doctor/doctor",
                         id: "2-2",
                         level: "2",
                         pid: "2"
