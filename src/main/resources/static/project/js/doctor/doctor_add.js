@@ -60,10 +60,8 @@
                 entity["doctorName"] = $("#doctorName").val();
                 entity["doctorTitle"] = $("#doctorTitle").val();
                 entity["doctorTreatment"] = $("#doctorTreatment").val();
-                entity["doctorSorce"] = $("#doctorSorce").val();
                 entity["deptCode"] = $("#deptCode").val();
                 entity["numType"] = numType[$("#numType").val()].text;
-                entity["userCode"] = $("#userCode").val();
 
 
                 fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);

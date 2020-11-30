@@ -42,7 +42,12 @@ public class DoctorServiceImpl implements IDoctorService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        record.setUserCode(usernameUtil.getOrgCode());
+        String username = usernameUtil.getOperateUser();
+        record.setCreater(username);
         record.setItemcreateat(new Date());
+        record.setUpdater(username);
+
         return doctorDOMapper.insertSelective(record);
     }
 
@@ -52,6 +57,9 @@ public class DoctorServiceImpl implements IDoctorService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        String username = usernameUtil.getOperateUser();
+        record.setUpdater(username);
+
         return doctorDOMapper.updateByPrimaryKeySelective(record);
     }
 
