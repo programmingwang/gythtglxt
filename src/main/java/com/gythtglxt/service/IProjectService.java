@@ -2,6 +2,8 @@ package com.gythtglxt.service;
 import java.util.List;
 
 import com.gythtglxt.dataobject.Project;
+import com.gythtglxt.dto.ProjectDto;
+
 public interface IProjectService {
 
 
@@ -13,9 +15,9 @@ public interface IProjectService {
 
     int updateByPrimaryKeySelective(Project record);
 
-    List<Project> selectproAll();
+    List<ProjectDto> selectproAll(List<String> dataStatus);
 
-    List<Project> selectchaAll();
+    List<ProjectDto> selectchaAll(List<String> dataStatus);
 
 
 }

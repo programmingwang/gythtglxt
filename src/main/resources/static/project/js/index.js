@@ -78,14 +78,14 @@
                     },
                     {
                         menu_name: "开展项目",
-                        menu_url: "/ubiuiu",
+                        menu_url: "/project/project",
                         id: "2-3",
                         level: "2",
                         pid: "2"
                     },
                     {
                         menu_name: "功效特色",
-                        menu_url: "/ihiuh",
+                        menu_url: "/project/characteri",
                         id: "2-4",
                         level: "2",
                         pid: "2"

@@ -16,9 +16,9 @@ public interface ProjectMapper {
 
     int updateByPrimaryKeySelective(Project record);
 
-    List<Project> selectproAll();
+    List<Project> selectproAll(@Param("status") String dataStatus);
 
-    List<Project> selectchaAll();
+    List<Project> selectchaAll(@Param("status") String dataStatus);
 
 
 }

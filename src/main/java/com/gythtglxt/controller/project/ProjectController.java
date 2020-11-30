@@ -8,6 +8,7 @@ import com.gythtglxt.service.IProjectService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("project")
@@ -51,8 +52,8 @@ public class ProjectController {
      */
     @RequestMapping(value = "/updateProject", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseData updateByPrimaryKeySelective(@RequestBody Project record) throws BusinessException {
-        iProjectService.updateByPrimaryKeySelective(record);
+    public ResponseData updateByPrimaryKeySelective(@RequestBody Project submitStatus) throws BusinessException {
+        iProjectService.updateByPrimaryKeySelective(submitStatus);
         return new ResponseData(EmBusinessError.success);
     }
 
@@ -61,8 +62,8 @@ public class ProjectController {
      */
     @GetMapping(value = "/selectproAll")
     @ResponseBody
-    public ResponseData selectproAll() {
-        return new ResponseData(EmBusinessError.success,iProjectService.selectproAll());
+    public ResponseData selectproAll(@RequestParam(value = "status") List dataStatus) {
+        return new ResponseData(EmBusinessError.success,iProjectService.selectproAll(dataStatus));
     }
 
     /**
@@ -70,8 +71,8 @@ public class ProjectController {
      */
     @GetMapping(value = "/selectchaAll")
     @ResponseBody
-    public ResponseData selectchaAll() {
-        return new ResponseData(EmBusinessError.success,iProjectService.selectchaAll());
+    public ResponseData selectchaAll(@RequestParam(value = "status") List dataStatus) {
+        return new ResponseData(EmBusinessError.success,iProjectService.selectchaAll(dataStatus));
     }
 
 }
