@@ -2246,6 +2246,12 @@
             '         </select>\n' +
             '      </div>\n' +
             '   </div> \n' +
+            '   <label class="input-label col-lg-12 col-md-12 ">预约量</label>\n' +
+            '   <div class=" col-lg-12 col-md-12 mb-3">\n' +
+            '      <div>\n' +
+            '         <input id="registerCount" type="number" class="form-control" style="width: 100%;height: 3rem;">\n' +
+            '      </div>\n' +
+            '   </div> \n' +
             '</div>'
             ;
 
@@ -2384,6 +2390,7 @@
         modalHtml.myDeleteModalMedicine='是否删除中医药';
         modalHtml.myDeleteModalcareFam='是否删除国医话健康';
         modalHtml.myDeleteModalSciknow='是否删除科普知识';
+        modalHtml.myDeleteModalSignalSource = "是否删除号源"
 
         modalHtml.myDeleteNewsInf = '是否删除新闻信息?';
         modalHtml.myDeleteNewsRotations = '是否删除新闻轮播图?';

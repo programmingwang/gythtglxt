@@ -75,8 +75,8 @@
             "subjectMajor": "subjectMajor",
             //网站数据状态
             "webStatus": "status",
-            //科研项目数据状态
-            "projectStatus": "projectStatus",
+            //审核数据状态
+            "auditStatus": "auditStatus",
             //专家评审状态
             "exmaineStatus": "exmaineStatus",
             //轮播图位置
@@ -95,7 +95,11 @@
             "expertSubmitStatus":"expertSubmitStatus",
             //课题专家分配状态
             "distributionExpert" : "distributionExpert",
-        }
+            //挂号类别
+            "numType":"numType",
+            //号源状态
+            "signalSourceStatus":"signalSourceStatus"
+        };
 
         var dictList = {
 
