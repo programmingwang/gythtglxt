@@ -221,7 +221,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button id="btn btn-primary btn-sm" class="btn btn-primary btn-sm"">中药名称</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="chineseMedicineName" class="form-control">\n' +
+            '                    <input type="text" id="name" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -231,7 +231,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button class="btn btn-primary btn-sm" >别名</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="chineseMedicineAlias" class="form-control">\n' +
+            '                    <input type="text" id="alias" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -241,7 +241,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button class="btn btn-primary btn-sm" >功效分类</button>\n' +
             '                    </div>\n' +
-            '                   <input type="text" id="chineseMedicineType" class="form-control">\n' +
+            '                   <input type="text" id="classification" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -251,7 +251,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button class="btn btn-primary btn-sm" >采制</button>\n' +
             '                    </div>\n' +
-            '                   <input type="text" id="chineseMedicineHarvesting" class="form-control">\n' +
+            '                   <input type="text" id="harvesting" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -261,7 +261,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button class="btn btn-primary btn-sm" >性味</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="chineseMedicineTaste" class="form-control">\n' +
+            '                    <input type="text" id="taste" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -271,7 +271,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button class="btn btn-primary btn-sm" >归经</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="chineseMedicineMerTro" class="form-control">\n' +
+            '                    <input type="text" id="merTropism" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -281,7 +281,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button class="btn btn-primary btn-sm" >功效主治</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="chineseMedicineEffect" class="form-control">\n' +
+            '                    <input type="text" id="governance" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -291,7 +291,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button class="btn btn-primary btn-sm" >用法用量</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="chineseMedicineUsage" class="form-control">\n' +
+            '                    <input type="text" id="usage" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '  \n' +
@@ -301,7 +301,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button class="btn btn-primary btn-sm" >数据状态</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="chineseMedicineStatus" class="form-control">\n' +
+            '                    <input type="text" id="status" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -2565,6 +2565,7 @@
         modalHtml.mySubmitProtection = "确认提交？";
         modalHtml.myNoSubmitProtection = "确认取消提交？";
         modalHtml.myPassProtection = "确认通过？";
+        modalHtml.myNoSubmitProtection='确认取消提交';
         modalHtml.myNoPassProtection = "确认不通过？";
         modalHtml.myUnderShelfProtection = "确认下架？";
         modalHtml.myDeleteProtection = "确认删除？";
