@@ -2530,7 +2530,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm">功效特色价格</button>\n' +
             '                    </div>\n' +
-            '                    <span style="position: absolute;top: 0.3rem;left: 6.5rem;font-size: 19px;z-index: 1050;">￥</span>\n'  +
+            '                    <span style="position: absolute;top: 0.3rem;left: 5.7rem;font-size: 19px;z-index: 1050;">￥</span>\n'  +
             '                    <input style="text-indent: 0.5rem;" type="text" id="price" class="form-control" >\n' +
             '                </div>\n' +
             '            </div>\n' +
