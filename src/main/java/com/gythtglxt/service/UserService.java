@@ -2,8 +2,9 @@ package com.gythtglxt.service;
 
 import com.gythtglxt.dataobject.UserDO;
 import com.gythtglxt.dataobject.UserDOKey;
+import com.gythtglxt.dto.UpdatePwdDto;
+import com.gythtglxt.response.ResponseData;
 
-import java.util.List;
 
 /**
  * @Author wanglx
@@ -26,5 +27,11 @@ public interface UserService {
     int updateByPrimaryKey(UserDO record);
 
     UserDO selectByName(String username);
+
+    ResponseData UpdatePassword(UpdatePwdDto updatePwdDto);
+
+    void UpdateUserMsg(UserDO userDO);
+
+    void UpdateUserPortrait(UserDO userDO);
 
 }

@@ -36,4 +36,9 @@ public class IndexController {
         return "/index";
     }
 
+    @RequestMapping(value = "/toUserMsg")
+    public String userMsg() {
+        return "/user/usermsg";
+    }
+
 }

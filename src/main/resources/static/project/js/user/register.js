@@ -58,7 +58,7 @@
                 }
             }
 
-            // 输入框失去焦点后获取公司名称和机构代码，去数据库查询该机构的审核状态
+            /*// 输入框失去焦点后获取公司名称和机构代码，去数据库查询该机构的审核状态
             $("#orgCode").on("blur", function () {
                 let orgName = $("#orgName").val();
                 // let orgType = $("#orgType option:selected").val();
@@ -67,7 +67,6 @@
                 console.log(orgType);
                 var userEntity = {"orgName": orgName, "orgIdentify": orgType, "orgCode": orgCode};
                 ajaxUtil.myAjax(null, "/user/queryOrgStatus", userEntity, function (data) {
-                    console.log("888888888888888:"+data.data);
                     if (data && data.code === 88888) {
 
                         if (i == 0) {
@@ -132,7 +131,7 @@
                         alertUtil.error("查询审核状态失败")
                     }
                 }, false)
-            });
+            });*/
 
             function validateLogin() {
                 let orgName = $("#orgName").val();
@@ -194,7 +193,6 @@
                 let password = $("#password").val();
                 let phone = $("#phone").val();
 
-                console.log('555555555555'+orgType);
 
                 var userEntity = {
                     "orgName": orgName,
