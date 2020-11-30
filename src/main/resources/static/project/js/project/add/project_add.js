@@ -3,9 +3,9 @@
         function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg) {
             const editor = objectUtil.wangEditorUtil();
             // uploadImg.init();
-            var pathUrl = "/healthProtection/kidsHealth";
+            var pathUrl = "/project/project";
 
-            var opreateUrl = "/healthProtection/hotspot";
+            var opreateUrl = isUpdate() ? "/project/updateProject" : "/project/insertProject";
 
             var type = isUpdate() ? "put" : "post" ;
 
@@ -16,36 +16,32 @@
             });
 
             $("#btn_save").unbind().on('click',function () {
-                var hotspotEntity;
+                var projectEntity;
                 var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增儿童健康成功";
-                    hotspotEntity = {
+                    operateMessage = "新增开展项目成功";
+                    projectEntity = {
                         itemcode: stringUtil.getUUID(),
-                        hotspotTitle : $("#hotspotTitle").val(),
-                        hotspotSource : $("#hotspotSource").val(),
-                        hotspotAuthor : $("#hotspotAuthor").val(),
-                        hotspotContent : editor.txt.html(),
+                        name : $("#name").val(),
+                        content : editor.txt.html(),
                         dataStatus : "0" ,
-                        dataType : "4",
-                        userCode : sessionStorage.getItem("itemcode")
+                        dataType : "0",
+                        userCode : ""
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
-                    hotspotEntity = {
+                    projectEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
-                        hotspotTitle : $("#hotspotTitle").val(),
-                        hotspotSource : $("#hotspotSource").val(),
-                        hotspotAuthor : $("#hotspotAuthor").val(),
-                        hotspotContent : editor.txt.html(),
+                        name : $("#name").val(),
+                        content : editor.txt.html(),
                     }
-                    operateMessage = "更新儿童健康成功";
+                    operateMessage = "更新开展项目成功";
                 }
 
-                fileUtil.handleFile(isUpdate(), hotspotEntity.itemcode, uploadImg.getFiles()[0]);
+                fileUtil.handleFile(isUpdate(), projectEntity.itemcode, uploadImg.getFiles()[0]);
 
-                ajaxUtil.myAjax(null,opreateUrl,hotspotEntity,function (data) {
+                ajaxUtil.myAjax(null,opreateUrl,projectEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
                             alertUtil.info(operateMessage);
@@ -61,36 +57,32 @@
             });
 
             $("#btn_insert").unbind().on('click',function () {
-                var hotspotEntity;
+                var projectEntity;
                 var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增儿童健康成功";
-                    hotspotEntity = {
+                    operateMessage = "新增开展项目成功";
+                    projectEntity = {
                         itemcode: stringUtil.getUUID(),
-                        hotspotTitle : $("#hotspotTitle").val(),
-                        hotspotSource : $("#hotspotSource").val(),
-                        hotspotAuthor : $("#hotspotAuthor").val(),
-                        hotspotContent : editor.txt.html(),
-                        dataStatus : "1" ,
-                        dataType : "4",
-                        userCode : sessionStorage.getItem("itemcode")
+                        name : $("#name").val(),
+                        content : editor.txt.html(),
+                        dataStatus : "0" ,
+                        dataType : "0",
+                        userCode : ""
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
-                    hotspotEntity = {
+                    projectEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
-                        hotspotTitle : $("#hotspotTitle").val(),
-                        hotspotSource : $("#hotspotSource").val(),
-                        hotspotAuthor : $("#hotspotAuthor").val(),
-                        hotspotContent : editor.txt.html(),
+                        name : $("#name").val(),
+                        content : editor.txt.html(),
                     }
-                    operateMessage = "更新儿童健康成功";
+                    operateMessage = "更新开展项目成功";
                 }
 
-                fileUtil.handleFile(isUpdate(), hotspotEntity.itemcode, uploadImg.getFiles()[0]);
+                fileUtil.handleFile(isUpdate(), projectEntity.itemcode, uploadImg.getFiles()[0]);
 
-                ajaxUtil.myAjax(null,opreateUrl,hotspotEntity,function (data) {
+                ajaxUtil.myAjax(null,opreateUrl,projectEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
                             alertUtil.info(operateMessage);
@@ -108,10 +100,8 @@
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#hotspotTitle").val(tempdata.hotspotTitle);
-                    $("#hotspotSource").val(tempdata.hotspotSource);
-                    $("#hotspotAuthor").val(tempdata.hotspotAuthor);
-                    editor.txt.html(tempdata.hotspotContent);
+                    $("#name").val(tempdata.name);
+                    editor.txt.html(tempdata.content);
                     var img = tempdata.filePath;
                     uploadImg.setImgSrc(img);
                 }

@@ -17,13 +17,13 @@
         function getRoleTable(role,preUrl,status,webStatus) {
             if(role === "管理员"){
                 $('#btn_addTask').attr('style',"display:block");
-                return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id;
+                return preUrl +status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
             }else if(role === "县局中医药管理部门"){
-                return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[8].id;
+                return preUrl +status+"="+webStatus[1].id+"&"+status+"="+webStatus[8].id;
             }else if(role === "市局中医药管理部门"){
-                return preUrl + "?"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[8].id;
+                return preUrl +status+"="+webStatus[3].id+"&"+status+"="+webStatus[8].id;
             }else if(role === "省局中医药管理部门"){
-                return preUrl + "?"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[8].id;
+                return preUrl +status+"="+webStatus[5].id+"&"+status+"="+webStatus[8].id;
             }
         }
         

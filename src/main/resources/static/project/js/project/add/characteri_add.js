@@ -3,9 +3,9 @@
         function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg) {
             const editor = objectUtil.wangEditorUtil();
             // uploadImg.init();
-            var pathUrl = "/healthProtection/kidsHealth";
+            var pathUrl = "/project/characteri";
 
-            var opreateUrl = "/healthProtection/hotspot";
+            var opreateUrl = isUpdate() ? "/project/updateProject" : "/project/insertProject";
 
             var type = isUpdate() ? "put" : "post" ;
 
@@ -16,36 +16,34 @@
             });
 
             $("#btn_save").unbind().on('click',function () {
-                var hotspotEntity;
+                var characteriEntity;
                 var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增儿童健康成功";
-                    hotspotEntity = {
+                    operateMessage = "新增功效特色成功";
+                    characteriEntity = {
                         itemcode: stringUtil.getUUID(),
-                        hotspotTitle : $("#hotspotTitle").val(),
-                        hotspotSource : $("#hotspotSource").val(),
-                        hotspotAuthor : $("#hotspotAuthor").val(),
-                        hotspotContent : editor.txt.html(),
+                        name : $("#name").val(),
+                        price : $("#price").val(),
+                        content : editor.txt.html(),
                         dataStatus : "0" ,
-                        dataType : "4",
-                        userCode : sessionStorage.getItem("itemcode")
+                        dataType : "1",
+                        userCode : ""
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
-                    hotspotEntity = {
+                    characteriEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
-                        hotspotTitle : $("#hotspotTitle").val(),
-                        hotspotSource : $("#hotspotSource").val(),
-                        hotspotAuthor : $("#hotspotAuthor").val(),
-                        hotspotContent : editor.txt.html(),
+                        name : $("#name").val(),
+                        price : $("#price").val(),
+                        content : editor.txt.html(),
                     }
-                    operateMessage = "更新儿童健康成功";
+                    operateMessage = "更新功效特色成功";
                 }
 
-                fileUtil.handleFile(isUpdate(), hotspotEntity.itemcode, uploadImg.getFiles()[0]);
+                fileUtil.handleFile(isUpdate(), characteriEntity.itemcode, uploadImg.getFiles()[0]);
 
-                ajaxUtil.myAjax(null,opreateUrl,hotspotEntity,function (data) {
+                ajaxUtil.myAjax(null,opreateUrl,characteriEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
                             alertUtil.info(operateMessage);
@@ -61,36 +59,34 @@
             });
 
             $("#btn_insert").unbind().on('click',function () {
-                var hotspotEntity;
+                var characteriEntity;
                 var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增儿童健康成功";
-                    hotspotEntity = {
+                    operateMessage = "新增功效特色成功";
+                    characteriEntity = {
                         itemcode: stringUtil.getUUID(),
-                        hotspotTitle : $("#hotspotTitle").val(),
-                        hotspotSource : $("#hotspotSource").val(),
-                        hotspotAuthor : $("#hotspotAuthor").val(),
-                        hotspotContent : editor.txt.html(),
-                        dataStatus : "1" ,
-                        dataType : "4",
-                        userCode : sessionStorage.getItem("itemcode")
+                        name : $("#name").val(),
+                        price : $("#price").val(),
+                        content : editor.txt.html(),
+                        dataStatus : "0" ,
+                        dataType : "1",
+                        userCode : ""
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
-                    hotspotEntity = {
+                    characteriEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
-                        hotspotTitle : $("#hotspotTitle").val(),
-                        hotspotSource : $("#hotspotSource").val(),
-                        hotspotAuthor : $("#hotspotAuthor").val(),
-                        hotspotContent : editor.txt.html(),
+                        name : $("#name").val(),
+                        price : $("#price").val(),
+                        content : editor.txt.html(),
                     }
-                    operateMessage = "更新儿童健康成功";
+                    operateMessage = "更新功效特色成功";
                 }
 
-                fileUtil.handleFile(isUpdate(), hotspotEntity.itemcode, uploadImg.getFiles()[0]);
+                fileUtil.handleFile(isUpdate(), characteriEntity.itemcode, uploadImg.getFiles()[0]);
 
-                ajaxUtil.myAjax(null,opreateUrl,hotspotEntity,function (data) {
+                ajaxUtil.myAjax(null,opreateUrl,characteriEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
                             alertUtil.info(operateMessage);
@@ -108,10 +104,9 @@
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#hotspotTitle").val(tempdata.hotspotTitle);
-                    $("#hotspotSource").val(tempdata.hotspotSource);
-                    $("#hotspotAuthor").val(tempdata.hotspotAuthor);
-                    editor.txt.html(tempdata.hotspotContent);
+                    $("#name").val(tempdata.name);
+                    $("#price").val(tempdata.price),
+                    editor.txt.html(tempdata.content);
                     var img = tempdata.filePath;
                     uploadImg.setImgSrc(img);
                 }

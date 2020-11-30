@@ -2,37 +2,30 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-            var url = "/healthProtection/hotspot?type=3&";
-            var pathUrl = "/healthProtection/add/chineseCultural_add";
-            var operateUrl = "/healthProtection/hotspot";
+            var url = "/project/selectchaAll?status=0";
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            //角色加载工具
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"status",webStatus);
-            console.log(url);
+            var pathUrl = "/project/add/characteri_add";
+            $("#btn_addTask").attr("style","display:block");
+            //url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"status",webStatus);
             var aParam = {
 
             };
-
-
-
             //操作
             function operation(value, row, index){
-                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus,webStatus)
-                // return [
-                //     '<a  class="pass"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >通过</a>',
-                //     '<a  class="fail"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
-                //     '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="" >查看</a>',
-                //     '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
-                //     '<a class="no-submit" style="margin:0 1em;text-decoration: none;color:#D60000;" data-toggle="modal" data-target="" >取消提交</a>',
-                //     '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
-                //     '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
-                //     '<a class="publish"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >发布</a>',
-                //     '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
-                //
-                // ].join('');
+                return [
+                    '<a  class="pass"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >通过</a>',
+                    '<a  class="fail"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
+                    '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="" >查看</a>',
+                    '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
+                    '<a class="no-submit" style="margin:0 1em;text-decoration: none;color:#D60000;" data-toggle="modal" data-target="" >取消提交</a>',
+                    '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
+                    '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
+                    '<a class="publish"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >发布</a>',
+                    '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+
+                ].join('');
+                //return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.status,webStatus)
             }
-
-
 
             //修改事件
             window.orgEvents = {
@@ -42,9 +35,9 @@
                 },
 
                 'click .delete': function (e, value, row, index) {
-                    var myDeleteModalData ={
-                        modalBodyID :"myDeleteProtection",
-                        modalTitle : "删除中医文化信息",
+                    var myDeleteModalCharacteri ={
+                        modalBodyID :"myDeleteModalCharacteri",
+                        modalTitle : "删除功效特色",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
@@ -53,7 +46,7 @@
                                 itemid: row.itemid,
                                 itemcode : row.itemcode
                             };
-                            ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
+                            ajaxUtil.myAjax(null,"/project/deleteProject/"+submitStatus.itemid+"/"+submitStatus.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
                                         ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
@@ -61,7 +54,7 @@
                                                 return alertUtil.error("文件删除失败，可能已经损坏了");
                                             }
                                         },false,"","get");
-                                        alertUtil.info("删除中医文化信息成功");
+                                        alertUtil.info("删除功效特色成功");
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -75,8 +68,8 @@
                         }
 
                     };
-                    var myDeleteModal = modalUtil.init(myDeleteModalData);
-                    myDeleteModal.show();
+                    var myDeleteModalCharacteri = modalUtil.init(myDeleteModalCharacteri);
+                    myDeleteModalCharacteri.show();
                 },
 
                 'click .pass' : function (e, value, row, index) {
@@ -91,7 +84,7 @@
                                 itemcode : row.itemcode,
                                 dataStatus : selectUtil.getPassStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
-                            ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
+                            ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 console.log(data);
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
@@ -123,7 +116,7 @@
                                 itemcode : row.itemcode,
                                 dataStatus : selectUtil.getFailStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
-                            ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
+                            ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
                                         alertUtil.info("操作成功");
@@ -154,7 +147,7 @@
                                 itemcode : row.itemcode,
                                 dataStatus : webStatus[9].id
                             };
-                            ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
+                            ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
                                         alertUtil.success("下架成功");
@@ -174,23 +167,22 @@
                 },
 
                 'click .view' : function (e, value, row, index) {
-                    var myViewModalData ={
-                        modalBodyID :"myViewHotSpotModal", //公用的在后面给span加不同的内容就行了，其他模块同理
+                    var myViewCharacteriModalData ={
+                        modalBodyID :"myViewCharacteriModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
                     };
-                    var myViewModal = modalUtil.init(myViewModalData);
-                    $("#hotspotTitle").val(row.hotspotTitle);
-                    $("#hotspotSource").val(row.hotspotSource);
-                    $("#hotspotAuthor").val(row.hotspotAuthor);
-                    $("#hotspotContent").html(row.hotspotContent);
+                    var myViewCharacteriModal = modalUtil.init(myViewCharacteriModalData);
+                    $("#name").val(row.name);
+                    $("#price").val(row.price);
+                    $("#content").html(row.content);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#dataStatus").val(webStatus[row.dataStatus].text);
-                    $("#hotspotImg").attr("src",row.filePath);
+                    $("#projectImg").attr("src",row.filePath)
 
-                    myViewModal.show();
+                    myViewCharacteriModal.show();
                 },
 
                 'click .submit' : function (e, value, row, index) {
@@ -205,7 +197,7 @@
                                 itemcode : row.itemcode,
                                 dataStatus : webStatus[1].id
                             };
-                            ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
+                            ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
                                         alertUtil.info("已提交");
@@ -237,7 +229,7 @@
                                 itemcode : row.itemcode,
                                 dataStatus : webStatus[0].id
                             };
-                            ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
+                            ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
                                         alertUtil.info("已取消提交");
@@ -269,7 +261,7 @@
                                 itemcode : row.itemcode,
                                 dataStatus : webStatus[8].id
                             };
-                            ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
+                            ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
                                         alertUtil.info("已发布");
@@ -292,26 +284,32 @@
 
 
             $("#btn_addTask").unbind().on('click',function () {
+                var url = "/project/add/characteri_add";
                 localStorage.removeItem("rowData");
-                orange.redirect(pathUrl);
+                orange.redirect(url);
             });
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
+            var p2 = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
+            $("#Search").selectUtil(p2);
 
             var aCol = [
-                {field: 'hotspotTitle', title: '文章标题'},
-                {field: 'filePath', title: '热点图片', formatter:function (value, row, index) {
+                {field: 'name', title: '功效特色名称'},
+                {field: 'filePath', title: '功效特色描述', formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';
                         }else{
                             return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                         }
                     }},
-                {field: 'hotspotSource', title: '来源'},
-                {field: 'hotspotAuthor', title: '作者'},
-                {field: 'itemcreateat', title: '发布时间'},
+                {field: 'price', title: '功效特色价格',formatter:function (value) {
+                        return '<p>￥'+value+'</p>'
+                    }},
+                {field:'dataStatus',title:'功效特色状态',formatter:function (value) {
+                        return '<p>'+webStatus[value].text+'</p>'
+                    }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
@@ -323,13 +321,11 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
             var allTableData = $("#table").bootstrapTable("getData");
+            //console.log(allTableData);
             localStorage.setItem('2',JSON.stringify(allTableData))
             obj2=JSON.parse(localStorage.getItem("2"));
-
         })
 })();
-
