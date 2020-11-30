@@ -32,4 +32,8 @@ public class UsernameUtil {
         return user.getRolename();
     }
 
+    public String getItemCode() {
+        UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
+        return user.getItemcode();
+    }
 }

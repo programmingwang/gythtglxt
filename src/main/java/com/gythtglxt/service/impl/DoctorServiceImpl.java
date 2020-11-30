@@ -42,7 +42,7 @@ public class DoctorServiceImpl implements IDoctorService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setUserCode(usernameUtil.getOrgCode());
+        record.setUserCode(usernameUtil.getItemCode());
         String username = usernameUtil.getOperateUser();
         record.setCreater(username);
         record.setItemcreateat(new Date());
