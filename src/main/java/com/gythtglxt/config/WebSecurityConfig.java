@@ -82,7 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/webjars/**","/component/**","/css/**", "/fonts/**",
                 "/images/**","/main/main.js", "/project/**", "/utils/**", "/"
                 ).permitAll().
-//                   anyRequest().authenticated().
+                   anyRequest().authenticated().
                     and().logout().
                     permitAll().//允许所有用户
                     logoutSuccessHandler(logoutSuccessHandler).//登出成功处理逻辑

@@ -1,3 +1,4 @@
+
 (function () {
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
@@ -14,11 +15,13 @@
             }
 
             function getStatus(role,webStatus) {
-                if(role == "县局中医药管理部门"){
+                if(role == "管理员"){
+                    return webStatus[1].id
+                }if(role == "县级"){
                     return webStatus[3].id
-                }else if(role == "市局中医药管理部门"){
+                }else if(role == "市级"){
                     return webStatus[5].id
-                }else if(role == "省局中医药管理部门"){
+                }else if(role == "省级"){
                     return webStatus[7].id
                 }
             }
@@ -27,13 +30,13 @@
                 if(role === "管理员"){
                     $('#btn_addTask').attr('style',"display:block");
                     return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id;
-                }else if(role === "县局中医药管理部门"){
+                }else if(role === "县级"){
 
                     return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[8].id;
-                }else if(role === "市局中医药管理部门"){
+                }else if(role === "市级"){
 
                     return preUrl + "?"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[8].id;
-                }else if(role === "省局中医药管理部门"){
+                }else if(role === "省级"){
 
                     return preUrl + "?"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[8].id;
                 }
@@ -69,7 +72,7 @@
                         ].join('');
                     }
 
-                }else if(role === "县局中医药管理部门"){
+                }else if(role === "县级"){
                     if(status == webStatus[1].id){
                         return [
                             '<a  class="pass"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >通过</a>',
@@ -83,7 +86,7 @@
                         ].join('');
                     }
 
-                }else if(role === "市局中医药管理部门"){
+                }else if(role === "市级"){
                     if(status == webStatus[3].id){
                         return [
                             '<a class="pass "  data-toggle="modal" data-target="#staticBackdrop" style="margin:0 1em;text-decoration: none;color:#775637;">通过</a>',
@@ -97,7 +100,7 @@
                         ].join('');
                     }
 
-                }else if(role === "省局中医药管理部门"){
+                }else if(role === "省级"){
                     if(status == webStatus[5].id){
                         return [
                             '<a class="pass "  data-toggle="modal" data-target="#staticBackdrop" style="margin:0 1em;text-decoration: none;color:#775637;">通过</a>',
@@ -122,14 +125,14 @@
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
                         modalBodyID : "myDeleteProtection",
-                        modalTitle : "删除中药名称",
+                        modalTitle : "删除中药信息",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,"deletechinesemedicine/"+row.itemid+"/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    alertUtil.info("删除中药名称成功");
+                                    alertUtil.info("删除中药信息成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
@@ -155,11 +158,11 @@
                             ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
-                                        if(sessionStorage.getItem("rolename") == "县局中医药管理部门"){
+                                        if(sessionStorage.getItem("rolename") == "县级"){
                                             alertUtil.info("县局审核已通过，已发送给市局中医药管理部门！");
-                                        }else if(sessionStorage.getItem("rolename") == "市局中医药管理部门"){
+                                        }else if(sessionStorage.getItem("rolename") == "市级"){
                                             alertUtil.info("市局审核已通过，已发送给省局中医药管理部门！");
-                                        }else if(sessionStorage.getItem("rolename") == "省局中医药管理部门"){
+                                        }else if(sessionStorage.getItem("rolename") == "省级"){
                                             alertUtil.info("省局审核已通过，已通知管理员确认发布！");
                                         }
                                         isSuccess = true;
@@ -186,11 +189,11 @@
                             var submitStatus = {
                                 "status": ""
                             };
-                            if(sessionStorage.getItem("rolename") == "县局中医药管理部门" ){
+                            if(sessionStorage.getItem("rolename") == "县级" ){
                                 submitStatus.status = webStatus[2].id;
-                            }else if(sessionStorage.getItem("rolename") == "市局中医药管理部门" ){
+                            }else if(sessionStorage.getItem("rolename") == "市级" ){
                                 submitStatus.status = webStatus[4].id;
-                            }else if(sessionStorage.getItem("rolename") == "省局中医药管理部门" ){
+                            }else if(sessionStorage.getItem("rolename") == "省级" ){
                                 submitStatus.status = webStatus[6].id;
                             }
                             ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
@@ -277,7 +280,7 @@
                             ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已提交");
+                                        alertUtil.info("已提交给县局中医药管理部门");
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -305,7 +308,7 @@
                             ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已提交");
+                                        alertUtil.info("已取消提交");
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -323,7 +326,7 @@
                 'click .publish' : function (e, value, row, index) {
                     var mypublishChineseMedicineModalData ={
                         modalBodyID :"myPublishProtection",
-                        modalTitle : "发布",
+                        modalTitle : "发布信息到小程序",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
                             var isSuccess = false;
@@ -373,13 +376,12 @@
                                 }
                             }},
                         {field:'classification',title:'功效分类',formatter:function (row) {
-                                return '<p>'+webStatus[row].text+'</p>';
+                                return '<p>'+p2[row].text+'</p>';
                             }},
                         {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
                     ];
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
-
             function refreshTable() {
                 var param = {};
                 myTable.free();

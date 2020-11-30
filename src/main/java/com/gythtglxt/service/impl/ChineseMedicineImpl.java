@@ -6,6 +6,7 @@ import com.gythtglxt.dataobject.ChineseMedicineDOKey;
 import com.gythtglxt.error.BusinessException;
 import com.gythtglxt.error.EmBusinessError;
 import com.gythtglxt.service.IChineseMedicineService;
+import com.gythtglxt.util.UsernameUtil;
 import com.gythtglxt.validator.ValidatorImpl;
 import com.gythtglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public class ChineseMedicineImpl implements IChineseMedicineService {
     private ChineseMedicineDOMapper chineseMedicineDOMapper;
     @Autowired
     private ValidatorImpl validator;
+    @Autowired
+    private UsernameUtil usernameUtil;
     @Transactional
     @Override
 
@@ -43,7 +46,8 @@ public class ChineseMedicineImpl implements IChineseMedicineService {
         }
         record.setStatus("0");
         record.setItemcreateat(new Date());
-        record.setUserCode("未定义");
+        record.setUserCode(usernameUtil.getOrgCode());
+        record.setCreater(usernameUtil.getOperateUser());
         return chineseMedicineDOMapper.insertSelective(record);
     }
 
@@ -60,6 +64,7 @@ public class ChineseMedicineImpl implements IChineseMedicineService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setItemupdateat(new Date());
+        record.setUpdater(usernameUtil.getOperateUser());
         return chineseMedicineDOMapper.updateByPrimaryKeySelective(record);
     }
 
