@@ -59,6 +59,9 @@
                 var param = generateParam();
                 param.status = "1";
                 param.reason = "";
+                if (uploadImg.isUpdate()) {
+                    ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "lrt", "lrt")
+                }
                 ajaxUtil.myAjax(null, opUrl, param, function (data) {
                     if (ajaxUtil.success(data)) {
                         orange.redirect(pathUrl)

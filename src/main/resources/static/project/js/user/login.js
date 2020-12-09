@@ -37,6 +37,10 @@
             }, false)
         })
 
+        $("#btn_register").unbind("click").bind("click",function () {
+            window.location.href = "/register"
+        });
+
         $("#return").unbind("click").bind("click", function () {
             window.location.href = "/"
         })
