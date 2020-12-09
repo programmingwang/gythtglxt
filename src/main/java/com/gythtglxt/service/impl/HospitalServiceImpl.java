@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gythtglxt.dao.HospitalMapper;
+import com.gythtglxt.dataobject.FileDO;
 import com.gythtglxt.dataobject.Hospital;
 import com.gythtglxt.dto.HospitalDto;
 import com.gythtglxt.error.BusinessException;
@@ -88,7 +89,12 @@ public class HospitalServiceImpl implements HospitalService {
         HospitalDto res = new HospitalDto();
         Hospital hospital = hospitalMapper.selectOneByItemcode(itemcode);
         BeanUtils.copyProperties(hospital, res);
-        res.setFilePath(fileService.selectFileByDataCode(res.getItemcode()).getFilePath());
+        List<FileDO> fileDOList = fileService.selectMultipleFileByDataCode(res.getItemcode());
+        List<String> filePathList = new ArrayList<>();
+        for (FileDO item: fileDOList){
+            filePathList.add(item.getFilePath());
+        }
+        res.setFilePath(filePathList);
         return res;
     }
 
@@ -106,7 +112,12 @@ public class HospitalServiceImpl implements HospitalService {
         {
             HospitalDto obj = new HospitalDto();
             BeanUtils.copyProperties(item,obj);
-            obj.setFilePath(fileService.selectFileByDataCode(obj.getItemcode()).getFilePath());
+            List<FileDO> fileDOList = fileService.selectMultipleFileByDataCode(obj.getItemcode());
+            List<String> filePathList = new ArrayList<>();
+            for (FileDO fileDO: fileDOList){
+                filePathList.add(fileDO.getFilePath());
+            }
+            obj.setFilePath(filePathList);
             resList.add(obj);
         }
         filter(resList);
