@@ -55,7 +55,6 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     public int updateByPrimaryKeySelective(Hospital record) {
         record.setUpdater(usernameUtil.getOperateUser());
-        System.out.println(record.getStatus());
         switch (usernameUtil.getRoleName()){
             case "县级":
                 if (!record.getStatus().equals("2")){
@@ -99,8 +98,13 @@ public class HospitalServiceImpl implements HospitalService {
         return res;
     }
 
+    @Override
+    public int updateByPrimaryKeySelectiveForRegister(Hospital record) {
+        return hospitalMapper.updateByPrimaryKeySelective(record);
+    }
 
-	@Override
+
+    @Override
 	public List<HospitalDto> selectAll(){
         List<HospitalDto> resList = new ArrayList<>();
         List<Hospital> hospitalList = hospitalMapper.selectAll();

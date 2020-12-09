@@ -132,10 +132,11 @@
 
                 if (validateLogin()) {
                     ajaxUtil.myAjax(null, "/user/register", userEntity, function (data) {
-                        if (data && data.code === 88888) {
+                        console.log(data);
+                        if (data && data.code == 88888) {
                             window.location.href = data.data
                         } else {
-                            alertUtil.error("注册失败");
+                            alertUtil.alert("注册失败");
                         }
                     }, false)
                 }

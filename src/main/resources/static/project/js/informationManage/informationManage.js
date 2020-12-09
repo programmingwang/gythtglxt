@@ -59,7 +59,6 @@
                 var param = generateParam();
                 param.status = "1";
                 param.reason = "";
-
                 if (uploadImg.isUpdate()) {
                     ajaxUtil.upload_multi(itemcode, uploadImg.getFiles(), "lrt", "lrt")
                 }

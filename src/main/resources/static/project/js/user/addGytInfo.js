@@ -6,7 +6,7 @@
 
             var pathUrl = "/userLogin";
 
-            var opUrl = "/information";
+            var opUrl = "/insert";
 
             var itemcode;
 
@@ -39,7 +39,7 @@
                 param.hospitalCity = $("#addressCity").val();
                 param.hospitalCountry = $("#addressCountry").val();
                 param.hospitalAdress = $("#address").val();
-                param.introduce = $(".w-e-text").html();
+                param.introduce = editor.txt.html();
                 param.itemcode = itemcode;
                 return param;
             }
@@ -47,6 +47,9 @@
             $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.status = "1";
+                if (uploadImg.isUpdate()) {
+                    ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "lrt", "lrt")
+                }
                 ajaxUtil.myAjax(null, opUrl, param, function (data) {
                     if (ajaxUtil.success(data)) {
                         window.location.href = "/userLogin"

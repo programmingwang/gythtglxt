@@ -34,4 +34,11 @@ public class informationManageController {
         BeanUtils.copyProperties(hospitalDto,hospital);
         return new ResponseData(EmBusinessError.success,hospitalService.updateByPrimaryKeySelective(hospital));
     }
+
+    @PutMapping(value = "insert")
+    public ResponseData updateHospital(@RequestBody HospitalDto hospitalDto){
+        Hospital hospital = new Hospital();
+        BeanUtils.copyProperties(hospitalDto,hospital);
+        return new ResponseData(EmBusinessError.success,hospitalService.updateByPrimaryKeySelectiveForRegister(hospital));
+    }
 }
