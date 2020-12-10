@@ -1,7 +1,7 @@
 spring:
   thymeleaf:
 #    听说关掉就可以不用重启，上线要开启
-    cache: false
+    cache: true
     suffix: .html
     mode: HTML5
     encoding: UTF-8
@@ -48,10 +48,6 @@ spring:
     ehcache:
       config: ehcache.xml
 
-
-
-
-
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.gythtglxt.dataobject
@@ -62,8 +58,8 @@ server:
   port: 14213
 
 upload:
-  addr: 47.113.104.120
-  port: 8085
+  addr: 42.193.46.47
+  port: 8080
 
 
 
