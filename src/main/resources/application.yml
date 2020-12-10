@@ -1,7 +1,7 @@
 spring:
   thymeleaf:
 #    听说关掉就可以不用重启，上线要开启
-    cache: false
+    cache: true
     suffix: .html
     mode: HTML5
     encoding: UTF-8
@@ -12,10 +12,31 @@ spring:
     name: zyyglxt
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.115.177.141:3306/natmeha?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://42.193.46.47:3306/natmeha?useUnicode=true&characterEncoding=utf8
     username: root
-    password: root1234
+    password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
+    #Spring Boot 默认是不注入这些属性值的，需要自己绑定
+    #druid 数据源专有配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+
+      #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
+    #如果允许时报错  java.lang.ClassNotFoundException: org.apache.log4j.Priority
+    #则导入 log4j 依赖即可，Maven 地址：https://mvnrepository.com/artifact/log4j/log4j
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
 #     使项目能访问图片
   resources:
@@ -27,10 +48,6 @@ spring:
     ehcache:
       config: ehcache.xml
 
-
-
-
-
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.gythtglxt.dataobject
@@ -41,15 +58,10 @@ server:
   port: 14213
 
 upload:
-  addr: 47.113.104.120
-  port: 8085
+  addr: 42.193.46.47
+  port: 8080
 
-#  servlet:
-#    context-path: /zyyglxt
-    
-#logging:
-#  file:
-#    path: E:/Desktop
+
 
 
 

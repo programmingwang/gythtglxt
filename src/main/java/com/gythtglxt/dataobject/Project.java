@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 /**
     * 开展项目、功效特色记录表
     */
@@ -37,12 +39,14 @@ public class Project {
     * 开展项目、功效特色名称
     */
     @ApiModelProperty(value="开展项目、功效特色名称")
+    @NotBlank(message = "名称不能为空")
     private String name;
 
     /**
     * 项目、功效特色简介
     */
     @ApiModelProperty(value="项目、功效特色简介")
+    @NotBlank(message = "简介不能为空")
     private String content;
 
     /**

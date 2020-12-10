@@ -89,7 +89,7 @@ public class DoctorServiceImpl implements IDoctorService {
 
     @Override
     public List<DoctorDto> selectByUserCode() {
-        List<DoctorDO> doctorDOList = doctorDOMapper.selectByUserCode(usernameUtil.getOrgCode());
+        List<DoctorDO> doctorDOList = doctorDOMapper.selectByUserCode(usernameUtil.getItemCode());
         return DoToDto(doctorDOList);
     }
 

@@ -90,15 +90,33 @@
                         level: "2",
                         pid: "2"
                     },
-                    {
-                        menu_name: "信息维护",
-                        menu_url: "/informationManage/informationManage",
-                        id: "2-5",
-                        level: "2",
-                        pid: "2"
-                    },
+                    // {
+                    //     menu_name: "机构审核",
+                    //     menu_url: "/audit/audit",
+                    //     id: "2-6",
+                    //     level: "2",
+                    //     pid: "2"
+                    // }
                 ];
 
+                if(roleName == "管理员"){
+                    menu_list.push(
+                        {
+                            menu_name: "信息维护",
+                            menu_url: "/informationManage/informationManage",
+                            id: "2-5",
+                            level: "2",
+                            pid: "2"
+                        })
+                }else if(roleName == "省级" || roleName== "市级" || roleName == "县级"){
+                    menu_list.push({
+                        menu_name: "国医堂机构信息审核",
+                        menu_url: "/audit/audit",
+                        id: "2-6",
+                        level: "2",
+                        pid: "2"
+                    })
+                }
 
 
             function getHTML_dropdown_menu_item(astr, aurl, show_active) {
@@ -120,7 +138,7 @@
                 var furl = item.menu_url;
                 var str = "<div class=\"card\">\n" +
                     "                    <div class=\"\" id=\"headingOne\">\n" +
-                    "                        <button class=\"collapse-btn btn btn-link btn-block text-left\" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + uuid + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
+                    "                        <button class=\"collapse-btn btn btn-link btn-block \" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + uuid + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
                     "                            <h4>" + header + "</h4>\n" +
                     "                        </button>\n" +
                     "                    </div>\n" +
@@ -242,5 +260,10 @@
             }
 
             $("#userName").text(sessionStorage.getItem('username'))
+
+
+
+
+
         })
 })();

@@ -20,6 +20,13 @@ public interface HospitalService {
 
     HospitalDto selectOneByItemcode(String itemcode);
 
+    int updateByPrimaryKeySelectiveForRegister(Hospital record);
+
+
+	List<HospitalDto> selectAll();
+
+
+
 
 }
 

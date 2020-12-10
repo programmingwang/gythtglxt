@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author lrt
@@ -90,11 +91,14 @@ public class HospitalDto {
     private Date itemupdateat;
 
     @ApiModelProperty(value = "照片路径")
-    private String filePath;
+    private List<String> filePath;
 
     @ApiModelProperty(value = "简介")
     private String introduce;
 
     @ApiModelProperty(value = "数据状态")
     private String status;
+
+    @ApiModelProperty(value = "理由")
+    private String reason;
 }

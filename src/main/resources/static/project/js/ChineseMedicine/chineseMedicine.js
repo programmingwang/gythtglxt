@@ -3,118 +3,29 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-            var url = "selectallchinesemedicine";
+            var url = "selectallchinesemedicine?";
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            url = getRoleTable(sessionStorage.getItem("rolename"),url,"status",webStatus);
+            if(sessionStorage.getItem("rolename") == "管理员"){
+                $('#btn_addTask').attr('style',"display:block");
+                url += "status="+webStatus[0].id+"&status="+webStatus[1].id+"&status="+webStatus[2].id+"&status="+webStatus[4].id+"&status="+webStatus[6].id+"&status="+webStatus[7].id+"&status="+webStatus[8].id+"&status="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
+            }else if(sessionStorage.getItem("rolename") == "县级"){
+                url += "status="+webStatus[1].id+"&status="+webStatus[8].id;
+            }else if(sessionStorage.getItem("rolename") == "市级"){
+                url += "status="+webStatus[3].id+"&status="+webStatus[8].id;
+            }else if(sessionStorage.getItem("rolename") == "省级"){
+                url += "status="+webStatus[5].id+"&status="+webStatus[8].id;
+            }
             var aParam = {
 
             };
+
             //操作
             function operation(value, row, index){
-                return getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.status,webStatus)
+                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.status,webStatus)
             }
 
-            function getStatus(role,webStatus) {
-                if(role == "管理员"){
-                    return webStatus[1].id
-                }if(role == "县级"){
-                    return webStatus[3].id
-                }else if(role == "市级"){
-                    return webStatus[5].id
-                }else if(role == "省级"){
-                    return webStatus[7].id
-                }
-            }
 
-            function getRoleTable(role,preUrl,status,webStatus) {
-                if(role === "管理员"){
-                    $('#btn_addTask').attr('style',"display:block");
-                    return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id;
-                }else if(role === "县级"){
 
-                    return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[8].id;
-                }else if(role === "市级"){
-
-                    return preUrl + "?"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[8].id;
-                }else if(role === "省级"){
-
-                    return preUrl + "?"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[8].id;
-                }
-            }
-
-            function getRoleOperate(value, row, index, role, status,webStatus) {
-                if(role === "管理员"){
-                    if(status == webStatus[0].id){
-                        return [
-                            '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
-                            '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
-                            '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
-                        ].join('');
-                    }else if(status == webStatus[2].id || status == webStatus[4].id || status == webStatus[6].id || status == webStatus[9].id){
-                        return [
-                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
-                            '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
-                        ].join('');
-                    }else if(status == webStatus[1].id){
-                        return [
-                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
-                            '<a class="no-submit" style="margin:0 1em;text-decoration: none;color:#D60000;" data-toggle="modal" data-target="" >取消提交</a>',
-                        ].join('');
-                    }else if(status == webStatus[7].id){
-                        return [
-                            '<a class="publish" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >发布</a>',
-                            '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
-                        ].join('');
-                    }else if(status == webStatus[8].id){
-                        return [
-                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
-                            '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >紧急下架</a>',
-                        ].join('');
-                    }
-
-                }else if(role === "县级"){
-                    if(status == webStatus[1].id){
-                        return [
-                            '<a  class="pass"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >通过</a>',
-                            '<a  class="fail"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
-                            '<a  class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="" >查看</a>',
-                        ].join('');
-                    }else if(status == webStatus[8].id){
-                        return [
-                            '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="" >查看</a>',
-                            '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >紧急下架</a>',
-                        ].join('');
-                    }
-
-                }else if(role === "市级"){
-                    if(status == webStatus[3].id){
-                        return [
-                            '<a class="pass "  data-toggle="modal" data-target="#staticBackdrop" style="margin:0 1em;text-decoration: none;color:#775637;">通过</a>',
-                            '<a class="fail"  data-toggle="modal" data-target="#staticBackdrop" style="margin:0 1em;text-decoration: none;color:#D60000;">不通过</a>',
-                            '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="" >查看</a>',
-                        ].join('');
-                    }else if(status == webStatus[8].id){
-                        return [
-                            '<a  class="view"  style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
-                            '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >紧急下架</a>',
-                        ].join('');
-                    }
-
-                }else if(role === "省级"){
-                    if(status == webStatus[5].id){
-                        return [
-                            '<a class="pass "  data-toggle="modal" data-target="#staticBackdrop" style="margin:0 1em;text-decoration: none;color:#775637;">通过</a>',
-                            '<a class="fail"  data-toggle="modal" data-target="#staticBackdrop" style="margin:0 1em;text-decoration: none;color:#D60000;">不通过</a>',
-                            '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="" >查看</a>',
-                        ].join('');
-                    }else if(status == webStatus[8].id){
-                        return [
-                            '<a  class="view"  style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
-                            '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >紧急下架</a>',
-                        ].join('');
-                    }
-                }
-            }
 
             //修改事件
             window.orgEvents = {
@@ -153,7 +64,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "status": getStatus(sessionStorage.getItem("rolename"),webStatus)
+                                "status": selectUtil.getPassStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -275,7 +186,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "status": getStatus(sessionStorage.getItem("rolename"),webStatus)
+                                "status": webStatus[1].id
                             };
                             ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){

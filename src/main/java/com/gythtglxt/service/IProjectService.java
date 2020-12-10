@@ -15,9 +15,9 @@ public interface IProjectService {
 
     int updateByPrimaryKeySelective(Project record);
 
-    List<ProjectDto> selectproAll(List<String> dataStatus);
+    List<ProjectDto> selectproAll(List<String> dataStatus, String userCode);
 
-    List<ProjectDto> selectchaAll(List<String> dataStatus);
+    List<ProjectDto> selectchaAll(List<String> dataStatus, String userCode);
 
 
 }

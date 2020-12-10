@@ -21,6 +21,7 @@
             ajaxUtil.myAjax(null, "/userLogin", userEntity, function (data) {
                 console.log(data)
                 if (data && data.code === 88888) {
+                    alertUtil.success('登录成功');
                     var userName = data.data.username;
                     var rolename = data.data.rolename;
                     var orgCode = data.data.orgCode;
@@ -35,6 +36,10 @@
                 }
             }, false)
         })
+
+        $("#btn_register").unbind("click").bind("click",function () {
+            window.location.href = "/register"
+        });
 
         $("#return").unbind("click").bind("click", function () {
             window.location.href = "/"

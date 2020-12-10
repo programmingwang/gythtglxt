@@ -2358,6 +2358,81 @@
             '            </div>\n'+
             '</div>';
 
+        modalHtml.myViewHospitalModal =
+            '<div class="row">'+
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">国医堂照片</button>\n' +
+            '                    </div>\n' +
+            '                    <img id="myImg" src="#"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">国医堂名称</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="hospitalName" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">联系电话</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="hospitalPhone" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >地&emsp;&emsp;址</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="address" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >简介</button>\n' +
+            '                    </div>\n' +
+            '                    <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" id="introduce" class="form-control">\n' +
+            '                       </div>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="creater" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
+            '\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">创建时间</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="itemcreateat" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
+            '</div>';
+
         modalHtml.myViewProjectModal =
             '<div class="row">'+
             '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
@@ -2455,7 +2530,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm">功效特色价格</button>\n' +
             '                    </div>\n' +
-            '                    <span style="position: absolute;top: 0.3rem;left: 6.5rem;font-size: 19px;z-index: 1050;">￥</span>\n'  +
+            '                    <span style="position: absolute;top: 0.3rem;left: 5.7rem;font-size: 19px;z-index: 1050;">￥</span>\n'  +
             '                    <input style="text-indent: 0.5rem;" type="text" id="price" class="form-control" >\n' +
             '                </div>\n' +
             '            </div>\n' +
@@ -2523,6 +2598,7 @@
         modalHtml.myPassModal = '确认通过吗？';
         modalHtml.myFailModal = '确认不通过吗？';
         modalHtml.myUnderShelfModal = '确认下架吗？';
+        modalHtml.myConfirmModal = '修改信息需要上级审核，确认修改？';
 
         modalHtml.myDeleteCStion='是否删除中药销售企业信息';
         modalHtml.myDeleteCPtion='是否删除中药制药企业信息';
