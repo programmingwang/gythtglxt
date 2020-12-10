@@ -121,12 +121,14 @@ table{
     color: white;
     text-decoration: none;
     background: url("../../images/new/hover.png");
+    background-size: 100% 100%;
 }
 .aaaa.active, .aaaa:active {
     color: white;
     text-decoration: none;
     background-color:#D60000;
     background: url("../../images/new/hover.png");
+    background-size: 100% 100%;
 }
 .btn-link{
     color:black;
@@ -137,6 +139,7 @@ table{
     font-style: normal;
     font-size: 16px;
     background: url("../../images/new/default.png");
+    background-size: 100% 100%;
     margin: 0 10px;
     text-align: center;
     width: 161px;
@@ -253,10 +256,12 @@ thead.self-thead {
 }
 #headingOne{
     background: url("../../images/new/title.png");
+    background-size: 100% 100%;
 }
 #left_menu_bottom{
     height: 20px;
     background: url("../../images/new/bottom.png");
+    background-size: 100% 100%;
     border-left: 4px solid #f6c2aa;
     border-right: 4px solid #f6c2aa;
 }
@@ -323,4 +328,14 @@ thead.self-thead {
 }
 #table{
     border: 0px
+}
+
+@media screen and (max-width: 1400px) {
+    #main_body {
+        border-top: 1rem solid #f7efeb;
+        border-right: 10px solid #f7efeb;
+        flex: 0 0 86.5934% !important;
+        max-width: 87.94% !important;
+        border-bottom: 1rem solid #f7efeb;
+    }
 }
