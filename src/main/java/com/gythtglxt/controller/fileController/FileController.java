@@ -66,6 +66,13 @@ public class FileController {
         return new ResponseData(EmBusinessError.success,fileService.selectFileByDataCode(datacode));
     }
 
+    @PostMapping("/upload-multi")
+    @ResponseBody
+    public ResponseData upload_multi(FileDto fileDto){
+        fileService.addFile(saveFile(fileDto));
+        return new ResponseData(EmBusinessError.success);
+    }
+
     private FileDO saveFile(FileDto fileDto) {
         FileDO fileDO = new FileDO();
         BeanUtils.copyProperties(fileDto,fileDO);

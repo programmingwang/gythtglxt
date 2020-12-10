@@ -26,9 +26,12 @@ var base64Code = "";
             // 单个图片删除
             $(".content-img-list").on("click", '.content-img-list-item a .gcllajitong', function () {
                 var index = $(this).parent().parent().parent().index();
-                imgSrc.splice(index, 1);
-                imgFile.splice(index, 1);
-                imgName.splice(index, 1);
+                imgSrc = [];
+                imgFile = [];
+                imgName = [];
+                // imgSrc.splice(index, 1);
+                // imgFile.splice(index, 1);
+                // imgName.splice(index, 1);
                 var boxId = ".content-img-list";
                 addNewContent(boxId);
                 if (imgSrc.length < limit) { //显示上传按钮

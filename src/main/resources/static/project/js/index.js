@@ -138,7 +138,7 @@
                 var furl = item.menu_url;
                 var str = "<div class=\"card\">\n" +
                     "                    <div class=\"\" id=\"headingOne\">\n" +
-                    "                        <button class=\"collapse-btn btn btn-link btn-block text-left\" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + uuid + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
+                    "                        <button class=\"collapse-btn btn btn-link btn-block \" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + uuid + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
                     "                            <h4>" + header + "</h4>\n" +
                     "                        </button>\n" +
                     "                    </div>\n" +
@@ -260,5 +260,10 @@
             }
 
             $("#userName").text(sessionStorage.getItem('username'))
+
+
+
+
+
         })
 })();

@@ -41,7 +41,7 @@
                 var param = generateParam();
                 param.status = "0";
                 if (uploadImg.isUpdate()) {
-                    ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "lrt", "lrt")
+                    ajaxUtil.upload_multi(itemcode, uploadImg.getFiles(), "lrt", "lrt")
                 }
 
                 ajaxUtil.myAjax(null, opUrl, param, function (data) {
@@ -59,6 +59,9 @@
                 var param = generateParam();
                 param.status = "1";
                 param.reason = "";
+                if (uploadImg.isUpdate()) {
+                    ajaxUtil.upload_multi(itemcode, uploadImg.getFiles(), "lrt", "lrt")
+                }
                 ajaxUtil.myAjax(null, opUrl, param, function (data) {
                     if (ajaxUtil.success(data)) {
                         orange.redirect(pathUrl)
@@ -90,7 +93,7 @@
                 });
                 $("#address").val(tempdata.hospitalAdress);
                 editor.txt.html(tempdata.introduce);
-                uploadImg.setImgSrc(tempdata.filePath);
+                uploadImg.setImgSrcs(tempdata.filePath);
                 itemcode = tempdata.itemcode;
                 itemid = tempdata.itemid;
                 if ( tempdata.status !== "6"){
@@ -106,8 +109,6 @@
                 }
             };
             init();
-
-
         })
 })();
 
