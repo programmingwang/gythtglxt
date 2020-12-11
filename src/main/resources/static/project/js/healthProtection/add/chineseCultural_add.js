@@ -64,14 +64,14 @@
                 var hotspotEntity;
                 var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增中医文化成功";
+                    operateMessage = "新增中医文化成功,信息将直接显示到国医堂小程序中,文责自负!如有问题请紧急下架!";
                     hotspotEntity = {
                         itemcode: stringUtil.getUUID(),
                         hotspotTitle : $("#hotspotTitle").val(),
                         hotspotSource : $("#hotspotSource").val(),
                         hotspotAuthor : $("#hotspotAuthor").val(),
                         hotspotContent : editor.txt.html(),
-                        dataStatus : "1" ,
+                        dataStatus : "8" ,
                         dataType : "3",
                         userCode : sessionStorage.getItem("itemcode")
                     };
