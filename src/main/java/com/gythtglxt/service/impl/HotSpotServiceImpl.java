@@ -88,7 +88,6 @@ public class HotSpotServiceImpl implements IHotspotService {
         record.setCreater(usernameUtil.getOperateUser());
         record.setItemcreateat(DateUtils.getDate());
         record.setUpdater(usernameUtil.getOperateUser());
-        record.setDataStatus("0");
         if(StringUtils.isEmpty(record.getItemcode())){
             record.setItemcode(UUIDUtils.getUUID());
         }

@@ -2639,6 +2639,7 @@
         modalHtml.myCencelDistribution = "是否取消分配专家？"
 
         modalHtml.mySubmitProtection = "确认提交？";
+        modalHtml.mySubmitProtectionUp = "确认提交?提交后数据将直接在小程序显示,文责自负!若有问题,请紧急下架!";
         modalHtml.myNoSubmitProtection = "确认取消提交？";
         modalHtml.myPassProtection = "确认通过？";
         modalHtml.myNoSubmitProtection='确认取消提交';

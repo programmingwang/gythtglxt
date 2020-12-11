@@ -183,7 +183,7 @@
 
                 'click .submit' : function (e, value, row, index) {
                     var mySubmitModalData ={
-                        modalBodyID :"mySubmitProtection",
+                        modalBodyID :"mySubmitProtectionUp",
                         modalTitle : "提交",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
@@ -191,7 +191,7 @@
                             var submitStatus = {
                                 itemid: row.itemid,
                                 itemcode : row.itemcode,
-                                dataStatus : webStatus[1].id
+                                dataStatus : webStatus[8].id
                             };
                             ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){

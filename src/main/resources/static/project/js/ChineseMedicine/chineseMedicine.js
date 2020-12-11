@@ -180,13 +180,13 @@
 
                 'click .submit' : function (e, value, row, index) {
                     var mySubmitChineseMedicineModalData ={
-                        modalBodyID :"mySubmitProtection",
+                        modalBodyID :"mySubmitProtectionUp",
                         modalTitle : "提交",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "status": webStatus[1].id
+                                "status": webStatus[8].id
                             };
                             ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){

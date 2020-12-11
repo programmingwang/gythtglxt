@@ -23,7 +23,7 @@
                 var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "insertchinesemedicine";
-                    operateMessage = "新增中药信息成功";
+                    operateMessage = "新增中药信息成功,信息将直接显示到国医堂小程序中,文责自负!如有问题请紧急下架!";
                     chinesemedicineEntity = {
                         itemcode: stringUtil.getUUID(),
                         name : $("#name").val(),//中药名称
