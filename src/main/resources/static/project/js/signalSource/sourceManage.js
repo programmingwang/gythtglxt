@@ -11,7 +11,9 @@
 
             var opUrl = "/accountSource/signal-source";
 
-
+            if(sessionStorage.getItem("rolename") == "管理员"){
+                $('#btn_addTask').attr('style',"display:block");
+            }
 
             var aParam = {};
 
