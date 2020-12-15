@@ -33,7 +33,7 @@
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalCharacteri ={
                         modalBodyID :"myDeleteModalCharacteri",
-                        modalTitle : "删除功效特色",
+                        modalTitle : "删除开展项目",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
@@ -50,7 +50,7 @@
                                                 return alertUtil.error("文件删除失败，可能已经损坏了");
                                             }
                                         },false,"","get");
-                                        alertUtil.info("删除功效特色成功");
+                                        alertUtil.info("删除开展项目成功");
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -292,18 +292,18 @@
             $("#Search").selectUtil(p2);
 
             var aCol = [
-                {field: 'name', title: '功效特色名称'},
-                {field: 'filePath', title: '功效特色描述', formatter:function (value, row, index) {
+                {field: 'name', title: '开展项目名称'},
+                {field: 'filePath', title: '开展项目描述', formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';
                         }else{
                             return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                         }
                     }},
-                {field: 'price', title: '功效特色价格',formatter:function (value) {
+                {field: 'price', title: '开展项目价格',formatter:function (value) {
                         return '<p>￥'+value+'</p>'
                     }},
-                {field:'dataStatus',title:'功效特色状态',formatter:function (value) {
+                {field:'dataStatus',title:'开展项目状态',formatter:function (value) {
                         return '<p>'+webStatus[value].text+'</p>'
                     }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}

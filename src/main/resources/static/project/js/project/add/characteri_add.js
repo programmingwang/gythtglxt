@@ -19,7 +19,7 @@
                 var characteriEntity;
                 var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增功效特色成功";
+                    operateMessage = "新增开展项目成功";
                     characteriEntity = {
                         itemcode: stringUtil.getUUID(),
                         name : $("#name").val(),
@@ -38,7 +38,7 @@
                         price : $("#price").val(),
                         content : editor.txt.html(),
                     }
-                    operateMessage = "更新功效特色成功";
+                    operateMessage = "更新开展项目成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), characteriEntity.itemcode, uploadImg.getFiles()[0]);
@@ -62,7 +62,7 @@
                 var characteriEntity;
                 var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增功效特色成功";
+                    operateMessage = "新增开展项目成功";
                     characteriEntity = {
                         itemcode: stringUtil.getUUID(),
                         name : $("#name").val(),
@@ -81,7 +81,7 @@
                         price : $("#price").val(),
                         content : editor.txt.html(),
                     }
-                    operateMessage = "更新功效特色成功";
+                    operateMessage = "更新开展项目成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), characteriEntity.itemcode, uploadImg.getFiles()[0]);

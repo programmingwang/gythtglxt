@@ -19,7 +19,7 @@
                 var projectEntity;
                 var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增开展项目成功";
+                    operateMessage = "新增功效特色成功";
                     projectEntity = {
                         itemcode: stringUtil.getUUID(),
                         name : $("#name").val(),
@@ -36,7 +36,7 @@
                         name : $("#name").val(),
                         content : editor.txt.html(),
                     }
-                    operateMessage = "更新开展项目成功";
+                    operateMessage = "更新功效特色成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), projectEntity.itemcode, uploadImg.getFiles()[0]);
@@ -60,7 +60,7 @@
                 var projectEntity;
                 var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增开展项目成功";
+                    operateMessage = "新增功效特色成功";
                     projectEntity = {
                         itemcode: stringUtil.getUUID(),
                         name : $("#name").val(),
@@ -77,7 +77,7 @@
                         name : $("#name").val(),
                         content : editor.txt.html(),
                     }
-                    operateMessage = "更新开展项目成功";
+                    operateMessage = "更新功效特色成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), projectEntity.itemcode, uploadImg.getFiles()[0]);
