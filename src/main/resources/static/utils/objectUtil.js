@@ -59,6 +59,8 @@
             // editor.config.uploadImgServer = 'http://localhost:8989/uploadFile';
             // 将图片大小限制为 10M
             editor.config.uploadImgMaxSize = 10 * 1024 * 1024;
+
+            editor.config.zIndex = 1000
             editor.create()
             editor.txt.html('')
 
