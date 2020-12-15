@@ -23,6 +23,46 @@
                 return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus,webStatus)
             }
 
+            function operation2(value, row, index){
+                var value1 = new Array();
+                for(var i=0;i<row.dataCode.length;i++){
+                    if(row.itemcode == row.dataCode[i]) {
+                        value1.push(value[i]);
+                    }
+                }
+                if(value[0] == "已经损坏了"){
+                    return '<p>已经全部或这张损坏了</p>';
+                }else{
+                    return '<img  src='+value1[0]+' width="100" height="100" class="checkImgs img-rounded" >';
+                }
+            }
+
+            window.checkImgDetailsEvents = {
+                'click .checkImgs' : function (e, value, row, index) {
+                    var value1 = new Array();
+                    for(var i=0;i<row.dataCode.length;i++){
+                        if(row.itemcode == row.dataCode[i]) {
+                            value1.push(value[i]);
+                        }
+                    }
+                    console.log(value1);
+                    var myCheckImg ={
+                        modalBodyID :"checkImgDetails", //公用的在后面给span加不同的内容就行了，其他模块同理
+                        modalTitle : "查看图片详情",
+                        modalClass : "modal-lg",
+                        confirmButtonStyle: "display:none",
+                    };
+                    var myCheckImgModal = modalUtil.init(myCheckImg);
+                    for(var i=0;i<value1.length;i++){
+                        var element = "#projectImg"+(i+1)
+                        $(element).attr("style","display:block");
+                        $(element).attr("src",value1[i]);
+                    }
+
+                    myCheckImgModal.show();
+                }
+            };
+
             //修改事件
             window.orgEvents = {
                 'click .edit' : function(e, value, row, index) {
@@ -81,7 +121,6 @@
                                 dataStatus : selectUtil.getPassStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
-                                console.log(data);
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
                                         alertUtil.info("已通过");
@@ -176,7 +215,7 @@
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#dataStatus").val(webStatus[row.dataStatus].text);
-                    $("#projectImg").attr("src",row.filePath)
+                    $("#projectImg").html("请点击表格图片查看图片详情");
 
                     myViewCharacteriModal.show();
                 },
@@ -293,13 +332,7 @@
 
             var aCol = [
                 {field: 'name', title: '开展项目名称'},
-                {field: 'filePath', title: '开展项目描述', formatter:function (value, row, index) {
-                        if(value == "已经损坏了"){
-                            return '<p>'+value+'</p>';
-                        }else{
-                            return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
-                        }
-                    }},
+                {field: 'filePath', title: '开展项目描述',formatter: operation2, events:checkImgDetailsEvents},
                 {field: 'price', title: '开展项目价格',formatter:function (value) {
                         return '<p>￥'+value+'</p>'
                     }},
@@ -320,7 +353,6 @@
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
             var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
             localStorage.setItem('2',JSON.stringify(allTableData))
             obj2=JSON.parse(localStorage.getItem("2"));
         })

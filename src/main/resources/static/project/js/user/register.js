@@ -132,7 +132,6 @@
 
                 if (validateLogin()) {
                     ajaxUtil.myAjax(null, "/user/register", userEntity, function (data) {
-                        console.log(data);
                         if (data && data.code == 88888) {
                             window.location.href = data.data
                         } else {

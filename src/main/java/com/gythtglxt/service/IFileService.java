@@ -18,4 +18,5 @@ public interface IFileService {
     int deleteFileByDataCode(String dataCode);
     void uploadFile(FileDO fileDO);
     List<FileDO> selectMultipleFileByDataCode(String dataCode);
+    List<FileDO> selectMultipleFileByDataCodeAndOrgCode(String dataCode,String orgCode);
 }

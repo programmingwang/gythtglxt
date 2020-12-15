@@ -69,7 +69,6 @@
                     if (data.code === 88888) {
                         for(var i=0; i<data.data.length; i++){
                             data.data[i].itemcreateat = stringUtil.formatDateTime(data.data[i].itemcreateat);
-                            console.log(data)
                         }
                         return {
                             total: data.data.length,
@@ -111,12 +110,9 @@
         }
 
         // $(window).on('load',function(){
-        //     console.log("aaaaaaaaaa");
         //     var allTableData = $("#table").bootstrapTable("getData");
-        //     console.log(allTableData);
         //     localStorage.setItem('2',JSON.stringify(allTableData))
         //     obj2=JSON.parse(localStorage.getItem("2"));
-        //     console.log(obj2);
         // })
 
         //$(".float-right").attr("display",block);
@@ -127,7 +123,6 @@
             // var oTab=document.getElementById("table");
             // var btnSearch=document.getElementById("btnSearch");
 
-            // console.log(needParam);
             $("#btnSearch").unbind().on('click',function() {
                 var myTable = myBootStrapTableInit(tableID, url, needParam, aCol);
                 // 先刷新列表------------
@@ -146,9 +141,6 @@
                 var allTableData = JSON.parse(localStorage.getItem("2"));
 
 
-                // console.log(allTableData);
-                // console.log(str);
-                // console.log("状态"+addstr);
                 if (str=='请输入'||str==''){
                     $("#table").bootstrapTable("load", allTableData);
                 }
@@ -158,21 +150,14 @@
                         var textP = allTableData[i][aCol[v].field];
                         var isTimeSlot=false;
                         var makeTime=allTableData[i][aCol[4].field];
-                        console.log(makeTime)
                         // if(makeTime.length>18){
                         //     makeTime=makeTime.substring(11,19);
                         // }
 
-                        // console.log(makeTime);
-                        // console.log("开始时间："+stratTime);
-                        // console.log("结束时间"+endTime);
-                        // console.log(makeTime>=stratTime);
-                        // console.log(makeTime<=endTime);
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";
                         }
                         if(makeTime>=stratTime && makeTime<=endTime){
-                            console.log('true')
                             isTimeSlot=true;
                         }
                         if(stratTime==endTime){
@@ -194,11 +179,6 @@
                         }
                     }
 
-                    // var chineseCulturalName = allTableData[i].chineseCulturalName;
-                    // console.log(chineseCulturalName);
-                    // if (chineseCulturalName.search(str) != -1) {
-                    //     newArry.push(allTableData[i]);
-                    // }
                 }
                 $("#table").bootstrapTable("load", newArry);
             })
@@ -213,36 +193,6 @@
             //     var newArry=[];
             //     var str=document.getElementById("taskNameSearch").value.toLowerCase();
             //     var allTableData = $("#table").bootstrapTable("getData");
-            //     console.log(allTableData);
-            //     for(var i in allTableData){
-            //         var chineseCulturalName = allTableData[i][chineseCulturalName];
-            //
-            //         if (chineseCulturalName.search(chineseCulturalName)!=-1){
-            //             newArry.push(allTableData[i]);
-            //         }
-            //     }
-            //     $("#table").bootstrapTable("load",newArry);
-
-
-
-            // var stratTime=document.getElementById("stratTime").children;
-            // var endTime=document.getElementById("endTime").children;
-            // stratTime=stratTime[0].value+":"+stratTime[1].value+":"+stratTime[2].value;
-            // endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
-            //
-            // console.log(oTab.tHead.rows[0].childNodes[5].innerText);
-            // for(var i=0;i<oTab.tBodies[0].rows.length;i++)
-            // {
-            //     var str1=oTab.tBodies[0].rows[i].innerText.toLowerCase();
-            //     var str2=oBt.value.toLowerCase();
-            //     console.log(oTab.tBodies[0].rows);
-            //     var time=oTab.tBodies[0].rows[i].childNodes[5].innerText;
-            //     time=time.substring(11,19)
-            //     console.log(time>stratTime);
-            //     console.log(time<endTime);
-            //     console.log(time)
-            //     if (str2==="请输入"){
-            //         myTable.free();
             //         myTable = myBootStrapTableInit(tableID,url,param,aCol)
             //     }
             /***********************************JS实现表格的模糊搜索*************************************/

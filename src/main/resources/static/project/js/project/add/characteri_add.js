@@ -41,7 +41,9 @@
                     operateMessage = "更新开展项目成功";
                 }
 
-                fileUtil.handleFile(isUpdate(), characteriEntity.itemcode, uploadImg.getFiles()[0]);
+                if (uploadImg.isUpdate()) {
+                    ajaxUtil.upload_multi(characteriEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                }
 
                 ajaxUtil.myAjax(null,opreateUrl,characteriEntity,function (data) {
                     if(ajaxUtil.success(data)){
@@ -68,7 +70,7 @@
                         name : $("#name").val(),
                         price : $("#price").val(),
                         content : editor.txt.html(),
-                        dataStatus : "0" ,
+                        dataStatus : "1" ,
                         dataType : "1",
                         userCode : sessionStorage.getItem("itemcode")
                     };
@@ -84,7 +86,9 @@
                     operateMessage = "更新开展项目成功";
                 }
 
-                fileUtil.handleFile(isUpdate(), characteriEntity.itemcode, uploadImg.getFiles()[0]);
+                if (uploadImg.isUpdate()) {
+                    ajaxUtil.upload_multi(characteriEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                }
 
                 ajaxUtil.myAjax(null,opreateUrl,characteriEntity,function (data) {
                     if(ajaxUtil.success(data)){
@@ -104,11 +108,17 @@
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    var value1 = new Array();
+                    for(var i=0;i<tempdata.dataCode.length;i++){
+                        if(tempdata.itemcode == tempdata.dataCode[i]) {
+                            value1.push(tempdata.filePath[i]);
+                        }
+                    }
                     $("#name").val(tempdata.name);
                     $("#price").val(tempdata.price),
                     editor.txt.html(tempdata.content);
                     var img = tempdata.filePath;
-                    uploadImg.setImgSrc(img);
+                    uploadImg.setImgSrcs(img);
                 }
             }());
 

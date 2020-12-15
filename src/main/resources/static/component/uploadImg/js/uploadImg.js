@@ -9,7 +9,6 @@ var base64Code = "";
 
 
         var init = function () {
-            console.log("init");
             localStorage.setItem('limit', $(".upload-content").attr('data-limit'));
             imgSrc = [];
             imgFile = [];
@@ -161,7 +160,6 @@ var base64Code = "";
         }
 
         function setImgSrc(src) {
-            console.log("setSrc")
             for (var i = 0; i < imgSrc.length; i++) {
                 if (imgSrc[i] === src) {
                     return

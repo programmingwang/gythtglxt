@@ -2441,7 +2441,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm">图片</button>\n' +
             '                    </div>\n' +
-            '                    <img id="projectImg" src="#"/>\n' +
+            '                    <span id="projectImg" ></span>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -2510,7 +2510,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm">图片</button>\n' +
             '                    </div>\n' +
-            '                    <img id="projectImg" src="#"/>\n' +
+            '                    <span id="projectImg"></span>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -2579,6 +2579,60 @@
             '                </div>\n' +
             '                </fieldset>'+
             '            </div>\n'+
+            '</div>';
+
+        modalHtml.checkImgDetails=
+            '<div class="row">'+
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">图片1</button>\n' +
+            '                    </div>\n' +
+            '                    <img id="projectImg1" src="#" style="display: none"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">图片2</button>\n' +
+            '                    </div>\n' +
+            '                    <img id="projectImg2" src="#" style="display: none"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12" >\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">图片3</button>\n' +
+            '                    </div>\n' +
+            '                    <img id="projectImg3" src="#" style="display: none"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">图片4</button>\n' +
+            '                    </div>\n' +
+            '                    <img id="projectImg4" src="#" style="display: none"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12" >\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">图片5</button>\n' +
+            '                    </div>\n' +
+            '                    <img id="projectImg5" src="#" style="display: none"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
             '</div>';
 
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
