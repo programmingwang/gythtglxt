@@ -177,7 +177,6 @@ hr {
 .AFirstMenu {
 
     color: black;
-    margin-left: 11px;
     font-family: 'Arial Negreta', 'Arial Normal', 'Arial', sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -338,4 +337,18 @@ thead.self-thead {
         max-width: 87.94% !important;
         border-bottom: 1rem solid #f7efeb;
     }
+}
+
+.rifuck{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.left-menu{
+    position: absolute;
+    width: 229px;
+    top: 0;
+    left: 0;
+    overflow: hidden;
 }
