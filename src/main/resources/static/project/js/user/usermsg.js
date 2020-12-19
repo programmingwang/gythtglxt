@@ -11,7 +11,7 @@
                     $("#name").val(data.data.name);
                     $("#gender").val(data.data.gender);
                     $("#email").val(data.data.email);
-                    $("#idcardType").val(data.data.idcardType);
+                    $("#idcardType").val('居民身份证');
                     $("#idcardNo").val(data.data.idcardNo);
                     $("#contacts").val(data.data.contacts);
                     $("#mobilephone").val(data.data.mobilephone);
@@ -45,7 +45,7 @@
 
             $("#confirmBtn").unbind().on('click', function () {
                 var portrait = uploadImg.getBase64();
-                var localportroit = JSON.parse(localStorage.getItem('user')).portrait;
+                var localportroit = localStorage.getItem('user').portrait;
                 // 如果输入框没有disabled属性，则取输入框的值
                 if (typeof ($(".msg").attr("disabled")) == "undefined") {
 
@@ -91,7 +91,6 @@
                     var mobilePhone = $("#phone").val();
                     var newPassword = $("#newPwd").val();
                     var checkNewPassword = $("#checkPwd").val();
-                    console.log(newPassword);
                     if (!stringUtil.isBlank(password) && !stringUtil.isBlank(mobilePhone) &&
                         !stringUtil.isBlank(newPassword) && !stringUtil.isBlank(checkNewPassword)) {
                         var pwd = {
@@ -112,7 +111,7 @@
                         alertUtil.info('输入不能为空')
                     }
                     // 修改密码时如果头像也改了也可以修改成功
-                    if (portrait !== localportroit) {
+                    if (portrait != localportroit) {
                         var uportroit = {
                             "portrait": portrait
                         };
@@ -125,7 +124,7 @@
                         }, false, true)
                     }
                 } else {
-                    if (portrait !== localportroit) {// 不与原头像相同才请求更新
+                    if (portrait != localportroit) {// 不与原头像相同才请求更新
                         var uportroit = {
                             "portrait": portrait
                         };
