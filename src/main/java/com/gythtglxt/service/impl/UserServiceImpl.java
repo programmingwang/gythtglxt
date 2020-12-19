@@ -313,6 +313,9 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException("手机号码不正确！", EmBusinessError.MOBILEPHONE_ERROR);
         }
 
+        if (userDO.getPortrait() == ""){
+            userDO.setPortrait(null);
+        }
         UserSessionDto userSessionDto = (UserSessionDto) request.getSession().getAttribute("user");
         userDO.setItemid(userSessionDto.getItemid());
         userDO.setItemcode(userSessionDto.getItemcode());

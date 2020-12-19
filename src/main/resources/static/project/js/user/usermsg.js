@@ -48,9 +48,7 @@
                 var localportroit = JSON.parse(localStorage.getItem('user')).portrait;
                 // 如果输入框没有disabled属性，则取输入框的值
                 if (typeof ($(".msg").attr("disabled")) == "undefined") {
-                    if (portrait == localportroit) {    // 如果修改后的头像和原头像一样，设置一个标记
-                        portrait = 1;
-                    }
+
                     var username = $("#username").val();
                     var name = $("#name").val();
                     var gender = $("#gender").val();
@@ -62,8 +60,8 @@
                     if (!stringUtil.isBlank(username) && !stringUtil.isBlank(name) && !stringUtil.isBlank(gender) &&
                         !stringUtil.isBlank(email) && !stringUtil.isBlank(idcardType) && !stringUtil.isBlank(idcardNo) &&
                         !stringUtil.isBlank(contacts) && !stringUtil.isBlank(mobilephone)) {
-                        if (portrait == 1) {    // 已被标记则表示与原头像一样，则设置为空，传到后端不被更新
-                            portrait = null
+                        if (portrait == localportroit) {    // 与原头像一样，则设置为空，传到后端不被更新
+                            portrait = 'null'
                         }
                         var user = {
                             "portrait": portrait,
