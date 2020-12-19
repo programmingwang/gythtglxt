@@ -9,11 +9,11 @@
                 $('#btn_addTask').attr('style',"display:block");
                 url += "status="+webStatus[0].id+"&status="+webStatus[1].id+"&status="+webStatus[2].id+"&status="+webStatus[4].id+"&status="+webStatus[6].id+"&status="+webStatus[7].id+"&status="+webStatus[8].id+"&status="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
             }else if(sessionStorage.getItem("rolename") == "县级"){
-                url += +status+"="+webStatus[1].id+"&status="+webStatus[8].id;
+                url += "status="+webStatus[1].id+"&status="+webStatus[8].id;
             }else if(sessionStorage.getItem("rolename") == "市级"){
-                url += +status+"="+webStatus[3].id+"&status="+webStatus[8].id;
+                url += "status="+webStatus[3].id+"&status="+webStatus[8].id;
             }else if(sessionStorage.getItem("rolename") == "省级"){
-                url += +status+"="+webStatus[5].id+"&status="+webStatus[8].id;
+                url += "status="+webStatus[5].id+"&status="+webStatus[8].id;
             }
             var aParam = {
 
