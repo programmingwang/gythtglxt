@@ -78,14 +78,14 @@
                     },
                     {
                         menu_name: "开展项目",
-                        menu_url: "/project/project",
+                        menu_url: "/project/characteri",
                         id: "2-3",
                         level: "2",
                         pid: "2"
                     },
                     {
                         menu_name: "功效特色",
-                        menu_url: "/project/characteri",
+                        menu_url: "/project/project",
                         id: "2-4",
                         level: "2",
                         pid: "2"
@@ -101,7 +101,7 @@
                             level: "2",
                             pid: "2"
                         })
-                }else if(roleName == "省级" || roleName== "市级" || roleName == "县级"){
+                }else if(roleName== "市级" || roleName == "县级"){
                     menu_list = [
                         {
                             menu_name: "信息管理",
@@ -126,14 +126,14 @@
                         },
                         {
                             menu_name: "开展项目",
-                            menu_url: "/project/project",
+                            menu_url: "/project/characteri",
                             id: "2-3",
                             level: "2",
                             pid: "2"
                         },
                         {
                             menu_name: "功效特色",
-                            menu_url: "/project/characteri",
+                            menu_url: "/project/project",
                             id: "2-4",
                             level: "2",
                             pid: "2"
@@ -144,6 +144,44 @@
                         id: "2-6",
                         level: "2",
                         pid: "2"
+                        }
+                    ]
+                }else if(roleName == "省级"){
+                    menu_list = [
+                        {
+                            menu_name: "信息管理",
+                            menu_url: "",
+                            id: "2",
+                            level: "1",
+                            pid: ""
+                        },
+                        {
+                            menu_name: "服务团队",
+                            menu_url: "/doctor/doctor",
+                            id: "2-2",
+                            level: "2",
+                            pid: "2"
+                        },
+                        {
+                            menu_name: "开展项目",
+                            menu_url: "/project/characteri",
+                            id: "2-3",
+                            level: "2",
+                            pid: "2"
+                        },
+                        {
+                            menu_name: "功效特色",
+                            menu_url: "/project/project",
+                            id: "2-4",
+                            level: "2",
+                            pid: "2"
+                        },
+                        {
+                            menu_name: "国医堂机构信息审核",
+                            menu_url: "/audit/audit",
+                            id: "2-6",
+                            level: "2",
+                            pid: "2"
                         }
                     ]
                 }
@@ -262,10 +300,8 @@
             function loadPage(url) {
                 orange.loadPage({
                     url: url, target: 'main_body', selector: '#fir_body', success: function (data) {
-                        console.log(typeof data);
                         if (typeof data == "string") {
                             $("#main_body").html(data);
-                            console.log(url + "加载")
                         } else {
                             alertUtil.error(url + '加载失败');
                         }

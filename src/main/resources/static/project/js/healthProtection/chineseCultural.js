@@ -8,7 +8,6 @@
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             //角色加载工具
             url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"status",webStatus);
-            console.log(url);
             var aParam = {
 
             };
@@ -80,7 +79,6 @@
                                 dataStatus : selectUtil.getPassStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
-                                console.log(data);
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
                                         alertUtil.info("已通过");

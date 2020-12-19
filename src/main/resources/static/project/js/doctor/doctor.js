@@ -8,13 +8,20 @@
             var aParam = {
             };
 
-
+            if(sessionStorage.getItem("rolename") == "管理员"){
+                $('#btn_addTask').attr('style',"display:block");
+            }
             //操作
             function operation(value, row, index){
-                return [
-                    '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >修改</a>',
-                    '<a class="delete" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >删除</a>',
-                ].join('');
+                if(sessionStorage.getItem("rolename") == "管理员"){
+                    return [
+                        '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >修改</a>',
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >删除</a>',
+                    ].join('');
+                }else{
+                    return [].join('');
+                }
+
             }
 
             //修改事件
