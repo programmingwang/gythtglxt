@@ -204,6 +204,39 @@
             })
         }
 
+        function haoGlobalSearch(tableID,url,needParam,aCol) {
+            $("#btnSearch").unbind().on('click',function() {
+                var newArry = [];
+
+                var str1=document.getElementById("yearSelect").value;
+                console.log(str1)
+
+
+                var str2 = document.getElementById("statusSelect").value.toLowerCase();
+
+                // console.log(str)
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+
+                // console.log(allTableData)
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        // console.log(111)
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if (textP.search(str1)!= -1&&textP.search(str2)!= -1){
+                            newArry.push(allTableData[i]);
+                        }
+                    }
+                }
+
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+            })
+
+        }
         return {
             myBootStrapTableInit:myBootStrapTableInit,
             myBootStrapTableDestory:myBootStrapTableDestory,
