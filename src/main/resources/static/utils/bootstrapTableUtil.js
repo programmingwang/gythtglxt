@@ -57,7 +57,7 @@
                 width: '100%',
                 columns: fColumns,
                 ajaxOptions: {
-                    async: false,
+
                     complete: function (XMLHttpRequest) {
 
                     }
