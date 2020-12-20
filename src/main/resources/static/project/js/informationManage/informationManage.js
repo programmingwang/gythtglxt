@@ -46,6 +46,7 @@
 
                 ajaxUtil.myAjax(null, opUrl, param, function (data) {
                     if (ajaxUtil.success(data)) {
+                        alertUtil.success("保存成功")
                         orange.redirect(pathUrl);
                     } else {
                         alert(data.msg);
@@ -64,6 +65,7 @@
                 }
                 ajaxUtil.myAjax(null, opUrl, param, function (data) {
                     if (ajaxUtil.success(data)) {
+                        alertUtil.success("修改成功，等待审核")
                         orange.redirect(pathUrl)
                     } else {
                         alert(data.msg)
