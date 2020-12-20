@@ -47,6 +47,7 @@ public class DoctorServiceImpl implements IDoctorService {
         record.setCreater(username);
         record.setItemcreateat(new Date());
         record.setUpdater(username);
+        record.setDeptCode("中医科");
 
         return doctorDOMapper.insertSelective(record);
     }

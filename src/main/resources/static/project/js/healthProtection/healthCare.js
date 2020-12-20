@@ -83,7 +83,6 @@
                                 dataStatus : selectUtil.getPassStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
-                                console.log(data);
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
                                         alertUtil.info("已通过");
@@ -318,7 +317,6 @@
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
             var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
             localStorage.setItem('2',JSON.stringify(allTableData))
             obj2=JSON.parse(localStorage.getItem("2"));
 

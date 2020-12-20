@@ -9,7 +9,6 @@ var base64Code = "";
 
 
         var init = function () {
-            console.log("init");
             localStorage.setItem('limit', $(".upload-content").attr('data-limit'));
             imgSrc = [];
             imgFile = [];
@@ -59,8 +58,8 @@ var base64Code = "";
                 var limit = localStorage.getItem('limit');
                 updated = true;
                 var imgSize = this.files[0].size;
-                if (imgSize > 1024 * 1024 * 1) { //1M
-                    return alert("上传图片不能超过1M");
+                if (imgSize > 5120 * 5120 * 1) { //5M
+                    return alert("上传图片不能超过5M");
                 }
                 ;
                 if (this.files[0].type != 'image/png' && this.files[0].type != 'image/jpeg' && this.files[0].type != 'image/gif') {
@@ -161,7 +160,6 @@ var base64Code = "";
         }
 
         function setImgSrc(src) {
-            console.log("setSrc")
             for (var i = 0; i < imgSrc.length; i++) {
                 if (imgSrc[i] === src) {
                     return
