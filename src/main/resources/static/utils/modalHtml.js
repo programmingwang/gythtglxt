@@ -2366,7 +2366,11 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm">国医堂照片</button>\n' +
             '                    </div>\n' +
-            '                    <img id="myImg" src="#"/>\n' +
+            '                    <img id="myImg1" src="#" class="col-lg-2"/>\n' +
+            '                    <img id="myImg2" src="#" class="col-lg-2"/>\n' +
+            '                    <img id="myImg3" src="#" class="col-lg-2"/>\n' +
+            '                    <img id="myImg4" src="#" class="col-lg-2"/>\n' +
+            '                    <img id="myImg5" src="#" class="col-lg-2"/>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
