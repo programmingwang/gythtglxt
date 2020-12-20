@@ -1,6 +1,5 @@
 package com.gythtglxt.service.impl;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import com.gythtglxt.dao.HospitalMapper;
 import com.gythtglxt.dataobject.FileDO;
@@ -16,8 +15,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * @Author lrt
@@ -121,6 +118,7 @@ public class HospitalServiceImpl implements HospitalService {
             resList.add(obj);
         }
         filter(resList);
+        resList.sort(Comparator.comparing(HospitalDto::getItemupdateat).reversed());
         return resList;
 	}
 
