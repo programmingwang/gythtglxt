@@ -44,7 +44,6 @@ public class ChineseMedicineImpl implements IChineseMedicineService {
         if(record.getItemcode()==null){
             record.setItemcode(UUID.randomUUID().toString());
         }
-        record.setStatus("8");
         record.setItemcreateat(new Date());
         record.setCreater(usernameUtil.getOperateUser());
         return chineseMedicineDOMapper.insertSelective(record);

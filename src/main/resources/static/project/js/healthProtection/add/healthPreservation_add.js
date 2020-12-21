@@ -38,6 +38,7 @@
                         hotspotTitle : $("#hotspotTitle").val(),
                         hotspotSource : $("#hotspotSource").val(),
                         hotspotAuthor : $("#hotspotAuthor").val(),
+                        dataStatus : "0" ,
                         hotspotContent : editor.txt.html(),
                     }
                     operateMessage = "更新节气养生成功";
@@ -83,6 +84,7 @@
                         hotspotTitle : $("#hotspotTitle").val(),
                         hotspotSource : $("#hotspotSource").val(),
                         hotspotAuthor : $("#hotspotAuthor").val(),
+                        dataStatus : "8" ,
                         hotspotContent : editor.txt.html(),
                     }
                     operateMessage = "更新节气养生成功";
