@@ -37,6 +37,7 @@
                         name : $("#name").val(),
                         price : $("#price").val(),
                         content : editor.txt.html(),
+                        dataStatus : "0" ,
                     }
                     operateMessage = "更新开展项目成功";
                 }
@@ -81,6 +82,7 @@
                         itemcode: needData.itemcode,
                         name : $("#name").val(),
                         price : $("#price").val(),
+                        dataStatus : "1" ,
                         content : editor.txt.html(),
                     }
                     operateMessage = "更新开展项目成功";
@@ -117,8 +119,7 @@
                     $("#name").val(tempdata.name);
                     $("#price").val(tempdata.price),
                     editor.txt.html(tempdata.content);
-                    var img = tempdata.filePath;
-                    uploadImg.setImgSrcs(img);
+                    uploadImg.setImgSrcs(value1);
                 }
             }());
 
