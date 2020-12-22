@@ -12,7 +12,6 @@
 
 
             $("#cancel").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/ChineseMedicine/chineseMedicine";
                 orange.redirect(url);
             });

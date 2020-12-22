@@ -103,8 +103,8 @@
                         }
 
                     };
-                    var myDeleteModalProject = modalUtil.init(myDeleteModalProject);
-                    myDeleteModalProject.show();
+                    var myDeleteModal = modalUtil.init(myDeleteModalProject);
+                    myDeleteModal.show();
                 },
 
                 'click .pass' : function (e, value, row, index) {
