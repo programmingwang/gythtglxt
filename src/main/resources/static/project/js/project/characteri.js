@@ -104,8 +104,8 @@
                         }
 
                     };
-                    var myDeleteModalCharacteri = modalUtil.init(myDeleteModalCharacteri);
-                    myDeleteModalCharacteri.show();
+                    var myDeleteModal = modalUtil.init(myDeleteModalCharacteri);
+                    myDeleteModal.show();
                 },
 
                 'click .pass' : function (e, value, row, index) {
