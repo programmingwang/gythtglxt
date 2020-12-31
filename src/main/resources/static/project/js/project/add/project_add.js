@@ -34,6 +34,7 @@
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
                         name : $("#name").val(),
+                        dataStatus : "0" ,
                         content : editor.txt.html(),
                     }
                     operateMessage = "更新功效特色成功";
@@ -77,6 +78,7 @@
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
                         name : $("#name").val(),
+                        dataStatus : "1" ,
                         content : editor.txt.html(),
                     }
                     operateMessage = "更新功效特色成功";

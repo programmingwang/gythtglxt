@@ -12,7 +12,6 @@
 
 
             $("#cancel").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/healthCare/healthcarechineseMedicine";
                 orange.redirect(url);
             });

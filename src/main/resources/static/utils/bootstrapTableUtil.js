@@ -57,7 +57,7 @@
                 width: '100%',
                 columns: fColumns,
                 ajaxOptions: {
-                    async: false,
+
                     complete: function (XMLHttpRequest) {
 
                     }
@@ -70,6 +70,8 @@
                         for(var i=0; i<data.data.length; i++){
                             data.data[i].itemcreateat = stringUtil.formatDateTime(data.data[i].itemcreateat);
                         }
+                        var allTableData = data.data
+                        localStorage.setItem('2',JSON.stringify(allTableData))
                         return {
                             total: data.data.length,
                             rows: data.data
@@ -118,17 +120,7 @@
         //$(".float-right").attr("display",block);
 
         function globalSearch(tableID,url,needParam,aCol) {
-
-
-            // var oTab=document.getElementById("table");
-            // var btnSearch=document.getElementById("btnSearch");
-
             $("#btnSearch").unbind().on('click',function() {
-                var myTable = myBootStrapTableInit(tableID, url, needParam, aCol);
-                // 先刷新列表------------
-                // myTable.free();
-                // myTable = myBootStrapTableInit(tableID,url,param,aCol);
-                //-----------------------
                 if(document.getElementById("stratTime")){
                     var stratTime=document.getElementById("stratTime").children;
                     var endTime=document.getElementById("endTime").children;
@@ -136,24 +128,28 @@
                     endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
                 }
                 var newArry = [];
-                var addstr=document.getElementById("chargePersonSearch").value;
-                var str = document.getElementById("taskNameSearch").value.toLowerCase();
-                var allTableData = JSON.parse(localStorage.getItem("2"));
-
-
-                if (str=='请输入'||str==''){
-                    $("#table").bootstrapTable("load", allTableData);
+                if(document.getElementById("chargePersonSearch")){
+                    var addstr=document.getElementById("chargePersonSearch").value;
                 }
 
+                var str = document.getElementById("taskNameSearch").value.toLowerCase();
+
+                // console.log(str)
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+
+                if (str==='请输入'||str===''){
+                    str=''
+                }
+                // console.log(allTableData)
                 for (var i in allTableData) {
                     for (var v in aCol){
                         var textP = allTableData[i][aCol[v].field];
+                        // console.log(111)
                         var isTimeSlot=false;
-                        var makeTime=allTableData[i][aCol[4].field];
-                        // if(makeTime.length>18){
-                        //     makeTime=makeTime.substring(11,19);
-                        // }
-
+                        var makeTime=allTableData[i][aCol[3].field];
+                        if(makeTime.length>18){
+                            makeTime=makeTime.substring(11,19);
+                        }
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";
                         }
@@ -171,67 +167,21 @@
                             str=str+" "+addstr;
                             var arr=str.split(' ');
                             for(var j=0;j<arr.length;j++)
-                                {
-                                    if(textP.search(arr[j])!=-1){
-                                        newArry.push(allTableData[i]);
-                                    }
+                            {
+                                if(String(textP).search(arr[j])!=-1){
+                                    newArry.push(allTableData[i]);
                                 }
+                            }
                         }
                     }
-
                 }
+
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
                 $("#table").bootstrapTable("load", newArry);
             })
 
 
-            //
-
-            // var oTab=document.getElementById("table");
-            // var btnSearch=document.getElementById("btnSearch");
-            //var param = {};
-            // btnSearch.onclick=function(){
-            //     var newArry=[];
-            //     var str=document.getElementById("taskNameSearch").value.toLowerCase();
-            //     var allTableData = $("#table").bootstrapTable("getData");
-            //         myTable = myBootStrapTableInit(tableID,url,param,aCol)
-            //     }
-            /***********************************JS实现表格的模糊搜索*************************************/
-            //表格的模糊搜索的就是通过JS中的一个search()方法，使用格式，string1.search(string2);如果
-            //用户输入的字符串是其一个子串，就会返回该子串在主串的位置，不匹配则会返回-1，故操作如下
-            // if(str1.search(str2)!=-1){
-            //     oTab.tBodies[0].rows[i].hidden= false;
-            // if (startTime=endTime||stratTime>time||endTime<time){
-            //     oTab.tBodies[0].rows[i].hidden= true;
-            // }
-            // }
-            // else{
-            //     oTab.tBodies[0].rows[i].hidden= true;
-            // if (stratTime<time&&time<endTime){
-            //     oTab.tBodies[0].rows[i].hidden= false;
-            // }
-            // }
-            /***********************************JS实现表格的多关键字搜索********************************/
-                //表格的多关键字搜索，加入用户所输入的多个关键字之间用空格隔开，就用split方法把一个长字符串以空格为标准，分成一个字符串数组，
-                //然后以一个循环将切成的数组的子字符串与信息表中的字符串比较
-                // var arr=str2.split(' ');
-                // for(var j=0;j<arr.length;j++)
-                // {
-                //     if(str1.search(arr[j])!=-1){oTab.tBodies[0].rows[i].hidden= false;}
-                // }
-
-
-                // if (oTab.tBodies[0].rows[i].hidden== false||oTab.tBodies[0].rows[i].hidden==""){
-                //     if(stratTime<time&&endTime>time){
-                //         oTab.tBodies[0].rows[i].hidden= false;
-                //     } else {
-                //         oTab.tBodies[0].rows[i].hidden= true;
-                //     }
-                //
-                // }
-
-                //}
-
-                //}
 
             var aria=this.ariaExpanded;
             var element=document.getElementById("stratTime");
@@ -254,6 +204,39 @@
             })
         }
 
+        function haoGlobalSearch(tableID,url,needParam,aCol) {
+            $("#btnSearch").unbind().on('click',function() {
+                var newArry = [];
+
+                var str1=document.getElementById("yearSelect").value;
+                console.log(str1)
+
+
+                var str2 = document.getElementById("statusSelect").value.toLowerCase();
+
+                // console.log(str)
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+
+                // console.log(allTableData)
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        // console.log(111)
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if (textP.search(str1)!= -1&&textP.search(str2)!= -1){
+                            newArry.push(allTableData[i]);
+                        }
+                    }
+                }
+
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+            })
+
+        }
         return {
             myBootStrapTableInit:myBootStrapTableInit,
             myBootStrapTableDestory:myBootStrapTableDestory,

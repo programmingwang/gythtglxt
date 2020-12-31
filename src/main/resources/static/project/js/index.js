@@ -111,13 +111,6 @@
                             pid: ""
                         },
                         {
-                            menu_name: "号源管理",
-                            menu_url: "/signalSource/sourceManage",
-                            id: "2-1",
-                            level: "2",
-                            pid: "2"
-                        },
-                        {
                             menu_name: "服务团队",
                             menu_url: "/doctor/doctor",
                             id: "2-2",
