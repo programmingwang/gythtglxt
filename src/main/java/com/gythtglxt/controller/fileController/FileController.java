@@ -10,7 +10,6 @@ import com.gythtglxt.service.IFileService;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,7 +23,6 @@ import java.util.List;
  * @date 2020/11/4 16:37
  */
 @RestController
-@PropertySource("classpath:application.properties")
 @RequestMapping("/file")
 public class FileController {
     @Resource

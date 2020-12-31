@@ -21,7 +21,6 @@
             (function init() {
                 if (isView()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    console.log(tempdata);
                     $("#projectName").val(tempdata.projectName);
                     $("#disciplineCode").val(tempdata.disciplineCode);
                     $("#disciplineName").val(tempdata.disciplineName);

@@ -2366,7 +2366,11 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm">国医堂照片</button>\n' +
             '                    </div>\n' +
-            '                    <img id="myImg" src="#"/>\n' +
+            '                    <img id="myImg1" src="#" class="col-lg-2"/>\n' +
+            '                    <img id="myImg2" src="#" class="col-lg-2"/>\n' +
+            '                    <img id="myImg3" src="#" class="col-lg-2"/>\n' +
+            '                    <img id="myImg4" src="#" class="col-lg-2"/>\n' +
+            '                    <img id="myImg5" src="#" class="col-lg-2"/>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -2441,7 +2445,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm">图片</button>\n' +
             '                    </div>\n' +
-            '                    <img id="projectImg" src="#"/>\n' +
+            '                    <span id="projectImg" ></span>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -2449,7 +2453,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">开展项目名称</button>\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">功效特色名称</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="name" class="form-control">\n' +
             '                </div>\n' +
@@ -2510,7 +2514,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm">图片</button>\n' +
             '                    </div>\n' +
-            '                    <img id="projectImg" src="#"/>\n' +
+            '                    <span id="projectImg"></span>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -2518,7 +2522,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">功效特色名称</button>\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">开展项目名称</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="name" class="form-control">\n' +
             '                </div>\n' +
@@ -2528,7 +2532,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">功效特色价格</button>\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">开展项目价格</button>\n' +
             '                    </div>\n' +
             '                    <span style="position: absolute;top: 0.3rem;left: 5.7rem;font-size: 19px;z-index: 1050;">￥</span>\n'  +
             '                    <input style="text-indent: 0.5rem;" type="text" id="price" class="form-control" >\n' +
@@ -2581,6 +2585,60 @@
             '            </div>\n'+
             '</div>';
 
+        modalHtml.checkImgDetails=
+            '<div class="row">'+
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">图片1</button>\n' +
+            '                    </div>\n' +
+            '                    <img id="projectImg1" src="#" style="display: none"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">图片2</button>\n' +
+            '                    </div>\n' +
+            '                    <img id="projectImg2" src="#" style="display: none"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12" >\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">图片3</button>\n' +
+            '                    </div>\n' +
+            '                    <img id="projectImg3" src="#" style="display: none"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">图片4</button>\n' +
+            '                    </div>\n' +
+            '                    <img id="projectImg4" src="#" style="display: none"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12" >\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">图片5</button>\n' +
+            '                    </div>\n' +
+            '                    <img id="projectImg5" src="#" style="display: none"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '</div>';
+
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
         modalHtml.myDeleteModalTraditionalCul = '是否删除中医医史信息?';
         modalHtml.myDeleteModalTraditionalDoc = '是否删除历代名家信息?';
@@ -2592,8 +2650,8 @@
         modalHtml.myDeleteModalInCuHe = '是否删除非物质文化遗产信息?';
         modalHtml.myDeleteModalMovTV = '是否删除电视电影信息?';
         modalHtml.myDeleteModalSaleDrug='是否删除该药品';
-        modalHtml.myDeleteModalCharacteri = '是否删除功效特色?';
-        modalHtml.myDeleteModalProject = '是否删除开展项目?';
+        modalHtml.myDeleteModalCharacteri = '是否删除开展项目?';
+        modalHtml.myDeleteModalProject = '是否删除功效特色?';
         modalHtml.mySubmitModal = '确认提交吗？';
         modalHtml.myPassModal = '确认通过吗？';
         modalHtml.myFailModal = '确认不通过吗？';

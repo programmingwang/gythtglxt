@@ -139,7 +139,6 @@
                 },
 
                 'click .view' : function (e, value, row, index) {
-                    console.log(row.content);
                     var myViewFamPreModalData ={
                         modalBodyID : "myViewFamPreModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看详情",
@@ -244,12 +243,10 @@
             var oBt=document.getElementById("taskNameSearch");
             var btnSearch=document.getElementById("btnSearch")
             btnSearch.onclick=function(){
-                console.log(oTab.tHead.rows[0].childNodes[5].innerText);
                 for(var i=0;i<oTab.tBodies[0].rows.length;i++)
                 {
                     var str1=oTab.tBodies[0].rows[i].innerText.toLowerCase();
                     var str2=oBt.value.toLowerCase();
-                    console.log(str2);
                     if (str2==""||str2=="请输入"){
                         refreshTable();
                     }
@@ -283,9 +280,7 @@
 
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
             var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
             localStorage.setItem('2',JSON.stringify(allTableData))
             obj2=JSON.parse(localStorage.getItem("2"));
-            //console.log(obj2);
         })
 })();

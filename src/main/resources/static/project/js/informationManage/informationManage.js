@@ -41,11 +41,12 @@
                 var param = generateParam();
                 param.status = "0";
                 if (uploadImg.isUpdate()) {
-                    ajaxUtil.upload_multi(itemcode, uploadImg.getFiles(), "lrt", "lrt")
+                    ajaxUtil.upload_multi(itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
                 }
 
                 ajaxUtil.myAjax(null, opUrl, param, function (data) {
                     if (ajaxUtil.success(data)) {
+                        alertUtil.success("保存成功")
                         orange.redirect(pathUrl);
                     } else {
                         alert(data.msg);
@@ -60,10 +61,11 @@
                 param.status = "1";
                 param.reason = "";
                 if (uploadImg.isUpdate()) {
-                    ajaxUtil.upload_multi(itemcode, uploadImg.getFiles(), "lrt", "lrt")
+                    ajaxUtil.upload_multi(itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
                 }
                 ajaxUtil.myAjax(null, opUrl, param, function (data) {
                     if (ajaxUtil.success(data)) {
+                        alertUtil.success("修改成功，等待审核")
                         orange.redirect(pathUrl)
                     } else {
                         alert(data.msg)

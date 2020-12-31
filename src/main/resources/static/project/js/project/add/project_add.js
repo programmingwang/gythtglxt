@@ -19,7 +19,7 @@
                 var projectEntity;
                 var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增开展项目成功";
+                    operateMessage = "新增功效特色成功";
                     projectEntity = {
                         itemcode: stringUtil.getUUID(),
                         name : $("#name").val(),
@@ -34,12 +34,15 @@
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
                         name : $("#name").val(),
+                        dataStatus : "0" ,
                         content : editor.txt.html(),
                     }
-                    operateMessage = "更新开展项目成功";
+                    operateMessage = "更新功效特色成功";
                 }
 
-                fileUtil.handleFile(isUpdate(), projectEntity.itemcode, uploadImg.getFiles()[0]);
+                if (uploadImg.isUpdate()) {
+                    ajaxUtil.upload_multi(projectEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                }
 
                 ajaxUtil.myAjax(null,opreateUrl,projectEntity,function (data) {
                     if(ajaxUtil.success(data)){
@@ -60,12 +63,12 @@
                 var projectEntity;
                 var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增开展项目成功";
+                    operateMessage = "新增功效特色成功";
                     projectEntity = {
                         itemcode: stringUtil.getUUID(),
                         name : $("#name").val(),
                         content : editor.txt.html(),
-                        dataStatus : "0" ,
+                        dataStatus : "1" ,
                         dataType : "0",
                         userCode : sessionStorage.getItem("itemcode")
                     };
@@ -75,12 +78,15 @@
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
                         name : $("#name").val(),
+                        dataStatus : "1" ,
                         content : editor.txt.html(),
                     }
-                    operateMessage = "更新开展项目成功";
+                    operateMessage = "更新功效特色成功";
                 }
 
-                fileUtil.handleFile(isUpdate(), projectEntity.itemcode, uploadImg.getFiles()[0]);
+                if (uploadImg.isUpdate()) {
+                    ajaxUtil.upload_multi(projectEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                }
 
                 ajaxUtil.myAjax(null,opreateUrl,projectEntity,function (data) {
                     if(ajaxUtil.success(data)){
@@ -100,10 +106,15 @@
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    var value1 = new Array();
+                    for(var i=0;i<tempdata.dataCode.length;i++){
+                        if(tempdata.itemcode == tempdata.dataCode[i]) {
+                            value1.push(tempdata.filePath[i]);
+                        }
+                    }
                     $("#name").val(tempdata.name);
                     editor.txt.html(tempdata.content);
-                    var img = tempdata.filePath;
-                    uploadImg.setImgSrc(img);
+                    uploadImg.setImgSrcs(value1);
                 }
             }());
 

@@ -36,7 +36,6 @@ public class ChineseMedicineController {
     @RequestMapping(value ="insertchinesemedicine",method = RequestMethod.POST )
 
     public ResponseData insertChineseMedicine(@RequestBody ChineseMedicineDO key){
-        System.out.println("中药名称: " + key.getName());
         iChineseMedicineService.insertSelective(key);
         return new ResponseData(EmBusinessError.success);
     }

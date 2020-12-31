@@ -25,4 +25,5 @@ public interface FileDOMapper {
     int deleteByDataCode(String dataCode);
 
     List<FileDO> selectMultipleFileByDataCode(String dataCode);
+    List<FileDO> selectMultipleFileByDataCodeAndOrgCode(@Param("dataCode") String dataCode, @Param("orgCode") String orgCode);
 }

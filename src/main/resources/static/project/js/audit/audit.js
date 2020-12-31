@@ -97,7 +97,18 @@
                     };
                     data = row;
                     let myTravelModal = modalUtil.init(modalData);
-                    $("#myImg").attr('src', data.filePath);
+                    var filePath = []
+                    ajaxUtil.myAjax(null,"/audit/hospital_img?itemcode="+data.itemcode,null,function (res) {
+                        filePath = res.data;
+                    },false,true,"get")
+                    let i = 1;
+                    for (const t of filePath){
+                        $("#myImg"+i.toString()).attr('src',t)
+                        i = i + 1
+                    }
+                    for (;i<6;i++){
+                        $("#myImg"+i.toString()).hide()
+                    }
                     $("#hospitalName").val(data.hospitalName);
                     $("#hospitalPhone").val(data.hospitalPhone);
                     $("#address").val(data.hospitalPro + data.hospitalCity + data.hospitalCountry + data.hospitalAdress);
