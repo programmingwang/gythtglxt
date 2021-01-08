@@ -7,7 +7,7 @@
                     localStorage.setItem('user', JSON.stringify(data.data));
                     uploadImg.init();
                     uploadImg.setImgSrc(data.data.portrait);
-                    $("#username").val(data.data.username);
+                    $("#uname").val(data.data.username);
                     $("#name").val(data.data.name);
                     $("#gender").val(data.data.gender);
                     $("#email").val(data.data.email);
@@ -20,8 +20,13 @@
                 }
             }, false, "", "get");
 
+            $("#userName").text(sessionStorage.getItem('username'));
+
             // 取消按钮返回上一页面
             $("#cancelBtn").click(function () {
+                window.history.back()
+            });
+            $("#return").click(function () {
                 window.history.back()
             });
 
@@ -61,23 +66,22 @@
                 // 如果输入框没有disabled属性，则取输入框的值
                 if (typeof ($(".msg").attr("disabled")) == "undefined") {
 
-                    var username = $("#username").val();
+                    var username = $("#uname").val();
                     var name = $("#name").val();
                     var gender = $("#gender").val();
                     var email = $("#email").val();
                     var idcardType = $("#idcardType").val();
                     var idcardNo = $("#idcardNo").val();
-                    var contacts = $("#contacts").val();
                     var mobilephone = $("#mobilephone").val();
 
                     if (usermsg.username == username && usermsg.name == name && usermsg.gender == gender &&
                         usermsg.email == email && usermsg.idcardType == idcardType && usermsg.idcardNo == idcardNo &&
-                        usermsg.contacts == contacts && usermsg.mobilephone == mobilephone) {
+                        usermsg.mobilephone == mobilephone) {
                         alertUtil.info('没有需要修改的值')
                     } else {
                         if (!stringUtil.isBlank(username) && !stringUtil.isBlank(name) && !stringUtil.isBlank(gender) &&
                             !stringUtil.isBlank(email) && !stringUtil.isBlank(idcardType) && !stringUtil.isBlank(idcardNo) &&
-                            !stringUtil.isBlank(contacts) && !stringUtil.isBlank(mobilephone)) {
+                            !stringUtil.isBlank(mobilephone)) {
                             if (portrait == localportroit) {    // 与原头像一样，则设置为空，传到后端不被更新
                                 portrait = 'null'
                             }
@@ -89,7 +93,6 @@
                                 "email": email,
                                 "idcardType": idcardType,
                                 "idcardNo": idcardNo,
-                                "contacts": contacts,
                                 "mobilephone": mobilephone
                             };
                             ajaxUtil.myAjax(null, "/user/updateusermsg", user, function (data) {
@@ -157,6 +160,18 @@
                     }
                 }
 
+            });
+
+            $("#logout").on("click", function () {
+                ajaxUtil.myAjax(null, "/logout", null, function (data) {
+                    if (data && data.code === 88888) {
+                        sessionStorage.clear();
+                        localStorage.clear();
+                        window.location.href = "/userLogin";
+                    } else {
+                        alertUtil.alert(data.msg);
+                    }
+                }, false)
             });
         });
 })();
