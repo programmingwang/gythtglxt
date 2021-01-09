@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 public class ProjectDto extends Project {
     private List<String> filePath;
-    private List<String> dataCode;
+//    private List<String> dataCode;
 }

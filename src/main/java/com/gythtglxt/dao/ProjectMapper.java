@@ -1,6 +1,7 @@
 package com.gythtglxt.dao;
 
 import com.gythtglxt.dataobject.Project;
+import com.gythtglxt.dto.ProjectDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,9 +17,9 @@ public interface ProjectMapper {
 
     int updateByPrimaryKeySelective(Project record);
 
-    List<Project> selectproAll(@Param("status") String dataStatus);
+    List<ProjectDto> selectproAll(@Param("status") String dataStatus, @Param("userCode")String userCode);
 
-    List<Project> selectchaAll(@Param("status") String dataStatus);
+    List<ProjectDto> selectchaAll(@Param("status") String dataStatus, @Param("userCode")String userCode);
 
 
 }

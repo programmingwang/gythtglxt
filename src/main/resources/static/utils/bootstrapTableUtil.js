@@ -77,7 +77,7 @@
                             rows: data.data
                         }
                     } else {
-                        return data = {total: 0, rows: []};
+                        return  {total: 0, rows: []};
                     }
                 },
                 onLoadSuccess: function (res) {
