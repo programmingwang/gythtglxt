@@ -5,15 +5,20 @@
 
             var url = "selectallchinesemedicine?";
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            if(sessionStorage.getItem("rolename") == "管理员"){
+            var role = sessionStorage.getItem("rolename");
+            if(role === "管理员"){
                 $('#btn_addTask').attr('style',"display:block");
-                url += "status="+webStatus[0].id+"&status="+webStatus[1].id+"&status="+webStatus[2].id+"&status="+webStatus[4].id+"&status="+webStatus[6].id+"&status="+webStatus[7].id+"&status="+webStatus[8].id+"&status="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
-            }else if(sessionStorage.getItem("rolename") == "县级"){
-                url += "status="+webStatus[1].id+"&status="+webStatus[8].id;
-            }else if(sessionStorage.getItem("rolename") == "市级"){
-                url += "status="+webStatus[3].id+"&status="+webStatus[8].id;
-            }else if(sessionStorage.getItem("rolename") == "省级"){
-                url += "status="+webStatus[5].id+"&status="+webStatus[8].id;
+                // return preUrl +status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
+                url = url + "status=1&userCode="+sessionStorage.getItem("itemcode");
+            }else if(role === "县级"){
+                // return preUrl +status+"="+webStatus[1].id+"&"+status+"="+webStatus[8].id;
+                url = url + "status=2";
+            }else if(role === "市级"){
+                // return preUrl +status+"="+webStatus[3].id+"&"+status+"="+webStatus[8].id;
+                url = url + "status=3";
+            }else if(role === "省级"){
+                // return preUrl +status+"="+webStatus[5].id+"&"+status+"="+webStatus[8].id;
+                url = url + "status=4";
             }
             var aParam = {
 
