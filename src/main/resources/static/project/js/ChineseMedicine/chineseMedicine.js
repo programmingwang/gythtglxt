@@ -1,17 +1,36 @@
+
 (function () {
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-            var url = "selectallchinesemedicine";
+            var url = "selectallchinesemedicine?";
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"status",webStatus);
+            var role = sessionStorage.getItem("rolename");
+            if(role === "管理员"){
+                $('#btn_addTask').attr('style',"display:block");
+                // return preUrl +status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
+                url = url + "status=1&userCode="+sessionStorage.getItem("itemcode");
+            }else if(role === "县级"){
+                // return preUrl +status+"="+webStatus[1].id+"&"+status+"="+webStatus[8].id;
+                url = url + "status=2";
+            }else if(role === "市级"){
+                // return preUrl +status+"="+webStatus[3].id+"&"+status+"="+webStatus[8].id;
+                url = url + "status=3";
+            }else if(role === "省级"){
+                // return preUrl +status+"="+webStatus[5].id+"&"+status+"="+webStatus[8].id;
+                url = url + "status=4";
+            }
             var aParam = {
 
             };
+
             //操作
             function operation(value, row, index){
                 return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.status,webStatus)
             }
+
+
+
 
             //修改事件
             window.orgEvents = {
@@ -21,15 +40,15 @@
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteModalMedicine",
-                        modalTitle : "删除中药名称",
+                        modalBodyID : "myDeleteProtection",
+                        modalTitle : "删除中药信息",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,"deletechinesemedicine/"+row.itemid+"/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    alertUtil.info("删除中药名称成功");
+                                    alertUtil.info("删除中药信息成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
@@ -44,21 +63,23 @@
 
                 'click .pass' : function (e, value, row, index) {
                     var myPassChineseMedicineModalData ={
-                        modalBodyID :"myPassModal",
+                        modalBodyID :"myPassProtection",
                         modalTitle : "审核通过",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
+                                "status": selectUtil.getPassStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
-                                        if(sessionStorage.getItem("rolename") == "文化宣传处长"){
-                                            alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
-                                        }else{
-                                            alertUtil.info("审核已通过，已上架！");
+                                        if(sessionStorage.getItem("rolename") == "县级"){
+                                            alertUtil.info("县局审核已通过，已发送给市局中医药管理部门！");
+                                        }else if(sessionStorage.getItem("rolename") == "市级"){
+                                            alertUtil.info("市局审核已通过，已发送给省局中医药管理部门！");
+                                        }else if(sessionStorage.getItem("rolename") == "省级"){
+                                            alertUtil.info("省局审核已通过，已通知管理员确认发布！");
                                         }
                                         isSuccess = true;
                                         refreshTable();
@@ -76,7 +97,7 @@
 
                 'click .fail' : function (e, value, row, index) {
                     var myFailChineseMedicineModalData ={
-                        modalBodyID :"myFailModal",
+                        modalBodyID :"myNoPassProtection",
                         modalTitle : "审核不通过",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
@@ -84,10 +105,12 @@
                             var submitStatus = {
                                 "status": ""
                             };
-                            if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
-                                submitStatus.status = webStatus[3].id;
-                            }else{
+                            if(sessionStorage.getItem("rolename") == "县级" ){
+                                submitStatus.status = webStatus[2].id;
+                            }else if(sessionStorage.getItem("rolename") == "市级" ){
                                 submitStatus.status = webStatus[4].id;
+                            }else if(sessionStorage.getItem("rolename") == "省级" ){
+                                submitStatus.status = webStatus[6].id;
                             }
                             ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -108,13 +131,13 @@
                 },
                 'click .under-shelf' : function (e, value, row, index) {
                     var myUnderShelfChineseMedicineModalData ={
-                        modalBodyID :"myUnderShelfModal",
-                        modalTitle : "下架",
+                        modalBodyID :"myUnderShelfProtection",
+                        modalTitle : "紧急下架",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "status": webStatus[6].id
+                                "status": webStatus[9].id
                             };
                             ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -162,18 +185,18 @@
 
                 'click .submit' : function (e, value, row, index) {
                     var mySubmitChineseMedicineModalData ={
-                        modalBodyID :"mySubmitModal",
+                        modalBodyID :"mySubmitProtectionUp",
                         modalTitle : "提交",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
+                                "status": webStatus[8].id
                             };
                             ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已提交");
+                                        alertUtil.info("已提交给县局中医药管理部门");
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -190,7 +213,7 @@
 
                 'click .no-submit' : function (e, value, row, index) {
                     var myNoSubmitChineseMedicineModalData ={
-                        modalBodyID :"myNoSubmitModal",
+                        modalBodyID :"myNoSubmitProtection",
                         modalTitle : "取消提交",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
@@ -201,7 +224,7 @@
                             ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已提交");
+                                        alertUtil.info("已取消提交");
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -214,6 +237,34 @@
                     };
                     var mySubmitModal = modalUtil.init(myNoSubmitChineseMedicineModalData);
                     mySubmitModal.show();
+                },
+
+                'click .publish' : function (e, value, row, index) {
+                    var mypublishChineseMedicineModalData ={
+                        modalBodyID :"myPublishProtection",
+                        modalTitle : "发布信息到小程序",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": webStatus[8].id
+                            };
+                            ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("管理员已发布到小程序");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+                    };
+                    var mypublishModal = modalUtil.init(mypublishChineseMedicineModalData);
+                    mypublishModal.show();
                 },
             };
 
@@ -240,12 +291,13 @@
                                     return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                                 }
                             }},
-                        {field:'classification',title:'功效分类'},
+                        {field:'classification',title:'功效分类',formatter:function (row) {
+                                return '<p>'+p2[row].text+'</p>';
+                            }},
                         {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
                     ];
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
-
             function refreshTable() {
                 var param = {};
                 myTable.free();
@@ -255,7 +307,6 @@
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
             var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
             localStorage.setItem('2',JSON.stringify(allTableData))
             obj2=JSON.parse(localStorage.getItem("2"));
         })

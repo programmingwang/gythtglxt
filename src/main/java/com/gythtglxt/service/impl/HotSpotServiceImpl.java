@@ -11,6 +11,7 @@ import com.gythtglxt.service.IFileService;
 import com.gythtglxt.service.IHotspotService;
 import com.gythtglxt.util.DateUtils;
 import com.gythtglxt.util.UUIDUtils;
+import com.gythtglxt.util.UsernameUtil;
 import com.gythtglxt.validator.ValidatorImpl;
 import com.gythtglxt.validator.ValidatorResult;
 import org.apache.commons.lang3.StringUtils;
@@ -39,27 +40,29 @@ public class HotSpotServiceImpl implements IHotspotService {
     @Autowired
     private ValidatorImpl validator;
 
+    @Autowired
+    private UsernameUtil usernameUtil;
+
     @Override
     public HotspotDO getHotspot(HotspotDOKey key, String dataType) {
         return hotspotDOMapper.selectByPrimaryKey(key,dataType);
     }
 
     @Override
-    public List<HotspotDto> getAll(String dataType, List<String> dataStatus) {
-        List<HotspotDO> hotspotDOS = new ArrayList<>();
-        List<HotspotDto> hotspotDtos = new ArrayList<>();
-        for (String status : dataStatus) {
-            hotspotDOS.addAll(hotspotDOMapper.selectAll(dataType,status));
-        }
-        for (HotspotDO hotspotDO : hotspotDOS) {
-            HotspotDto hotspotDto = new HotspotDto();
-            BeanUtils.copyProperties(hotspotDO,hotspotDto);
-            FileDO fileDO = fileService.selectFileByDataCode(hotspotDO.getItemcode());
-            String filePath = StringUtils.isEmpty(fileDO.getFilePath())
-                    ? "已经损坏了" : fileDO.getFilePath() ;
-            hotspotDto.setFilePath(filePath);
-            hotspotDtos.add(hotspotDto);
-        }
+    public List<HotspotDto> getAll(String dataType, String dataStatus, String userCode) {
+        List<HotspotDto> hotspotDtos = hotspotDOMapper.selectAll(dataType,dataStatus,userCode);
+//        if(userCode == null){
+//            return hotspotDtos;
+//        }else {
+//            List<HotspotDto> removeHotSpot = new ArrayList<>();
+//            for (HotspotDto hotspotDto : hotspotDtos) {
+//                if(!userCode.equals(hotspotDto.getUserCode()) || hotspotDto.getUserCode() == null){
+//                    removeHotSpot.add(hotspotDto);
+//                }
+//            }
+//            hotspotDtos.removeAll(removeHotSpot);
+//            return hotspotDtos;
+//        }
         return hotspotDtos;
     }
 
@@ -69,10 +72,9 @@ public class HotSpotServiceImpl implements IHotspotService {
         if(validate.isHasErrors()){
             throw new BusinessException(validate.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setCreater("");
+        record.setCreater(usernameUtil.getOperateUser());
         record.setItemcreateat(DateUtils.getDate());
-        record.setUpdater("");
-        record.setDataStatus("0");
+        record.setUpdater(usernameUtil.getOperateUser());
         if(StringUtils.isEmpty(record.getItemcode())){
             record.setItemcode(UUIDUtils.getUUID());
         }
@@ -86,7 +88,7 @@ public class HotSpotServiceImpl implements IHotspotService {
 
     @Override
     public int updateHotspot(HotspotDO record) {
-        record.setUpdater("");
+        record.setUpdater(usernameUtil.getOperateUser());
         return hotspotDOMapper.updateByPrimaryKeySelective(record);
     }
 }

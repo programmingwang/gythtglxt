@@ -128,4 +128,7 @@ public class Hospital {
      */
     @ApiModelProperty(value = "修改时间")
     private Date itemupdateat;
+
+    @ApiModelProperty(value = "理由")
+    private String reason;
 }

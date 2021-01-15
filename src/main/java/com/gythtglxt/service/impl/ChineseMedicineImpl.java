@@ -3,9 +3,11 @@ package com.gythtglxt.service.impl;
 import com.gythtglxt.dao.ChineseMedicineDOMapper;
 import com.gythtglxt.dataobject.ChineseMedicineDO;
 import com.gythtglxt.dataobject.ChineseMedicineDOKey;
+import com.gythtglxt.dto.ChineseMedicineDto;
 import com.gythtglxt.error.BusinessException;
 import com.gythtglxt.error.EmBusinessError;
 import com.gythtglxt.service.IChineseMedicineService;
+import com.gythtglxt.util.UsernameUtil;
 import com.gythtglxt.validator.ValidatorImpl;
 import com.gythtglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class ChineseMedicineImpl implements IChineseMedicineService {
     private ChineseMedicineDOMapper chineseMedicineDOMapper;
     @Autowired
     private ValidatorImpl validator;
+    @Autowired
+    private UsernameUtil usernameUtil;
     @Transactional
     @Override
 
@@ -41,8 +45,8 @@ public class ChineseMedicineImpl implements IChineseMedicineService {
         if(record.getItemcode()==null){
             record.setItemcode(UUID.randomUUID().toString());
         }
-        record.setStatus("0");
         record.setItemcreateat(new Date());
+        record.setCreater(usernameUtil.getOperateUser());
         return chineseMedicineDOMapper.insertSelective(record);
     }
 
@@ -59,16 +63,13 @@ public class ChineseMedicineImpl implements IChineseMedicineService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setItemupdateat(new Date());
+        record.setUpdater(usernameUtil.getOperateUser());
         return chineseMedicineDOMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
-    public List<ChineseMedicineDO> selectAllChineseMedicine(List<String> status) {
-        List<ChineseMedicineDO> chineseMedicineDOList=new ArrayList<>();
-        for(String chinesemedicine:status){
-            chineseMedicineDOList.addAll(chineseMedicineDOMapper.selectAllChineseMedicine(chinesemedicine));
-        }
-        return chineseMedicineDOList;
+    public List<ChineseMedicineDto> selectAllChineseMedicine(String status, String userCode) {
+        return chineseMedicineDOMapper.selectAllChineseMedicine(status,userCode);
     }
 
     @Override

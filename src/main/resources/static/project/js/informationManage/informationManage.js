@@ -1,8 +1,8 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'objectUtil', 'distpicker', 'alertUtil'],
-        function ($, ajaxUtil, stringUtil, uploadImg, objectUtil, distpicker, alertUtil) {
+    require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil','uploadImg','distpicker'],
+        function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil,uploadImg,distpicker) {
 
-            var url = "/information?itemCode=" + "f324ccba-2e2c-4df2-aeb8-f9f0cd58f5dc";
+            var url = "/information?itemCode=" + sessionStorage.getItem("orgCode");
 
             var pathUrl = "/informationManage/informationManage";
 
@@ -37,32 +37,41 @@
             }
 
             $("#saveBtn").unbind('click').on('click', function () {
+
                 var param = generateParam();
                 param.status = "0";
                 if (uploadImg.isUpdate()) {
-                    ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "lrt", "lrt")
+                    ajaxUtil.upload_multi(itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
                 }
 
                 ajaxUtil.myAjax(null, opUrl, param, function (data) {
                     if (ajaxUtil.success(data)) {
+                        alertUtil.success("保存成功")
                         orange.redirect(pathUrl);
                     } else {
                         alert(data.msg);
                     }
                 }, true, "123", type);
+
                 return false;
             });
 
             $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.status = "1";
+                param.reason = "";
+                if (uploadImg.isUpdate()) {
+                    ajaxUtil.upload_multi(itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                }
                 ajaxUtil.myAjax(null, opUrl, param, function (data) {
                     if (ajaxUtil.success(data)) {
+                        alertUtil.success("修改成功，等待审核")
                         orange.redirect(pathUrl)
                     } else {
                         alert(data.msg)
                     }
                 }, true, "123", type);
+
                 return false;
             });
 
@@ -86,16 +95,22 @@
                 });
                 $("#address").val(tempdata.hospitalAdress);
                 editor.txt.html(tempdata.introduce);
-                uploadImg.setImgSrc(tempdata.filePath);
+                uploadImg.setImgSrcs(tempdata.filePath);
                 itemcode = tempdata.itemcode;
                 itemid = tempdata.itemid;
+                if ( tempdata.status !== "6"){
+                    $("#statusSpan").html(dictUtil.getName(dictUtil.DICT_LIST.auditStatus, tempdata.status));
+                    $("#reasonSpan").html(tempdata.reason);
+                    $("#statusDiv").show();
+                }
+                else {
+                    $("#statusDiv").hide();
+                }
                 init = function () {
 
                 }
             };
             init();
-
-
         })
 })();
 

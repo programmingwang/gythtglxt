@@ -47,6 +47,8 @@ public class DoctorServiceImpl implements IDoctorService {
         record.setCreater(username);
         record.setItemcreateat(new Date());
         record.setUpdater(username);
+        record.setDeptCode("中医科");
+        record.setOrgCode(usernameUtil.getOrgCode());
 
         return doctorDOMapper.insertSelective(record);
     }
@@ -89,7 +91,7 @@ public class DoctorServiceImpl implements IDoctorService {
 
     @Override
     public List<DoctorDto> selectByUserCode() {
-        List<DoctorDO> doctorDOList = doctorDOMapper.selectByUserCode(usernameUtil.getOrgCode());
+        List<DoctorDO> doctorDOList = doctorDOMapper.selectByUserCode(usernameUtil.getItemCode());
         return DoToDto(doctorDOList);
     }
 

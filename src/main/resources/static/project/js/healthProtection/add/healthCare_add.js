@@ -28,7 +28,7 @@
                         hotspotContent : editor.txt.html(),
                         dataStatus : "0" ,
                         dataType : "1",
-                        userCode : ""
+                        userCode : sessionStorage.getItem("itemcode")
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
@@ -38,6 +38,7 @@
                         hotspotTitle : $("#hotspotTitle").val(),
                         hotspotSource : $("#hotspotSource").val(),
                         hotspotAuthor : $("#hotspotAuthor").val(),
+                        dataStatus : "0" ,
                         hotspotContent : editor.txt.html(),
                     }
                     operateMessage = "更新自我保健成功";
@@ -64,16 +65,16 @@
                 var hotspotEntity;
                 var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增自我保健成功";
+                    operateMessage = "新增自我保健成功,信息将直接显示到国医堂小程序中,文责自负!如有问题请紧急下架!";
                     hotspotEntity = {
                         itemcode: stringUtil.getUUID(),
                         hotspotTitle : $("#hotspotTitle").val(),
                         hotspotSource : $("#hotspotSource").val(),
                         hotspotAuthor : $("#hotspotAuthor").val(),
                         hotspotContent : editor.txt.html(),
-                        dataStatus : "1" ,
+                        dataStatus : "8" ,
                         dataType : "1",
-                        userCode : ""
+                        userCode : sessionStorage.getItem("itemcode")
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
@@ -83,6 +84,7 @@
                         hotspotTitle : $("#hotspotTitle").val(),
                         hotspotSource : $("#hotspotSource").val(),
                         hotspotAuthor : $("#hotspotAuthor").val(),
+                        dataStatus : "8" ,
                         hotspotContent : editor.txt.html(),
                     }
                     operateMessage = "更新自我保健成功";

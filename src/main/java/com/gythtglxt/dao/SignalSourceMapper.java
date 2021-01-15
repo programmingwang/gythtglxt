@@ -25,6 +25,7 @@ public interface SignalSourceMapper {
     List<SignalSourceDto> selectAllByUserCodeOrStatusOrRegisterDate(@Param("userCode") String userCode,
                                                                     @Param("status") String status,
                                                                     @Param("year") String year);
-
     List<SignalSourceDoctorDto> getDoctor(String usercode);
+
+    int dayUpdate();
 }

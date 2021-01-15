@@ -1,13 +1,15 @@
 package com.gythtglxt.dataobject;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class ChineseMedicineDO extends ChineseMedicineDOKey {
-
+    @NotBlank(message = "中药材名称不能为空")
     private String name;
 
     private String alias;
 
+    @NotBlank(message = "功效分类不能为空")
     private String classification;
 
     private String harvesting;

@@ -93,15 +93,7 @@
             index: '../project/js/index',
             userMsg: '../project/js/user/usermsg',
             register: '../project/js/user/register',
-            addPlantation: '../project/js/industrialdevelop/chinesemed/add_plantation',
-            addProcess: '../project/js/industrialdevelop/chinesemed/add_chinesemed-process',
-            addProduce: '../project/js/industrialdevelop/chinesemed/add_chinesemed-produce',
-            addSale: '../project/js/industrialdevelop/chinesemed/add_chinesemed-sale',
-            addSchool: '../project/js/industrialdevelop/add_school',
-            addLab: '../project/js/industrialdevelop/organization/add_lab',
-            addHosp: '../project/js/industrialdevelop/organization/addHosp',
-            addTecServiceOrg: '../project/js/industrialdevelop/organization/add_tecserviceorg',
-            addTour: '../project/js/industrialdevelop/organization/add_tour'
+            addGytInfo: '../project/js/user/addGytInfo',
 
         },
         waitSeconds: 0,
@@ -119,15 +111,7 @@
         {path:"/userLogin",jspath:"userLogin"},
         {path:"/toUserMsg",jspath:"userMsg"},
         {path:"/register",jspath:"register"},
-        {path:"/plantation_add",jspath:"addPlantation"},
-        {path:"/process_add",jspath:"addProcess"},
-        {path:"/produce_add",jspath:"addProduce"},
-        {path:"/sale_add",jspath:"addSale"},
-        {path:"/school_add",jspath:"addSchool"},
-        {path:"/lab_add",jspath:"addLab"},
-        {path:"/hosp_add",jspath:"addHosp"},
-        {path:"/tecserviceorg_add",jspath:"addTecServiceOrg"},
-        {path:"/tour_add",jspath:"addTour"}
+        {path:"/addGytInfo",jspath:"addGytInfo"},
 
     ];
 

@@ -62,8 +62,8 @@ public class ResourcesServiceImpl implements ResourcesService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setUpdater(usernameUtil.getOperateUser());
-        record.setCreater(usernameUtil.getOperateUser());
+//        record.setUpdater(usernameUtil.getOperateUser());
+//        record.setCreater(usernameUtil.getOperateUser());
         record.setItemcode(UUIDUtils.getUUID());
         resourcesDOMapper.insertSelective(record);
     }
@@ -108,9 +108,8 @@ public class ResourcesServiceImpl implements ResourcesService {
     }
 
     @Override
-    public List<ResourceDO> SelectPermissionByRoleCode(UserDO userDO) {
-        RoleDO roleDO = roleDOMapper.selectByUserid(userDO.getItemcode());
-        return resourcesDOMapper.SelectPermissionByRoleCode(roleDO.getItemcode());
+    public List<ResourceDO> SelectPermissionByRoleCode(String rolecode) {
+        return resourcesDOMapper.SelectPermissionByRoleCode(rolecode);
     }
 
     @Override
