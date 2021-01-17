@@ -282,8 +282,6 @@
                 orange.redirect(pathUrl);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
-            $("#chargePersonSearch").selectUtil(pl);
 
 
             var aCol = [
@@ -310,11 +308,7 @@
             }
 
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
-
-            var allTableData = $("#table").bootstrapTable("getData");
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "dataStatus");
 
         })
 })();

@@ -42,9 +42,7 @@
                     operateMessage = "更新开展项目成功";
                 }
 
-                if (uploadImg.isUpdate()) {
-                    ajaxUtil.upload_multi(characteriEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
-                }
+                ajaxUtil.upload_multi(characteriEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
 
                 ajaxUtil.myAjax(null,opreateUrl,characteriEntity,function (data) {
                     if(ajaxUtil.success(data)){
@@ -88,9 +86,8 @@
                     operateMessage = "更新开展项目成功";
                 }
 
-                if (uploadImg.isUpdate()) {
-                    ajaxUtil.upload_multi(characteriEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
-                }
+                ajaxUtil.upload_multi(characteriEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+
 
                 ajaxUtil.myAjax(null,opreateUrl,characteriEntity,function (data) {
                     if(ajaxUtil.success(data)){
