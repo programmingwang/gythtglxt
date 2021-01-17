@@ -17,13 +17,17 @@
         function getRoleTable(role,preUrl,status,webStatus) {
             if(role === "管理员"){
                 $('#btn_addTask').attr('style',"display:block");
-                return preUrl +status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
+                // return preUrl +status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
+                return preUrl +status+"=1&userCode="+sessionStorage.getItem("itemcode");
             }else if(role === "县级"){
-                return preUrl +status+"="+webStatus[1].id+"&"+status+"="+webStatus[8].id;
+                // return preUrl +status+"="+webStatus[1].id+"&"+status+"="+webStatus[8].id;
+                return preUrl +status+"=2";
             }else if(role === "市级"){
-                return preUrl +status+"="+webStatus[3].id+"&"+status+"="+webStatus[8].id;
+                // return preUrl +status+"="+webStatus[3].id+"&"+status+"="+webStatus[8].id;
+                return preUrl +status+"=3";
             }else if(role === "省级"){
-                return preUrl +status+"="+webStatus[5].id+"&"+status+"="+webStatus[8].id;
+                // return preUrl +status+"="+webStatus[5].id+"&"+status+"="+webStatus[8].id;
+                return preUrl +status+"=4";
             }
         }
         

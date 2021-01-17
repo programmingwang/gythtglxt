@@ -16,10 +16,33 @@
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
   </resultMap>
+  <resultMap id="BaseResultMapWithFiles" type="com.gythtglxt.dto.ProjectDto">
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="CONTENT" jdbcType="LONGVARCHAR" property="content" />
+    <result column="DATA_TYPE" jdbcType="VARCHAR" property="dataType" />
+    <result column="PRICE" jdbcType="INTEGER" property="price" />
+    <result column="DATA_STATUS" jdbcType="VARCHAR" property="dataStatus" />
+    <result column="USER_CODE" jdbcType="CHAR" property="userCode" />
+    <result column="VISIT_NUM" jdbcType="INTEGER" property="visitNum" />
+    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
+    <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
+    <collection property="filePath" ofType="java.lang.String" >
+      <constructor>
+        <arg column="FILE_PATH"/>
+      </constructor>
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List">
-    <!--@mbg.generated-->
     itemID, itemCode, `NAME`, CONTENT, DATA_TYPE, PRICE, DATA_STATUS, USER_CODE, VISIT_NUM, 
     CREATER, itemCreateAt, UPDATER, itemUpdateAt
+  </sql>
+  <sql id="SelectAll_Column_List">
+    p.itemID, p.itemCode, p.NAME, p.CONTENT, p.DATA_TYPE, p.PRICE, p.DATA_STATUS, p.USER_CODE, p.VISIT_NUM,
+    p.CREATER, p.itemCreateAt, p.UPDATER, p.itemUpdateAt
   </sql>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -30,7 +53,6 @@
       and itemCode = #{itemcode,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
-    <!--@mbg.generated-->
     delete from tb_natmeha_project
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
@@ -154,17 +176,61 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-  <select id="selectproAll" resultMap="BaseResultMap">
-  select
-  <include refid="Base_Column_List" />
-  from tb_natmeha_project
-  where DATA_TYPE=0 and DATA_STATUS = #{status,jdbcType=VARCHAR}
-</select>
-  <select id="selectchaAll" resultMap="BaseResultMap">
-select
-<include refid="Base_Column_List" />
-  from tb_natmeha_project
-  where DATA_TYPE=1 and DATA_STATUS = #{status,jdbcType=VARCHAR}
+  <!--<select id="selectproAll" resultMap="BaseResultMap">-->
+  <!--select-->
+  <!--<include refid="Base_Column_List" />-->
+  <!--from tb_natmeha_project-->
+  <!--where DATA_TYPE=0 and DATA_STATUS = #{status,jdbcType=VARCHAR}-->
+<!--</select>-->
+  <select id="selectproAll" resultMap="BaseResultMapWithFiles">
+    select
+    <include refid="SelectAll_Column_List" />
+    ,
+    f.FILE_PATH
+    from tb_natmeha_project p
+    LEFT JOIN tb_natmeha_file f on f.DATA_CODE = p.itemCode
+    where DATA_TYPE=0
+    <if test="status == 1">
+      and p.DATA_STATUS in (0,1,2,4,6,7,8,9)
+    </if>
+    <if test="status == 2">
+      and p.DATA_STATUS in (1,8)
+    </if>
+    <if test="status == 3">
+      and p.DATA_STATUS in (3,8)
+    </if>
+    <if test="status == 4">
+      and p.DATA_STATUS in (5,8)
+    </if>
+    <if test="userCode != null">
+      and p.USER_CODE = #{userCode}
+    </if>
+    order by p.itemUpdateAt desc
+  </select>
+  <select id="selectchaAll" resultMap="BaseResultMapWithFiles">
+    select
+    <include refid="SelectAll_Column_List" />
+    ,
+    f.FILE_PATH
+    from tb_natmeha_project p
+    LEFT JOIN tb_natmeha_file f on f.DATA_CODE = p.itemCode
+    where DATA_TYPE=1
+    <if test="status == 1">
+      and p.DATA_STATUS in (0,1,2,4,6,7,8,9)
+    </if>
+    <if test="status == 2">
+      and p.DATA_STATUS in (1,8)
+    </if>
+    <if test="status == 3">
+      and p.DATA_STATUS in (3,8)
+    </if>
+    <if test="status == 4">
+      and p.DATA_STATUS in (5,8)
+    </if>
+    <if test="userCode != null">
+      and p.USER_CODE = #{userCode}
+    </if>
+    order by p.itemUpdateAt desc
 </select>
 
 

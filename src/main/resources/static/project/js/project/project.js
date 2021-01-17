@@ -7,13 +7,17 @@
             var pathUrl = "/project/add/project_add";
             if(sessionStorage.getItem("rolename") == "管理员"){
                 $('#btn_addTask').attr('style',"display:block");
-                url += "status="+webStatus[0].id+"&status="+webStatus[1].id+"&status="+webStatus[2].id+"&status="+webStatus[4].id+"&status="+webStatus[6].id+"&status="+webStatus[7].id+"&status="+webStatus[8].id+"&status="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
+                // url += "status="+webStatus[0].id+"&status="+webStatus[1].id+"&status="+webStatus[2].id+"&status="+webStatus[4].id+"&status="+webStatus[6].id+"&status="+webStatus[7].id+"&status="+webStatus[8].id+"&status="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
+                url += "status=1&userCode="+sessionStorage.getItem("itemcode");
             }else if(sessionStorage.getItem("rolename") == "县级"){
-                url += "status="+webStatus[1].id+"&status="+webStatus[8].id;
+                // url += "status="+webStatus[1].id+"&status="+webStatus[8].id;
+                url += "status=2";
             }else if(sessionStorage.getItem("rolename") == "市级"){
-                url += "status="+webStatus[3].id+"&status="+webStatus[8].id;
+                // url += "status="+webStatus[3].id+"&status="+webStatus[8].id;
+                url += "status=3";
             }else if(sessionStorage.getItem("rolename") == "省级"){
-                url += "status="+webStatus[5].id+"&status="+webStatus[8].id;
+                // url += "status="+webStatus[5].id+"&status="+webStatus[8].id;
+                url += "status=4";
             }
             var aParam = {
 
@@ -24,27 +28,28 @@
             }
 
             function operation2(value, row, index){
-               var value1 = new Array();
-               for(var i=0;i<row.dataCode.length;i++){
-                   if(row.itemcode == row.dataCode[i]) {
-                       value1.push(value[i]);
-                   }
-               }
-               if(value[0] == "已经损坏了"){
-                   return '<p>已经全部或这张损坏了</p>';
-               }else{
-                   return '<img  src='+value1[0]+' width="100" height="100" class="checkImgs img-rounded" >';
-               }
+               // var value1 = new Array();
+               // for(var i=0;i<row.dataCode.length;i++){
+               //     if(row.itemcode == row.dataCode[i]) {
+               //         value1.push(value[i]);
+               //     }
+               // }
+               // if(value[0] == "已经损坏了"){
+               //     return '<p>已经全部或这张损坏了</p>';
+               // }else{
+               //     return '<img  src='+value1[0]+' width="100" height="100" class="checkImgs img-rounded" >';
+               // }
+                return '<img  src='+row.filePath[0]+' width="100" height="100" class="checkImgs img-rounded" >';
             }
 
             window.checkImgDetailsEvents = {
                 'click .checkImgs' : function (e, value, row, index) {
-                    var value1 = new Array();
-                    for(var i=0;i<row.dataCode.length;i++){
-                        if(row.itemcode == row.dataCode[i]) {
-                            value1.push(value[i]);
-                        }
-                    }
+                    // var value1 = new Array();
+                    // for(var i=0;i<row.dataCode.length;i++){
+                    //     if(row.itemcode == row.dataCode[i]) {
+                    //         value1.push(value[i]);
+                    //     }
+                    // }
                     var myCheckImg ={
                         modalBodyID :"checkImgDetails", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看图片详情",
@@ -52,11 +57,12 @@
                         confirmButtonStyle: "display:none",
                     };
                     var myCheckImgModal = modalUtil.init(myCheckImg);
-                    for(var i=0;i<value1.length;i++){
+                    for(var i=0;i<row.filePath.length;i++){
                         var element = "#projectImg"+(i+1)
                         $(element).attr("style","display:block");
-                        $(element).attr("src",value1[i]);
+                        $(element).attr("src",row.filePath[i]);
                     }
+
 
                     myCheckImgModal.show();
                 }
@@ -345,10 +351,61 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            $("#btnSearch").unbind().on('click',function() {
+                var newArry = [];
+                var addstr=document.getElementById("chargePersonSearch").value;
+                var str = document.getElementById("taskNameSearch").value.toLowerCase();
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                if(str.indexOf("请输入")!=-1){
+                    str=""
+                }
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        var isStatusSlot=false;           // 默认状态为true
+                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
+                        var status= allTableData[i]["dataStatus"]
+                        // console.log("addstr:"+addstr)
+                        // console.log("status:"+status)
+                        //调试时可以先打印出来，进行修改
+                        if(addstr==status){
+                            isStatusSlot=true;
+                        }
+                        if(typeof textP == "object") continue;
+                        else if(typeof textP == "number") textP = textP.toString();
+                        //当存在时将条件改为flase
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
+                            isStatusSlot = false;
+                            newArry.push(allTableData[i])
+                        }
+                        if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot){
+                            newArry.push(allTableData[i])
+                        }
+                    }
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+                if(newArry.length == 0){
+                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
+                }else{
+                    alertUtil.success("搜索成功");
+                }
+            })
 
-            var allTableData = $("#table").bootstrapTable("getData");
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
+            var aria=this.ariaExpanded;
+            $("#closeAndOpen").unbind().on('click',function(){
+                this.innerText="";
+                if (aria==="true"){
+                    this.innerText="展开";
+                    aria = "false";
+                } else {
+                    this.innerText="收起";
+                    aria = "true";
+                }
+            })
         })
 })();

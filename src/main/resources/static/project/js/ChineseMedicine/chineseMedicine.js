@@ -5,15 +5,20 @@
 
             var url = "selectallchinesemedicine?";
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            if(sessionStorage.getItem("rolename") == "管理员"){
+            var role = sessionStorage.getItem("rolename");
+            if(role === "管理员"){
                 $('#btn_addTask').attr('style',"display:block");
-                url += "status="+webStatus[0].id+"&status="+webStatus[1].id+"&status="+webStatus[2].id+"&status="+webStatus[4].id+"&status="+webStatus[6].id+"&status="+webStatus[7].id+"&status="+webStatus[8].id+"&status="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
-            }else if(sessionStorage.getItem("rolename") == "县级"){
-                url += "status="+webStatus[1].id+"&status="+webStatus[8].id;
-            }else if(sessionStorage.getItem("rolename") == "市级"){
-                url += "status="+webStatus[3].id+"&status="+webStatus[8].id;
-            }else if(sessionStorage.getItem("rolename") == "省级"){
-                url += "status="+webStatus[5].id+"&status="+webStatus[8].id;
+                // return preUrl +status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
+                url = url + "status=1&userCode="+sessionStorage.getItem("itemcode");
+            }else if(role === "县级"){
+                // return preUrl +status+"="+webStatus[1].id+"&"+status+"="+webStatus[8].id;
+                url = url + "status=2";
+            }else if(role === "市级"){
+                // return preUrl +status+"="+webStatus[3].id+"&"+status+"="+webStatus[8].id;
+                url = url + "status=3";
+            }else if(role === "省级"){
+                // return preUrl +status+"="+webStatus[5].id+"&"+status+"="+webStatus[8].id;
+                url = url + "status=4";
             }
             var aParam = {
 
@@ -270,11 +275,38 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
-            $("#chargePersonSearch").selectUtil(pl);
 
            var p2 = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
             $("#Search").selectUtil(p2);
+
+            $("#Search").unbind("change").on("change",function () {
+                var newArry = [];
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                var searchGxfl=document.getElementById("Search").value;
+
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        var isStatusSlot=false;           // 默认状态为true
+                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
+                        var gxfl= allTableData[i]["classification"]
+                        //调试时可以先打印出来，进行修改
+                        if(gxfl==searchGxfl){
+                            isStatusSlot=true;
+                        }
+                        //当存在时将条件改为flase
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if(isStatusSlot){
+                            newArry.push(allTableData[i])
+                        }
+                        var newArr=new Set(newArry)
+                        newArry=Array.from(newArr)
+                        $("#table").bootstrapTable("load", newArry);
+                    }
+                }
+            });
 
             var aCol = [
                         {field: 'name', title: '中医药名称'},
@@ -299,10 +331,59 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            $("#btnSearch").unbind().on('click',function() {
+                var newArry = [];
+                var addstr=document.getElementById("chargePersonSearch").value;
+                var str = document.getElementById("taskNameSearch").value.toLowerCase();
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                if(str.indexOf("请输入")!=-1){
+                    str=""
+                }
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        var isStatusSlot=false;           // 默认状态为true
+                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
+                        var status= allTableData[i]["status"]
+                        // console.log("addstr:"+addstr)
+                        // console.log("status:"+status)
+                        //调试时可以先打印出来，进行修改
+                        if(addstr==status){
+                            isStatusSlot=true;
+                        }
+                        //当存在时将条件改为flase
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
+                            isStatusSlot = false;
+                            newArry.push(allTableData[i])
+                        }
+                        if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot){
+                            newArry.push(allTableData[i])
+                        }
+                    }
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+                if(newArry.length == 0){
+                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
+                }else{
+                    alertUtil.success("搜索成功");
+                }
+            })
 
-            var allTableData = $("#table").bootstrapTable("getData");
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
+            var aria=this.ariaExpanded;
+            $("#closeAndOpen").unbind().on('click',function(){
+                this.innerText="";
+                if (aria==="true"){
+                    this.innerText="展开";
+                    aria = "false";
+                } else {
+                    this.innerText="收起";
+                    aria = "true";
+                }
+            })
         })
 })();

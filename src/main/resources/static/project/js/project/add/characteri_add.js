@@ -42,9 +42,7 @@
                     operateMessage = "更新开展项目成功";
                 }
 
-                if (uploadImg.isUpdate()) {
-                    ajaxUtil.upload_multi(characteriEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
-                }
+                ajaxUtil.upload_multi(characteriEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
 
                 ajaxUtil.myAjax(null,opreateUrl,characteriEntity,function (data) {
                     if(ajaxUtil.success(data)){
@@ -88,9 +86,8 @@
                     operateMessage = "更新开展项目成功";
                 }
 
-                if (uploadImg.isUpdate()) {
-                    ajaxUtil.upload_multi(characteriEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
-                }
+                ajaxUtil.upload_multi(characteriEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+
 
                 ajaxUtil.myAjax(null,opreateUrl,characteriEntity,function (data) {
                     if(ajaxUtil.success(data)){
@@ -110,16 +107,10 @@
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    var value1 = new Array();
-                    for(var i=0;i<tempdata.dataCode.length;i++){
-                        if(tempdata.itemcode == tempdata.dataCode[i]) {
-                            value1.push(tempdata.filePath[i]);
-                        }
-                    }
                     $("#name").val(tempdata.name);
                     $("#price").val(tempdata.price),
                     editor.txt.html(tempdata.content);
-                    uploadImg.setImgSrcs(value1);
+                    uploadImg.setImgSrcs(tempdata.filePath);
                 }
             }());
 

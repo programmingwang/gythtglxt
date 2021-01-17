@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gythtglxt.dao.HotspotDOMapper">
   <resultMap id="BaseResultMap" type="com.gythtglxt.dataobject.HotspotDO">
-     
     <id column="itemID" jdbcType="INTEGER" property="itemid" />
     <id column="itemCode" jdbcType="CHAR" property="itemcode" />
     <result column="HOTSPOT_TITLE" jdbcType="VARCHAR" property="hotspotTitle" />
@@ -20,6 +19,10 @@
      
     <result column="HOTSPOT_CONTENT" jdbcType="LONGVARCHAR" property="hotspotContent" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBAndFiles" type="com.gythtglxt.dto.HotspotDto">
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+    <result column="HOTSPOT_CONTENT" jdbcType="LONGVARCHAR" property="hotspotContent" />
+  </resultMap>
   <sql id="Base_Column_List">
      
     itemID, itemCode, HOTSPOT_TITLE, HOTSPOT_SOURCE, HOTSPOT_AUTHOR, DATA_STATUS, DATA_TYPE, USER_CODE, CREATER, itemCreateAt,
@@ -28,6 +31,13 @@
   <sql id="Blob_Column_List">
      
     HOTSPOT_CONTENT
+  </sql>
+  <sql id="SelectAll_Column_List">
+    h.itemID, h.itemCode, h.HOTSPOT_TITLE, h.HOTSPOT_SOURCE, h.HOTSPOT_AUTHOR, h.DATA_STATUS, h.DATA_TYPE, h.USER_CODE, h.CREATER, h.itemCreateAt,
+    h.UPDATER, h.itemUpdateAt
+  </sql>
+  <sql id="SelectAllBlob_Column_List">
+    h.HOTSPOT_CONTENT
   </sql>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs">
      
@@ -40,14 +50,41 @@
       and itemCode = #{key.itemcode,jdbcType=CHAR}
       and DATA_TYPE = #{type,jdbcType=CHAR}
   </select>
-  <select id="selectAll" resultMap="ResultMapWithBLOBs">
+  <!--<select id="selectAll" resultMap="ResultMapWithBLOBs">-->
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--,-->
+    <!--<include refid="Blob_Column_List" />-->
+    <!--from tb_natmeha_hotspot-->
+    <!--where DATA_TYPE = #{type,jdbcType=VARCHAR}-->
+      <!--and DATA_STATUS = #{status,jdbcType=VARCHAR}-->
+  <!--</select>-->
+  <select id="selectAll" resultMap="ResultMapWithBLOBAndFiles">
     select
-    <include refid="Base_Column_List" />
+    <include refid="SelectAll_Column_List" />
     ,
-    <include refid="Blob_Column_List" />
-    from tb_natmeha_hotspot
-    where DATA_TYPE = #{type,jdbcType=VARCHAR}
-      and DATA_STATUS = #{status,jdbcType=VARCHAR}
+    <include refid="SelectAllBlob_Column_List" />
+    ,
+    f.FILE_PATH
+    from tb_natmeha_hotspot h left join tb_natmeha_file f
+    on f.DATA_CODE = h.itemCode
+    where h.DATA_TYPE = #{type,jdbcType=VARCHAR}
+    <if test="status == 1">
+      and h.DATA_STATUS in (0,1,2,4,6,7,8,9)
+    </if>
+    <if test="status == 2">
+      and h.DATA_STATUS in (1,8)
+    </if>
+    <if test="status == 3">
+      and h.DATA_STATUS in (3,8)
+    </if>
+    <if test="status == 4">
+      and h.DATA_STATUS in (5,8)
+    </if>
+    <if test="userCode != null">
+      and h.USER_CODE = #{userCode}
+    </if>
+    order by h.itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.gythtglxt.dataobject.HotspotDOKey">
      

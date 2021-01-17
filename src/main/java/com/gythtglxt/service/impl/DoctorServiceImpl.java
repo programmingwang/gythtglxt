@@ -85,28 +85,11 @@ public class DoctorServiceImpl implements IDoctorService {
 
     @Override
     public List<DoctorDto> selectAll() {
-        List<DoctorDO> doctorDOList = doctorDOMapper.selectAll();
-        return DoToDto(doctorDOList);
+        return doctorDOMapper.selectAll();
     }
 
     @Override
     public List<DoctorDto> selectByUserCode() {
-        List<DoctorDO> doctorDOList = doctorDOMapper.selectByUserCode(usernameUtil.getItemCode());
-        return DoToDto(doctorDOList);
+        return doctorDOMapper.selectByUserCode(usernameUtil.getOrgCode());
     }
-
-    private List<DoctorDto> DoToDto(List<DoctorDO> doList){
-        List<DoctorDto> dtoList = new ArrayList<>();
-        if (!doList.isEmpty()){
-            for (DoctorDO doctorDO:doList){
-                DoctorDto dto = new DoctorDto();
-                BeanUtils.copyProperties(doctorDO,dto);
-                FileDO fileDO= fileService.selectFileByDataCode(dto.getItemcode());
-                dto.setFilePath(fileDO == null ? null:fileDO.getFilePath());
-                dtoList.add(dto);
-            }
-        }
-        return dtoList;
-    }
-
 }
