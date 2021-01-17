@@ -7,7 +7,7 @@
                     localStorage.setItem('user', JSON.stringify(data.data));
                     uploadImg.init();
                     uploadImg.setImgSrc(data.data.portrait);
-                    $("#username").val(data.data.username);
+                    $("#uname").val(data.data.username);
                     $("#name").val(data.data.name);
                     $("#gender").val(data.data.gender);
                     $("#email").val(data.data.email);
@@ -20,8 +20,13 @@
                 }
             }, false, "", "get");
 
+            $("#userName").text(sessionStorage.getItem('username'));
+
             // 取消按钮返回上一页面
             $("#cancelBtn").click(function () {
+                window.history.back()
+            });
+            $("#return").click(function () {
                 window.history.back()
             });
 
@@ -34,57 +39,74 @@
                 });
             });
 
+            var a = 0;
+
             // 点击修改密码按钮向上向下滑动，信息输入框变得不可输入，修改密码输入框可输入
             $(document).ready(function () {
                 $("#modifypwdBtn").click(function () {
-                    $(".updataP").slideToggle("slow");
-                    $(".msg").attr("disabled", "disabled");
-                    $(".pwd").removeAttr("disabled");
+                    if (a == 0) {
+                        $(".updataP").slideDown("slow");
+                        if (typeof ($(".msg").attr("disabled")) == "undefined") {
+                            $(".msg").attr("disabled", "disabled");
+                        }
+                        $(".pwd").removeAttr("disabled");
+                        a = 1;
+                    } else if (a == 1) {
+                        $(".updataP").slideUp("slow");
+                        $(".pwd").attr("disabled", "disabled");
+                        a = 0;
+                    }
                 });
             });
 
             $("#confirmBtn").unbind().on('click', function () {
                 var portrait = uploadImg.getBase64();
-                var localportroit = localStorage.getItem('user').portrait;
+                var usermsg = JSON.parse(localStorage.getItem('user'));
+                var localportroit = usermsg.portrait;
                 // 如果输入框没有disabled属性，则取输入框的值
                 if (typeof ($(".msg").attr("disabled")) == "undefined") {
 
-                    var username = $("#username").val();
+                    var username = $("#uname").val();
                     var name = $("#name").val();
                     var gender = $("#gender").val();
                     var email = $("#email").val();
                     var idcardType = $("#idcardType").val();
                     var idcardNo = $("#idcardNo").val();
-                    var contacts = $("#contacts").val();
                     var mobilephone = $("#mobilephone").val();
-                    if (!stringUtil.isBlank(username) && !stringUtil.isBlank(name) && !stringUtil.isBlank(gender) &&
-                        !stringUtil.isBlank(email) && !stringUtil.isBlank(idcardType) && !stringUtil.isBlank(idcardNo) &&
-                        !stringUtil.isBlank(contacts) && !stringUtil.isBlank(mobilephone)) {
-                        if (portrait == localportroit) {    // 与原头像一样，则设置为空，传到后端不被更新
-                            portrait = 'null'
-                        }
-                        var user = {
-                            "portrait": portrait,
-                            "username": username,
-                            "name": name,
-                            "gender": gender,
-                            "email": email,
-                            "idcardType": idcardType,
-                            "idcardNo": idcardNo,
-                            "contacts": contacts,
-                            "mobilephone": mobilephone
-                        };
-                        ajaxUtil.myAjax(null, "/user/updateusermsg", user, function (data) {
-                            if (data && data.code == 88888) {
-                                alertUtil.success('修改成功');
-                                sessionStorage.setItem('username', user.username);//将修改后的用户名更新到sessionStorage中显示在欢迎您后面
-                                $(".msg").attr("disabled", "disabled");
-                            } else {
-                                alertUtil.error(data.msg)
-                            }
-                        }, false, true)
+
+                    if (usermsg.username == username && usermsg.name == name && usermsg.gender == gender &&
+                        usermsg.email == email && usermsg.idcardType == idcardType && usermsg.idcardNo == idcardNo &&
+                        usermsg.mobilephone == mobilephone) {
+                        alertUtil.info('没有需要修改的值')
                     } else {
-                        alertUtil.info('输入不能为空')
+                        if (!stringUtil.isBlank(username) && !stringUtil.isBlank(name) && !stringUtil.isBlank(gender) &&
+                            !stringUtil.isBlank(email) && !stringUtil.isBlank(idcardType) && !stringUtil.isBlank(idcardNo) &&
+                            !stringUtil.isBlank(mobilephone)) {
+                            if (portrait == localportroit) {    // 与原头像一样，则设置为空，传到后端不被更新
+                                portrait = 'null'
+                            }
+                            var user = {
+                                "portrait": portrait,
+                                "username": username,
+                                "name": name,
+                                "gender": gender,
+                                "email": email,
+                                "idcardType": idcardType,
+                                "idcardNo": idcardNo,
+                                "mobilephone": mobilephone
+                            };
+                            ajaxUtil.myAjax(null, "/user/updateusermsg", user, function (data) {
+                                if (data && data.code == 88888) {
+                                    alertUtil.success('修改成功');
+                                    sessionStorage.setItem('username', user.username);//将修改后的用户名更新到sessionStorage中显示在欢迎您后面
+                                    $(".msg").attr("disabled", "disabled");
+                                } else {
+                                    alertUtil.error(data.msg)
+                                }
+                            }, false, true)
+                        } else {
+                            alertUtil.info('输入不能为空')
+                        }
                     }
                 } else if (typeof ($(".pwd").attr("disabled")) == "undefined") {
                     var password = $("#oldPwd").val();
@@ -138,6 +160,18 @@
                     }
                 }
 
+            });
+
+            $("#logout").on("click", function () {
+                ajaxUtil.myAjax(null, "/logout", null, function (data) {
+                    if (data && data.code === 88888) {
+                        sessionStorage.clear();
+                        localStorage.clear();
+                        window.location.href = "/userLogin";
+                    } else {
+                        alertUtil.alert(data.msg);
+                    }
+                }, false)
             });
         });
 })();

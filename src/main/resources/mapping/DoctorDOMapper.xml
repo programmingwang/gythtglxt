@@ -15,12 +15,18 @@
         <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
         <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
         <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat"/>
-        <result column="ORG_CODE" jdbcType="CHAR" property="orgCode" />
+        <result column="ORG_CODE" jdbcType="CHAR" property="orgCode"/>
+    </resultMap>
+    <resultMap id="BaseResultMapAndFile" type="com.gythtglxt.dto.DoctorDto" extends="BaseResultMap">
+        <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
     </resultMap>
     <sql id="Base_Column_List">
-    itemID, itemCode, DOCTOR_NAME, DOCTOR_TITLE, DOCTOR_TREATMENT, DOCTOR_SORCE, DEPT_CODE, 
-    NUM_TYPE, USER_CODE, CREATER, itemCreateAt, UPDATER, itemUpdateAt, ORG_CODE
-</sql>
+        d.itemID, d.itemCode, d.DOCTOR_NAME, d.DOCTOR_TITLE, d.DOCTOR_TREATMENT, d.DOCTOR_SORCE, d.DEPT_CODE,
+        d.NUM_TYPE, d.USER_CODE, d.CREATER, d.itemCreateAt, d.UPDATER, d.itemUpdateAt, d.ORG_CODE
+    </sql>
+    <sql id="File_Column_List">
+        f.FILE_PATH
+    </sql>
     <select id="selectByPrimaryKey" parameterType="com.gythtglxt.dataobject.DoctorDOKey" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -198,16 +204,20 @@
   </update>
 
 
-    <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectAll" resultMap="BaseResultMapAndFile">
         select
         <include refid="Base_Column_List"/>
-        from tb_natmeha_doctor
+        ,
+        <include refid="File_Column_List"/>
+        from tb_natmeha_doctor d left join tb_natmeha_file f on d.itemCode=f.DATA_CODE
     </select>
 
-    <select id="selectByUserCode" resultMap="BaseResultMap">
+    <select id="selectByUserCode" resultMap="BaseResultMapAndFile">
         select
         <include refid="Base_Column_List"/>
-        from tb_natmeha_doctor
-        WHERE USER_CODE = #{userCode}
+        ,
+        <include refid="File_Column_List"/>
+        from tb_natmeha_doctor d left join tb_natmeha_file f on d.itemCode=f.DATA_CODE
+        WHERE d.ORG_CODE = #{ORGCode}
     </select>
 </mapper>
