@@ -119,8 +119,6 @@
                         var mobilephone = $("#mobilephone").val();
                         var cityid = $("#cityid").val();
 
-                        console.log(roleName);
-                        console.log(cityid);
 
                         var submitStatus = {
                             "username": username,
@@ -183,9 +181,7 @@
 
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
             var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
             localStorage.setItem('2',JSON.stringify(allTableData))
             obj2=JSON.parse(localStorage.getItem("2"));
-            //console.log(obj2);
         })
 })();

@@ -28,7 +28,7 @@ public class HotpotController {
 
     @RequestMapping(value = "/hotspot" , method = RequestMethod.GET)
     @ResponseBody
-    public ResponseData getAllTraditionalCultural(@RequestParam(value = "type")String dataType, @RequestParam(value = "status") List dataStatus,
+    public ResponseData getAllTraditionalCultural(@RequestParam(value = "type")String dataType, @RequestParam(value = "status") String dataStatus,
                                                   @RequestParam(value = "userCode", required = false) String userCode){
         return new ResponseData(EmBusinessError.success,hotspotService.getAll(dataType, dataStatus,userCode));
     }

@@ -6,6 +6,7 @@ import com.gythtglxt.dataobject.FileDOKey;
 import com.gythtglxt.error.BusinessException;
 import com.gythtglxt.error.EmBusinessError;
 import com.gythtglxt.service.IFileService;
+import com.gythtglxt.util.UsernameUtil;
 import com.gythtglxt.validator.ValidatorImpl;
 import com.gythtglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ import java.util.List;
  */
 @Service
 public class FileServiceImpl implements IFileService {
-
-
+    @Resource
+    private UsernameUtil usernameUtil;
     @Resource
     private FileDOMapper fileDOMapper;
     @Autowired
@@ -38,6 +39,7 @@ public class FileServiceImpl implements IFileService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        fileDO.setOrgCode(usernameUtil.getOrgCode());
         fileDO.setItemcreateat(new Date());
         return fileDOMapper.insertSelective(fileDO);
     }
@@ -86,14 +88,9 @@ public class FileServiceImpl implements IFileService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        FileDO f = fileDOMapper.selectFileByDataCode(fileDO.getDataCode());
         /*对文件上传记录表操作，记录上传信息*/
-        if (f == null){
-            fileService.addFile(fileDO);
-        }
-        else {
-            fileService.updateFile(fileDO);
-        }
+        fileService.addFile(fileDO);
+
     }
 
     @Override
@@ -102,6 +99,18 @@ public class FileServiceImpl implements IFileService {
             throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         List<FileDO> fileDOList = fileDOMapper.selectMultipleFileByDataCode(dataCode);
+        if(fileDOList == null){
+            return new ArrayList<>();
+        }
+        return fileDOList;
+    }
+
+    @Override
+    public List<FileDO> selectMultipleFileByDataCodeAndOrgCode(String dataCode, String orgCode) {
+        if(dataCode == null || dataCode == ""){
+            throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        List<FileDO> fileDOList = fileDOMapper.selectMultipleFileByDataCodeAndOrgCode(dataCode, orgCode);
         if(fileDOList == null){
             return new ArrayList<>();
         }

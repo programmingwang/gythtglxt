@@ -177,7 +177,6 @@ hr {
 .AFirstMenu {
 
     color: black;
-    margin-left: 11px;
     font-family: 'Arial Negreta', 'Arial Normal', 'Arial', sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -188,12 +187,12 @@ hr {
 }
 .page-item.active .page-link {
     z-index: 3;
-    color: #fff;
-    background-color: #5b4622;
-    border-color: #5b4622;
+    color: #fff !important;
+    background-color: #5b4622 !important;
+    border-color: #5b4622 !important;
 }
 .page-link {
-    color: black;
+    color: black !important;
 }
 .fixed-table-pagination {
     font-size: smaller;
@@ -280,6 +279,10 @@ thead.self-thead {
     background: url("../../images/new/top.png");
     height: 15px;
 }
+#accordion2>hr{
+    background: url("../../images/new/top.png");
+    height: 15px;
+}
 #collapseOne{
     margin: 0;
     padding: 0;
@@ -294,9 +297,11 @@ thead.self-thead {
 #main_body {
     border-top: 1rem solid #f7efeb;
     border-right: 10px solid #f7efeb;
-    flex: 0 0 87.94% !important;
-    max-width: 87.94% !important;
     border-bottom: 1rem solid #f7efeb;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    margin-left: 229px;
 }
 #accordion2{
     margin-top: 20px;
@@ -304,11 +309,28 @@ thead.self-thead {
 #btn_addTask{
     width: 140px;
     height: 40px;
+    background-color: #e66736 !important;
+    text-align: center;
+    font-size: 16px;
+    border-color: #e66736;
+}
+#addExper{
+    width: 140px;
+    height: 40px;
     background-color: #e66736;
     text-align: center;
     font-size: 16px;
     border-color: #e66736;
 }
+#deleteExper{
+    width: 154px;
+    height: 40px;
+    background-color: #e66736;
+    text-align: center;
+    font-size: 16px;
+    border-color: #e66736;
+}
+
 #chargePersonSearch{
     height: 40px;
     max-width: 280px;
@@ -319,10 +341,10 @@ thead.self-thead {
 }
 
 .openBtnP{
-     position: relative;
-     left: 917px;
-     top: -56px;
- }
+    position: relative;
+    left: 73%;
+    top: -56px;
+}
 #table td, #table th {
     border: 0px solid #dee2e6;
 }
@@ -330,12 +352,17 @@ thead.self-thead {
     border: 0px
 }
 
-@media screen and (max-width: 1400px) {
-    #main_body {
-        border-top: 1rem solid #f7efeb;
-        border-right: 10px solid #f7efeb;
-        flex: 0 0 86.5934% !important;
-        max-width: 87.94% !important;
-        border-bottom: 1rem solid #f7efeb;
-    }
+
+.rifuck{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.left_menu_fly{
+    position: absolute;
+    width: 229px;
+    top: 0;
+    left: 0;
+    overflow: hidden;
 }

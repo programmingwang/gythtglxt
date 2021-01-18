@@ -69,24 +69,43 @@ public class UserController {
         }
     }
 
+    /**
+     * 个人信息
+     * @return
+     */
     @RequestMapping(value = "/usermsg", method = RequestMethod.GET)
     public ResponseData selectOne() {
         UserDO userDO = userService.selectByName(usernameUtil.getOperateUser());
         return new ResponseData(EmBusinessError.success, userDO);
     }
 
+    /**
+     * 修改个人信息
+     * @param userDO
+     * @return
+     */
     @RequestMapping(value = "/updateusermsg", method = RequestMethod.POST)
     public ResponseData updateUserMsg(@RequestBody UserDO userDO) {
         userService.UpdateUserMsg(userDO);
         return new ResponseData(EmBusinessError.success);
     }
 
+    /**
+     * 修改用户头像
+     * @param userDO
+     * @return
+     */
     @RequestMapping(value = "/updateuserimg", method = RequestMethod.POST)
     public ResponseData updateUserPortrait(@RequestBody UserDO userDO) {
         userService.UpdateUserPortrait(userDO);
         return new ResponseData(EmBusinessError.success);
     }
 
+    /**
+     * 用户未录入机构信息点击返回按钮则删除用户信息
+     * @param userDtO
+     * @return
+     */
     @RequestMapping(value = "/deletuser", method = RequestMethod.POST)
     public ResponseData deleteUserByUsername(@RequestBody UserDto userDtO){
         userService.deleteUserByUsername(userDtO);

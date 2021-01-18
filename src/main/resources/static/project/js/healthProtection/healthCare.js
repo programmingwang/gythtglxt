@@ -83,7 +83,6 @@
                                 dataStatus : selectUtil.getPassStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
-                                console.log(data);
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
                                         alertUtil.info("已通过");
@@ -186,7 +185,7 @@
 
                 'click .submit' : function (e, value, row, index) {
                     var mySubmitModalData ={
-                        modalBodyID :"mySubmitProtection",
+                        modalBodyID :"mySubmitProtectionUp",
                         modalTitle : "提交",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
@@ -194,7 +193,7 @@
                             var submitStatus = {
                                 itemid: row.itemid,
                                 itemcode : row.itemcode,
-                                dataStatus : webStatus[1].id
+                                dataStatus : webStatus[8].id
                             };
                             ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -287,8 +286,6 @@
                 orange.redirect(pathUrl);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
-            $("#chargePersonSearch").selectUtil(pl);
 
 
             var aCol = [
@@ -315,12 +312,7 @@
             }
 
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
-
-            var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "dataStatus");
 
         })
 })();

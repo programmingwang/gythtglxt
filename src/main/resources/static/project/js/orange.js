@@ -60,7 +60,10 @@
 			sessionStorage.clear();	//	清空会话缓存
 			clearAppContext();	//	重置应用上下文
 		}
-		
+
+        function isContains(str, substr) {
+            return new RegExp(substr).test(str);
+        }
 
 		
 		//	渲染应用首页
@@ -150,7 +153,10 @@
 						return alert(url+"加载失败");
 					}
 					$("#main_body").html(data);
-				}})
+					if(!(isContains(url,"insert") || isContains(url,"add"))){
+						window.location.reload();
+					}
+			}})
 		}
 
 

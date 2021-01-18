@@ -7,13 +7,17 @@
             var pathUrl = "/project/add/characteri_add";
             if(sessionStorage.getItem("rolename") == "管理员"){
                 $('#btn_addTask').attr('style',"display:block");
-                url += "status="+webStatus[0].id+"&status="+webStatus[1].id+"&status="+webStatus[2].id+"&status="+webStatus[4].id+"&status="+webStatus[6].id+"&status="+webStatus[7].id+"&status="+webStatus[8].id+"&status="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
+                // url += "status="+webStatus[0].id+"&status="+webStatus[1].id+"&status="+webStatus[2].id+"&status="+webStatus[4].id+"&status="+webStatus[6].id+"&status="+webStatus[7].id+"&status="+webStatus[8].id+"&status="+webStatus[9].id + "&userCode="+sessionStorage.getItem("itemcode");
+                url += "status=1&userCode="+sessionStorage.getItem("itemcode");
             }else if(sessionStorage.getItem("rolename") == "县级"){
-                url += +status+"="+webStatus[1].id+"&status="+webStatus[8].id;
+                // url += "status="+webStatus[1].id+"&status="+webStatus[8].id;
+                url += "status=2";
             }else if(sessionStorage.getItem("rolename") == "市级"){
-                url += +status+"="+webStatus[3].id+"&status="+webStatus[8].id;
+                // url += "status="+webStatus[3].id+"&status="+webStatus[8].id;
+                url += "status=3";
             }else if(sessionStorage.getItem("rolename") == "省级"){
-                url += +status+"="+webStatus[5].id+"&status="+webStatus[8].id;
+                // url += "status="+webStatus[5].id+"&status="+webStatus[8].id;
+                url += "status=4";
             }
             var aParam = {
 
@@ -22,6 +26,47 @@
             function operation(value, row, index){
                 return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus,webStatus)
             }
+
+            function operation2(value, row, index){
+                // var value1 = new Array();
+                // for(var i=0;i<row.dataCode.length;i++){
+                //     if(row.itemcode == row.dataCode[i]) {
+                //         value1.push(value[i]);
+                //     }
+                // }
+                // if(value[0] == "已经损坏了"){
+                //     return '<p>已经全部或这张损坏了</p>';
+                // }else{
+                //     return '<img  src='+value1[0]+' width="100" height="100" class="checkImgs img-rounded" >';
+                // }
+                return '<img  src='+row.filePath[0]+' width="100" height="100" class="checkImgs img-rounded" >';
+
+            }
+
+            window.checkImgDetailsEvents = {
+                'click .checkImgs' : function (e, value, row, index) {
+                    // var value1 = new Array();
+                    // for(var i=0;i<row.dataCode.length;i++){
+                    //     if(row.itemcode == row.dataCode[i]) {
+                    //         value1.push(value[i]);
+                    //     }
+                    // }
+                    var myCheckImg ={
+                        modalBodyID :"checkImgDetails", //公用的在后面给span加不同的内容就行了，其他模块同理
+                        modalTitle : "查看图片详情",
+                        modalClass : "modal-lg",
+                        confirmButtonStyle: "display:none",
+                    };
+                    var myCheckImgModal = modalUtil.init(myCheckImg);
+                    for(var i=0;i<row.filePath.length;i++){
+                        var element = "#projectImg"+(i+1)
+                        $(element).attr("style","display:block");
+                        $(element).attr("src",row.filePath[i]);
+                    }
+
+                    myCheckImgModal.show();
+                }
+            };
 
             //修改事件
             window.orgEvents = {
@@ -33,7 +78,7 @@
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalCharacteri ={
                         modalBodyID :"myDeleteModalCharacteri",
-                        modalTitle : "删除功效特色",
+                        modalTitle : "删除开展项目",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
@@ -50,7 +95,7 @@
                                                 return alertUtil.error("文件删除失败，可能已经损坏了");
                                             }
                                         },false,"","get");
-                                        alertUtil.info("删除功效特色成功");
+                                        alertUtil.info("删除开展项目成功");
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -64,8 +109,8 @@
                         }
 
                     };
-                    var myDeleteModalCharacteri = modalUtil.init(myDeleteModalCharacteri);
-                    myDeleteModalCharacteri.show();
+                    var myDeleteModal = modalUtil.init(myDeleteModalCharacteri);
+                    myDeleteModal.show();
                 },
 
                 'click .pass' : function (e, value, row, index) {
@@ -81,7 +126,6 @@
                                 dataStatus : selectUtil.getPassStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
-                                console.log(data);
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
                                         alertUtil.info("已通过");
@@ -176,7 +220,7 @@
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#dataStatus").val(webStatus[row.dataStatus].text);
-                    $("#projectImg").attr("src",row.filePath)
+                    $("#projectImg").html("请点击表格图片查看图片详情");
 
                     myViewCharacteriModal.show();
                 },
@@ -285,25 +329,18 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
-            var p2 = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
-            $("#Search").selectUtil(p2);
 
             var aCol = [
-                {field: 'name', title: '功效特色名称'},
-                {field: 'filePath', title: '功效特色描述', formatter:function (value, row, index) {
-                        if(value == "已经损坏了"){
-                            return '<p>'+value+'</p>';
-                        }else{
-                            return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
-                        }
+                {field: 'name', title: '开展项目名称'},
+                {field: 'filePath', title: '开展项目描述',formatter: operation2, events:checkImgDetailsEvents},
+                {field: 'price', title: '开展项目价格',formatter:function (value) {
+                    var price = value.toString()
+                        return '<p>￥'+price+'</p>'
                     }},
-                {field: 'price', title: '功效特色价格',formatter:function (value) {
-                        return '<p>￥'+value+'</p>'
-                    }},
-                {field:'dataStatus',title:'功效特色状态',formatter:function (value) {
+                {field:'dataStatus',title:'开展项目状态',formatter:function (value) {
                         return '<p>'+webStatus[value].text+'</p>'
                     }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
@@ -317,11 +354,61 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            $("#btnSearch").unbind().on('click',function() {
+                var newArry = [];
+                var addstr=document.getElementById("chargePersonSearch").value;
+                var str = document.getElementById("taskNameSearch").value.toLowerCase();
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                if(str.indexOf("请输入")!=-1){
+                    str=""
+                }
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        var isStatusSlot=false;           // 默认状态为true
+                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
+                        var status= allTableData[i]["dataStatus"]
+                        // console.log("addstr:"+addstr)
+                        // console.log("status:"+status)
+                        //调试时可以先打印出来，进行修改
+                        if(addstr==status){
+                            isStatusSlot=true;
+                        }
+                        if(typeof textP == "object") continue;
+                        else if(typeof textP == "number") textP = textP.toString();
+                        //当存在时将条件改为flase
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
+                            isStatusSlot = false;
+                            newArry.push(allTableData[i])
+                        }
+                        if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot){
+                            newArry.push(allTableData[i])
+                        }
+                    }
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+                if(newArry.length == 0){
+                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
+                }else{
+                    alertUtil.success("搜索成功");
+                }
+            })
 
-            var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
+            var aria=this.ariaExpanded;
+            $("#closeAndOpen").unbind().on('click',function(){
+                this.innerText="";
+                if (aria==="true"){
+                    this.innerText="展开";
+                    aria = "false";
+                } else {
+                    this.innerText="收起";
+                    aria = "true";
+                }
+            })
         })
 })();

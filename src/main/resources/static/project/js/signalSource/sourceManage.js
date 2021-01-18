@@ -11,7 +11,9 @@
 
             var opUrl = "/accountSource/signal-source";
 
-
+            if(sessionStorage.getItem("rolename") == "管理员"){
+                $('#btn_addTask').attr('style',"display:block");
+            }
 
             var aParam = {};
 
@@ -151,7 +153,7 @@
                 ajaxUtil.myAjax(null, "/accountSource/doctor?usercode=" + userCode, null, function (res) {
                     var data = res.data;
                     $("#docName").selectUtil(data);
-                }, true, true, "get");
+                }, false, true, "get");
 
                 if (row != null){
                     $("#docName").val(row.doctorCode)

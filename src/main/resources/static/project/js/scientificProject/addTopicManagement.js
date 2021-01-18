@@ -165,7 +165,6 @@
                     $("#distpicker").distpicker();
                     var userCode = sessionStorage.getItem("usercode");
                     ajaxUtil.myAjax(null,"/industrialdevelop/getStatus?userCode="+userCode,null,function (data) {
-                        //console.log(data.data.length);
                         var sum=0;
                         for(var i=0;i<data.data.length;i++){
                             if (data.data[i].status == "——" || data.data[i].status == "进行中"){

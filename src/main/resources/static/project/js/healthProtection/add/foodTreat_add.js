@@ -38,6 +38,7 @@
                         hotspotTitle : $("#hotspotTitle").val(),
                         hotspotSource : $("#hotspotSource").val(),
                         hotspotAuthor : $("#hotspotAuthor").val(),
+                        dataStatus : "0" ,
                         hotspotContent : editor.txt.html(),
                     }
                     operateMessage = "更新药膳食疗成功";
@@ -64,14 +65,14 @@
                 var hotspotEntity;
                 var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增药膳食疗成功";
+                    operateMessage = "新增药膳食疗成功,信息将直接显示到国医堂小程序中,文责自负!如有问题请紧急下架!";
                     hotspotEntity = {
                         itemcode: stringUtil.getUUID(),
                         hotspotTitle : $("#hotspotTitle").val(),
                         hotspotSource : $("#hotspotSource").val(),
                         hotspotAuthor : $("#hotspotAuthor").val(),
                         hotspotContent : editor.txt.html(),
-                        dataStatus : "1" ,
+                        dataStatus : "8" ,
                         dataType : "2",
                         userCode : sessionStorage.getItem("itemcode")
                     };
@@ -83,6 +84,7 @@
                         hotspotTitle : $("#hotspotTitle").val(),
                         hotspotSource : $("#hotspotSource").val(),
                         hotspotAuthor : $("#hotspotAuthor").val(),
+                        dataStatus : "8" ,
                         hotspotContent : editor.txt.html(),
                     }
                     operateMessage = "更新药膳食疗成功";

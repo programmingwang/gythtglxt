@@ -2,6 +2,7 @@ package com.gythtglxt.service;
 
 import com.gythtglxt.dataobject.ChineseMedicineDO;
 import com.gythtglxt.dataobject.ChineseMedicineDOKey;
+import com.gythtglxt.dto.ChineseMedicineDto;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface IChineseMedicineService {
 
     int updateByPrimaryKeySelective(ChineseMedicineDO record);
 
-    List<ChineseMedicineDO> selectAllChineseMedicine(List<String> status);//中药数据的所有查询
+    List<ChineseMedicineDto> selectAllChineseMedicine(String status, String userCode);//中药数据的所有查询
 
     int changeStatusToChineseMedicine(ChineseMedicineDOKey key, String status);//中药数据状态
 

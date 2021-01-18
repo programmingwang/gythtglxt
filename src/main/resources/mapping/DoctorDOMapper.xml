@@ -15,11 +15,18 @@
         <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
         <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
         <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat"/>
+        <result column="ORG_CODE" jdbcType="CHAR" property="orgCode"/>
+    </resultMap>
+    <resultMap id="BaseResultMapAndFile" type="com.gythtglxt.dto.DoctorDto" extends="BaseResultMap">
+        <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
     </resultMap>
     <sql id="Base_Column_List">
-    itemID, itemCode, DOCTOR_NAME, DOCTOR_TITLE, DOCTOR_TREATMENT, DOCTOR_SORCE, DEPT_CODE, 
-    NUM_TYPE, USER_CODE, CREATER, itemCreateAt, UPDATER, itemUpdateAt
-</sql>
+        d.itemID, d.itemCode, d.DOCTOR_NAME, d.DOCTOR_TITLE, d.DOCTOR_TREATMENT, d.DOCTOR_SORCE, d.DEPT_CODE,
+        d.NUM_TYPE, d.USER_CODE, d.CREATER, d.itemCreateAt, d.UPDATER, d.itemUpdateAt, d.ORG_CODE
+    </sql>
+    <sql id="File_Column_List">
+        f.FILE_PATH
+    </sql>
     <select id="selectByPrimaryKey" parameterType="com.gythtglxt.dataobject.DoctorDOKey" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -37,12 +44,12 @@
       DOCTOR_TITLE, DOCTOR_TREATMENT, DOCTOR_SORCE, 
       DEPT_CODE, NUM_TYPE, USER_CODE, 
       CREATER, itemCreateAt, UPDATER, 
-      itemUpdateAt)
+      itemUpdateAt, ORG_CODE)
     values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{doctorName,jdbcType=VARCHAR}, 
       #{doctorTitle,jdbcType=VARCHAR}, #{doctorTreatment,jdbcType=VARCHAR}, #{doctorSorce,jdbcType=DOUBLE}, 
       #{deptCode,jdbcType=VARCHAR}, #{numType,jdbcType=VARCHAR}, #{userCode,jdbcType=CHAR}, 
       #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
-      #{itemupdateat,jdbcType=TIMESTAMP})
+      #{itemupdateat,jdbcType=TIMESTAMP}, #{orgCode,jdbcType=CHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.gythtglxt.dataobject.DoctorDO">
         insert into tb_natmeha_doctor
@@ -86,6 +93,9 @@
             <if test="itemupdateat != null">
                 itemUpdateAt,
             </if>
+            <if test="orgCode != null">
+                ORG_CODE,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="itemid != null">
@@ -127,6 +137,9 @@
             <if test="itemupdateat != null">
                 #{itemupdateat,jdbcType=TIMESTAMP},
             </if>
+            <if test="orgCode != null">
+                #{orgCode,jdbcType=CHAR},
+            </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.gythtglxt.dataobject.DoctorDO">
@@ -165,6 +178,9 @@
             <if test="itemupdateat != null">
                 itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
             </if>
+            <if test="orgCode != null">
+                ORG_CODE = #{orgCode,jdbcType=CHAR},
+            </if>
         </set>
         where itemID = #{itemid,jdbcType=INTEGER}
         and itemCode = #{itemcode,jdbcType=CHAR}
@@ -181,22 +197,27 @@
       CREATER = #{creater,jdbcType=VARCHAR},
       itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
       UPDATER = #{updater,jdbcType=VARCHAR},
-      itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
+      itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      ORG_CODE = #{orgCode,jdbcType=CHAR}
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
 
 
-    <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectAll" resultMap="BaseResultMapAndFile">
         select
         <include refid="Base_Column_List"/>
-        from tb_natmeha_doctor
+        ,
+        <include refid="File_Column_List"/>
+        from tb_natmeha_doctor d left join tb_natmeha_file f on d.itemCode=f.DATA_CODE
     </select>
 
-    <select id="selectByUserCode" resultMap="BaseResultMap">
+    <select id="selectByUserCode" resultMap="BaseResultMapAndFile">
         select
         <include refid="Base_Column_List"/>
-        from tb_natmeha_doctor
-        WHERE USER_CODE = #{userCode}
+        ,
+        <include refid="File_Column_List"/>
+        from tb_natmeha_doctor d left join tb_natmeha_file f on d.itemCode=f.DATA_CODE
+        WHERE d.ORG_CODE = #{ORGCode}
     </select>
 </mapper>

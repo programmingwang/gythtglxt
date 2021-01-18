@@ -49,34 +49,21 @@ public class HotSpotServiceImpl implements IHotspotService {
     }
 
     @Override
-    public List<HotspotDto> getAll(String dataType, List<String> dataStatus, String userCode) {
-        List<HotspotDO> hotspotDOS = new ArrayList<>();
-        List<HotspotDto> hotspotDtos = new ArrayList<>();
-        for (String status : dataStatus) {
-            hotspotDOS.addAll(hotspotDOMapper.selectAll(dataType,status));
-        }
-        for (HotspotDO hotspotDO : hotspotDOS) {
-            HotspotDto hotspotDto = new HotspotDto();
-            BeanUtils.copyProperties(hotspotDO,hotspotDto);
-            FileDO fileDO = fileService.selectFileByDataCode(hotspotDO.getItemcode());
-            String filePath = StringUtils.isEmpty(fileDO.getFilePath())
-                    ? "已经损坏了" : fileDO.getFilePath() ;
-            hotspotDto.setFilePath(filePath);
-            hotspotDtos.add(hotspotDto);
-        }
-
-        if(userCode == null){
-            return hotspotDtos;
-        }else {
-            List<HotspotDto> removeHotSpot = new ArrayList<>();
-            for (HotspotDto hotspotDto : hotspotDtos) {
-                if(!userCode.equals(hotspotDto.getUserCode()) || hotspotDto.getUserCode() == null){
-                    removeHotSpot.add(hotspotDto);
-                }
-            }
-            hotspotDtos.removeAll(removeHotSpot);
-            return hotspotDtos;
-        }
+    public List<HotspotDto> getAll(String dataType, String dataStatus, String userCode) {
+        List<HotspotDto> hotspotDtos = hotspotDOMapper.selectAll(dataType,dataStatus,userCode);
+//        if(userCode == null){
+//            return hotspotDtos;
+//        }else {
+//            List<HotspotDto> removeHotSpot = new ArrayList<>();
+//            for (HotspotDto hotspotDto : hotspotDtos) {
+//                if(!userCode.equals(hotspotDto.getUserCode()) || hotspotDto.getUserCode() == null){
+//                    removeHotSpot.add(hotspotDto);
+//                }
+//            }
+//            hotspotDtos.removeAll(removeHotSpot);
+//            return hotspotDtos;
+//        }
+        return hotspotDtos;
     }
 
     @Override
@@ -88,7 +75,6 @@ public class HotSpotServiceImpl implements IHotspotService {
         record.setCreater(usernameUtil.getOperateUser());
         record.setItemcreateat(DateUtils.getDate());
         record.setUpdater(usernameUtil.getOperateUser());
-        record.setDataStatus("0");
         if(StringUtils.isEmpty(record.getItemcode())){
             record.setItemcode(UUIDUtils.getUUID());
         }

@@ -1,6 +1,5 @@
 package com.gythtglxt.service.impl;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import com.gythtglxt.dataobject.FileDO;
 import com.gythtglxt.dto.ProjectDto;
@@ -63,62 +62,12 @@ public class ProjectServiceImpl implements IProjectService {
     }
 
     @Override
-    public List<ProjectDto> selectproAll(List<String> dataStatus, String userCode) {
-        List<Project> projects = new ArrayList<>();
-        List<ProjectDto> projectDtos = new ArrayList<>();
-        for (String status : dataStatus) {
-            projects.addAll(projectMapper.selectproAll(status));
-        }
-        for (Project project : projects) {
-            ProjectDto projectDto = new ProjectDto();
-            BeanUtils.copyProperties(project, projectDto);
-            FileDO fileDO = fileService.selectFileByDataCode(project.getItemcode());
-            String filePath = StringUtils.isEmpty(fileDO.getFilePath())
-                    ? "已经损坏了" : fileDO.getFilePath();
-            projectDto.setFilePath(filePath);
-            projectDtos.add(projectDto);
-        }
-        if (userCode == null) {
-            return projectDtos;
-        } else {
-            List<ProjectDto> removeProject = new ArrayList<>();
-            for (ProjectDto projectDto : projectDtos) {
-                if (!userCode.equals(projectDto.getUserCode()) || projectDto.getUserCode().isEmpty()) {
-                    removeProject.add(projectDto);
-                }
-            }
-            projectDtos.removeAll(removeProject);
-            return projectDtos;
-        }
+    public List<ProjectDto> selectproAll(String dataStatus, String userCode) {
+        return projectMapper.selectproAll(dataStatus,userCode);
     }
 
     @Override
-    public List<ProjectDto> selectchaAll(List<String> dataStatus, String userCode) {
-        List<Project> projects = new ArrayList<>();
-        List<ProjectDto> projectDtos = new ArrayList<>();
-        for (String status : dataStatus) {
-            projects.addAll(projectMapper.selectchaAll(status));
-        }
-        for (Project project : projects) {
-            ProjectDto projectDto = new ProjectDto();
-            BeanUtils.copyProperties(project, projectDto);
-            FileDO fileDO = fileService.selectFileByDataCode(project.getItemcode());
-            String filePath = StringUtils.isEmpty(fileDO.getFilePath())
-                    ? "已经损坏了" : fileDO.getFilePath();
-            projectDto.setFilePath(filePath);
-            projectDtos.add(projectDto);
-        }
-        if (userCode == null) {
-            return projectDtos;
-        } else {
-            List<ProjectDto> removeProject = new ArrayList<>();
-            for (ProjectDto projectDto : projectDtos) {
-                if (!userCode.equals(projectDto.getUserCode()) || projectDto.getUserCode().isEmpty()) {
-                    removeProject.add(projectDto);
-                }
-            }
-            projectDtos.removeAll(removeProject);
-            return projectDtos;
-        }
+    public List<ProjectDto> selectchaAll(String dataStatus, String userCode) {
+        return projectMapper.selectchaAll(dataStatus,userCode);
     }
 }

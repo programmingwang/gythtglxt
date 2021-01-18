@@ -1,10 +1,10 @@
 package com.gythtglxt.service.impl;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import com.gythtglxt.dao.HospitalMapper;
 import com.gythtglxt.dataobject.FileDO;
 import com.gythtglxt.dataobject.Hospital;
+import com.gythtglxt.dto.FileDto;
 import com.gythtglxt.dto.HospitalDto;
 import com.gythtglxt.error.BusinessException;
 import com.gythtglxt.error.EmBusinessError;
@@ -16,8 +16,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * @Author lrt
@@ -112,17 +110,22 @@ public class HospitalServiceImpl implements HospitalService {
         {
             HospitalDto obj = new HospitalDto();
             BeanUtils.copyProperties(item,obj);
-            List<FileDO> fileDOList = fileService.selectMultipleFileByDataCode(obj.getItemcode());
-            List<String> filePathList = new ArrayList<>();
-            for (FileDO fileDO: fileDOList){
-                filePathList.add(fileDO.getFilePath());
-            }
-            obj.setFilePath(filePathList);
             resList.add(obj);
         }
         filter(resList);
+        resList.sort(Comparator.comparing(HospitalDto::getItemupdateat).reversed());
         return resList;
 	}
+
+    @Override
+    public List<String> selectImg(String itemcode) {
+        List<FileDO> fileDOList = fileService.selectMultipleFileByDataCode(itemcode);
+        List<String> resList = new ArrayList<>();
+        for (FileDO fileDO: fileDOList){
+            resList.add(fileDO.getFilePath());
+        }
+        return resList;
+    }
 
     public void filter(List<HospitalDto> target) {
         Map<String, String> proMap = dictService.getDictMapByCode("auditStatus");

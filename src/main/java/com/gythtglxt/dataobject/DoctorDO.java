@@ -31,5 +31,6 @@ public class DoctorDO extends DoctorDOKey {
     private String updater;
 
     private Date itemupdateat;
+    private String orgCode;
 
 }

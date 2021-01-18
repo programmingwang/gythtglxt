@@ -36,7 +36,6 @@ public class ChineseMedicineController {
     @RequestMapping(value ="insertchinesemedicine",method = RequestMethod.POST )
 
     public ResponseData insertChineseMedicine(@RequestBody ChineseMedicineDO key){
-        System.out.println("中药名称: " + key.getName());
         iChineseMedicineService.insertSelective(key);
         return new ResponseData(EmBusinessError.success);
     }
@@ -66,28 +65,8 @@ public class ChineseMedicineController {
     }
     /*中医药常识数据所有查询*/
     @RequestMapping(value ="selectallchinesemedicine",method = RequestMethod.GET )
-    public ResponseData selectAllChineseMedicine(@RequestParam(value="status") List status,@RequestParam(value = "userCode", required = false)String userCode){
-        List<ChineseMedicineDO> chineseMedicineDOList = iChineseMedicineService.selectAllChineseMedicine(status);
-        List<ChineseMedicineDto> chineseMedicineDtoList = new ArrayList<>();
-        for (ChineseMedicineDO chineseMedicineDO : chineseMedicineDOList) {
-            chineseMedicineDtoList.add(
-                    this.convertDtoFromDo(
-                            chineseMedicineDO,iFileService.selectFileByDataCode(
-                                    chineseMedicineDO.getItemcode()).getFilePath()));
-        }
-        if(userCode == null){
-            return new ResponseData(EmBusinessError.success,chineseMedicineDtoList);
-        }else{
-            List<ChineseMedicineDto> removeList = new ArrayList<>();
-            for (ChineseMedicineDto chineseMedicineDto : chineseMedicineDtoList) {
-                if(!userCode.equals(chineseMedicineDto.getUserCode()) || chineseMedicineDto.getUserCode().isEmpty()){
-                    removeList.add(chineseMedicineDto);
-                }
-            }
-            chineseMedicineDtoList.removeAll(removeList);
-            return new ResponseData(EmBusinessError.success,chineseMedicineDtoList);
-        }
-
+    public ResponseData selectAllChineseMedicine(@RequestParam(value="status") String status,@RequestParam(value = "userCode", required = false)String userCode){
+        return new ResponseData(EmBusinessError.success,iChineseMedicineService.selectAllChineseMedicine(status,userCode));
     }
     private ChineseMedicineDto convertDtoFromDo(ChineseMedicineDO chineseMedicineDO, String filePath){
         if(StringUtils.isEmpty(filePath)){
