@@ -1,7 +1,7 @@
 spring:
   thymeleaf:
 #    听说关掉就可以不用重启，上线要开启
-    cache: true
+    cache: false
     suffix: .html
     mode: HTML5
     encoding: UTF-8

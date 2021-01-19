@@ -153,7 +153,7 @@
                 ajaxUtil.myAjax(null, "/accountSource/doctor?usercode=" + userCode, null, function (res) {
                     var data = res.data;
                     $("#docName").selectUtil(data);
-                }, true, true, "get");
+                }, false, true, "get");
 
                 if (row != null){
                     $("#docName").val(row.doctorCode)
