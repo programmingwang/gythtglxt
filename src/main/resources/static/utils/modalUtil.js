@@ -178,7 +178,8 @@
 
 
         return {
-            init: _init
+            init: _init,
+            modalDes: _myModalDestory
         };
 
     });

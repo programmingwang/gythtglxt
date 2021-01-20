@@ -5,6 +5,7 @@
 
             var url = "selectallchinesemedicine?";
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+            var p2 = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
             var role = sessionStorage.getItem("rolename");
             if(role === "管理员"){
                 $('#btn_addTask').attr('style',"display:block");
@@ -168,7 +169,7 @@
                     var myChineseMedicineModal = modalUtil.init(myViewChineseMedicineModalData);
                     $("#name").val(row.name);
                     $("#alias").val(row.alias);
-                    $("#classification").val(row.classification);
+                    $("#classification").val(p2[row.classification].text);
                     $("#harvesting").val(row.harvesting);
                     $("#taste").val(row.taste);
                     $("#merTropism").val(row.merTropism);
@@ -176,7 +177,7 @@
                     $("#usage").val(row.usage);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
-                    $("#status").val(webStatus[ row.status].text);
+                    $("#status").val(webStatus[row.status].text);
                     $("#mediCineImg").attr("src",row.filePath)
                     $('#mediCineImgSpan').html("药材图片");
 
@@ -252,7 +253,17 @@
                             ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("管理员已发布到小程序");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myPublishToWechat",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -276,7 +287,7 @@
             });
 
 
-           var p2 = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
+
             $("#Search").selectUtil(p2);
 
             $("#Search").unbind("change").on("change",function () {

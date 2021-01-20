@@ -24,7 +24,7 @@
             };
             //操作
             function operation(value, row, index){
-                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus,webStatus)
+                return selectUtil.getRoleOperateProCha(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus,webStatus)
             }
 
             function operation2(value, row, index){

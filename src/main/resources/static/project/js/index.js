@@ -28,7 +28,7 @@
                         pid: "1"
                     },
                     {
-                        menu_name: "药膳治疗",
+                        menu_name: "药膳食疗",
                         menu_url: "/healthProtection/foodTreat",
                         id: "1-3",
                         level: "2",
@@ -110,13 +110,13 @@
                             level: "1",
                             pid: ""
                         },
-                        {
-                            menu_name: "服务团队",
-                            menu_url: "/doctor/doctor",
-                            id: "2-2",
-                            level: "2",
-                            pid: "2"
-                        },
+                        // {
+                        //     menu_name: "服务团队",
+                        //     menu_url: "/doctor/doctor",
+                        //     id: "2-2",
+                        //     level: "2",
+                        //     pid: "2"
+                        // },
                         {
                             menu_name: "开展项目",
                             menu_url: "/project/characteri",
@@ -148,13 +148,13 @@
                             level: "1",
                             pid: ""
                         },
-                        {
-                            menu_name: "服务团队",
-                            menu_url: "/doctor/doctor",
-                            id: "2-2",
-                            level: "2",
-                            pid: "2"
-                        },
+                        // {
+                        //     menu_name: "服务团队",
+                        //     menu_url: "/doctor/doctor",
+                        //     id: "2-2",
+                        //     level: "2",
+                        //     pid: "2"
+                        // },
                         {
                             menu_name: "开展项目",
                             menu_url: "/project/characteri",

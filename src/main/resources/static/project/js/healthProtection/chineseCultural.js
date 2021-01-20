@@ -175,7 +175,7 @@
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#dataStatus").val(webStatus[row.dataStatus].text);
                     $("#hotspotImg").attr("src",row.filePath);
-
+                    console.log(myViewModal)
                     myViewModal.show();
                 },
 
@@ -258,7 +258,15 @@
                             ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已发布");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myPublishToWechat",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
                                         isSuccess = true;
                                         refreshTable();
                                     }else{

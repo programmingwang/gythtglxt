@@ -17,7 +17,7 @@
                 '                    <div class="modal-body">\n' + obj.modalBody +
                 '                    </div>\n' +
                 '                    <div class="modal-footer">\n' +
-                '                        <button type="button" id="'+obj.modalCancelID+'" class="btn btn-secondary" data-dismiss="modal">'+obj.modalCancel+'</button>\n' +
+                '                        <button type="button" id="'+obj.modalCancelID+'"  style="'+obj.cancelButtonStyle+'" class="btn btn-secondary" data-dismiss="modal">'+obj.modalCancel+'</button>\n' +
                 '                        <button type="button" id="'+obj.modalConfirmID+'" style="'+obj.confirmButtonStyle+'" class="'+ obj.confirmButtonClass +'">'+obj.modalConfirm+'</button>\n' +
                 '                    </div>\n' +
                 '                </div>\n' +
@@ -2702,9 +2702,11 @@
         modalHtml.myPassProtection = "确认通过？";
         modalHtml.myNoSubmitProtection='确认取消提交';
         modalHtml.myNoPassProtection = "确认不通过？";
-        modalHtml.myUnderShelfProtection = "确认下架？";
+        modalHtml.myUnderShelfProtection = "紧急下架后，公众用户将不能查看，确定下架吗？";
         modalHtml.myDeleteProtection = "确认删除？";
         modalHtml.myPublishProtection = "此信息发布后将展示给用户查看，需要文责自负，是否确认发布？";
+        modalHtml.myPublishToWechat = "您已发布到小程序";
+
 
 
         return modalHtml;
