@@ -333,18 +333,35 @@
             $("#chargePersonSearch").selectUtil(pl);
 
 
-            var aCol = [
-                {field: 'name', title: '开展项目名称'},
-                {field: 'filePath', title: '开展项目描述',formatter: operation2, events:checkImgDetailsEvents},
-                {field: 'price', title: '开展项目价格',formatter:function (value) {
-                    var price = value.toString()
-                        return '<p>￥'+price+'</p>'
-                    }},
-                {field:'dataStatus',title:'开展项目状态',formatter:function (value) {
-                        return '<p>'+webStatus[value].text+'</p>'
-                    }},
-                {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
-            ];
+            var aCol;
+            if(sessionStorage.getItem("rolename") != "管理员"){
+                aCol = [
+                    {field: 'hospitalName', title: '国医堂名称'},
+                    {field: 'name', title: '开展项目名称'},
+                    {field: 'filePath', title: '开展项目描述',formatter: operation2, events:checkImgDetailsEvents},
+                    {field: 'price', title: '开展项目价格',formatter:function (value) {
+                            var price = value.toString()
+                            return '<p>￥'+price+'</p>'
+                        }},
+                    {field:'dataStatus',title:'开展项目状态',formatter:function (value) {
+                            return '<p>'+webStatus[value].text+'</p>'
+                        }},
+                    {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
+                ];
+            }else {
+                aCol = [
+                    {field: 'name', title: '开展项目名称'},
+                    {field: 'filePath', title: '开展项目描述',formatter: operation2, events:checkImgDetailsEvents},
+                    {field: 'price', title: '开展项目价格',formatter:function (value) {
+                            var price = value.toString()
+                            return '<p>￥'+price+'</p>'
+                        }},
+                    {field:'dataStatus',title:'开展项目状态',formatter:function (value) {
+                            return '<p>'+webStatus[value].text+'</p>'
+                        }},
+                    {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
+                ];
+            }
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
 
