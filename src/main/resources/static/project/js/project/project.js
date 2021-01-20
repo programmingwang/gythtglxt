@@ -334,14 +334,27 @@
             var p2 = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
             $("#Search").selectUtil(p2);
 
-            var aCol = [
-                {field: 'name', title: '功效特色名称'},
-                {field: 'filePath', title: '功效特色描述', formatter: operation2, events:checkImgDetailsEvents},
-                {field:'dataStatus',title:'功效特色状态',formatter:function (value) {
+            var aCol;
+            if (sessionStorage.getItem("rolename") != "管理员"){
+               aCol =  [
+                   {field: 'hospitalName', title: '国医堂名称'},
+                    {field: 'name', title: '功效特色名称'},
+                    {field: 'filePath', title: '功效特色描述', formatter: operation2, events:checkImgDetailsEvents},
+                    {field:'dataStatus',title:'功效特色状态',formatter:function (value) {
                             return '<p>'+webStatus[value].text+'</p>'
-                    }},
-                {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
-            ];
+                        }},
+                    {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
+                ]
+            }else {
+                aCol =  [
+                    {field: 'name', title: '功效特色名称'},
+                    {field: 'filePath', title: '功效特色描述', formatter: operation2, events:checkImgDetailsEvents},
+                    {field:'dataStatus',title:'功效特色状态',formatter:function (value) {
+                            return '<p>'+webStatus[value].text+'</p>'
+                        }},
+                    {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
+                ]
+            }
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
 
