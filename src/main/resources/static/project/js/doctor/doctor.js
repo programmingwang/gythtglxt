@@ -33,8 +33,6 @@
 
                 'click .delete': function (e, value, row, index) {
                     var deleteModal = "";
-                    console.log(new Date(row.registerDate) < new Date());
-                    console.log(row.registerDate == null);
                     if (new Date(row.registerDate) < new Date() || row.registerDate==null){
                         deleteModal = "myDeleteDoctor";
                     }
