@@ -101,7 +101,6 @@
                         ajaxUtil.myAjax(null, opreateUrl, hotspotEntity, function (data) {
                             if (ajaxUtil.success(data)) {
                                 if (data.code == ajaxUtil.successCode) {
-                                    isSuccess = true;
                                     var submitConfirmModal = {
                                         modalBodyID :"myPublishToWechat",
                                         modalTitle : "提示",
@@ -109,7 +108,6 @@
                                         cancelButtonStyle: "display:none",
                                         modalConfirmFun:function (){
                                             orange.redirect(pathUrl);
-                                            return true;
                                         }
                                     }
                                     var submitConfirm = modalUtil.init(submitConfirmModal);
@@ -121,12 +119,12 @@
                                 alertUtil.alert(data.msg);
                             }
                         }, false, true, type);
-                        return isSuccess;
                     }
 
                 }
                 var x = modalUtil.init(myPublishModalData);
                 x.show();
+                return false;
 
             });
 

@@ -118,7 +118,6 @@
                         fileUtil.handleFile(isUpdate(), chinesemedicineEntity.itemcode, uploadImg.getFiles()[0]);
                         ajaxUtil.myAjax(null, addUpdateUrl, chinesemedicineEntity, function (data) {
                             if (ajaxUtil.success(data)) {
-                                isSuccess = true;
                                 var submitConfirmModal = {
                                     modalBodyID: "myPublishToWechat",
                                     modalTitle: "提示",
@@ -137,11 +136,11 @@
                                 alertUtil.alert(data.msg);
                             }
                         }, false, true);
-                        return isSuccess;
                     }
                 }
                 var x = modalUtil.init(myPublishModalData);
                 x.show();
+                return false;
             });
             (function init() {
                 if (isUpdate()){
