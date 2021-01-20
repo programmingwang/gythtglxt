@@ -22,5 +22,5 @@ public interface DoctorDOMapper {
 
     List<DoctorDto> selectAll();
 
-    List<DoctorDto> selectByUserCode(String ORGCode);
+    List<DoctorDto> selectByORGCode(String ORGCode);
 }

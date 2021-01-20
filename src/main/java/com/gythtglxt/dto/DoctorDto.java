@@ -11,4 +11,5 @@ import lombok.Data;
 @Data
 public class DoctorDto extends DoctorDO {
     private String filePath;
+    private String registerDate;
 }

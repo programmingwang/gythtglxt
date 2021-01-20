@@ -42,7 +42,6 @@ public class DoctorServiceImpl implements IDoctorService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setUserCode(usernameUtil.getItemCode());
         String username = usernameUtil.getOperateUser();
         record.setCreater(username);
         record.setItemcreateat(new Date());
@@ -89,7 +88,7 @@ public class DoctorServiceImpl implements IDoctorService {
     }
 
     @Override
-    public List<DoctorDto> selectByUserCode() {
-        return doctorDOMapper.selectByUserCode(usernameUtil.getOrgCode());
+    public List<DoctorDto> selectByORGCode() {
+        return doctorDOMapper.selectByORGCode(usernameUtil.getOrgCode());
     }
 }
