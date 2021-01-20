@@ -2687,6 +2687,8 @@
         modalHtml.myDeleteSpecialty = "是否删除科室信息？";
         modalHtml.myDeleteChineseMedicine = "是否删除名老中医信息？";
         modalHtml.myDeleteAccount = "是否删除该账号？";
+        modalHtml.myDeleteDoctor = "是否删除此医生信息？";
+        modalHtml.myDeleteDoctorSignalSource = "此医生还有预约挂号的信息，是否删除该医生信息？";
 
         modalHtml.myDeleteMedMat = "是否删除药材信息？"
         modalHtml.myShelveMedMat = "点击上架将药材信息发送到河北中医药网，确认上架？"

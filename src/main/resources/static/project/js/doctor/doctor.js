@@ -32,8 +32,15 @@
                 },
 
                 'click .delete': function (e, value, row, index) {
+                    var deleteModal = "";
+                    if (new Date(row.registerDate) < new Date() || row.registerDate==null){
+                        deleteModal = "myDeleteDoctor";
+                    }
+                    else {
+                        deleteModal = "myDeleteDoctorSignalSource";
+                    }
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteChineseMedicine",
+                        modalBodyID : deleteModal,
                         modalTitle : "删除医生",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
@@ -84,7 +91,6 @@
                     }},
                 {field: 'doctorTitle', title: '职称'},
                 {field: 'doctorTreatment', title: '擅长治疗'},
-                {field: 'numType', title: '号别'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

@@ -13,16 +13,9 @@
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     uploadImg.setImgSrc(tempdata.filePath)
-
                     $("#doctorName").val(tempdata.doctorName);
                     $("#doctorTitle").val(tempdata.doctorTitle);
                     $("#doctorTreatment").val(tempdata.doctorTreatment);
-                    $("#numType").find("option").each(function (data) {
-                        var $this = $(this);
-                        if($this.text() == tempdata.numType) {
-                            $this.attr("selected", true);
-                        }
-                    });
                 }
             }());
             function isUpdate() {
@@ -61,7 +54,6 @@
                 entity["doctorTitle"] = $("#doctorTitle").val();
                 entity["doctorTreatment"] = $("#doctorTreatment").val();
                 entity["deptCode"] = $("#deptCode").val();
-                entity["numType"] = numType[$("#numType").val()].text;
 
 
                 fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
