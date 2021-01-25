@@ -127,8 +127,8 @@
                             formData.append("dataCode",dataCode);
                             formData.append("file",file);
                             formData.append("itemcode",stringUtil.getUUID());
-                            formData.append("uploader",uploader);
-                            formData.append("uploaderCode",uploaderCode);
+                            formData.append("uploader",sessionStorage.getItem("username"));
+                            formData.append("uploaderCode",sessionStorage.getItem("itemcode"));
                             $.ajax({
                                 url:"/file/upload-multi",
                                 type:'POST',
