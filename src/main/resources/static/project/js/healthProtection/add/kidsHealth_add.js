@@ -58,7 +58,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true,type);
-
+            return false;
             });
 
             $("#btn_insert").unbind().on('click',function () {
