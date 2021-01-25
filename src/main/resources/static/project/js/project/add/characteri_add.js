@@ -101,8 +101,17 @@
                         ajaxUtil.myAjax(null,opreateUrl,characteriEntity,function (data) {
                             if(ajaxUtil.success(data)){
                                 if(data.code == ajaxUtil.successCode) {
-                                    alertUtil.info(operateMessage);
-                                    orange.redirect(pathUrl);
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myPublishTNextDepart",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            orange.redirect(pathUrl);
+                                        }
+                                    }
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
                                 }else{
                                     alertUtil.error(data.msg);
                                 }
