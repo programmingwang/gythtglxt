@@ -28,7 +28,13 @@
                     sessionStorage.setItem('rolename',rolename);
                     sessionStorage.setItem('orgCode',orgCode);
                     sessionStorage.setItem('itemcode',itemCode);
-                    window.location.href = "/main"
+                    if (rolename === '管理员') {
+                        window.location.href = "/main#/healthProtection/healthPreservation";
+                    } else if (rolename === '县级' || rolename === '市级' || rolename === '省级'){
+                        window.location.href = "/main#/project/characteri";
+                    } else{
+                        window.location.href = "/main"
+                    }
                 }else{
                     alertUtil.error(data.msg)
                 }
