@@ -318,7 +318,7 @@
                 loadPage(currentUrlHash);
             }
 
-            $("#userName").text(sessionStorage.getItem('username'))
+            $("#userName").text(sessionStorage.getItem('NAME'))
 
 
 

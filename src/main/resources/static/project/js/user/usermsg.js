@@ -20,7 +20,7 @@
                 }
             }, false, "", "get");
 
-            $("#userName").text(sessionStorage.getItem('username'));
+            $("#userName").text(sessionStorage.getItem('NAME'));
 
             // 取消按钮返回上一页面
             $("#cancelBtn").click(function () {

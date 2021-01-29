@@ -13,6 +13,8 @@ import lombok.ToString;
 public class UserSessionDto {
     private String username;
 
+    private String name;
+
     private int itemid;
 
     private String itemcode;
