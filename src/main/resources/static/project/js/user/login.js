@@ -19,12 +19,13 @@
             var userEntity = {"username": inputUsername, "password": inputPassword};
             ajaxUtil.myAjax(null, "/userLogin", userEntity, function (data) {
                 if (data && data.code === 88888) {
-                    alertUtil.success('登录成功');
                     var userName = data.data.username;
                     var rolename = data.data.rolename;
                     var orgCode = data.data.orgCode;
                     var itemCode = data.data.itemcode;
+                    var name = data.data.name;
                     sessionStorage.setItem('username',userName);
+                    sessionStorage.setItem("Name",name);
                     sessionStorage.setItem('rolename',rolename);
                     sessionStorage.setItem('orgCode',orgCode);
                     sessionStorage.setItem('itemcode',itemCode);
