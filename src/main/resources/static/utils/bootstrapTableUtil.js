@@ -1,5 +1,5 @@
 (function() {
-    define('bootstrapTableUtil', ['jquery','objectUtil','ajaxUtil','stringUtil','myBootstrapTable'], function(jquery,objectUtil,ajaxUtil,stringUtil) {
+    define('bootstrapTableUtil', ['jquery','objectUtil','ajaxUtil','stringUtil','alertUtil','myBootstrapTable'], function(jquery,objectUtil,ajaxUtil,stringUtil,alertUtil) {
 
         $.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales['zh-CN']);
 
@@ -67,9 +67,9 @@
                         window.location.href = "/userLogin";
                     }
                     if (data.code === 88888) {
-                        for(var i=0; i<data.data.length; i++){
-                            data.data[i].itemcreateat = stringUtil.formatDateTime(data.data[i].itemcreateat);
-                        }
+                        // for(var i=0; i<data.data.length; i++){
+                        //     data.data[i].itemcreateat = stringUtil.formatDateTime(data.data[i].itemcreateat);
+                        // }
                         var allTableData = data.data
                         localStorage.setItem('2',JSON.stringify(allTableData))
                         return {
@@ -77,7 +77,7 @@
                             rows: data.data
                         }
                     } else {
-                        return data = {total: 0, rows: []};
+                        return  {total: 0, rows: []};
                     }
                 },
                 onLoadSuccess: function (res) {
@@ -119,7 +119,7 @@
 
         //$(".float-right").attr("display",block);
 
-        function globalSearch(tableID,url,needParam,aCol) {
+        function globalSearch(tableID, url, needParam, aCol, statusWord) {
             $("#btnSearch").unbind().on('click',function() {
                 if(document.getElementById("stratTime")){
                     var stratTime=document.getElementById("stratTime").children;
@@ -128,60 +128,58 @@
                     endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
                 }
                 var newArry = [];
-                if(document.getElementById("chargePersonSearch")){
-                    var addstr=document.getElementById("chargePersonSearch").value;
-                }
-
+                var addstr=document.getElementById("chargePersonSearch").value;
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
-
-                // console.log(str)
                 var allTableData = JSON.parse(localStorage.getItem("2"));
-
-                if (str==='请输入'||str===''){
-                    str=''
+                if(str.indexOf("请输入")!=-1){
+                    str=""
                 }
-                // console.log(allTableData)
                 for (var i in allTableData) {
                     for (var v in aCol){
                         var textP = allTableData[i][aCol[v].field];
-                        // console.log(111)
-                        var isTimeSlot=false;
-                        var makeTime=allTableData[i][aCol[3].field];
-                        if(makeTime.length>18){
-                            makeTime=makeTime.substring(11,19);
+                        var isStatusSlot=false;           // 默认状态为true
+                        var isTimeSlot=false;             // 默认时间条件为true
+                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
+                        var status= allTableData[i][statusWord]
+                        // console.log("addstr:"+addstr)
+                        // console.log("status:"+status)
+                        //调试时可以先打印出来，进行修改
+                        if(addstr==status){
+                            isStatusSlot=true;
+                        }
+                        //当存在时将条件改为flase
+                        var makeTime = allTableData[i]["itemcreateat"].substring(11,19);
+                        if (makeTime >= stratTime && makeTime <= endTime) {
+                            isTimeSlot = true;
+                        }
+                        else {
+                            isTimeSlot = false;
+                        }
+                        if (stratTime == endTime) {
+                            isTimeSlot = true;
                         }
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";
                         }
-                        if(makeTime>=stratTime && makeTime<=endTime){
-                            isTimeSlot=true;
+                        if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
+                            isStatusSlot = false;
+                            isTimeSlot = false;
+                            newArry.push(allTableData[i])
                         }
-                        if(stratTime==endTime){
-                            isTimeSlot=true;
-                        }
-
-                        if (textP.search(str)!= -1&&isTimeSlot){
-                            newArry.push(allTableData[i]);
-                        }
-                        if (addstr=="展示中"||addstr=="已下架"){
-                            str=str+" "+addstr;
-                            var arr=str.split(' ');
-                            for(var j=0;j<arr.length;j++)
-                            {
-                                if(String(textP).search(arr[j])!=-1){
-                                    newArry.push(allTableData[i]);
-                                }
-                            }
+                        if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot && isTimeSlot){
+                            newArry.push(allTableData[i])
                         }
                     }
                 }
-
                 var newArr=new Set(newArry)
                 newArry=Array.from(newArr)
                 $("#table").bootstrapTable("load", newArry);
+                if(newArry.length == 0){
+                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
+                }else{
+                    alertUtil.success("搜索成功");
+                }
             })
-
-
 
             var aria=this.ariaExpanded;
             var element=document.getElementById("stratTime");
@@ -204,39 +202,7 @@
             })
         }
 
-        function haoGlobalSearch(tableID,url,needParam,aCol) {
-            $("#btnSearch").unbind().on('click',function() {
-                var newArry = [];
 
-                var str1=document.getElementById("yearSelect").value;
-                console.log(str1)
-
-
-                var str2 = document.getElementById("statusSelect").value.toLowerCase();
-
-                // console.log(str)
-                var allTableData = JSON.parse(localStorage.getItem("2"));
-
-                // console.log(allTableData)
-                for (var i in allTableData) {
-                    for (var v in aCol){
-                        var textP = allTableData[i][aCol[v].field];
-                        // console.log(111)
-                        if (textP == null || textP == undefined || textP == '') {
-                            textP = "1";
-                        }
-                        if (textP.search(str1)!= -1&&textP.search(str2)!= -1){
-                            newArry.push(allTableData[i]);
-                        }
-                    }
-                }
-
-                var newArr=new Set(newArry)
-                newArry=Array.from(newArr)
-                $("#table").bootstrapTable("load", newArry);
-            })
-
-        }
         return {
             myBootStrapTableInit:myBootStrapTableInit,
             myBootStrapTableDestory:myBootStrapTableDestory,

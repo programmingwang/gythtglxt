@@ -17,7 +17,7 @@
                 '                    <div class="modal-body">\n' + obj.modalBody +
                 '                    </div>\n' +
                 '                    <div class="modal-footer">\n' +
-                '                        <button type="button" id="'+obj.modalCancelID+'" class="btn btn-secondary" data-dismiss="modal">'+obj.modalCancel+'</button>\n' +
+                '                        <button type="button" id="'+obj.modalCancelID+'"  style="'+obj.cancelButtonStyle+'" class="btn btn-secondary" data-dismiss="modal">'+obj.modalCancel+'</button>\n' +
                 '                        <button type="button" id="'+obj.modalConfirmID+'" style="'+obj.confirmButtonStyle+'" class="'+ obj.confirmButtonClass +'">'+obj.modalConfirm+'</button>\n' +
                 '                    </div>\n' +
                 '                </div>\n' +
@@ -2687,6 +2687,8 @@
         modalHtml.myDeleteSpecialty = "是否删除科室信息？";
         modalHtml.myDeleteChineseMedicine = "是否删除名老中医信息？";
         modalHtml.myDeleteAccount = "是否删除该账号？";
+        modalHtml.myDeleteDoctor = "是否删除此医生信息？";
+        modalHtml.myDeleteDoctorSignalSource = "此医生还有预约挂号的信息，是否删除该医生信息？";
 
         modalHtml.myDeleteMedMat = "是否删除药材信息？"
         modalHtml.myShelveMedMat = "点击上架将药材信息发送到河北中医药网，确认上架？"
@@ -2702,9 +2704,17 @@
         modalHtml.myPassProtection = "确认通过？";
         modalHtml.myNoSubmitProtection='确认取消提交';
         modalHtml.myNoPassProtection = "确认不通过？";
-        modalHtml.myUnderShelfProtection = "确认下架？";
+        modalHtml.myUnderShelfProtection = "紧急下架后，公众用户将不能查看，确定下架吗？";
         modalHtml.myDeleteProtection = "确认删除？";
         modalHtml.myPublishProtection = "此信息发布后将展示给用户查看，需要文责自负，是否确认发布？";
+        modalHtml.myPublishToWechat = "您已发布到小程序";
+        modalHtml.myPublishTNextDepart = "您已成功提交";
+        modalHtml.myAuditSubmitProtectionCountry = "提交后需要县级审核，确认提交？";
+        modalHtml.myAuditPassProtectionCity = "您通过后需要市级审核，确认通过？";
+        modalHtml.myAuditPassProtectionPre = "您通过后需要省级审核，确认通过？";
+        modalHtml.myPassProtectionUp = "您通过后管理员需要进行最后确认，确认通过？";
+        modalHtml.myPassSuccessTip = "操作成功";
+
 
 
         return modalHtml;

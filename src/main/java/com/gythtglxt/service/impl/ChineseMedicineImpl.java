@@ -3,6 +3,7 @@ package com.gythtglxt.service.impl;
 import com.gythtglxt.dao.ChineseMedicineDOMapper;
 import com.gythtglxt.dataobject.ChineseMedicineDO;
 import com.gythtglxt.dataobject.ChineseMedicineDOKey;
+import com.gythtglxt.dto.ChineseMedicineDto;
 import com.gythtglxt.error.BusinessException;
 import com.gythtglxt.error.EmBusinessError;
 import com.gythtglxt.service.IChineseMedicineService;
@@ -67,12 +68,8 @@ public class ChineseMedicineImpl implements IChineseMedicineService {
     }
 
     @Override
-    public List<ChineseMedicineDO> selectAllChineseMedicine(List<String> status) {
-        List<ChineseMedicineDO> chineseMedicineDOList=new ArrayList<>();
-        for(String chinesemedicineStatus:status){
-            chineseMedicineDOList.addAll(chineseMedicineDOMapper.selectAllChineseMedicine(chinesemedicineStatus));
-        }
-        return chineseMedicineDOList;
+    public List<ChineseMedicineDto> selectAllChineseMedicine(String status, String userCode) {
+        return chineseMedicineDOMapper.selectAllChineseMedicine(status,userCode);
     }
 
     @Override

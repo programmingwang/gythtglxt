@@ -32,8 +32,15 @@
                 },
 
                 'click .delete': function (e, value, row, index) {
+                    var deleteModal = "";
+                    if (new Date(row.registerDate) < new Date() || row.registerDate==null){
+                        deleteModal = "myDeleteDoctor";
+                    }
+                    else {
+                        deleteModal = "myDeleteDoctorSignalSource";
+                    }
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteChineseMedicine",
+                        modalBodyID : deleteModal,
                         modalTitle : "删除医生",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
@@ -84,7 +91,6 @@
                     }},
                 {field: 'doctorTitle', title: '职称'},
                 {field: 'doctorTreatment', title: '擅长治疗'},
-                {field: 'numType', title: '号别'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
@@ -95,9 +101,34 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
-            var allTableData = $("#table").bootstrapTable("getData");
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
+
+            $("#btnSearch").unbind().on('click',function() {
+                var newArry = [];
+                var str = document.getElementById("taskNameSearch").value.toLowerCase();
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                if(str.indexOf("请输入")!=-1){
+                    str=""
+                }
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        console.log(textP.search(str));
+                        if(textP.search(str) != -1){
+                            newArry.push(allTableData[i])
+                        }
+                    }
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+                if(newArry.length == 0){
+                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
+                }else{
+                    alertUtil.success("搜索成功");
+                }
+            })
         })
 })();

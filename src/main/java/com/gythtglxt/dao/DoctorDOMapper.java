@@ -20,7 +20,7 @@ public interface DoctorDOMapper {
 
     int updateByPrimaryKey(DoctorDO record);
 
-    List<DoctorDO> selectAll();
+    List<DoctorDto> selectAll();
 
-    List<DoctorDO> selectByUserCode(String userCode);
+    List<DoctorDto> selectByORGCode(String ORGCode);
 }

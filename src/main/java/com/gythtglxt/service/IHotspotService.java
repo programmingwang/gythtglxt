@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface IHotspotService {
     HotspotDO getHotspot(HotspotDOKey key, String dataType);
-    List<HotspotDto> getAll(String dataType, List<String> dataStatus, String userCode);
+    List<HotspotDto> getAll(String dataType, String dataStatus, String userCode);
     int addHotspot(HotspotDO record);
     int removeHotspot(HotspotDOKey key);
     int updateHotspot(HotspotDO record);

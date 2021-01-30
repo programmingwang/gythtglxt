@@ -28,7 +28,11 @@
                     <div class="input-group-prepend" style="position: relative;top: 7px;">
                         <span class="input-text" >其他选项： 展示状态：</span>
                     </div>
-                    <select class="custom-select" id="chargePersonSearch"></select>
+                    <select class="custom-select" id="chargePersonSearch">
+                        <option value="0">保存</option>
+                        <option value="8">管理员确认发布到小程序</option>
+                        <option value="9">从小程序上下架</option>
+                    </select>
                 </div>
             </div>
 
@@ -71,5 +75,4 @@
 
 </body>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/healthProtection/chineseCultural.js}"></script>
 </html>

@@ -62,7 +62,7 @@ public class ProjectController {
      */
     @GetMapping(value = "/selectproAll")
     @ResponseBody
-    public ResponseData selectproAll(@RequestParam(value = "status") List dataStatus,@RequestParam(value = "userCode",required = false) String userCode) {
+    public ResponseData selectproAll(@RequestParam(value = "status") String dataStatus,@RequestParam(value = "userCode",required = false) String userCode) {
         return new ResponseData(EmBusinessError.success,iProjectService.selectproAll(dataStatus,userCode));
     }
 
@@ -71,7 +71,7 @@ public class ProjectController {
      */
     @GetMapping(value = "/selectchaAll")
     @ResponseBody
-    public ResponseData selectchaAll(@RequestParam(value = "status") List dataStatus,@RequestParam(value = "userCode",required = false) String userCode) {
+    public ResponseData selectchaAll(@RequestParam(value = "status") String dataStatus,@RequestParam(value = "userCode",required = false) String userCode) {
         return new ResponseData(EmBusinessError.success,iProjectService.selectchaAll(dataStatus,userCode));
     }
 

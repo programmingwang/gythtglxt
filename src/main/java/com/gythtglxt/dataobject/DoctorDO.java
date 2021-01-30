@@ -19,7 +19,6 @@ public class DoctorDO extends DoctorDOKey {
 
     private String deptCode;
 
-    @NotBlank(message = "挂号类别不能为空")
     private String numType;
 
     private String userCode;
