@@ -20,12 +20,12 @@
             ajaxUtil.myAjax(null, "/userLogin", userEntity, function (data) {
                 if (data && data.code === 88888) {
                     var userName = data.data.username;
-                    var name = data.data.name;
                     var rolename = data.data.rolename;
                     var orgCode = data.data.orgCode;
                     var itemCode = data.data.itemcode;
+                    var name = data.data.name;
                     sessionStorage.setItem('username',userName);
-                    sessionStorage.setItem('NAME', name);
+                    sessionStorage.setItem("Name",name);
                     sessionStorage.setItem('rolename',rolename);
                     sessionStorage.setItem('orgCode',orgCode);
                     sessionStorage.setItem('itemcode',itemCode);
