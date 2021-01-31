@@ -1274,7 +1274,7 @@
             '                        <button type="button" id="reasonSpan" class="btn btn-primary btn-sm" >理&emsp;&emsp;由</button>\n' +
             '                    </div>\n' +
             '                  <div>\n' +
-            '                       <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:scroll;word-break: break-all;" id="reason" class="form-control">\n' +
+            '                       <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:scroll;word-break: break-all;" id="viewReason" class="form-control">\n' +
             '                       </div>\n' +
             '                  </div>\n' +
             '                </div>\n' +
