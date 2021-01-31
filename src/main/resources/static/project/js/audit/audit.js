@@ -120,13 +120,20 @@
 
                 },
                 'click .pass': function (e, value, row, index) {
-                    var submitConfirmModal = {
-                        modalBodyID :"myPassSuccessTip",
-                        modalTitle : "提示",
+
+                    var bodyId = "";
+                    if (rolename === "县级"){
+                        bodyId = "myAuditPassProtectionCity"
+                    } else if (rolename === "市级"){
+                        bodyId = "myAuditPassProtectionPre"
+                    } else if (rolename === "省级") {
+                        bodyId = "myPublishProtection"
+                    }
+                    var passConfirmModal = {
+                        modalBodyID: bodyId,
+                        modalTitle: "提示",
                         modalClass : "modal-lg",
-                        cancelButtonStyle: "display:none",
-                        confirmButtonClass: "btn-danger",
-                        modalConfirmFun:function (){
+                        modalConfirmFun: function () {
                             var param = {
                                 itemid: row.itemid,
                                 itemcode: row.itemcode,
@@ -136,11 +143,23 @@
                                 alertUtil.info("修改成功");
                                 refreshTable()
                             }, true,true,"put")
-                            return false;
+                            var submitConfirmModal = {
+                                modalBodyID :"myPassSuccessTip",
+                                modalTitle : "提示",
+                                modalClass : "modal-lg",
+                                cancelButtonStyle: "display:none",
+                                confirmButtonClass: "btn-danger",
+                                modalConfirmFun:function (){
+                                    return true;
+                                }
+                            }
+                            passConfirm.hide();
+                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                            submitConfirm.show();
                         }
                     }
-                    var submitConfirm = modalUtil.init(submitConfirmModal);
-                    submitConfirm.show();
+                    var passConfirm = modalUtil.init(passConfirmModal);
+                    passConfirm.show()
 
                 },
                 'click .nopass' : function(e, value, row, index) {
