@@ -40,7 +40,9 @@
                     operateMessage = "更新功效特色成功";
                 }
 
-                ajaxUtil.upload_multi(projectEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                if(uploadImg.isUpdate()){
+                    ajaxUtil.upload_multi(projectEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                }
 
                 ajaxUtil.myAjax(null,opreateUrl,projectEntity,function (data) {
                     if(ajaxUtil.success(data)){
@@ -54,7 +56,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true,type);
-
+                return false;
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -87,13 +89,24 @@
                             operateMessage = "提交功效特色成功";
                         }
 
-                        ajaxUtil.upload_multi(projectEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                        if(uploadImg.isUpdate()) {
+                            ajaxUtil.upload_multi(projectEntity.itemcode, uploadImg.getFiles(), sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                        }
 
                         ajaxUtil.myAjax(null,opreateUrl,projectEntity,function (data) {
                             if(ajaxUtil.success(data)){
                                 if(data.code == ajaxUtil.successCode) {
-                                    alertUtil.info(operateMessage);
-                                    orange.redirect(pathUrl);
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myPublishTNextDepart",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            orange.redirect(pathUrl);
+                                        }
+                                    }
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
                                 }else{
                                     alertUtil.error(data.msg);
                                 }

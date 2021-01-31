@@ -104,7 +104,9 @@
                 async: false,
                 success:function(data){
                     if(data && data.code == successCode){}else{
-                        alertUtil.error(data.msg);
+                        data.msg == "您未上传图片或者附件！"?
+                            alertUtil.warning(data.msg) :
+                            alertUtil.error(data.msg)
                     }
                 },
                 error: function(data){
@@ -138,11 +140,12 @@
                                 async: false,
                                 success:function(data){
                                     if(data && data.code == successCode){}else{
-                                        alertUtil.error(data.msg);
+                                        if(data.msg == "您未上传图片或者附件！")
+                                            alertUtil.warning(data.msg)
                                     }
                                 },
-                                error: function(data){
-                                    alertUtil.error(data.msg)
+                                error: function(data) {
+                                    alertUtil.warning(data.msg)
                                 }
                             });
                         }

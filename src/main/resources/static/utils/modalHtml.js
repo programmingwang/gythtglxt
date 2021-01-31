@@ -2708,7 +2708,12 @@
         modalHtml.myDeleteProtection = "确认删除？";
         modalHtml.myPublishProtection = "此信息发布后将展示给用户查看，需要文责自负，是否确认发布？";
         modalHtml.myPublishToWechat = "您已发布到小程序";
-        modalHtml.myAuditSubmitProtectionCountry = "提交后需要县级管理员审核，确认提交？";
+        modalHtml.myPublishTNextDepart = "您已成功提交";
+        modalHtml.myAuditSubmitProtectionCountry = "提交后需要县级审核，确认提交？";
+        modalHtml.myAuditPassProtectionCity = "您通过后需要市级审核，确认通过？";
+        modalHtml.myAuditPassProtectionPre = "您通过后需要省级审核，确认通过？";
+        modalHtml.myPassProtectionUp = "您通过后管理员需要进行最后确认，确认通过？";
+        modalHtml.myPassSuccessTip = "操作成功";
 
 
 

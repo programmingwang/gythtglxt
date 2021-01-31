@@ -66,6 +66,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true,requestType);
+                return false;
             });
 
         });

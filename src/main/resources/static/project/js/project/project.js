@@ -114,6 +114,7 @@
                 },
 
                 'click .pass' : function (e, value, row, index) {
+                    var role = sessionStorage.getItem("rolename");
                     var myPassModalData ={
                         modalBodyID :"myPassProtection",
                         modalTitle : "审核通过",
@@ -128,7 +129,17 @@
                             ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
-                                        alertUtil.info("已通过");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myPassSuccessTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -140,6 +151,9 @@
                         }
 
                     };
+                    if(role == "县级") myPassModalData.modalBodyID = "myAuditPassProtectionCity";
+                    else if(role == "市级") myPassModalData.modalBodyID = "myAuditPassProtectionPre";
+                    else if(role == "省级") myPassModalData.modalBodyID = "myPassProtectionUp";
                     var myPassModal = modalUtil.init(myPassModalData);
                     myPassModal.show();
                 },
@@ -226,7 +240,7 @@
 
                 'click .submit' : function (e, value, row, index) {
                     var mySubmitModalData ={
-                        modalBodyID :"mySubmitProtection",
+                        modalBodyID :"myAuditSubmitProtectionCountry",
                         modalTitle : "提交",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
@@ -239,7 +253,17 @@
                             ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已提交");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myPublishTNextDepart",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -252,6 +276,8 @@
                         }
 
                     };
+
+
                     var mySubmitModal = modalUtil.init(mySubmitModalData);
                     mySubmitModal.show();
                 },
@@ -303,7 +329,17 @@
                             ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已发布");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myPassSuccessTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
