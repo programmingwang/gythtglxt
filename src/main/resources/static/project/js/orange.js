@@ -21,16 +21,6 @@
 		
 
 		function _bindAppContext(getAppContextServiceUrl, _renderIndex) {
-			ajaxUtil.myAjax(null,getAppContextServiceUrl,null,function (data) {
-				if(ajaxUtil.success(data)){
-					if(ajaxUtil.success(data)){
-						_appContext.user = data.data.user;
-						_appContext.organization = data.data.organization;
-						_appContext.role = data.data.role;
-						$("#userName").html(_appContext.user.userName);
-					}
-				}
-			},false);
 			if(_renderIndex != undefined){
 				_renderIndex();
 			}
