@@ -6,17 +6,55 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
     <style>
-        label{
+        label {
             text-align: right;
         }
+
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
         }
-        input[type="number"]{
+
+        input[type="number"] {
             -moz-appearance: textfield;
         }
     </style>
+    <script>
+        function noNumbers(e) {
+            var keynum
+            var keychar
+            if (window.event) // IE
+            {
+                keynum = e.keyCode
+            } else if (e.which) // Netscape/Firefox/Opera
+            {
+                keynum = e.which
+            }
+            keychar = String.fromCharCode(keynum);
+            //判断是数字,且小数点后面只保留两位小数
+            if (!isNaN(keychar)) {
+                var index = e.currentTarget.value.indexOf(".");
+                if (index >= 0 && e.currentTarget.value.length - index > 2) {
+                    return false;
+                }
+                if (e.currentTarget.value === '0'){
+                    return false;
+                }
+                return true;
+            }
+            //如果是小数点 但不能出现多个 且第一位不能是小数点
+            if ("." == keychar) {
+                if (e.currentTarget.value == "") {
+                    return false;
+                }
+                if (e.currentTarget.value.indexOf(".") >= 0) {
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
+    </script>
 </head>
 <body>
 <div id="fir_body">
@@ -37,7 +75,9 @@
                     <label class="col-sm-2 col-form-label">开展项目价格(元)：</label>
                     <div class="col-sm-3">
                         <span style="color: #D60000;position: absolute;top: 0.2rem;left: 1rem;font-size: 23px;">￥</span>
-                        <input id="price" type="number" class="form-control" placeholder="请输入" style="text-indent: 0.5rem;">
+                        <input id="price" onkeypress="return noNumbers(event)"
+                               type="number" step="0.01" class="form-control" placeholder="请输入"
+                               style="text-indent: 0.5rem;">
                     </div>
                 </div>
 
@@ -69,8 +109,8 @@
 
                 <!----------------------- 三个按钮 -------------------------------->
                 <div class="form-group row">
-                    <div class="col-lg-2 col-md-4" ></div>
-                    <div class=" col-lg-3 row" >
+                    <div class="col-lg-2 col-md-4"></div>
+                    <div class=" col-lg-3 row">
                         <div class="col">
                             <button id="cancel" type="button" class="btn btn-light col">取消</button>
                         </div>
@@ -81,7 +121,7 @@
                             <button id="btn_insert" type="submit" class="btn btn-danger col">提交</button>
                         </div>
                     </div>
-                    <div class="col-lg-7 col-md-4" ></div>
+                    <div class="col-lg-7 col-md-4"></div>
                 </div>
             </form>
 
