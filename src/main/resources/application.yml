@@ -13,6 +13,11 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+    url: jdbc:mysql://42.193.46.47:3306/natmeha?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: ELWChcTvdti2^dJN
+  
+
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initialSize: 5
