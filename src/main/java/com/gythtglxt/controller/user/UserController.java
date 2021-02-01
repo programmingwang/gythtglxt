@@ -53,18 +53,23 @@ public class UserController {
      */
     @RequestMapping(value = "/updatepwd", method = RequestMethod.PUT)
     public ResponseData UpdatePassword(UpdatePwdDto updatePwdDto) {
-        if (StringUtils.isEmpty(updatePwdDto.getNewPassword()) || StringUtils.isEmpty(updatePwdDto.getCheckNewPassword())) {
+        if (StringUtils.isBlank(updatePwdDto.getNewPassword()) || StringUtils.isBlank(updatePwdDto.getCheckNewPassword()) ||
+                StringUtils.isBlank(updatePwdDto.getMobilePhone()) || StringUtils.isBlank(updatePwdDto.getPassword())) {
             return new ResponseData(EmBusinessError.INPUT_NOT_NULL);
         } else {
-            if (updatePwdDto.getNewPassword().equals(updatePwdDto.getCheckNewPassword())) {
-                ResponseData rd = userService.UpdatePassword(updatePwdDto);
-                if (rd.getCode().equals(EmBusinessError.success.getErrCode())) {
-                    return new ResponseData(EmBusinessError.success);
-                } else {
-                    return new ResponseData(EmBusinessError.MODIFY_USER_MESSAGE_FAILED);
-                }
+            if (updatePwdDto.getPassword().equals(updatePwdDto.getNewPassword())) {
+                return new ResponseData(EmBusinessError.OPWD_EQUAL_NPWD);
             } else {
-                return new ResponseData(EmBusinessError.NEWPASSWORD_NOT_EQUAL);
+                if (updatePwdDto.getNewPassword().equals(updatePwdDto.getCheckNewPassword())) {
+                    ResponseData rd = userService.UpdatePassword(updatePwdDto);
+                    if (rd.getCode().equals(EmBusinessError.success.getErrCode())) {
+                        return new ResponseData(EmBusinessError.success);
+                    } else {
+                        return new ResponseData(EmBusinessError.MODIFY_USER_MESSAGE_FAILED);
+                    }
+                } else {
+                    return new ResponseData(EmBusinessError.NEWPASSWORD_NOT_EQUAL);
+                }
             }
         }
     }
