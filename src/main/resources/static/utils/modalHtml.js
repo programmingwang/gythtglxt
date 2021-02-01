@@ -1,4 +1,3 @@
-
 (function() {
     define('modalHtml', ['jquery','objectUtil', 'stringUtil', 'alertUtil', 'bootstrap'], function(jquery, objectUtil,stringUtil,alertUtil,bootstrap) {
 
@@ -2722,3 +2721,4 @@
 
     });
 })();
+
