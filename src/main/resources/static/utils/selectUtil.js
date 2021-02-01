@@ -36,10 +36,90 @@
                 if(status == webStatus[0].id){
                     return [
                         '<a class="edit" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >编辑</a>',
+                        '<a class="publish"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >发布</a>',
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                    ].join('');
+                }else if(status == webStatus[2].id || status == webStatus[4].id || status == webStatus[6].id ){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                    ].join('');
+                }else if(status == webStatus[1].id){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        '<a class="no-submit" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="" >取消提交</a>',
+                    ].join('');
+                }else if(status == webStatus[7].id){
+                    return [
+                        '<a class="publish" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >发布</a>',
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                    ].join('');
+                }else if(status == webStatus[8].id){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >紧急下架</a>',
+                    ].join('');
+                }else if(status == webStatus[9].id){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        '<a class="edit" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >编辑</a>',
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                    ].join('');
+                }
+
+            }else if(role === "县级"){
+                if(status == webStatus[1].id){
+                    return [
+                        '<a  class="pass"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="#staticBackdrop" >通过</a>',
+                        '<a  class="fail"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >不通过</a>',
+                        '<a  class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                    ].join('');
+                }else if(status == webStatus[8].id){
+                    return [
+                        '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >紧急下架</a>',
+                    ].join('');
+                }
+
+            }else if(role === "市级"){
+                if(status == webStatus[3].id){
+                    return [
+                        '<a class="pass "  data-toggle="modal" data-target="#staticBackdrop" style="margin:0 1em;text-decoration: none;color:#348eff;">通过</a>',
+                        '<a class="fail"  data-toggle="modal" data-target="#staticBackdrop" style="margin:0 1em;text-decoration: none;color:#ed0f09;">不通过</a>',
+                        '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                    ].join('');
+                }else if(status == webStatus[8].id){
+                    return [
+                        '<a  class="view"  style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >紧急下架</a>',
+                    ].join('');
+                }
+
+            }else if(role === "省级"){
+                if(status == webStatus[5].id){
+                    return [
+                        '<a class="pass "  data-toggle="modal" data-target="#staticBackdrop" style="margin:0 1em;text-decoration: none;color:#348eff;">通过</a>',
+                        '<a class="fail"  data-toggle="modal" data-target="#staticBackdrop" style="margin:0 1em;text-decoration: none;color:#ed0f09;">不通过</a>',
+                        '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                    ].join('');
+                }else if(status == webStatus[8].id){
+                    return [
+                        '<a  class="view"  style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >紧急下架</a>',
+                    ].join('');
+                }
+            }
+        }
+
+        function getRoleOperateProCha(value, row, index, role, status,webStatus) {
+            if(role === "管理员"){
+                if(status == webStatus[0].id){
+                    return [
+                        '<a class="edit" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >编辑</a>',
                         '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
-                }else if(status == webStatus[2].id || status == webStatus[4].id || status == webStatus[6].id || status == webStatus[7].id ){
+                }else if(status == webStatus[2].id || status == webStatus[4].id || status == webStatus[6].id ){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
@@ -137,6 +217,7 @@
             getRoleOperate:getRoleOperate,
             getPassStatus: getPassStatus,
             getFailStatus: getFailStatus,
+            getRoleOperateProCha: getRoleOperateProCha
         }
     })
 })();

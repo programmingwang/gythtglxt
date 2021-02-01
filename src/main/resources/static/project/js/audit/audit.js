@@ -120,15 +120,47 @@
 
                 },
                 'click .pass': function (e, value, row, index) {
-                    var param = {
-                        itemid: row.itemid,
-                        itemcode: row.itemcode,
-                        status: pass
-                    };
-                    ajaxUtil.myAjax(null,auditUrl,param,function (data) {
-                        alertUtil.info("修改成功");
-                        refreshTable()
-                    }, true,true,"put")
+
+                    var bodyId = "";
+                    if (rolename === "县级"){
+                        bodyId = "myAuditPassProtectionCity"
+                    } else if (rolename === "市级"){
+                        bodyId = "myAuditPassProtectionPre"
+                    } else if (rolename === "省级") {
+                        bodyId = "myPublishProtection"
+                    }
+                    var passConfirmModal = {
+                        modalBodyID: bodyId,
+                        modalTitle: "提示",
+                        modalClass : "modal-lg",
+                        modalConfirmFun: function () {
+                            var param = {
+                                itemid: row.itemid,
+                                itemcode: row.itemcode,
+                                status: pass
+                            };
+                            ajaxUtil.myAjax(null,auditUrl,param,function (data) {
+                                alertUtil.info("修改成功");
+                                refreshTable()
+                            }, true,true,"put")
+                            var submitConfirmModal = {
+                                modalBodyID :"myPassSuccessTip",
+                                modalTitle : "提示",
+                                modalClass : "modal-lg",
+                                cancelButtonStyle: "display:none",
+                                confirmButtonClass: "btn-danger",
+                                modalConfirmFun:function (){
+                                    return true;
+                                }
+                            }
+                            passConfirm.hide();
+                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                            submitConfirm.show();
+                        }
+                    }
+                    var passConfirm = modalUtil.init(passConfirmModal);
+                    passConfirm.show()
+
                 },
                 'click .nopass' : function(e, value, row, index) {
                     var param = {
@@ -139,15 +171,20 @@
                     };
 
                     var myModalData ={
-                        modalBodyID : "myInputReason", //公用的在后面给span加不同的内容就行了，其他模块同理
+                        modalBodyID : "myResonable",
                         modalTitle : "输入理由",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
-                            param.reason = $("#inputReason").val();
+                            param.reason = $("#reason").val();
                             ajaxUtil.myAjax(null,auditUrl,param,function (data) {
-                                alertUtil.info("修改成功");
-                                myTravelModal.hide();
-                                refreshTable();
+                                if (ajaxUtil.success(data)){
+                                    alertUtil.info("修改成功");
+                                    myTravelModal.hide();
+                                    refreshTable();
+                                }else {
+                                    alertUtil.error("请输入理由");
+                                }
+
                             }, true,true,"put")
                         },
                     };
@@ -164,7 +201,7 @@
                         confirmButtonStyle: "display:none",
                     };
                     var myTravelModal = modalUtil.init(myModalData);
-                    $("#reason").html(row.reason);
+                    $("#viewReason").html(row.reason);
 
                     myTravelModal.show();
                 },

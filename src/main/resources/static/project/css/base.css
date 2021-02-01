@@ -366,3 +366,6 @@ thead.self-thead {
     left: 0;
     overflow: hidden;
 }
+a{
+    cursor: pointer;
+}

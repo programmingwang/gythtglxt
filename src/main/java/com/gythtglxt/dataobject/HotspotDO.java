@@ -26,6 +26,5 @@ public class HotspotDO extends HotspotDOKey {
     private String hotspotContent;
     @NotBlank(message = "来源不能为空")
     private String hotspotSource;
-    @NotBlank(message = "作者不能为空")
     private String hotspotAuthor;
 }

@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 	
-	define('orange', ['jquery','ajaxUtil','urlUtil','bootstrapBundle'], function($,ajaxUtil,urlUtil) {
+	define('orange', ['jquery','ajaxUtil','urlUtil','modalUtil','bootstrapBundle'], function($,ajaxUtil,urlUtil,modalUtil) {
 		// $('#systemMasking').modal({backdrop: "static"});
 
 
@@ -21,16 +21,6 @@
 		
 
 		function _bindAppContext(getAppContextServiceUrl, _renderIndex) {
-			ajaxUtil.myAjax(null,getAppContextServiceUrl,null,function (data) {
-				if(ajaxUtil.success(data)){
-					if(ajaxUtil.success(data)){
-						_appContext.user = data.data.user;
-						_appContext.organization = data.data.organization;
-						_appContext.role = data.data.role;
-						$("#userName").html(_appContext.user.userName);
-					}
-				}
-			},false);
 			if(_renderIndex != undefined){
 				_renderIndex();
 			}
@@ -148,14 +138,12 @@
 		// 页面跳转
 		function redirect(url) {
 			$("#main_body").html("");
-			loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
+			loadPage({url: url, target: 'main_body', selector: '#fir_body', replace:true, success: function(data){
 					if(data == null||data == ""){
 						return alert(url+"加载失败");
 					}
-					$("#main_body").html(data);
-					if(!(isContains(url,"insert") || isContains(url,"add"))){
-						window.location.reload();
-					}
+                    $("#main_body").html(data);
+					$('.modal-backdrop').remove();
 			}})
 		}
 

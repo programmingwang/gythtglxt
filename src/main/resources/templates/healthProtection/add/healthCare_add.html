@@ -12,12 +12,12 @@
     </style>
 </head>
 <body>
-<div class="row">
+<div id="fir_body" class="row">
     <div class="col-12">
         <form>
             <!--上传图片的div-->
             <div class="form-group row">
-                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">热点图片：</label>
+                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label"><span style="color: red">*</span>自我保健热点图片：</label>
                 <div class="upload-content" data-limit="1">
                     <div class="content-img">
                         <ul class="content-img-list"></ul>
@@ -36,25 +36,25 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">自我保健标题：</label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>自我保健标题：</label>
                 <div class="col-sm-3">
                     <input id="hotspotTitle" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">来源：</label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>自我保健来源：</label>
                 <div class="col-sm-3">
                     <input id="hotspotSource" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">作者：</label>
+                <label class="col-sm-2 col-form-label">自我保健作者：</label>
                 <div class="col-sm-3">
                     <input id="hotspotAuthor" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">自我保健介绍：</label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>自我保健介绍：</label>
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
@@ -70,7 +70,7 @@
                         <button id="btn_save" type="submit" class="btn btn-danger col">保存</button>
                     </div>
                     <div class="col">
-                        <button id="btn_insert" type="submit" class="btn btn-danger col">提交</button>
+                        <button id="btn_insert" type="submit" class="btn btn-danger col">发布</button>
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-4" ></div>
@@ -81,9 +81,8 @@
 
 </div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/healthProtection/add/healthCare_add.js}"></script>
 <link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
       th:src="@{/component/uploadImg/css/uploadImg.css}">
-<script type="text/javascript" th:src="@{/component/uploadImg/js/bootstrap.min.js}"></script>
+
 </body>
 </html>

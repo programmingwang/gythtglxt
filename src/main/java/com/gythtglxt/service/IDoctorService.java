@@ -23,5 +23,5 @@ public interface IDoctorService {
 
     List<DoctorDto> selectAll();
 
-    List<DoctorDto> selectByUserCode();
+    List<DoctorDto> selectByORGCode();
 }

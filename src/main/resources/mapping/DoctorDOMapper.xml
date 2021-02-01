@@ -10,7 +10,6 @@
         <result column="DOCTOR_SORCE" jdbcType="DOUBLE" property="doctorSorce"/>
         <result column="DEPT_CODE" jdbcType="VARCHAR" property="deptCode"/>
         <result column="NUM_TYPE" jdbcType="VARCHAR" property="numType"/>
-        <result column="USER_CODE" jdbcType="CHAR" property="userCode"/>
         <result column="CREATER" jdbcType="VARCHAR" property="creater"/>
         <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
         <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
@@ -19,13 +18,14 @@
     </resultMap>
     <resultMap id="BaseResultMapAndFile" type="com.gythtglxt.dto.DoctorDto" extends="BaseResultMap">
         <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
+        <result column="REGISTER_DATE" jdbcType="TIMESTAMP" property="registerDate"/>
     </resultMap>
     <sql id="Base_Column_List">
         d.itemID, d.itemCode, d.DOCTOR_NAME, d.DOCTOR_TITLE, d.DOCTOR_TREATMENT, d.DOCTOR_SORCE, d.DEPT_CODE,
-        d.NUM_TYPE, d.USER_CODE, d.CREATER, d.itemCreateAt, d.UPDATER, d.itemUpdateAt, d.ORG_CODE
+        d.NUM_TYPE, d.CREATER, d.itemCreateAt, d.UPDATER, d.itemUpdateAt, d.ORG_CODE
     </sql>
     <sql id="File_Column_List">
-        f.FILE_PATH
+        f.FILE_PATH, s.REGISTER_DATE
     </sql>
     <select id="selectByPrimaryKey" parameterType="com.gythtglxt.dataobject.DoctorDOKey" resultMap="BaseResultMap">
         select
@@ -212,12 +212,15 @@
         from tb_natmeha_doctor d left join tb_natmeha_file f on d.itemCode=f.DATA_CODE
     </select>
 
-    <select id="selectByUserCode" resultMap="BaseResultMapAndFile">
+    <select id="selectByORGCode" resultMap="BaseResultMapAndFile">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="File_Column_List"/>
-        from tb_natmeha_doctor d left join tb_natmeha_file f on d.itemCode=f.DATA_CODE
+        FROM
+            tb_natmeha_doctor d LEFT JOIN tb_natmeha_file f ON d.itemCode = f.DATA_CODE
+            LEFT JOIN (SELECT MAX(REGISTER_DATE) REGISTER_DATE, DOCTOR_CODE FROM tb_natmeha_signal_source GROUP BY DOCTOR_CODE ) s
+            ON d.itemCode = s.DOCTOR_CODE
         WHERE d.ORG_CODE = #{ORGCode}
     </select>
 </mapper>

@@ -24,7 +24,7 @@
             };
             //操作
             function operation(value, row, index){
-                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus,webStatus)
+                return selectUtil.getRoleOperateProCha(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus,webStatus)
             }
 
             function operation2(value, row, index){
@@ -114,6 +114,7 @@
                 },
 
                 'click .pass' : function (e, value, row, index) {
+                    var role = sessionStorage.getItem("rolename");
                     var myPassModalData ={
                         modalBodyID :"myPassProtection",
                         modalTitle : "审核通过",
@@ -128,7 +129,17 @@
                             ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
-                                        alertUtil.info("已通过");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myPassSuccessTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -140,6 +151,9 @@
                         }
 
                     };
+                    if(role == "县级") myPassModalData.modalBodyID = "myAuditPassProtectionCity";
+                    else if(role == "市级") myPassModalData.modalBodyID = "myAuditPassProtectionPre";
+                    else if(role == "省级") myPassModalData.modalBodyID = "myPassProtectionUp";
                     var myPassModal = modalUtil.init(myPassModalData);
                     myPassModal.show();
                 },
@@ -226,7 +240,7 @@
 
                 'click .submit' : function (e, value, row, index) {
                     var mySubmitModalData ={
-                        modalBodyID :"mySubmitProtection",
+                        modalBodyID :"myAuditSubmitProtectionCountry",
                         modalTitle : "提交",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
@@ -239,7 +253,17 @@
                             ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已提交");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myPublishTNextDepart",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -252,6 +276,8 @@
                         }
 
                     };
+
+
                     var mySubmitModal = modalUtil.init(mySubmitModalData);
                     mySubmitModal.show();
                 },
@@ -303,7 +329,17 @@
                             ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已发布");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myPassSuccessTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -334,14 +370,27 @@
             var p2 = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
             $("#Search").selectUtil(p2);
 
-            var aCol = [
-                {field: 'name', title: '功效特色名称'},
-                {field: 'filePath', title: '功效特色描述', formatter: operation2, events:checkImgDetailsEvents},
-                {field:'dataStatus',title:'功效特色状态',formatter:function (value) {
+            var aCol;
+            if (sessionStorage.getItem("rolename") != "管理员"){
+               aCol =  [
+                   {field: 'hospitalName', title: '国医堂名称'},
+                    {field: 'name', title: '功效特色名称'},
+                    {field: 'filePath', title: '功效特色描述', formatter: operation2, events:checkImgDetailsEvents},
+                    {field:'dataStatus',title:'功效特色状态',formatter:function (value) {
                             return '<p>'+webStatus[value].text+'</p>'
-                    }},
-                {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
-            ];
+                        }},
+                    {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
+                ]
+            }else {
+                aCol =  [
+                    {field: 'name', title: '功效特色名称'},
+                    {field: 'filePath', title: '功效特色描述', formatter: operation2, events:checkImgDetailsEvents},
+                    {field:'dataStatus',title:'功效特色状态',formatter:function (value) {
+                            return '<p>'+webStatus[value].text+'</p>'
+                        }},
+                    {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
+                ]
+            }
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
 

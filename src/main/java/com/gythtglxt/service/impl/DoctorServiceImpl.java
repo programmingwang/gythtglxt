@@ -3,7 +3,6 @@ package com.gythtglxt.service.impl;
 import com.gythtglxt.dao.DoctorDOMapper;
 import com.gythtglxt.dataobject.DoctorDO;
 import com.gythtglxt.dataobject.DoctorDOKey;
-import com.gythtglxt.dataobject.FileDO;
 import com.gythtglxt.dto.DoctorDto;
 import com.gythtglxt.error.BusinessException;
 import com.gythtglxt.error.EmBusinessError;
@@ -12,11 +11,9 @@ import com.gythtglxt.service.IFileService;
 import com.gythtglxt.util.UsernameUtil;
 import com.gythtglxt.validator.ValidatorImpl;
 import com.gythtglxt.validator.ValidatorResult;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -89,7 +86,7 @@ public class DoctorServiceImpl implements IDoctorService {
     }
 
     @Override
-    public List<DoctorDto> selectByUserCode() {
-        return doctorDOMapper.selectByUserCode(usernameUtil.getOrgCode());
+    public List<DoctorDto> selectByORGCode() {
+        return doctorDOMapper.selectByORGCode(usernameUtil.getOrgCode());
     }
 }

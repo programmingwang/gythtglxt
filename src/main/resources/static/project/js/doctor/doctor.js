@@ -32,8 +32,15 @@
                 },
 
                 'click .delete': function (e, value, row, index) {
+                    var deleteModal = "";
+                    if (new Date(row.registerDate) < new Date() || row.registerDate==null){
+                        deleteModal = "myDeleteDoctor";
+                    }
+                    else {
+                        deleteModal = "myDeleteDoctorSignalSource";
+                    }
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteChineseMedicine",
+                        modalBodyID : deleteModal,
                         modalTitle : "删除医生",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
@@ -74,8 +81,8 @@
             $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [
-                {field: 'doctorName', title: '专家名称'},
-                {field: 'filePath', title: '专家照片',formatter:function (value, row, index) {
+                {field: 'doctorName', title: '医生姓名'},
+                {field: 'filePath', title: '医生照片',formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';
                         }else{
@@ -84,7 +91,6 @@
                     }},
                 {field: 'doctorTitle', title: '职称'},
                 {field: 'doctorTreatment', title: '擅长治疗'},
-                {field: 'numType', title: '号别'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

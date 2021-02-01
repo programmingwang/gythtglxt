@@ -15,9 +15,13 @@ public class UserSessionDto {
 
     private int itemid;
 
+    private String name;
+
     private String itemcode;
 
     private String rolename;
 
     private String orgCode;
+
+    private String cityId;
 }
