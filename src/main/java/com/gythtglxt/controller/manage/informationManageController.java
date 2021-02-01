@@ -30,6 +30,11 @@ public class informationManageController {
 
     @PutMapping(value = "information")
     public ResponseData updHospital(@RequestBody HospitalDto hospitalDto){
+        if (hospitalDto.getStatus().equals("3") || hospitalDto.getStatus().equals("5") || hospitalDto.getStatus().equals("7")) {
+            if (hospitalDto.getReason() == null || hospitalDto.getReason().equals("")){
+                return new ResponseData(EmBusinessError.PARAMETER_VALIDATION_ERROR);
+            }
+        }
         Hospital hospital = new Hospital();
         BeanUtils.copyProperties(hospitalDto,hospital);
         return new ResponseData(EmBusinessError.success,hospitalService.updateByPrimaryKeySelective(hospital));

@@ -35,6 +35,7 @@ public interface HospitalMapper {
 
     Hospital selectOneByItemcode(@Param("itemcode") String itemcode);
 
-    List<Hospital> selectAll();
+    //0代表县级，1代表市级，2代表省级
+    List<Hospital> selectAll(@Param("addrCountry") String addrCountry,@Param("addrCity") String addrCity, @Param("status") int status);
 
 }

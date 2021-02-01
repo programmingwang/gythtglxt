@@ -177,9 +177,14 @@
                         modalConfirmFun:function () {
                             param.reason = $("#reason").val();
                             ajaxUtil.myAjax(null,auditUrl,param,function (data) {
-                                alertUtil.info("修改成功");
-                                myTravelModal.hide();
-                                refreshTable();
+                                if (ajaxUtil.success(data)){
+                                    alertUtil.info("修改成功");
+                                    myTravelModal.hide();
+                                    refreshTable();
+                                }else {
+                                    alertUtil.error("请输入理由");
+                                }
+
                             }, true,true,"put")
                         },
                     };
