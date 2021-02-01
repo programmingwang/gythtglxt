@@ -48,7 +48,6 @@
                         modalBodyID :"myDeleteProtection",
                         modalTitle : "删除儿童健康信息",
                         modalClass : "modal-lg",
-                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -63,7 +62,18 @@
                                                 return alertUtil.error("文件删除失败，可能已经损坏了");
                                             }
                                         },false,"","get");
-                                        alertUtil.info("删除儿童健康信息成功");
+                                        var submitConfirmModal = {
+                                            modalBodyID: "myPassSuccessTip",
+                                            modalTitle: "提示",
+                                            modalClass: "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            confirmButtonClass: "btn-danger",
+                                            modalConfirmFun: function () {
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -81,73 +91,12 @@
                     myDeleteModal.show();
                 },
 
-                'click .pass' : function (e, value, row, index) {
-                    var myPassModalData ={
-                        modalBodyID :"myPassProtection",
-                        modalTitle : "审核通过",
-                        modalClass : "modal-lg",
-                        modalConfirmFun:function () {
-                            var isSuccess = false;
-                            var submitStatus = {
-                                itemid: row.itemid,
-                                itemcode : row.itemcode,
-                                dataStatus : selectUtil.getPassStatus(sessionStorage.getItem("rolename"),webStatus)
-                            };
-                            ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == ajaxUtil.successCode){
-                                        alertUtil.info("已通过");
-                                        isSuccess = true;
-                                        refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
-                                }
-                            },false,true,"put");
-                            return isSuccess;
-                        }
-
-                    };
-                    var myPassModal = modalUtil.init(myPassModalData);
-                    myPassModal.show();
-                },
-
-                'click .fail' : function (e, value, row, index) {
-                    var myFailTravelModalData ={
-                        modalBodyID :"myNoPassProtection",
-                        modalTitle : "审核不通过",
-                        modalClass : "modal-lg",
-                        modalConfirmFun:function () {
-                            var isSuccess = false;
-                            var submitStatus = {
-                                itemid: row.itemid,
-                                itemcode : row.itemcode,
-                                dataStatus : selectUtil.getFailStatus(sessionStorage.getItem("rolename"),webStatus)
-                            };
-                            ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        alertUtil.info("操作成功");
-                                        isSuccess = true;
-                                        refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
-                                }
-                            },false,true,"put");
-                            return isSuccess;
-                        }
-
-                    };
-                    var myFailModal = modalUtil.init(myFailTravelModalData);
-                    myFailModal.show();
-                },
-
                 'click .under-shelf' : function (e, value, row, index) {
                     var myUnderShelfModalData ={
                         modalBodyID :"myUnderShelfProtection",
                         modalTitle : "下架",
                         modalClass : "modal-lg",
+                        confirmButtonClass: "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -158,7 +107,18 @@
                             ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.success("下架成功");
+                                        var submitConfirmModal = {
+                                            modalBodyID: "myPassSuccessTip",
+                                            modalTitle: "提示",
+                                            modalClass: "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            confirmButtonClass: "btn-danger",
+                                            modalConfirmFun: function () {
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -194,75 +154,12 @@
                     myViewModal.show();
                 },
 
-                'click .submit' : function (e, value, row, index) {
-                    var mySubmitModalData ={
-                        modalBodyID :"mySubmitProtectionUp",
-                        modalTitle : "提交",
-                        modalClass : "modal-lg",
-                        modalConfirmFun:function () {
-                            var isSuccess = false;
-                            var submitStatus = {
-                                itemid: row.itemid,
-                                itemcode : row.itemcode,
-                                dataStatus : webStatus[8].id
-                            };
-                            ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        alertUtil.info("已提交");
-                                        isSuccess = true;
-                                        refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
-
-                                }
-                            },false,true,"put");
-                            return isSuccess;
-                        }
-
-                    };
-                    var mySubmitModal = modalUtil.init(mySubmitModalData);
-                    mySubmitModal.show();
-                },
-
-                'click .no-submit' : function (e, value, row, index) {
-                    var myNoSubmitModalData ={
-                        modalBodyID :"myNoSubmitProtection",
-                        modalTitle : "取消提交",
-                        modalClass : "modal-lg",
-                        modalConfirmFun:function () {
-                            var isSuccess = false;
-                            var submitStatus = {
-                                itemid: row.itemid,
-                                itemcode : row.itemcode,
-                                dataStatus : webStatus[0].id
-                            };
-                            ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        alertUtil.info("已取消提交");
-                                        isSuccess = true;
-                                        refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
-
-                                }
-                            },false,true,"put");
-                            return isSuccess;
-                        }
-
-                    };
-                    var myNoSubmitModal = modalUtil.init(myNoSubmitModalData);
-                    myNoSubmitModal.show();
-                },
-
                 'click .publish' : function (e, value, row, index) {
                     var myPublishModalData ={
                         modalBodyID :"myPublishProtection",
                         modalTitle : "信息发布",
                         modalClass : "modal-lg",
+                        confirmButtonClass: "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -278,6 +175,7 @@
                                             modalTitle : "提示",
                                             modalClass : "modal-lg",
                                             cancelButtonStyle: "display:none",
+                                            confirmButtonClass: "btn-danger",
                                             modalConfirmFun:function (){
                                                 return true;
                                             }

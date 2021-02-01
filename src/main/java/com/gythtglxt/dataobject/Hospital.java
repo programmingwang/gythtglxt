@@ -1,11 +1,15 @@
 package com.gythtglxt.dataobject;
 
+import com.gythtglxt.dataobject.validation.PhoneCheck;
+import com.gythtglxt.dataobject.validation.ValidationGroups;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotBlank;
 
 /**
    *@Author lrt
@@ -37,6 +41,7 @@ public class Hospital {
      * 国医堂名称
      */
     @ApiModelProperty(value = "国医堂名称")
+    @NotBlank(message = "国医堂名称不能为空",groups = ValidationGroups.Insert.class)
     private String hospitalName;
 
     /**
@@ -67,36 +72,43 @@ public class Hospital {
      * 医院电话
      */
     @ApiModelProperty(value = "医院电话")
+    @NotBlank(message = "电话号码不能为空",groups = ValidationGroups.Insert.class)
+    @PhoneCheck(groups = {ValidationGroups.Insert.class})
     private String hospitalPhone;
 
     /**
      * 医院地址省份
      */
     @ApiModelProperty(value = "医院地址省份")
+    @NotBlank(message = "省份不能为空",groups = ValidationGroups.Insert.class)
     private String hospitalPro;
 
     /**
      * 医院地址市
      */
     @ApiModelProperty(value = "医院地址市")
+    @NotBlank(message = "地市不能为空",groups = ValidationGroups.Insert.class)
     private String hospitalCity;
 
     /**
      * 医院地址区
      */
     @ApiModelProperty(value = "医院地址区")
+    @NotBlank(message = "地区不能为空",groups = ValidationGroups.Insert.class)
     private String hospitalCountry;
 
     /**
      * 医院详细地址
      */
     @ApiModelProperty(value = "医院详细地址")
+    @NotBlank(message = "详细地址不能为空",groups = ValidationGroups.Insert.class)
     private String hospitalAdress;
 
     /**
      * 简介
      */
     @ApiModelProperty(value = "简介")
+    @NotBlank(message = "简介不能为空",groups = ValidationGroups.Insert.class)
     private String introduce;
 
     /**

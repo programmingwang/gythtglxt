@@ -1,10 +1,9 @@
 package com.gythtglxt.service.impl;
-import java.util.*;
 
 import com.gythtglxt.dao.HospitalMapper;
 import com.gythtglxt.dataobject.FileDO;
 import com.gythtglxt.dataobject.Hospital;
-import com.gythtglxt.dto.FileDto;
+import com.gythtglxt.dataobject.validation.ValidationGroups;
 import com.gythtglxt.dto.HospitalDto;
 import com.gythtglxt.error.BusinessException;
 import com.gythtglxt.error.EmBusinessError;
@@ -12,10 +11,13 @@ import com.gythtglxt.service.HospitalService;
 import com.gythtglxt.service.IDictService;
 import com.gythtglxt.service.IFileService;
 import com.gythtglxt.util.UsernameUtil;
+import com.gythtglxt.validator.ValidatorImpl;
+import com.gythtglxt.validator.ValidatorResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.*;
 
 /**
  * @Author lrt
@@ -36,6 +38,9 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Resource
     private IDictService dictService;
+
+    @Resource
+    private ValidatorImpl validator;
 
     @Override
     public int deleteByPrimaryKey(Integer itemid, String itemcode) {
@@ -98,6 +103,10 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public int updateByPrimaryKeySelectiveForRegister(Hospital record) {
+        ValidatorResult result = validator.validate(record, ValidationGroups.Insert.class);
+        if (result.isHasErrors()) {
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         return hospitalMapper.updateByPrimaryKeySelective(record);
     }
 
