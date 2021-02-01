@@ -1,4 +1,3 @@
-
 (function() {
     define('modalHtml', ['jquery','objectUtil', 'stringUtil', 'alertUtil', 'bootstrap'], function(jquery, objectUtil,stringUtil,alertUtil,bootstrap) {
 
@@ -1274,7 +1273,7 @@
             '                        <button type="button" id="reasonSpan" class="btn btn-primary btn-sm" >理&emsp;&emsp;由</button>\n' +
             '                    </div>\n' +
             '                  <div>\n' +
-            '                       <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:scroll;word-break: break-all;" id="reason" class="form-control">\n' +
+            '                       <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:scroll;word-break: break-all;" id="viewReason" class="form-control">\n' +
             '                       </div>\n' +
             '                  </div>\n' +
             '                </div>\n' +
@@ -2714,6 +2713,7 @@
         modalHtml.myAuditPassProtectionPre = "您通过后需要省级审核，确认通过？";
         modalHtml.myPassProtectionUp = "您通过后管理员需要进行最后确认，确认通过？";
         modalHtml.myPassSuccessTip = "操作成功";
+        modalHtml.myUpdateConfirm = "更新信息将从小程序下架，是否保存？"
 
 
 
@@ -2721,3 +2721,4 @@
 
     });
 })();
+

@@ -36,4 +36,9 @@ public class UsernameUtil {
         UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
         return user.getItemcode();
     }
+
+    public String getCityId() {
+        UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
+        return user.getCityId();
+    }
 }

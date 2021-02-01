@@ -107,7 +107,7 @@
                                         modalTitle: "提示",
                                         modalClass: "modal-lg",
                                         cancelButtonStyle: "display:none",
-                                        confirmButtonClass : "btn-danger",
+                                        confirmButtonClass: "btn-danger",
                                         modalConfirmFun: function () {
                                             orange.redirect(pathUrl);
                                             return true;

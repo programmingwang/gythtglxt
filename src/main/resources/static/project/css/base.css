@@ -375,12 +375,12 @@ thead.self-thead {
     left: 0;
     overflow: hidden;
 }
-.table td {
+#table td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.table td:last-child
+#table td:last-child
 {
     white-space: nowrap;
     overflow: visible !important;
@@ -390,4 +390,7 @@ span.input-text {
     font-family: SourceHanSansCN-Regular;
     font-size: 16px;
     color: #1e2629;
+}
+a{
+    cursor: pointer;
 }

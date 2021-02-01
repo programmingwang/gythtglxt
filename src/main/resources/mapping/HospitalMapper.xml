@@ -219,5 +219,16 @@
         <include refid="Base_Column_List"/>
         from tb_natmeha_hospital
         where STATUS != '0'
+        <if test="status == 0">
+            and HOSPITAL_COUNTRY = #{addrCountry}
+            and HOSPITAL_CITY = #{addrCity}
+        </if>
+        <if test="status == 1">
+            and HOSPITAL_CITY = #{addrCity}
+            and STATUS in (2,4,5,6,7)
+        </if>
+        <if test="status == 2">
+            and STATUS in (4, 6, 7)
+        </if>
     </select>
 </mapper>

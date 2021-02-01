@@ -66,7 +66,7 @@
                     modalBodyID: "myPublishProtection",
                     modalTitle: "信息发布",
                     modalClass: "modal-lg",
-                    confirmButtonClass : "btn-danger",
+                    confirmButtonClass: "btn-danger",
                     modalConfirmFun: function () {
                         var isSuccess = true;
                         var hotspotEntity;
@@ -107,7 +107,7 @@
                                         modalTitle: "提示",
                                         modalClass: "modal-lg",
                                         cancelButtonStyle: "display:none",
-                                        confirmButtonClass : "btn-danger",
+                                        confirmButtonClass: "btn-danger",
                                         modalConfirmFun: function () {
                                             orange.redirect(pathUrl);
                                             return true;
