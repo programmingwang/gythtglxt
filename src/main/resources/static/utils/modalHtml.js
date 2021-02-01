@@ -2714,6 +2714,7 @@
         modalHtml.myPassProtectionUp = "您通过后管理员需要进行最后确认，确认通过？";
         modalHtml.myPassSuccessTip = "操作成功";
         modalHtml.myUpdateConfirm = "更新信息将从小程序下架，是否保存？"
+        modalHtml.myPublishDoctor = "您确定发布此医生的信息吗？"
 
 
 
