@@ -94,6 +94,7 @@
                         modalTitle : "查看详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
+                        confirmButtonClass : "btn-danger",
                     };
                     data = row;
                     let myTravelModal = modalUtil.init(modalData);
@@ -142,6 +143,7 @@
                         modalBodyID : "myInputReason", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "输入理由",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             param.reason = $("#inputReason").val();
                             ajaxUtil.myAjax(null,auditUrl,param,function (data) {
@@ -161,6 +163,7 @@
                         modalBodyID : "myViewReasonHtml", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看理由",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         confirmButtonStyle: "display:none",
                     };
                     var myTravelModal = modalUtil.init(myModalData);

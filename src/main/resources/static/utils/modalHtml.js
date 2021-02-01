@@ -2226,28 +2226,28 @@
 
 
         modalHtml.myTimeModal ='<div class="row">    \n' +
-            '   <label class="input-label col-lg-12 col-md-12 ">出诊时间</label>\n' +
-            '   <div class=" col-lg-12 col-md-12 mb-3">\n' +
+            '   <label class="input-label col-lg-3 col-md-3 " style="text-align: right;margin-top: 0.5rem;">出诊时间:</label>\n' +
+            '   <div class=" col-lg-9 col-md-9 mb-3">\n' +
             '      <div>\n' +
             '        <input type="text" id="startTime" style="width: 100%;height: 3rem;">  <i class="fa fa-calendar fa-lg" style="position: absolute;top: 1rem;right: 1.5rem;"></i>\n' +
             '      </div>\n' +
             '   </div> \n' +
-            '   <label class="input-label col-lg-12 col-md-12 ">号别</label>\n' +
-            '   <div class=" col-lg-12 col-md-12 mb-3">\n' +
+            '   <label class="input-label col-lg-3 col-md-3 " style="text-align: right;margin-top: 0.5rem;">号别:</label>\n' +
+            '   <div class=" col-lg-9 col-md-9 mb-3">\n' +
             '      <div>\n' +
             '         <select id="numName" class="form-control" style="width: 100%;height: 3rem;">\n' +
             '         </select>\n' +
             '      </div>\n' +
             '   </div> \n' +
-            '   <label class="input-label col-lg-12 col-md-12 ">医生姓名</label>\n' +
-            '   <div class=" col-lg-12 col-md-12 mb-3">\n' +
+            '   <label class="input-label col-lg-3 col-md-3 " style="text-align: right;margin-top: 0.5rem;">医生姓名:</label>\n' +
+            '   <div class=" col-lg-9 col-md-9 mb-3">\n' +
             '      <div>\n' +
             '         <select id="docName" class="form-control" style="width: 100%;height: 3rem;">\n' +
             '         </select>\n' +
             '      </div>\n' +
             '   </div> \n' +
-            '   <label class="input-label col-lg-12 col-md-12 ">预约量</label>\n' +
-            '   <div class=" col-lg-12 col-md-12 mb-3">\n' +
+            '   <label class="input-label col-lg-3 col-md-3" style="text-align: right;margin-top: 0.5rem;">预约量:</label>\n' +
+            '   <div class=" col-lg-9 col-md-9 mb-3">\n' +
             '      <div>\n' +
             '         <input id="registerCount" type="number" class="form-control" style="width: 100%;height: 3rem;">\n' +
             '      </div>\n' +
