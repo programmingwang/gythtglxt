@@ -73,6 +73,7 @@
                 let orgCode = $("#orgCode").val();
                 let username = $("#username").val();
                 let password = $("#password").val();
+                let checkpwd = $("#checkpassword").val();
                 let phone = $("#phone").val();
 
                 let inputCode = $("#reg-code").val().toLowerCase();
@@ -100,6 +101,14 @@
                     alertUtil.error('请输入密码！');
                     return false;
                 }
+                if (checkpwd == '') {
+                    alertUtil.error('请确认密码！');
+                    return false;
+                }
+                if (password != checkpwd){
+                    alertUtil.info("两次输入的密码不一致");
+                    return false
+                }
                 if (phone == '') {
                     alertUtil.error('请输入手机号码！');
                     return false;
@@ -119,6 +128,14 @@
                     return false
                 }
             }
+
+            $("#checkpassword").on("blur", function () {
+                let password = $("#password").val();
+                let checkpwd = $("#checkpassword").val();
+                if (checkpwd != password){
+                    alertUtil.info("两次输入的密码不一致")
+                }
+            });
 
             $("#btn_register").unbind("click").bind("click", function () {
                 let orgName = $("#orgName").val();
