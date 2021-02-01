@@ -364,11 +364,9 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
-            var p2 = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
-            $("#Search").selectUtil(p2);
 
             var aCol;
             if (sessionStorage.getItem("rolename") != "管理员"){
