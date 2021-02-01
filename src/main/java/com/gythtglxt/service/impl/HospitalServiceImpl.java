@@ -114,7 +114,31 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
 	public List<HospitalDto> selectAll(){
         List<HospitalDto> resList = new ArrayList<>();
-        List<Hospital> hospitalList = hospitalMapper.selectAll();
+        String cityId = usernameUtil.getCityId();
+
+        int status;
+        String addrCountry;
+        String addrCity;
+        if (usernameUtil.getRoleName().equals("县级")){
+            addrCity = cityId.split("\\|")[0];
+            addrCountry = cityId.split("\\|")[1];
+            status = 0;
+        }else if (usernameUtil.getRoleName().equals("市级")){
+            addrCity = cityId;
+            addrCountry = null;
+            status = 1;
+            System.out.println("市级");
+        }else {
+            addrCity = null;
+            addrCountry = null;
+            status = 2;
+            System.out.println("省级");
+        }
+        System.out.println(addrCity);
+        System.out.println(addrCountry);
+
+
+        List<Hospital> hospitalList = hospitalMapper.selectAll(addrCountry,addrCity,status);
         for (Hospital item: hospitalList)
         {
             HospitalDto obj = new HospitalDto();
@@ -138,16 +162,15 @@ public class HospitalServiceImpl implements HospitalService {
 
     public void filter(List<HospitalDto> target) {
         Map<String, String> proMap = dictService.getDictMapByCode("auditStatus");
-        target.removeIf(item -> item.getStatus().equals("0"));
-        if (usernameUtil.getRoleName().equals("省级")){
-            target.removeIf(item -> item.getStatus().equals("1"));
-            target.removeIf(item -> item.getStatus().equals("2"));
-            target.removeIf(item -> item.getStatus().equals("3"));
-            target.removeIf(item -> item.getStatus().equals("5"));
-        }else if (usernameUtil.getRoleName().equals("市级")){
-            target.removeIf(item->item.getStatus().equals("1"));
-            target.removeIf(item->item.getStatus().equals("3"));
-        }
+//        if (usernameUtil.getRoleName().equals("省级")){
+//            target.removeIf(item -> item.getStatus().equals("1"));
+//            target.removeIf(item -> item.getStatus().equals("2"));
+//            target.removeIf(item -> item.getStatus().equals("3"));
+//            target.removeIf(item -> item.getStatus().equals("5"));
+//        }else if (usernameUtil.getRoleName().equals("市级")){
+//            target.removeIf(item->item.getStatus().equals("1"));
+//            target.removeIf(item->item.getStatus().equals("3"));
+//        }
 
         for (HospitalDto item : target) {
             if (item.getStatus().equals("1")){
