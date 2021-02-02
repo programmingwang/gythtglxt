@@ -119,6 +119,7 @@
                                         confirmButtonClass: "btn-danger",
                                         modalConfirmFun:function (){
                                             orange.redirect(pathUrl);
+                                            return true;
                                         }
                                     }
                                     var submitConfirm = modalUtil.init(submitConfirmModal);
