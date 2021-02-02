@@ -50,6 +50,7 @@
                         modalTitle : "查看详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
+                        confirmButtonClass : "btn-danger",
                     };
                     var myTravelModal = modalUtil.init(myViewTravelModalData);
                     uploadImg.init();
@@ -75,6 +76,7 @@
                         modalBodyID :"mySubmitModal",
                         modalTitle : "重置密码",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -109,6 +111,7 @@
                     modalBodyID : "myAddAccountModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle : "新增用户账户",
                     modalClass : "modal-lg",
+                    confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
                         var isSuccess = false;
 

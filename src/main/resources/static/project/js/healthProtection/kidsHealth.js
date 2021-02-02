@@ -48,6 +48,7 @@
                         modalBodyID :"myDeleteProtection",
                         modalTitle : "删除儿童健康信息",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -89,6 +90,70 @@
                     };
                     var myDeleteModal = modalUtil.init(myDeleteModalData);
                     myDeleteModal.show();
+                },
+
+                'click .pass' : function (e, value, row, index) {
+                    var myPassModalData ={
+                        modalBodyID :"myPassProtection",
+                        modalTitle : "审核通过",
+                        modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                itemid: row.itemid,
+                                itemcode : row.itemcode,
+                                dataStatus : selectUtil.getPassStatus(sessionStorage.getItem("rolename"),webStatus)
+                            };
+                            ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == ajaxUtil.successCode){
+                                        alertUtil.info("已通过");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false,true,"put");
+                            return isSuccess;
+                        }
+
+                    };
+                    var myPassModal = modalUtil.init(myPassModalData);
+                    myPassModal.show();
+                },
+
+                'click .fail' : function (e, value, row, index) {
+                    var myFailTravelModalData ={
+                        modalBodyID :"myNoPassProtection",
+                        modalTitle : "审核不通过",
+                        modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                itemid: row.itemid,
+                                itemcode : row.itemcode,
+                                dataStatus : selectUtil.getFailStatus(sessionStorage.getItem("rolename"),webStatus)
+                            };
+                            ajaxUtil.myAjax(null,operateUrl,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("操作成功");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false,true,"put");
+                            return isSuccess;
+                        }
+
+                    };
+                    var myFailModal = modalUtil.init(myFailTravelModalData);
+                    myFailModal.show();
                 },
 
                 'click .under-shelf' : function (e, value, row, index) {
@@ -140,6 +205,7 @@
                         modalTitle : "查看详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
+                        confirmButtonClass : "btn-danger",
                     };
                     var myViewModal = modalUtil.init(myViewModalData);
                     $("#hotspotTitle").val(row.hotspotTitle);

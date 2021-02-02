@@ -47,6 +47,7 @@
                         modalBodyID :"myPassModal",
                         modalTitle : "审核通过",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -79,6 +80,7 @@
                         modalBodyID :"myFailModal",
                         modalTitle : "审核不通过",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -111,6 +113,7 @@
                         modalBodyID :"myUnderShelfModal",
                         modalTitle : "下架",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -141,6 +144,7 @@
                         modalTitle : "查看详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
+                        confirmButtonClass : "btn-danger",
                     };
                     var myChineseMedicineModal = modalUtil.init(myViewChineseMedicineModalData);
                     $("#chineseMedicineName").val(row.chineseMedicineName);
@@ -165,6 +169,7 @@
                         modalBodyID :"mySubmitModal",
                         modalTitle : "提交",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -193,6 +198,7 @@
                         modalBodyID :"myNoSubmitModal",
                         modalTitle : "取消提交",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {

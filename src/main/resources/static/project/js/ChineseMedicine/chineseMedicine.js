@@ -73,11 +73,82 @@
                     myDeleteModal.show();
                 },
 
+                'click .pass' : function (e, value, row, index) {
+                    var myPassChineseMedicineModalData ={
+                        modalBodyID :"myPassProtection",
+                        modalTitle : "审核通过",
+                        modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": selectUtil.getPassStatus(sessionStorage.getItem("rolename"),webStatus)
+                            };
+                            ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == ajaxUtil.successCode){
+                                        if(sessionStorage.getItem("rolename") == "县级"){
+                                            alertUtil.info("县局审核已通过，已发送给市局中医药管理部门！");
+                                        }else if(sessionStorage.getItem("rolename") == "市级"){
+                                            alertUtil.info("市局审核已通过，已发送给省局中医药管理部门！");
+                                        }else if(sessionStorage.getItem("rolename") == "省级"){
+                                            alertUtil.info("省局审核已通过，已通知管理员确认发布！");
+                                        }
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+                    };
+                    var myPassModal = modalUtil.init(myPassChineseMedicineModalData);
+                    myPassModal.show();
+                },
+
+                'click .fail' : function (e, value, row, index) {
+                    var myFailChineseMedicineModalData ={
+                        modalBodyID :"myNoPassProtection",
+                        modalTitle : "审核不通过",
+                        modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": ""
+                            };
+                            if(sessionStorage.getItem("rolename") == "县级" ){
+                                submitStatus.status = webStatus[2].id;
+                            }else if(sessionStorage.getItem("rolename") == "市级" ){
+                                submitStatus.status = webStatus[4].id;
+                            }else if(sessionStorage.getItem("rolename") == "省级" ){
+                                submitStatus.status = webStatus[6].id;
+                            }
+                            ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("操作成功");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+                    };
+                    var myFailModal = modalUtil.init(myFailChineseMedicineModalData);
+                    myFailModal.show();
+                },
                 'click .under-shelf' : function (e, value, row, index) {
                     var myUnderShelfChineseMedicineModalData ={
                         modalBodyID :"myUnderShelfProtection",
                         modalTitle : "紧急下架",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -119,6 +190,7 @@
                         modalTitle : "查看详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
+                        confirmButtonClass : "btn-danger",
                     };
                     var myChineseMedicineModal = modalUtil.init(myViewChineseMedicineModalData);
                     $("#name").val(row.name);
@@ -138,11 +210,70 @@
                     myChineseMedicineModal.show();
                 },
 
+                'click .submit' : function (e, value, row, index) {
+                    var mySubmitChineseMedicineModalData ={
+                        modalBodyID :"mySubmitProtectionUp",
+                        modalTitle : "提交",
+                        modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": webStatus[8].id
+                            };
+                            ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("已提交给县局中医药管理部门");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+                    };
+                    var mySubmitModal = modalUtil.init(mySubmitChineseMedicineModalData);
+                    mySubmitModal.show();
+                },
+
+                'click .no-submit' : function (e, value, row, index) {
+                    var myNoSubmitChineseMedicineModalData ={
+                        modalBodyID :"myNoSubmitProtection",
+                        modalTitle : "取消提交",
+                        modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": webStatus[0].id
+                            };
+                            ajaxUtil.myAjax(null,"changestatustochinesemedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("已取消提交");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+                    };
+                    var mySubmitModal = modalUtil.init(myNoSubmitChineseMedicineModalData);
+                    mySubmitModal.show();
+                },
+
                 'click .publish' : function (e, value, row, index) {
                     var mypublishChineseMedicineModalData ={
                         modalBodyID :"myPublishProtection",
                         modalTitle : "发布信息到小程序",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -289,9 +420,11 @@
                 if (aria==="true"){
                     this.innerText="展开";
                     aria = "false";
+                    document.getElementById("btn_addTask").classList.remove("openBtnP");
                 } else {
                     this.innerText="收起";
                     aria = "true";
+                    document.getElementById("btn_addTask").classList.add("openBtnP");
                 }
             })
         })

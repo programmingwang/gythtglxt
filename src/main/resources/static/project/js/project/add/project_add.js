@@ -74,6 +74,7 @@
                     modalBodyID: "myAuditSubmitProtectionCountry",
                     modalTitle: "提交确认",
                     modalClass: "modal-lg",
+                    confirmButtonClass : "btn-danger",
                     modalConfirmFun: function () {
                         var projectEntity;
                         var operateMessage;
@@ -111,6 +112,7 @@
                                         modalTitle : "提示",
                                         modalClass : "modal-lg",
                                         cancelButtonStyle: "display:none",
+                                        confirmButtonClass : "btn-danger",
                                         modalConfirmFun:function (){
                                             orange.redirect(pathUrl);
                                         }
@@ -136,7 +138,6 @@
 
             (function init() {
                 if (isUpdate()){
-                    $(".titleCSS").text("修改功效特色信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
                     editor.txt.html(tempdata.content);
