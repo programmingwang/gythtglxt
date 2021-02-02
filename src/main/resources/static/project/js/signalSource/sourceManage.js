@@ -175,7 +175,9 @@
                 var myTravelModal = modalUtil.init(myViewTimeModalData);
                 myTravelModal.show();
                 if (view){
-                    $(".modal-footer .btn-primary").remove()
+                    $(".modal-footer .btn-danger").remove();
+                    $(".modal-body input").attr('disabled','disabled');
+                    $(".modal-body select").attr('disabled','disabled');
                 }
                 var options = dictUtil.getDictByCode(dictUtil.DICT_LIST.numType);
                 $("#numName").selectUtil(options);
