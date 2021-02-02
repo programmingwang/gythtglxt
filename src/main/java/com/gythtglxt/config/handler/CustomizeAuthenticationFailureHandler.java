@@ -29,8 +29,24 @@ public class CustomizeAuthenticationFailureHandler implements AuthenticationFail
             //密码错误
             result = ResultTool.fail(EmBusinessError.USER_CREDENTIALS_ERROR);
         }else if (e instanceof InternalAuthenticationServiceException) {
-            //用户不存在
-            result = ResultTool.fail(EmBusinessError.USER_ACCOUNT_NOT_EXIST);
+            if ("用户不存在".equals(e.getMessage())) {
+                //用户不存在
+                result = ResultTool.fail(EmBusinessError.USER_ACCOUNT_NOT_EXIST);
+            } else if (e.getMessage().contains("等待县局审核")){
+                result = ResultTool.fail(EmBusinessError.WAIT_XIAN_CHECK);
+            } else if (e.getMessage().contains("县局审核不通过")){
+                result = ResultTool.fail(EmBusinessError.XIAN_CHECK_NOT_PASSED);
+            } else if (e.getMessage().contains("县局审核通过")){
+                result = ResultTool.fail(EmBusinessError.XIAN_CHECK_PASSED);
+            }else if (e.getMessage().contains("市局审核不通过")){
+                result = ResultTool.fail(EmBusinessError.SHI_CHECK_NOT_PASSED);
+            }else if (e.getMessage().contains("市局审核通过")){
+                result = ResultTool.fail(EmBusinessError.SHI_CHECK_PASSED);
+            }else if (e.getMessage().contains("省局审核不通过")){
+                result = ResultTool.fail(EmBusinessError.SHENG_CHECK_NOT_PASSED);
+            }else {
+                result = ResultTool.fail(EmBusinessError.UNKNOWN_ERROR);
+            }
         }else{
             //其他错误
             result = ResultTool.fail(EmBusinessError.fail);

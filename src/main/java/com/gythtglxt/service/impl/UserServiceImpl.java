@@ -139,6 +139,7 @@ public class UserServiceImpl implements UserService {
         userDO.setItemcode(userItemCode);
         userDO.setOrgCode(userDto.getOrgCode());
         userDO.setUsername(userDto.getUsername());
+        userDO.setName(userDto.getOrgName());
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String password = passwordEncoder.encode(userDto.getPassword());
         userDO.setSalt(userDto.getUsername());// 将 登陆账号 设置为 盐，存放到数据库中
