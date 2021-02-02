@@ -369,3 +369,11 @@ thead.self-thead {
 a{
     cursor: pointer;
 }
+.titleCSS {
+    padding-bottom: 45px;
+    padding-top: 20px;
+    padding-right: 100px;
+    text-align: center;
+    color: #775637;
+    font-size: 24px;
+}

@@ -49,8 +49,19 @@
                 ajaxUtil.myAjax(null,opreateUrl,hotspotEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
-                            alertUtil.info(operateMessage);
-                            orange.redirect(pathUrl);
+                            var submitConfirmModal = {
+                                modalBodyID: "myPublishToWechat",
+                                modalTitle: "提示",
+                                modalClass: "modal-lg",
+                                cancelButtonStyle: "display:none",
+                                confirmButtonClass: "btn-danger",
+                                modalConfirmFun: function () {
+                                    orange.redirect(pathUrl);
+                                    return true;
+                                }
+                            }
+                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                            submitConfirm.show();
                         }else{
                             alertUtil.error(data.msg);
                         }
@@ -130,6 +141,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改中医文化热点信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#hotspotTitle").val(tempdata.hotspotTitle);
                     $("#hotspotSource").val(tempdata.hotspotSource);

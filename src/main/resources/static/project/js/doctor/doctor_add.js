@@ -11,6 +11,7 @@
             uploadImg.init();
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改服务团队医生信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     uploadImg.setImgSrc(tempdata.filePath)
                     $("#doctorName").val(tempdata.doctorName);
