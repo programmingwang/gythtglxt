@@ -57,7 +57,17 @@
                                             return alertUtil.error("文件删除失败");
                                         }
                                     },false,"","get");
-                                    alertUtil.info("删除医生信息成功");
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myPassSuccessTip",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            return true;
+                                        }
+                                    }
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
                                     isSuccess = true;
                                     refreshTable();
                                 }
@@ -81,8 +91,8 @@
             $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [
-                {field: 'doctorName', title: '专家名称'},
-                {field: 'filePath', title: '专家照片',formatter:function (value, row, index) {
+                {field: 'doctorName', title: '医生姓名'},
+                {field: 'filePath', title: '医生照片',formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';
                         }else{

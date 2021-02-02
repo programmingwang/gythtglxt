@@ -56,6 +56,7 @@
                         modalTitle : "查看图片详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
+                        confirmButtonClass : "btn-danger",
                     };
                     var myCheckImgModal = modalUtil.init(myCheckImg);
                     for(var i=0;i<row.filePath.length;i++){
@@ -95,7 +96,17 @@
                                                 return alertUtil.error("文件删除失败，可能已经损坏了");
                                             }
                                         },false,"","get");
-                                        alertUtil.info("删除开展项目成功");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myPassSuccessTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -119,6 +130,7 @@
                         modalBodyID :"myPassProtection",
                         modalTitle : "审核通过",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -134,6 +146,7 @@
                                             modalTitle : "提示",
                                             modalClass : "modal-lg",
                                             cancelButtonStyle: "display:none",
+                                            confirmButtonClass : "btn-danger",
                                             modalConfirmFun:function (){
                                                 return true;
                                             }
@@ -163,6 +176,7 @@
                         modalBodyID :"myNoPassProtection",
                         modalTitle : "审核不通过",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -173,7 +187,17 @@
                             ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("操作成功");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myPassSuccessTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -194,6 +218,7 @@
                         modalBodyID :"myUnderShelfProtection",
                         modalTitle : "下架",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -204,7 +229,17 @@
                             ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.success("下架成功");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myPassSuccessTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -226,6 +261,7 @@
                         modalTitle : "查看详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
+                        confirmButtonClass : "btn-danger",
                     };
                     var myViewCharacteriModal = modalUtil.init(myViewCharacteriModalData);
                     $("#name").val(row.name);
@@ -244,6 +280,7 @@
                         modalBodyID :"myAuditSubmitProtectionCountry",
                         modalTitle : "提交",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -259,6 +296,7 @@
                                             modalTitle : "提示",
                                             modalClass : "modal-lg",
                                             cancelButtonStyle: "display:none",
+                                            confirmButtonClass : "btn-danger",
                                             modalConfirmFun:function (){
                                                 return true;
                                             }
@@ -286,6 +324,7 @@
                         modalBodyID :"myNoSubmitProtection",
                         modalTitle : "取消提交",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -296,7 +335,17 @@
                             ajaxUtil.myAjax(null,"/project/updateProject",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已取消提交");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myPassSuccessTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -333,6 +382,7 @@
                                             modalTitle : "提示",
                                             modalClass : "modal-lg",
                                             cancelButtonStyle: "display:none",
+                                            confirmButtonClass : "btn-danger",
                                             modalConfirmFun:function (){
                                                 return true;
                                             }

@@ -53,7 +53,17 @@
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,opUrl,entity,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    alertUtil.info("删除成功");
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myPassSuccessTip",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            return true;
+                                        }
+                                    }
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
                                     isSuccess = true;
                                     refreshTable();
                                 }
@@ -108,7 +118,8 @@
                 var myViewTimeModalData = {
                     modalBodyID: "myTimeModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle: "维护专家号源",
-                    modalClass: "modal-sm",
+                    modalClass: "modal-md",
+                    confirmButtonClass : "btn-danger",
                     modalConfirmFun: function () {
                         var isSuccess = false;
                         var doctorCode = $("#docName").val()
@@ -133,7 +144,17 @@
                         var isSuccess = false;
                         ajaxUtil.myAjax(null, opUrl, param, function (data) {
                             if (ajaxUtil.success(data)) {
-                                alertUtil.info("设置成功");
+                                var submitConfirmModal = {
+                                    modalBodyID :"myPassSuccessTip",
+                                    modalTitle : "提示",
+                                    modalClass : "modal-lg",
+                                    cancelButtonStyle: "display:none",
+                                    modalConfirmFun:function (){
+                                        return true;
+                                    }
+                                }
+                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                submitConfirm.show();
                                 isSuccess = true;
                                 refreshTable();
                             }

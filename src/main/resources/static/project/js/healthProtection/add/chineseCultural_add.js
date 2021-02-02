@@ -66,12 +66,11 @@
                     modalBodyID: "myPublishProtection",
                     modalTitle: "信息发布",
                     modalClass: "modal-lg",
+                    confirmButtonClass: "btn-danger",
                     modalConfirmFun: function () {
-                        var isSuccess = false;
                         var hotspotEntity;
                         var operateMessage;
                         if(!isUpdate()){
-                            operateMessage = "新增中医文化成功,信息将直接显示到国医堂小程序中,文责自负!如有问题请紧急下架!";
                             hotspotEntity = {
                                 itemcode: stringUtil.getUUID(),
                                 hotspotTitle : $("#hotspotTitle").val(),
@@ -106,6 +105,7 @@
                                         modalTitle : "提示",
                                         modalClass : "modal-lg",
                                         cancelButtonStyle: "display:none",
+                                        confirmButtonClass: "btn-danger",
                                         modalConfirmFun:function (){
                                             orange.redirect(pathUrl);
                                         }
@@ -120,7 +120,6 @@
                             }
                         }, false, true, type);
                     }
-
                 }
                 var x = modalUtil.init(myPublishModalData);
                 x.show();
