@@ -47,7 +47,6 @@
                     modalBodyID : "addExperModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle : "分配专家",
                     modalClass : "modal-lg",
-                    confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         for (var i = 0; i < rows.length; i++){

@@ -118,8 +118,7 @@
                 var myViewTimeModalData = {
                     modalBodyID: "myTimeModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle: "维护专家号源",
-                    modalClass: "modal-md",
-                    confirmButtonClass : "btn-danger",
+                    modalClass: "modal-sm",
                     modalConfirmFun: function () {
                         var isSuccess = false;
                         var doctorCode = $("#docName").val()
