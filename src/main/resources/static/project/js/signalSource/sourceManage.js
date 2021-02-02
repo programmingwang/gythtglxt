@@ -3,6 +3,16 @@
         function (jquery, ajaxUtil, bootstrapTableUtil, objectUtil, alertUtil, modalUtil, selectUtil, stringUtil, dictUtil, datetimepicker) {
 
 
+            // 判断日期是不是今天、昨天、明天
+            const isToday = (date) => {
+                let d = new Date(date).setHours(0, 0, 0, 0);
+                let today = new Date().setHours(0, 0, 0, 0);
+
+                return d - today === 0;
+            };
+
+            isToday(new Date());	// 今天
+
             var userCode = sessionStorage.getItem("itemcode");
 
             var baseUrl = "/accountSource/signal-source?userCode="+userCode;
@@ -19,7 +29,7 @@
 
 
             function operation(value, row, index) {
-                if (row.status === '有效') {
+                if (row.status === '有效' && !isToday(row.registerDate)) {
                     return [
                         '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >修改</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
