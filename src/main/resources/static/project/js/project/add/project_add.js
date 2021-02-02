@@ -47,8 +47,18 @@
                 ajaxUtil.myAjax(null,opreateUrl,projectEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
-                            alertUtil.info(operateMessage);
-                            orange.redirect(pathUrl);
+                            var submitConfirmModal = {
+                                modalBodyID :"myPassSuccessTip",
+                                modalTitle : "提示",
+                                modalClass : "modal-lg",
+                                cancelButtonStyle: "display:none",
+                                modalConfirmFun:function (){
+                                    orange.redirect(pathUrl);
+                                    return true;
+                                }
+                            }
+                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                            submitConfirm.show();
                         }else{
                             alertUtil.error(data.msg);
                         }
@@ -64,6 +74,7 @@
                     modalBodyID: "myAuditSubmitProtectionCountry",
                     modalTitle: "提交确认",
                     modalClass: "modal-lg",
+                    confirmButtonClass : "btn-danger",
                     modalConfirmFun: function () {
                         var projectEntity;
                         var operateMessage;
@@ -101,6 +112,7 @@
                                         modalTitle : "提示",
                                         modalClass : "modal-lg",
                                         cancelButtonStyle: "display:none",
+                                        confirmButtonClass : "btn-danger",
                                         modalConfirmFun:function (){
                                             orange.redirect(pathUrl);
                                         }

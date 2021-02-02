@@ -63,11 +63,47 @@ public class ProjectServiceImpl implements IProjectService {
 
     @Override
     public List<ProjectDto> selectproAll(String dataStatus, String userCode) {
-        return projectMapper.selectproAll(dataStatus,userCode);
+        String rolename = usernameUtil.getRoleName();
+        String cityid = projectMapper.selCityIdByItemCode(usernameUtil.getItemCode());
+        String[] cityCountry = cityid.split("\\|");
+        String addrCity,addrCountry = null;
+        if (cityCountry.length == 1){
+            addrCity = cityCountry[0];
+        }else{
+            addrCity = cityCountry[0];
+            addrCountry = cityCountry[1];
+        }
+        if(StringUtils.equals("管理员",rolename)){
+            return projectMapper.selectproAll(dataStatus,userCode,null,null,null,null);
+        }else if(StringUtils.equals("县级",rolename)){
+            return projectMapper.selectproAll(dataStatus,userCode,"yes",null,addrCity,addrCountry);
+        }else if(StringUtils.equals("市级",rolename)){
+            return projectMapper.selectproAll(dataStatus,userCode,null,"yes",addrCity,addrCountry);
+        }else{
+            return projectMapper.selectproAll(dataStatus,userCode,null,null,addrCity,addrCountry);
+        }
     }
 
     @Override
     public List<ProjectDto> selectchaAll(String dataStatus, String userCode) {
-        return projectMapper.selectchaAll(dataStatus,userCode);
+        String rolename = usernameUtil.getRoleName();
+        String cityid = projectMapper.selCityIdByItemCode(usernameUtil.getItemCode());
+        String[] cityCountry = cityid.split("\\|");
+        String addrCity,addrCountry = null;
+        if (cityCountry.length == 1){
+            addrCity = cityCountry[0];
+        }else{
+            addrCity = cityCountry[0];
+            addrCountry = cityCountry[1];
+        }
+        if(StringUtils.equals("管理员",rolename)){
+            return projectMapper.selectchaAll(dataStatus,userCode,null,null,null,null);
+        }else if(StringUtils.equals("县级",rolename)){
+            return projectMapper.selectchaAll(dataStatus,userCode,"yes",null,addrCity,addrCountry);
+        }else if(StringUtils.equals("市级",rolename)){
+            return projectMapper.selectchaAll(dataStatus,userCode,null,"yes",addrCity,addrCountry);
+        }else{
+            return projectMapper.selectchaAll(dataStatus,userCode,null,null,addrCity,addrCountry);
+        }
     }
 }

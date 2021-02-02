@@ -57,7 +57,17 @@
                                             return alertUtil.error("文件删除失败");
                                         }
                                     },false,"","get");
-                                    alertUtil.info("删除医生信息成功");
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myPassSuccessTip",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            return true;
+                                        }
+                                    }
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
                                     isSuccess = true;
                                     refreshTable();
                                 }

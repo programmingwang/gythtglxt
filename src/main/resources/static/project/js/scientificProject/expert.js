@@ -50,6 +50,7 @@
                         modalTitle : "查看",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
+                        confirmButtonClass : "btn-danger",
                     };
                     var myViewExpertModal = modalUtil.init(myViewExpertModalData);
                     $("#username").val(row.username);
@@ -70,6 +71,7 @@
                         modalBodyID :"myResetPassword",
                         modalTitle : "重置密码",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
