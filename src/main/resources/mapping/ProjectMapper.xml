@@ -226,9 +226,7 @@
             </if>
             order by p.itemUpdateAt desc) p2 , user, tb_natmeha_hospital hospital
             where p2.USER_CODE = user.itemCode and user.ORG_CODE = hospital.itemCode
-            <if test="isCity != null">
-                and hospital.HOSPITAL_CITY = #{addrCity}
-            </if>
+            and hospital.HOSPITAL_CITY = #{addrCity}
             <if test="isCountry != null">
                 and hospital.HOSPITAL_COUNTRY = #{addrCountry}
             </if>
@@ -276,9 +274,7 @@
             </if>
             order by p.itemUpdateAt desc) p2 , user, tb_natmeha_hospital hospital
             where p2.USER_CODE = user.itemCode and user.ORG_CODE = hospital.itemCode
-            <if test="isCity != null">
-                and hospital.HOSPITAL_CITY = #{addrCity}
-            </if>
+            and hospital.HOSPITAL_CITY = #{addrCity}
             <if test="isCountry != null">
                 and hospital.HOSPITAL_COUNTRY = #{addrCountry}
             </if>

@@ -76,6 +76,7 @@
                     modalBodyID: "myAuditSubmitProtectionCountry",
                     modalTitle: "提交确认",
                     modalClass: "modal-lg",
+                    confirmButtonClass : "btn-danger",
                     modalConfirmFun: function () {
                         var characteriEntity;
                         var operateMessage;
@@ -116,6 +117,7 @@
                                         modalTitle : "提示",
                                         modalClass : "modal-lg",
                                         cancelButtonStyle: "display:none",
+                                        confirmButtonClass : "btn-danger",
                                         modalConfirmFun:function (){
                                             orange.redirect(pathUrl);
                                         }
