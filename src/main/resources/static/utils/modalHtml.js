@@ -2634,6 +2634,35 @@
             '\n' +
             '</div>';
 
+        modalHtml.myChangePasswordModal = ' <div class="row">\n' +
+            '            <div class="col-lg-12 col-md-12 mb-3" style="margin-top: 0;padding-top: 0;">\n' +
+            '                <div class="row">\n' +
+            '                    <div class="col-lg-2 col-md-2"> <span class="titleName" style="margin-top: 0;padding-top: 0;">电话号码：</span> </div>\n' +
+            '                    <input type="text" id="phone" class="form-control col-lg-9 col-md-9">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12 mb-3">\n' +
+            '                <div class="row">\n' +
+            '                    <div class="col-lg-2 col-md-2">\n' +
+            '                        <sapn class="titleName">原密码：</sapn>\n' +
+            '                    </div>\n' +
+            '                    <input type="password" id="oldPwd" class="form-control col-lg-9 col-md-9">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12 mb-3">\n' +
+            '                <div class="row">\n' +
+            '                    <div class="col-lg-2 col-md-2"> <span class="titleName">新密码：</span> </div>\n' +
+            '                    <input type="password" id="newPwd" class="form-control col-lg-9 col-md-9">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12 mb-3">\n' +
+            '                <div class="row">\n' +
+            '                    <div class="col-lg-2 col-md-2"> <span class="titleName">确认密码：</span> </div>\n' +
+            '                    <input type="password" id="checkPwd" class="form-control col-lg-9 col-md-9">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '        </div>';
+
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
         modalHtml.myDeleteModalTraditionalCul = '是否删除中医医史信息?';
         modalHtml.myDeleteModalTraditionalDoc = '是否删除历代名家信息?';

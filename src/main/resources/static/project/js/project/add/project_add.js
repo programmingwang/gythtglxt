@@ -136,6 +136,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改功效特色信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
                     editor.txt.html(tempdata.content);

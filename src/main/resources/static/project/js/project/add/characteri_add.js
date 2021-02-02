@@ -141,6 +141,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改开展项目信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
                     $("#price").val(tempdata.price),

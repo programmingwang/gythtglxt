@@ -47,24 +47,31 @@
             $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.status = "1";
-                if (uploadImg.isUpdate()) {
+                if (!stringUtil.isBlank(param.hospitalName) && !stringUtil.isBlank(param.hospitalPhone) && !stringUtil.isBlank(param.hospitalPro) &&
+                    !stringUtil.isBlank(param.hospitalCity) && !stringUtil.isBlank(param.hospitalCountry) && !stringUtil.isBlank(param.hospitalAdress) &&
+                    !stringUtil.isBlank(param.introduce) && !stringUtil.isBlank(uploadImg.getFiles()[0].name)){
                     ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "lrt", "lrt")
+                    ajaxUtil.myAjax(null, opUrl, param, function (data) {
+                        if (ajaxUtil.success(data)) {
+                            window.location.href = "/userLogin"
+                            // orange.redirect(pathUrl)
+                        } else {
+                            alert(data.msg)
+                        }
+                    }, true, "123", type);
+                } else {
+                    alert("请插入图片且输入不能为空！")
                 }
-                ajaxUtil.myAjax(null, opUrl, param, function (data) {
-                    if (ajaxUtil.success(data)) {
-                        window.location.href = "/userLogin"
-                        // orange.redirect(pathUrl)
-                    } else {
-                        alert(data.msg)
-                    }
-                }, true, "123", type);
+
                 return false;
             });
 
             var init = function () {
                 $("#hospitalName").val(sessionStorage.getItem("orgName"));
                 $("#hospitalPhone").val(sessionStorage.getItem("phone"));
-                $("#distpicker").distpicker();
+                $("#distpicker").distpicker({
+                    province: "河北省"
+                });
                 itemcode = sessionStorage.getItem("orgCode");
                 init = function () {
 

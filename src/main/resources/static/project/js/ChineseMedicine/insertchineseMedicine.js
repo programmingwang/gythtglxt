@@ -59,9 +59,20 @@
                 fileUtil.handleFile(isUpdate(), chinesemedicineEntity.itemcode, uploadImg.getFiles()[0]);
                 ajaxUtil.myAjax(null,addUpdateUrl,chinesemedicineEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/ChineseMedicine/chineseMedicine";
-                        orange.redirect(url);
+                        var submitConfirmModal = {
+                            modalBodyID: "myPublishToWechat",
+                            modalTitle: "提示",
+                            modalClass: "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            confirmButtonClass: "btn-danger",
+                            modalConfirmFun: function () {
+                                var url = "/ChineseMedicine/chineseMedicine";
+                                orange.redirect(url);
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                        submitConfirm.show();
                     }else {
                         alertUtil.alert(data.msg);
                     }
@@ -144,6 +155,7 @@
             });
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改中药常识热点信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
                     $("#alias").val(tempdata.alias);
