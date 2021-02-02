@@ -74,11 +74,13 @@ public class ProjectServiceImpl implements IProjectService {
             addrCountry = cityCountry[1];
         }
         if(StringUtils.equals("管理员",rolename)){
-            return projectMapper.selectproAll(dataStatus,userCode,null,null,null);
+            return projectMapper.selectproAll(dataStatus,userCode,null,null,null,null);
         }else if(StringUtils.equals("县级",rolename)){
-            return projectMapper.selectproAll(dataStatus,userCode,"yes",addrCity,addrCountry);
+            return projectMapper.selectproAll(dataStatus,userCode,"yes",null,addrCity,addrCountry);
+        }else if(StringUtils.equals("市级",rolename)){
+            return projectMapper.selectproAll(dataStatus,userCode,null,"yes",addrCity,addrCountry);
         }else{
-            return projectMapper.selectproAll(dataStatus,userCode,null,addrCity,addrCountry);
+            return projectMapper.selectproAll(dataStatus,userCode,null,null,addrCity,addrCountry);
         }
     }
 
@@ -95,10 +97,13 @@ public class ProjectServiceImpl implements IProjectService {
             addrCountry = cityCountry[1];
         }
         if(StringUtils.equals("管理员",rolename)){
-            return projectMapper.selectchaAll(dataStatus,userCode,null,null,null);
+            return projectMapper.selectchaAll(dataStatus,userCode,null,null,null,null);
         }else if(StringUtils.equals("县级",rolename)){
-            return projectMapper.selectchaAll(dataStatus,userCode,"yes",addrCity,addrCountry);
+            return projectMapper.selectchaAll(dataStatus,userCode,"yes",null,addrCity,addrCountry);
+        }else if(StringUtils.equals("市级",rolename)){
+            return projectMapper.selectchaAll(dataStatus,userCode,null,"yes",addrCity,addrCountry);
         }else{
-            return projectMapper.selectchaAll(dataStatus,userCode,null,addrCity,addrCountry);
-        }    }
+            return projectMapper.selectchaAll(dataStatus,userCode,null,null,addrCity,addrCountry);
+        }
+    }
 }

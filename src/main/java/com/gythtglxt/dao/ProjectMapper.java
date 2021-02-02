@@ -18,9 +18,9 @@ public interface ProjectMapper {
 
     int updateByPrimaryKeySelective(Project record);
 
-    List<ProjectDto> selectproAll(@Param("status") String dataStatus, @Param("userCode")String userCode, @Param("isCountry")String isCountry, @Param("addrCity")String addrCity, @Param("addrCountry")String addrCountry);
+    List<ProjectDto> selectproAll(@Param("status") String dataStatus, @Param("userCode")String userCode, @Param("isCountry")String isCountry, @Param("isCity")String isCity, @Param("addrCity")String addrCity, @Param("addrCountry")String addrCountry);
 
-    List<ProjectDto> selectchaAll(@Param("status") String dataStatus, @Param("userCode")String userCode, @Param("isCountry")String isCountry, @Param("addrCity")String addrCity, @Param("addrCountry")String addrCountry);
+    List<ProjectDto> selectchaAll(@Param("status") String dataStatus, @Param("userCode")String userCode, @Param("isCountry")String isCountry, @Param("isCity")String isCity, @Param("addrCity")String addrCity, @Param("addrCountry")String addrCountry);
 
 
 }
