@@ -94,7 +94,6 @@
                         modalTitle : "查看详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
-                        confirmButtonClass : "btn-danger",
                     };
                     data = row;
                     let myTravelModal = modalUtil.init(modalData);
@@ -175,7 +174,6 @@
                         modalBodyID : "myResonable",
                         modalTitle : "输入理由",
                         modalClass : "modal-lg",
-                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             param.reason = $("#reason").val();
                             ajaxUtil.myAjax(null,auditUrl,param,function (data) {
@@ -200,7 +198,6 @@
                         modalBodyID : "myViewReasonHtml", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看理由",
                         modalClass : "modal-lg",
-                        confirmButtonClass : "btn-danger",
                         confirmButtonStyle: "display:none",
                     };
                     var myTravelModal = modalUtil.init(myModalData);
@@ -228,7 +225,7 @@
                 {field: 'hospitalPhone', title: '联系电话'},
                 {field: 'itemupdateat', title: '申请时间'},
                 {field: 'status', title: '审核状态'},
-                {field: 'action',  title: '操作',width:'300px',formatter: operation,events:orgEvents}]
+                {field: 'action',  title: '操作',formatter: operation,events:orgEvents}]
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, aParam, aCol);
 

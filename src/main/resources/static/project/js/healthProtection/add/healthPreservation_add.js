@@ -66,7 +66,7 @@
                     modalBodyID: "myPublishProtection",
                     modalTitle: "信息发布",
                     modalClass: "modal-lg",
-                    confirmButtonClass : "btn-danger",
+                    confirmButtonClass: "btn-danger",
                     modalConfirmFun: function () {
                         var isSuccess = false;
                         var hotspotEntity;

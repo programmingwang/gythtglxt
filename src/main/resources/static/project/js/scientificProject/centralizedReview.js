@@ -69,7 +69,6 @@
                         modalBodyID :"mySubmitModal",
                         modalTitle : "提交",
                         modalClass : "modal-lg",
-                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {

@@ -170,7 +170,6 @@
                         modalBodyID :"myPassModal",
                         modalTitle : "审核通过",
                         modalClass : "modal-lg",
-                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var shStatus = {
@@ -226,7 +225,6 @@
                         modalBodyID :"myResonable",
                         modalTitle : "审核不通过理由",
                         modalClass : "modal-lg",
-                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var developTopicDO = {
@@ -293,7 +291,6 @@
                         modalBodyID :"myResonable",
                         modalTitle : "放弃课题理由",
                         modalClass : "modal-lg",
-                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var developTopicDO = {
@@ -344,7 +341,6 @@
                         modalBodyID :"mySubmitModal",
                         modalTitle : "提交",
                         modalClass : "modal-lg",
-                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var shStatus = {
@@ -374,7 +370,6 @@
                         modalTitle: "查看理由",
                         modalClass: "modal-lg",
                         confirmButtonStyle: "display:none",
-                        confirmButtonClass : "btn-danger",
                     }
 
 
