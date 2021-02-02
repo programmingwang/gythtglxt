@@ -116,9 +116,9 @@
             function modalFun(reqType,row,view) {
 
                 var myViewTimeModalData = {
-                    modalBodyID: "myTimeModal", //公用的在后面给span加不同的内容就行了，其他模块同理
+                    modalBodyID: "myTimeModal",
                     modalTitle: "维护专家号源",
-                    modalClass: "modal-sm",
+                    modalClass: "modal-md",
                     modalConfirmFun: function () {
                         var isSuccess = false;
                         var doctorCode = $("#docName").val()
