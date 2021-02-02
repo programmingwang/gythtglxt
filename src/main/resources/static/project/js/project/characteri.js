@@ -56,6 +56,7 @@
                         modalTitle : "查看图片详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
+                        confirmButtonClass : "btn-danger",
                     };
                     var myCheckImgModal = modalUtil.init(myCheckImg);
                     for(var i=0;i<row.filePath.length;i++){
@@ -129,6 +130,7 @@
                         modalBodyID :"myPassProtection",
                         modalTitle : "审核通过",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -144,6 +146,7 @@
                                             modalTitle : "提示",
                                             modalClass : "modal-lg",
                                             cancelButtonStyle: "display:none",
+                                            confirmButtonClass : "btn-danger",
                                             modalConfirmFun:function (){
                                                 return true;
                                             }
@@ -173,6 +176,7 @@
                         modalBodyID :"myNoPassProtection",
                         modalTitle : "审核不通过",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -214,6 +218,7 @@
                         modalBodyID :"myUnderShelfProtection",
                         modalTitle : "下架",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -256,6 +261,7 @@
                         modalTitle : "查看详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
+                        confirmButtonClass : "btn-danger",
                     };
                     var myViewCharacteriModal = modalUtil.init(myViewCharacteriModalData);
                     $("#name").val(row.name);
@@ -274,6 +280,7 @@
                         modalBodyID :"myAuditSubmitProtectionCountry",
                         modalTitle : "提交",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -289,6 +296,7 @@
                                             modalTitle : "提示",
                                             modalClass : "modal-lg",
                                             cancelButtonStyle: "display:none",
+                                            confirmButtonClass : "btn-danger",
                                             modalConfirmFun:function (){
                                                 return true;
                                             }
@@ -316,6 +324,7 @@
                         modalBodyID :"myNoSubmitProtection",
                         modalTitle : "取消提交",
                         modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
@@ -373,6 +382,7 @@
                                             modalTitle : "提示",
                                             modalClass : "modal-lg",
                                             cancelButtonStyle: "display:none",
+                                            confirmButtonClass : "btn-danger",
                                             modalConfirmFun:function (){
                                                 return true;
                                             }
