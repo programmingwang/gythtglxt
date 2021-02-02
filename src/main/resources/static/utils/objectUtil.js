@@ -40,8 +40,8 @@
                 'list',
                 // 'justify',
                 'image',
-                // 'table',
-                'splitLine',
+                'table',
+                // 'splitLine',
                 'undo',
                 'redo',
 
