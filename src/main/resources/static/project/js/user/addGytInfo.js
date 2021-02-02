@@ -47,9 +47,7 @@
             $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.status = "1";
-                if (uploadImg.isUpdate()) {
-                    ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "lrt", "lrt")
-                }
+                ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "lrt", "lrt")
                 ajaxUtil.myAjax(null, opUrl, param, function (data) {
                     if (ajaxUtil.success(data)) {
                         window.location.href = "/userLogin"
