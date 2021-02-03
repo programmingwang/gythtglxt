@@ -69,7 +69,6 @@
             // 输入数据进行校验
             function validateLogin() {
                 let orgName = $("#orgName").val();
-                let orgType = $("#orgType option:selected").val();
                 let orgCode = $("#orgCode").val();
                 let username = $("#username").val();
                 let password = $("#password").val();
@@ -81,27 +80,28 @@
 
                 let RegExp = /^0\d{2,3}-\d{7,8}$/;
 
-                if (orgName == '') {
+                if (stringUtil.isBlank(orgName)) {
                     alertUtil.error('请输入机构名字！');
                     return false;
                 }
-                if (orgType == '') {
-                    alertUtil.error('请选择机构类型！');
+                if (stringUtil.isBlank(orgCode)) {
+                    alertUtil.error('请输入统一社会信用代码！');
                     return false;
                 }
-                if (orgCode == '') {
-                    alertUtil.error('请输入机构代码！');
-                    return false;
-                }
-                if (username == '') {
+                if (stringUtil.isBlank(username)) {
                     alertUtil.error('请输入用户名！');
                     return false;
                 }
-                if (password == '') {
+                var reg = /^[a-zA-Z]([\s\S]{4,11})$/;//以字母开头，5-12位，([\s\S]*)匹配任意字符
+                if (!reg.test(username)) {
+                    alertUtil.error("用户名须以字母开头，长度为5-12位");
+                    return false
+                }
+                if (stringUtil.isBlank(password)) {
                     alertUtil.error('请输入密码！');
                     return false;
                 }
-                if (checkpwd == '') {
+                if (stringUtil.isBlank(checkpwd)) {
                     alertUtil.error('请确认密码！');
                     return false;
                 }
@@ -109,16 +109,14 @@
                     alertUtil.info("两次输入的密码不一致");
                     return false
                 }
-                if (phone == '') {
+                if (stringUtil.isBlank(phone)) {
                     alertUtil.error('请输入手机号码！');
                     return false;
                 } else if (RegExp.test(phone) == false && !(/^1[3456789]\d{9}$/.test(phone))) {
                     alertUtil.error("电话号码或手机号码有误，请重填");
                     return false;
                 }
-
-
-                if (inputCode == '') {
+                if (stringUtil.isBlank(inputCode)) {
                     alertUtil.error('请输入验证码！');
                     return false;
                 } else if (inputCode == canvasCode) {
@@ -128,6 +126,15 @@
                     return false
                 }
             }
+
+            $("#username").on("blur", function () {
+                let username = $("#username").val();
+                var reg = /^[a-zA-Z]([\s\S]{4,11})$/;//以字母开头，5-12位，([\s\S]*)匹配任意字符
+                if (!reg.test(username)) {
+                    alertUtil.error("用户名须以字母开头，长度为5-12位");
+                    return false
+                }
+            });
 
             $("#checkpassword").on("blur", function () {
                 let password = $("#password").val();
@@ -166,6 +173,10 @@
                         }
                     }, false)
                 }
+            })
+
+            $("#btn_login").unbind("click").bind("click",function () {
+                window.location.href = "/userLogin"
             })
 
         })

@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 /**
  * @Author wanglx
@@ -65,6 +66,11 @@ public class UserServiceImpl implements UserService {
         // 验证手机号码
         if (!MobileUtil.checkPhone(userDto.getMobilePhone()) && !MobileUtil.isPhone(userDto.getMobilePhone())) {
             throw new BusinessException("号码不正确", EmBusinessError.MOBILEPHONE_ERROR);
+        }
+        //用户账号：字母开头，至少5位，别超过12个字符
+        Pattern reg = Pattern.compile("^[a-zA-Z]([\\s\\S]{4,11})$");
+        if (!reg.matcher(userDto.getUsername()).matches()){
+            throw new BusinessException("用户账号须以字母开头，长度为5-12位", EmBusinessError.USERNAME_ERROR);
         }
         // 用户名的唯一性
         UserDO userDO = userDOMapper.selectByUsername(userDto.getUsername());
