@@ -399,6 +399,7 @@ span.input-text {
     border-radius: 10px;
     background-color: white;
     background-clip: content-box;
+    border-top: 10px solid #f7efeb;
 }
 #table td:last-child>a {
     margin: 0 0.6em 0 0 !important;
@@ -418,8 +419,26 @@ a{
     text-align: right;
     width: 100%;
     margin-top: 6px;
+    color: #775637;
 }
 .titleName {
     float: right;
     margin-top: 6px !important;
+    color: #775637;
+}
+th.next {
+    background: #C8C8C8;
+}
+th.prev {
+    background: #C8C8C8;
+}
+input, select{
+    border-color: #c4d3d4;
+}
+.btn-light {
+    background-color: #D3D3D3;
+    border-color: #D3D3D3;
+}
+#table{
+    border-top: 10px solid #fff;
 }
