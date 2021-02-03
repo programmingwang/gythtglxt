@@ -44,6 +44,7 @@ public enum EmBusinessError implements CommonError {
     SHI_CHECK_PASSED(2023,"市局审核通过待省局审核，请耐心等待！"),
     SHENG_CHECK_NOT_PASSED(2024,"省局审核不通过，请联系县局处理！"),
     OPWD_EQUAL_NPWD(2025,"新密码与原密码相同，无需修改！"),
+    USERNAME_ERROR(2026,"用户名须以字母开头，长度为5-12位！"),
     /* 业务错误 */
     NO_PERMISSION(10001, "没有权限"),
     INTEGRITY_CONSTRAINT_ERROE(40001,"违反数据完整性，请检查是否有其他数据关联"),
