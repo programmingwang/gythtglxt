@@ -442,3 +442,7 @@ input, select{
 #table{
     border-top: 10px solid #fff;
 }
+#upload{
+    z-index: 100;
+    margin-left: 100px;
+}

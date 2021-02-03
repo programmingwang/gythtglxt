@@ -10,6 +10,10 @@
    .show {
        text-align: center;
    }
+
+   .content-img{
+       margin-left: 2px;
+   }
    
    .upload-content .content-img-list {
        display: inline-block;

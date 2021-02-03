@@ -81,7 +81,7 @@
                 let RegExp = /^0\d{2,3}-\d{7,8}$/;
 
                 if (stringUtil.isBlank(orgName)) {
-                    alertUtil.error('请输入机构名字！');
+                    alertUtil.error('请输入国医堂名称！');
                     return false;
                 }
                 if (stringUtil.isBlank(orgCode)) {

@@ -138,35 +138,18 @@
                     for (var v in aCol){
                         var textP = allTableData[i][aCol[v].field];
                         var isStatusSlot=false;           // 默认状态为true
-                        var isTimeSlot=false;             // 默认时间条件为true
                         //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
                         var status= allTableData[i][statusWord]
                         // console.log("addstr:"+addstr)
                         // console.log("status:"+status)
                         //调试时可以先打印出来，进行修改
-                        if(addstr==status){
+                        if(addstr==status || addstr==99){
                             isStatusSlot=true;
-                        }
-                        //当存在时将条件改为flase
-                        var makeTime = allTableData[i]["itemcreateat"].substring(11,19);
-                        if (makeTime >= stratTime && makeTime <= endTime) {
-                            isTimeSlot = true;
-                        }
-                        else {
-                            isTimeSlot = false;
-                        }
-                        if (stratTime == endTime) {
-                            isTimeSlot = true;
                         }
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";
                         }
-                        if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
-                            isStatusSlot = false;
-                            isTimeSlot = false;
-                            newArry.push(allTableData[i])
-                        }
-                        if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot && isTimeSlot){
+                        if(textP.search(str) != -1 && isStatusSlot){
                             newArry.push(allTableData[i])
                         }
                     }
@@ -174,32 +157,9 @@
                 var newArr=new Set(newArry)
                 newArry=Array.from(newArr)
                 $("#table").bootstrapTable("load", newArry);
-                if(newArry.length == 0){
-                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
-                }else{
-                    alertUtil.success("搜索成功");
-                }
+
             })
 
-            var aria=this.ariaExpanded;
-            var element=document.getElementById("stratTime");
-            $("#closeAndOpen").unbind().on('click',function(){
-                this.innerText="";
-                if (aria==="true"){
-                    this.innerText="展开";
-                    aria = "false";
-                    if (typeof(element)!= "undefined" || element != null){
-                        document.getElementById("btn_addTask").classList.remove("openBtnP");
-                    }
-                } else {
-                    this.innerText="收起";
-                    aria = "true";
-                    if (typeof(element)!= "undefined" || element != null){
-                        document.getElementById("btn_addTask").classList.add("openBtnP");
-                    }
-
-                }
-            })
         }
 
 

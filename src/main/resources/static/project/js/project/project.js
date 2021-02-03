@@ -452,9 +452,6 @@
                         var isStatusSlot=false;           // 默认状态为true
                         //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
                         var status= allTableData[i]["dataStatus"]
-                        // console.log("addstr:"+addstr)
-                        // console.log("status:"+status)
-                        //调试时可以先打印出来，进行修改
                         if(addstr==status){
                             isStatusSlot=true;
                         }
@@ -464,11 +461,7 @@
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";
                         }
-                        if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
-                            isStatusSlot = false;
-                            newArry.push(allTableData[i])
-                        }
-                        if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot){
+                        if(textP.search(str) != -1 && isStatusSlot){
                             newArry.push(allTableData[i])
                         }
                     }
@@ -476,23 +469,8 @@
                 var newArr=new Set(newArry)
                 newArry=Array.from(newArr)
                 $("#table").bootstrapTable("load", newArry);
-                if(newArry.length == 0){
-                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
-                }else{
-                    alertUtil.success("搜索成功");
-                }
+
             })
 
-            var aria=this.ariaExpanded;
-            $("#closeAndOpen").unbind().on('click',function(){
-                this.innerText="";
-                if (aria==="true"){
-                    this.innerText="展开";
-                    aria = "false";
-                } else {
-                    this.innerText="收起";
-                    aria = "true";
-                }
-            })
         })
 })();
