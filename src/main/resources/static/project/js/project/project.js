@@ -404,8 +404,7 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            $("#chargePersonSearch").selectUtil(pl);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
 
             var aCol;
@@ -452,7 +451,15 @@
                         var isStatusSlot=false;           // 默认状态为true
                         //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
                         var status= allTableData[i]["dataStatus"]
-                        if(addstr==status){
+                        if(status == "0") status =0;
+                        else if(status == "1" || status == "3" || status =="5" || status == "7") status = 1;
+                        else if(status == "2" || status == "4" || status == "6") status = 2;
+                        else if(status == "8") status = 3;
+                        else if (status == "9") status = 4;
+                        // console.log("addstr:"+addstr)
+                        // console.log("status:"+status)
+                        //调试时可以先打印出来，进行修改
+                        if(addstr==status || addstr=="99"){
                             isStatusSlot=true;
                         }
                         if(typeof textP == "object") continue;
