@@ -469,7 +469,6 @@
                         if(addstr==status || addstr=="99"){
                             isStatusSlot=true;
                         }
-                        if(status == 99) isStatusSlot = true;
                         if(typeof textP == "object") continue;
                         else if(typeof textP == "number") textP = textP.toString();
                         //当存在时将条件改为flase
