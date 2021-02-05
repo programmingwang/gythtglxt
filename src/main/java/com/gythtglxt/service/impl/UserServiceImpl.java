@@ -186,12 +186,8 @@ public class UserServiceImpl implements UserService {
         userDOKey.setItemcode(userDO.getItemcode());
         userDOMapper.deleteByPrimaryKey(userDOKey);
         //删除hospital
-        HospitalDO hospitalDO = hospitalDOMapper.selectByHospitalName(userDtO.getOrgName());
-        if (hospitalDO != null){
-            HospitalDOKey hospitalDOKey = new HospitalDOKey();
-            hospitalDOKey.setItemid(hospitalDO.getItemid());
-            hospitalDOKey.setItemcode(hospitalDO.getItemcode());
-            hospitalDOMapper.deleteByPrimaryKey(hospitalDOKey);
+        if (!StringUtils.isBlank(userDtO.getOrgCode())){
+            hospitalDOMapper.deleteByHospitalNameAndCode(userDtO.getOrgName(),userDtO.getOrgCode());
         }
     }
 
