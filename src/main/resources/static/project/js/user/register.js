@@ -167,7 +167,6 @@
                 if (validateLogin()) {
                     ajaxUtil.myAjax(null, "/user/register", userEntity, function (data) {
                         if (data && data.code == 88888) {
-                            alertUtil.alert(data.data);
                             window.location.href = data.data
                         } else {
                             alertUtil.alert(data.msg);

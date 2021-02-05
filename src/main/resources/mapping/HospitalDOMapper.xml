@@ -68,6 +68,11 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </delete>
+  <delete id="deleteByHospitalNameAndCode" parameterType="java.lang.String">
+    delete from tb_natmeha_hospital
+    where itemCode = #{itemcode,jdbcType=CHAR}
+    and HOSPITAL_NAME = #{hospitalName,jdbcType=VARCHAR}
+  </delete>
   <insert id="insert" parameterType="com.gythtglxt.dataobject.HospitalDO">
     <!--
       WARNING - @mbg.generated
