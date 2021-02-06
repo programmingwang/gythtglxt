@@ -197,7 +197,7 @@
         '   <div class=" col-lg-12 col-md-12 mb-3">' +
         '      <div>' +
             '   <label class="input-label col-lg-3 col-md-3 " style="display: inline;padding-left: 2rem"><span style="color: red">*</span>预约量</label>' +
-        '         <input id="registerCount" type="number" class="col-lg-9 col-md-9" style="height: 3rem;">' +
+        '         <input id="registerCount" type="number" class="col-lg-9 col-md-9" style="height: 3rem;" oninput="if(value>201)value=200" onkeyup="value=value.replace(/[^\\d]/g,\'\').replace(/^00{1,}/g,\'\')">' +
         '      </div>' +
         '   </div> ' +
         '</div>'
