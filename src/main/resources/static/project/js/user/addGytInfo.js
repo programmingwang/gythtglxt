@@ -46,7 +46,7 @@
                 return param;
             }
 
-            $("#submitBtn").unbind('click').on('click', function () {
+            $("#submitBtn").off('click').on('click', function () {
                 var param = generateParam();
                 param.status = "1";
                 if (!stringUtil.isBlank(param.hospitalName) && !stringUtil.isBlank(param.hospitalPhone) && !stringUtil.isBlank(param.hospitalPro) &&
@@ -55,6 +55,7 @@
                     ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "lrt", "lrt")
                     ajaxUtil.myAjax(null, opUrl, param, function (data) {
                         if (ajaxUtil.success(data)) {
+                            alertUtil.alert("信息已提交给上级审核，请牢记您的账号和密码，耐心等待！")
                             window.location.href = "/userLogin"
                             // orange.redirect(pathUrl)
                         } else {
@@ -64,7 +65,6 @@
                 } else {
                     alert("请插入图片且输入不能为空！")
                 }
-
                 return false;
             });
 

@@ -95,7 +95,6 @@ var base64Code = "";
             var spanElement = $('<span>')
             spanElement.attr('style',"z-index: 99;position: absolute;left: 46px;top: -20px;color: #ABABAD;")
             spanElement.html("推荐尺寸")
-            console.log($("#upload").parent())
             var parentNode = $("#upload").parent()
             parentNode.append(spanElement)
             spanElement = $('<span>')

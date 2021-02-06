@@ -144,7 +144,7 @@
                 }
             });
 
-            $("#btn_register").unbind("click").bind("click", function () {
+            $("#btn_register").off("click").bind("click", function () {
                 let orgName = $("#orgName").val();
                 var orgCode = stringUtil.getUUID();
                 let username = $("#username").val();
@@ -167,6 +167,9 @@
                 if (validateLogin()) {
                     ajaxUtil.myAjax(null, "/user/register", userEntity, function (data) {
                         if (data && data.code == 88888) {
+                            if(data.data == "/userLogin"){
+                                alertUtil.alert("该国医堂已经申请注册了，可以尝试登陆，若无法登陆，则还在审核中，请耐心等待！")
+                            }
                             window.location.href = data.data
                         } else {
                             alertUtil.alert(data.msg);
