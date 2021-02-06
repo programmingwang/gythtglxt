@@ -6,7 +6,7 @@
         modalHtml.defaultModalHtml = function defaultModalHtml(obj) {
             return '<div class="modal fade" id="' + obj.modalID + '" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">' +
                 '            <div class="' + obj.modalClass + '">' +
-                '                <div class="modal-content">' +
+                '                <div class="modal-content" style="width: 100%">' +
                 '                    <div class="modal-header">' +
                 '                        <h5 class="modal-title" id="staticBackdropLabel">' + obj.modalTitle + '</h5>' +
                 '                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
