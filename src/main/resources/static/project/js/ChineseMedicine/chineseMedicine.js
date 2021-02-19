@@ -133,7 +133,7 @@
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#status").val(webStatus[row.status].text);
                     $("#mediCineImg").attr("src",row.filePath)
-                    $('#mediCineImgSpan').html("药材图片");
+                    $('#mediCineImgSpan').html("药材图片：");
 
                     myChineseMedicineModal.show();
                 },
@@ -222,13 +222,13 @@
                         {field: 'alias', title: '别名'},
                         {field: 'filePath', title: '药材图片', formatter:function (value, row, index) {
                                 if(value == "已经损坏了"){
-                                    return '<p>'+value+'</p>';
+                                    return value;
                                 }else{
                                     return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                                 }
                             }},
                         {field:'classification',title:'功效分类',formatter:function (row) {
-                                return '<p>'+p2[row].text+'</p>';
+                                return p2[row].text;
                             }},
                         {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
                     ];
