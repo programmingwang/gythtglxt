@@ -414,10 +414,10 @@
                     {field: 'filePath', title: '开展项目描述',formatter: operation2, events:checkImgDetailsEvents},
                     {field: 'price', title: '开展项目价格',formatter:function (value) {
                             var price = value.toString()
-                            return '<p>￥'+price+'</p>'
+                            return '￥'+price
                         }},
                     {field:'dataStatus',title:'开展项目状态',formatter:function (value) {
-                            return '<p>'+webStatus[value].text+'</p>'
+                            return webStatus[value].text
                         }},
                     {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
                 ];
@@ -427,10 +427,10 @@
                     {field: 'filePath', title: '开展项目描述',formatter: operation2, events:checkImgDetailsEvents},
                     {field: 'price', title: '开展项目价格',formatter:function (value) {
                             var price = value.toString()
-                            return '<p>￥'+price+'</p>'
+                            return '￥'+price
                         }},
                     {field:'dataStatus',title:'开展项目状态',formatter:function (value) {
-                            return '<p>'+webStatus[value].text+'</p>'
+                            return webStatus[value].text
                         }},
                     {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
                 ];

@@ -122,10 +122,10 @@
             '                    <div class="col-lg-6 col-md-6">' +
             '                        <fieldset disabled>' +
             '                            <div class="input-group mb-3 row">' +
-            '                                <div class="input-group-prepend col-lg-4 col-md-4">' +
+            '                                <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4">' +
             '                                    <span class="lefttext" for="applicant">创建人：</span>' +
             '                                </div>' +
-            '                                <input style="margin-left: 4px;" type="text" id="creater" class="form-control col-lg-6 col-md-6">' +
+            '                                <input  type="text" id="creater" class="form-control col-lg-6 col-md-6">' +
             '                            </div>' +
             '                        </fieldset>' +
             '                    </div>' +
@@ -224,10 +224,10 @@
             '            <div class="col-lg-6 col-md-6">' +
             '                <fieldset disabled>' +
             '                    <div class="input-group mb-3 row">' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4">' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4">' +
             '                            <span class="lefttext">来源：</span>' +
             '                        </div>' +
-            '                        <input style="margin-left: 4px;" type="text" id="hotspotSource" class="form-control col-lg-6 col-md-6">' +
+            '                        <input  type="text" id="hotspotSource" class="form-control col-lg-6 col-md-6">' +
             '                    </div>' +
             '            </div>' +
             '' +
@@ -268,10 +268,10 @@
             '            <div class="col-lg-6 col-md-6">' +
             '                <fieldset disabled>' +
             '                    <div class="input-group mb-3 row">' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4">' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4">' +
             '                            <span class="lefttext" for="applicant">创建人：</span>' +
             '                        </div>' +
-            '                        <input style="margin-left: 4px;" type="text" id="creater" class="form-control col-lg-6 col-md-6">' +
+            '                        <input  type="text" id="creater" class="form-control col-lg-6 col-md-6">' +
             '                    </div>' +
             '                </fieldset>' +
             '            </div>' +
@@ -346,10 +346,10 @@
             '            <div class="col-lg-6 col-md-6">' +
             '                <fieldset disabled>' +
             '                    <div class="input-group mb-3 row">' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4">' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4">' +
             '                            <span class="lefttext" for="applicant">创建人：</span>' +
             '                        </div>' +
-            '                        <input style="margin-left: 4px" type="text" id="creater" class="form-control col-lg-6 col-md-6">' +
+            '                        <input  type="text" id="creater" class="form-control col-lg-6 col-md-6">' +
             '                    </div>' +
             '                </fieldset>' +
             '            </div>' +
@@ -418,10 +418,10 @@
             '            <div class="col-lg-6 col-md-6 ">' +
             '                <fieldset disabled>' +
             '                    <div class=" input-group mb-3 row ">' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4">' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4">' +
             '                            <span class="lefttext" for="applicant">创建人：</span>' +
             '                        </div>' +
-            '                        <input style="margin-left: 4px" type="text" id="creater" class="form-control col-lg-6 col-md-6">' +
+            '                        <input  type="text" id="creater" class="form-control col-lg-6 col-md-6">' +
             '                    </div>' +
             '                </fieldset>' +
             '            </div>' +
@@ -500,10 +500,10 @@
             '            <div class="col-lg-6 col-md-6">' +
             '                <fieldset disabled>' +
             '                    <div class="input-group mb-3 row">' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4">' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4">' +
             '                            <span class="lefttext" for="applicant">创建人：</span>' +
             '                        </div>' +
-            '                        <input style="margin-left: 4px" type="text" id="creater" class="form-control col-lg-6 col-md-6">' +
+            '                        <input type="text" id="creater" class="form-control col-lg-6 col-md-6">' +
             '                    </div>' +
             '                </fieldset>' +
             '            </div>' +
