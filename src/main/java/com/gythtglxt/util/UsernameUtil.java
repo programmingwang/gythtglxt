@@ -2,6 +2,7 @@ package com.gythtglxt.util;
 
 import com.gythtglxt.dto.UserSessionDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ public class UsernameUtil {
 
     public String getOperateUser(){
         UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
-        return user.getUsername();
+        return user==null ? null: user.getUsername();
     }
     public String getOrgCode(){
         UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
@@ -29,16 +30,16 @@ public class UsernameUtil {
 
     public String getRoleName(){
         UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
-        return user.getRolename();
+        return user==null ? null: user.getRolename();
     }
 
     public String getItemCode() {
         UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
-        return user.getItemcode();
+        return user==null ? null: user.getItemcode();
     }
 
     public String getCityId() {
         UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
-        return user.getCityId();
+        return user==null ? null: user.getCityId();
     }
 }

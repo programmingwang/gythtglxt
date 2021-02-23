@@ -1,7 +1,6 @@
 package com.gythtglxt.service.impl;
 import java.util.*;
 
-import com.gythtglxt.dataobject.FileDO;
 import com.gythtglxt.dto.ProjectDto;
 import com.gythtglxt.error.BusinessException;
 import com.gythtglxt.error.EmBusinessError;
@@ -11,7 +10,6 @@ import com.gythtglxt.util.UsernameUtil;
 import com.gythtglxt.validator.ValidatorImpl;
 import com.gythtglxt.validator.ValidatorResult;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.gythtglxt.dataobject.Project;
