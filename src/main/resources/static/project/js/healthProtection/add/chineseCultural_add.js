@@ -47,7 +47,7 @@
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
                             var submitConfirmModal = {
-                                modalBodyID: "myPublishToWechat",
+                                modalBodyID: "myPassSuccessTip",
                                 modalTitle: "提示",
                                 modalClass: "modal-lg",
                                 cancelButtonStyle: "display:none",

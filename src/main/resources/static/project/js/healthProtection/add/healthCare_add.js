@@ -17,9 +17,7 @@
 
             $("#btn_save").unbind().on('click',function () {
                 var hotspotEntity;
-                var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增自我保健成功";
                     hotspotEntity = {
                         itemcode: stringUtil.getUUID(),
                         hotspotTitle : $("#hotspotTitle").val(),
@@ -41,7 +39,6 @@
                         dataStatus : "0" ,
                         hotspotContent : editor.txt.html(),
                     }
-                    operateMessage = "更新自我保健成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), hotspotEntity.itemcode, uploadImg.getFiles()[0]);
@@ -50,7 +47,7 @@
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
                             var submitConfirmModal = {
-                                modalBodyID: "myPublishToWechat",
+                                modalBodyID: "myPassSuccessTip",
                                 modalTitle: "提示",
                                 modalClass: "modal-lg",
                                 cancelButtonStyle: "display:none",
@@ -81,9 +78,7 @@
                     modalConfirmFun: function () {
                         var isSuccess = true;
                         var hotspotEntity;
-                        var operateMessage;
                         if (!isUpdate()) {
-                            operateMessage = "新增自我保健成功,信息将直接显示到国医堂小程序中,文责自负!如有问题请紧急下架!";
                             hotspotEntity = {
                                 itemcode: stringUtil.getUUID(),
                                 hotspotTitle: $("#hotspotTitle").val(),
@@ -105,7 +100,6 @@
                                 dataStatus: "8",
                                 hotspotContent: editor.txt.html(),
                             }
-                            operateMessage = "更新自我保健成功";
                         }
 
                         fileUtil.handleFile(isUpdate(), hotspotEntity.itemcode, uploadImg.getFiles()[0]);

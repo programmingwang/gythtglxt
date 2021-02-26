@@ -17,9 +17,7 @@
 
             $("#btn_save").unbind().on('click',function () {
                 var hotspotEntity;
-                var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增儿童健康成功";
                     hotspotEntity = {
                         itemcode: stringUtil.getUUID(),
                         hotspotTitle : $("#hotspotTitle").val(),
@@ -41,7 +39,6 @@
                         dataStatus : "0" ,
                         hotspotContent : editor.txt.html(),
                     }
-                    operateMessage = "更新儿童健康成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), hotspotEntity.itemcode, uploadImg.getFiles()[0]);
@@ -50,7 +47,7 @@
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
                             var submitConfirmModal = {
-                                modalBodyID: "myPublishToWechat",
+                                modalBodyID: "myPassSuccessTip",
                                 modalTitle: "提示",
                                 modalClass: "modal-lg",
                                 cancelButtonStyle: "display:none",
