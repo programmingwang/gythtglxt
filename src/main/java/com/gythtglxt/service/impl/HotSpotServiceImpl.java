@@ -50,20 +50,7 @@ public class HotSpotServiceImpl implements IHotspotService {
 
     @Override
     public List<HotspotDto> getAll(String dataType, String dataStatus, String userCode) {
-        List<HotspotDto> hotspotDtos = hotspotDOMapper.selectAll(dataType,dataStatus,userCode);
-//        if(userCode == null){
-//            return hotspotDtos;
-//        }else {
-//            List<HotspotDto> removeHotSpot = new ArrayList<>();
-//            for (HotspotDto hotspotDto : hotspotDtos) {
-//                if(!userCode.equals(hotspotDto.getUserCode()) || hotspotDto.getUserCode() == null){
-//                    removeHotSpot.add(hotspotDto);
-//                }
-//            }
-//            hotspotDtos.removeAll(removeHotSpot);
-//            return hotspotDtos;
-//        }
-        return hotspotDtos;
+        return hotspotDOMapper.selectAll(dataType,dataStatus,userCode);
     }
 
     @Override
@@ -88,6 +75,12 @@ public class HotSpotServiceImpl implements IHotspotService {
 
     @Override
     public int updateHotspot(HotspotDO record) {
+        ValidatorResult validate = validator.validate(record);
+        if("0".equals(record.getDataStatus()) || "1".equals(record.getDataStatus())){
+            if(validate.isHasErrors()){
+                throw new BusinessException(validate.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+            }
+        }
         record.setUpdater(usernameUtil.getOperateUser());
         return hotspotDOMapper.updateByPrimaryKeySelective(record);
     }
