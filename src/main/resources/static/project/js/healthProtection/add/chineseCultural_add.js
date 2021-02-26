@@ -17,9 +17,7 @@
 
             $("#btn_save").unbind().on('click',function () {
                 var hotspotEntity;
-                var operateMessage;
                 if(!isUpdate()){
-                    operateMessage = "新增中医文化成功";
                     hotspotEntity = {
                         itemcode: stringUtil.getUUID(),
                         hotspotTitle : $("#hotspotTitle").val(),
@@ -41,7 +39,6 @@
                         dataStatus : "0" ,
                         hotspotContent : editor.txt.html(),
                     }
-                    operateMessage = "更新中医文化成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), hotspotEntity.itemcode, uploadImg.getFiles()[0]);
@@ -80,7 +77,6 @@
                     confirmButtonClass: "btn-danger",
                     modalConfirmFun: function () {
                         var hotspotEntity;
-                        var operateMessage;
                         if(!isUpdate()){
                             hotspotEntity = {
                                 itemcode: stringUtil.getUUID(),
@@ -103,7 +99,6 @@
                                 dataStatus : "8" ,
                                 hotspotContent : editor.txt.html(),
                             }
-                            operateMessage = "更新中医文化成功";
                         }
 
                         fileUtil.handleFile(isUpdate(), hotspotEntity.itemcode, uploadImg.getFiles()[0]);
