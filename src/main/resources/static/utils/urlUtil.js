@@ -24,7 +24,10 @@
             return window.location.hash;
         }
 
-
+        //存放富文本编辑器上传的图片的服务器的ip以及应用的port
+        function getEditorUrl(){
+            return "http://42.193.46.47:8999"
+        }
 
         var url;
         url = window.location.pathname; /* 获取文件路径（文件地址） */
@@ -69,6 +72,7 @@
             getQueryVariable:getQueryVariable,
             getFullUrl:getFullUrl,
             getUrlHash:getUrlHash,
+            getEditorUrl:getEditorUrl,
         }
     })
 })();
