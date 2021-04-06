@@ -238,31 +238,47 @@
             $("#btnSearch").unbind().on('click',function() {
                 var newArry = [];
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
-                var allTableData = JSON.parse(localStorage.getItem("2"));
-                if(str.indexOf("请输入")!=-1){
-                    str=""
-                }
-                for (var i in allTableData) {
-                    for (var v in aCol){
-                        var textP = allTableData[i][aCol[v].field];
-                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
-                        // console.log("addstr:"+addstr)
-                        // console.log("status:"+status)
-                        //调试时可以先打印出来，进行修改
-                        if(typeof textP == "object") continue;
-                        else if(typeof textP == "number") textP = textP.toString();
-                        //当存在时将条件改为flase
-                        if (textP == null || textP == undefined || textP == '') {
-                            textP = "1";
-                        }
-                        if(textP.search(str) != -1){
-                            newArry.push(allTableData[i])
+                //var allTableData = JSON.parse(localStorage.getItem("2"));
+                var req = window.indexedDB.open("myDB", 1);
+                req.onsuccess = function (e) {
+                    var db = e.target.result;
+                    //创建事物
+                    var t = db.transaction(["search"], "readwrite");
+                    var userStore = t.objectStore("search");
+                    var request = userStore.get(1);
+                    request.onsuccess = function (event) {
+                        if (request.result) {
+                            var allTableData = request.result.dataSearch;
+                            if(str.indexOf("请输入")!=-1){
+                                str=""
+                            }
+                            for (var i in allTableData) {
+                                for (var v in aCol){
+                                    var textP = allTableData[i][aCol[v].field];
+                                    //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
+                                    // console.log("addstr:"+addstr)
+                                    // console.log("status:"+status)
+                                    //调试时可以先打印出来，进行修改
+                                    if(typeof textP == "object") continue;
+                                    else if(typeof textP == "number") textP = textP.toString();
+                                    //当存在时将条件改为flase
+                                    if (textP == null || textP == undefined || textP == '') {
+                                        textP = "1";
+                                    }
+                                    if(textP.search(str) != -1){
+                                        newArry.push(allTableData[i])
+                                    }
+                                }
+                            }
+                            var newArr=new Set(newArry)
+                            newArry=Array.from(newArr)
+                            $("#table").bootstrapTable("load", newArry);
+                        } else {
+                            console.log('未获得数据记录');
                         }
                     }
-                }
-                var newArr=new Set(newArry)
-                newArry=Array.from(newArr)
-                $("#table").bootstrapTable("load", newArry);
+                };
+
 
             })
         })
