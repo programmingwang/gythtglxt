@@ -452,3 +452,7 @@ input, select{
     z-index: 100;
     margin-left: 100px;
 }
+.w-e-full-screen-editor {
+    max-width: 100% !important;
+    padding: 0;
+}
