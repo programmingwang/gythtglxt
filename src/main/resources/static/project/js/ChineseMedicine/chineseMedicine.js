@@ -188,7 +188,6 @@
 
             $("#Search").selectUtil(p2);
 
-            /
 
             var aCol = [
                         {field: 'name', title: '中医药名称'},
